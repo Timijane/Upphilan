@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media & Performances | P. Paul (The Great)</title>
+<meta name="description" content="Explore the media, spoken word performances, public speaking engagements, and creative projects of P. Paul (The Great).">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0d12;
+  --text:#ffffff;
+  --muted:#b7bcc9;
+  --accent:#8ef0c8;
+  --glass:rgba(255,255,255,0.05);
+  --border-glass: rgba(255,255,255,0.15);
+}
+
+/* Reset */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;}
+
+/* Header */
+header{position:fixed;top:0;width:100%;padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(7,7,7,0.7);backdrop-filter:blur(14px);z-index:100;}
+header nav a{margin-left:2rem;color:var(--muted);text-decoration:none;}
+header nav a:hover{color:var(--accent);}
+.logo{font-weight:800;letter-spacing:1px;font-family:'Playfair Display', serif;}
+
+/* Hero */
+.hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 2rem;position:relative;overflow:hidden;}
+.hero h1{font-family:'Playfair Display', serif;font-size:clamp(2.5rem, 6vw, 4rem);line-height:1.1;}
+.hero h1 span{color:var(--accent);}
+.hero p{max-width:700px;margin:1.5rem auto 0;color:var(--muted);font-size:1.1rem;}
+
+/* Section Titles */
+section{padding:6rem 2rem;}
+.center{text-align:center;}
+.content{max-width:1100px;margin:auto;}
+.section-title{font-size:1.5rem;font-weight:600;margin-bottom:3rem;position:relative;display:inline-block;}
+.section-title::after{content:'';width:50px;height:3px;background:var(--accent);position:absolute;left:0;bottom:-10px;}
+
+/* Media Grid */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
+.media-card{position:relative;overflow:hidden;border-radius:18px;background:var(--glass);border:1px solid var(--border-glass);backdrop-filter:blur(14px);transition:0.4s;}
+.media-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 25px 50px rgba(0,0,0,0.5);}
+.media-card iframe, .media-card img{width:100%;height:220px;object-fit:cover;border-radius:inherit;}
+
+/* Description Overlay */
+.media-card .desc{padding:1rem;}
+.media-card .desc h3{margin-bottom:0.5rem;color:var(--accent);}
+.media-card .desc p{color:var(--muted);font-size:0.95rem;}
+
+/* CTA */
+.cta{text-align:center;margin-top:4rem;}
+.cta a{display:inline-block;margin:0 0.5rem;padding:0.9rem 2rem;border-radius:50px;font-weight:600;text-decoration:none;color:var(--text);background:var(--accent);transition:0.4s;}
+.cta a:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.4);}
+
+/* Footer */
+footer{padding:3rem;text-align:center;color:var(--muted);border-top:1px solid var(--border-glass);}
+
+/* Responsive */
+@media(max-width:768px){
+  header{padding:1.2rem 2rem;}
+  .hero h1{font-size:3rem;}
+  .hero p{font-size:1rem;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">P. Paul</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="what-i-do.html">What I Do</a>
+    <a href="media.html">Media</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Media & <span>Performances</span></h1>
+    <p>Explore moments from spoken word performances, public speaking engagements, community programs, and creative projects.</p>
+  </div>
+</section>
+
+<section class="center">
+  <div class="content">
+    <div class="section-title">Gallery & Videos</div>
+    <div class="media-grid">
+
+      <!-- Media Card Example 1 -->
+      <div class="media-card">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+        <div class="desc">
+          <h3>Spoken Word Performance</h3>
+          <p>Delivering hope and inspiration on stage through storytelling and poetry.</p>
+        </div>
+      </div>
+
+      <!-- Media Card Example 2 -->
+      <div class="media-card">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+        <div class="desc">
+          <h3>Public Speaking Engagement</h3>
+          <p>Empowering youth with leadership and self-belief through live talks.</p>
+        </div>
+      </div>
+
+      <!-- Media Card Example 3 -->
+      <div class="media-card">
+        <img src="https://via.placeholder.com/600x350.png?text=Community+Event" alt="Community Event">
+        <div class="desc">
+          <h3>Community Program</h3>
+          <p>Mobilizing individuals towards service, values, and positive change.</p>
+        </div>
+      </div>
+
+      <!-- Media Card Example 4 -->
+      <div class="media-card">
+        <img src="https://via.placeholder.com/600x350.png?text=Creative+Project" alt="Creative Project">
+        <div class="desc">
+          <h3>Creative Project</h3>
+          <p>Music and performance projects that inspire reflection and transformation.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <a href="contact.html">Invite Me to Perform</a>
+  <a href="contact.html">Contact Me</a>
+</div>
+
+<footer>
+  <p><strong>P. Paul (The Great)</strong></p>
+  <p>Speaking the language of peace, healing, and human transformation.</p>
+  <small>© 2026 P. Paul (The Great). All Rights Reserved.</small>
+</footer>
+
+<!-- GSAP Animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.from(".hero h1",{y:80,opacity:0,duration:1.4,ease:"power4.out"});
+gsap.from(".hero p",{y:40,opacity:0,delay:0.3,duration:1.2});
+
+gsap.utils.toArray(".media-card").forEach(card=>{
+  gsap.from(card,{opacity:0,y:60,duration:1.2,scrollTrigger:{trigger:card,start:"top 85%"}});
+});
+</script>
+
+</body>
+</html>
