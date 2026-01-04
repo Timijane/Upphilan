@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Selected Works | P. Paul (The Great)</title>
+    <meta name="description" content="Verifiable Testimonies of Transformation - Poetry, Speaking, Music, and Advocacy works by P. Paul.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        /* Custom CSS with Tailwind configuration */
+        :root {
+            --gold-400: #e1b76a;
+            --gold-500: #d4af37;
+            --gold-600: #bc9a2e;
+            --onyx: #0a0a0a;
+        }
+        
+        .selection\\:bg-gold-500 *::selection, .selection\\:bg-gold-500::selection {
+            background-color: var(--gold-500);
+        }
+        
+        .selection\\:text-black *::selection, .selection\\:text-black::selection {
+            color: #000;
+        }
+        
+        .bg-onyx {
+            background-color: var(--onyx);
+        }
+        
+        .text-gold-500 {
+            color: var(--gold-500);
+        }
+        
+        .bg-gold-500 {
+            background-color: var(--gold-500);
+        }
+        
+        .border-gold-500 {
+            border-color: var(--gold-500);
+        }
+        
+        .shadow-\\[0_0_20px_rgba\\(212\\2c 175\\2c 55\\2c 0\\.3\\)\\] {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .from-transparent {
+            background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5), transparent);
+        }
+        
+        .via-gold-500\\/50 {
+            background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5), transparent);
+        }
+        
+        .hover\\:grayscale-0:hover {
+            filter: grayscale(0);
+        }
+        
+        .hover\\:scale-110:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #080808;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-500);
+            border-radius: 5px;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Animation for portfolio items */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        /* Grid animation */
+        .grid-item {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        
+        /* Load animation */
+        @keyframes loadIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#080808] text-white selection:bg-gold-500 selection:text-black overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/20 border-b border-white/10">
+        <div class="text-2xl font-serif font-bold tracking-tighter italic">Portfolio <span class="text-gold-500">.</span></div>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+            <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
+            <a href="#all" class="active-filter hover:text-gold-500 transition-colors" data-filter="All">All</a>
+            <a href="#poetry" class="hover:text-gold-500 transition-colors" data-filter="Poetry">Poetry</a>
+            <a href="#speaking" class="hover:text-gold-500 transition-colors" data-filter="Speaking">Speaking</a>
+            <a href="#music" class="hover:text-gold-500 transition-colors" data-filter="Music">Music</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-gold-500">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-8 text-xl">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 text-3xl">×</button>
+        <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
+        <a href="#" class="filter-btn hover:text-gold-500 transition-colors" data-filter="All">All Works</a>
+        <a href="#" class="filter-btn hover:text-gold-500 transition-colors" data-filter="Poetry">Poetry</a>
+        <a href="#" class="filter-btn hover:text-gold-500 transition-colors" data-filter="Speaking">Speaking</a>
+        <a href="#" class="filter-btn hover:text-gold-500 transition-colors" data-filter="Music">Music</a>
+        <a href="#" class="filter-btn hover:text-gold-500 transition-colors" data-filter="Advocacy">Advocacy</a>
+    </div>
+
+    <!-- Header -->
+    <header class="pt-32 pb-16 px-6 md:px-10 text-center">
+        <h1 id="portfolio-title" class="text-5xl md:text-8xl font-serif font-bold mb-6 opacity-0">
+            Selected <span class="text-gold-500 italic">Works</span>
+        </h1>
+        <p class="text-gray-500 tracking-[0.2em] uppercase text-sm">Verifiable Testimonies of Transformation</p>
+        <div class="mt-10 flex justify-center">
+            <div class="w-24 h-[1px] bg-gold-500"></div>
+        </div>
+    </header>
+
+    <!-- Filter Navigation -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12 md:mb-16 px-6">
+        <button data-filter="All" class="filter-btn active px-6 md:px-8 py-2 rounded-full border border-gold-500 bg-gold-500 text-black text-sm font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-500">
+            All
+        </button>
+        <button data-filter="Poetry" class="filter-btn px-6 md:px-8 py-2 rounded-full border border-white/10 text-gray-500 hover:border-white hover:text-white text-sm font-bold tracking-widest uppercase transition-all duration-500">
+            Poetry
+        </button>
+        <button data-filter="Speaking" class="filter-btn px-6 md:px-8 py-2 rounded-full border border-white/10 text-gray-500 hover:border-white hover:text-white text-sm font-bold tracking-widest uppercase transition-all duration-500">
+            Speaking
+        </button>
+        <button data-filter="Music" class="filter-btn px-6 md:px-8 py-2 rounded-full border border-white/10 text-gray-500 hover:border-white hover:text-white text-sm font-bold tracking-widest uppercase transition-all duration-500">
+            Music
+        </button>
+        <button data-filter="Advocacy" class="filter-btn px-6 md:px-8 py-2 rounded-full border border-white/10 text-gray-500 hover:border-white hover:text-white text-sm font-bold tracking-widest uppercase transition-all duration-500">
+            Advocacy
+        </button>
+    </div>
+
+    <!-- Portfolio Grid -->
+    <section id="portfolio-grid" class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <!-- Project items will be dynamically loaded here -->
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="mt-20 md:mt-32 px-6 md:px-10">
+        <div class="max-w-7xl mx-auto p-1 bg-gradient-to-r from-transparent via-gold-500/50 to-transparent">
+            <div class="bg-[#080808] py-12 md:py-20 text-center">
+                <h2 class="text-3xl md:text-4xl font-serif italic mb-4">Want to see more?</h2>
+                <p class="text-gray-500 mb-8">Follow the journey on social media for daily poetic insights.</p>
+                <div class="flex flex-wrap justify-center gap-6 md:gap-8 font-mono text-sm tracking-widest">
+                    <a href="#" class="hover:text-gold-500 transition-colors border border-white/10 px-6 py-3 rounded-full hover:border-gold-500">INSTAGRAM</a>
+                    <a href="#" class="hover:text-gold-500 transition-colors border border-white/10 px-6 py-3 rounded-full hover:border-gold-500">YOUTUBE</a>
+                    <a href="#" class="hover:text-gold-500 transition-colors border border-white/10 px-6 py-3 rounded-full hover:border-gold-500">LINKEDIN</a>
+                </div>
+                <div class="mt-10 pt-8 border-t border-white/10">
+                    <p class="text-gray-600 text-sm">Explore more of my work across different platforms and collaborations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 text-center border-t border-white/10 mt-12">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-gray-600 text-xs tracking-widest uppercase mb-4">P. Paul (The Great) — Portfolio</p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
+                <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
+                <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
+                <a href="upphilan.html" class="hover:text-gold-500 transition-colors">Upphilan</a>
+                <a href="#top" class="hover:text-gold-500 transition-colors">Back to Top</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Portfolio data
+            const projects = [
+                { 
+                    id: 1, 
+                    title: "Echoes of Peace", 
+                    category: "Poetry", 
+                    img: "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80", 
+                    desc: "A spoken word journey through conflict resolution and inner peace." 
+                },
+                { 
+                    id: 2, 
+                    title: "Youth Summit 2024", 
+                    category: "Speaking", 
+                    img: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80", 
+                    desc: "Keynote address on value-driven leadership for the next generation." 
+                },
+                { 
+                    id: 3, 
+                    title: "Rhythms of Hope", 
+                    category: "Music", 
+                    img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80", 
+                    desc: "Musical composition created for a humanitarian gala event." 
+                },
+                { 
+                    id: 4, 
+                    title: "The Great Manifesto", 
+                    category: "Advocacy", 
+                    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80", 
+                    desc: "A policy-shaping performance advocating for youth rights and empowerment." 
+                },
+                { 
+                    id: 5, 
+                    title: "Urban Verse", 
+                    category: "Poetry", 
+                    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80", 
+                    desc: "Street-side spoken word capturing the soul and rhythm of the city." 
+                },
+                { 
+                    id: 6, 
+                    title: "Law & Logic", 
+                    category: "Speaking", 
+                    img: "https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+                    desc: "Exploring the intersection of legal ethics with creative expression." 
+                },
+                { 
+                    id: 7, 
+                    title: "Soul Conversations", 
+                    category: "Music", 
+                    img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80", 
+                    desc: "Album of instrumental pieces designed for meditation and reflection." 
+                },
+                { 
+                    id: 8, 
+                    title: "Voices Unchained", 
+                    category: "Advocacy", 
+                    img: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80", 
+                    desc: "A campaign performance focused on freedom of expression and human rights." 
+                },
+                { 
+                    id: 9, 
+                    title: "Silent Echoes", 
+                    category: "Poetry", 
+                    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80", 
+                    desc: "Collection of minimalist poems exploring silence and its meaning." 
+                }
+            ];
+
+            // DOM elements
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const portfolioTitle = document.getElementById('portfolio-title');
+            
+            // Current filter state
+            let currentFilter = 'All';
+            let filteredProjects = [...projects];
+
+            // Initialize
+            function init() {
+                // Animate title
+                gsap.to(portfolioTitle, {
+                    opacity: 1,
+                    duration: 1.5,
+                    y: 0
+                });
+                
+                // Load all projects initially
+                renderProjects(filteredProjects);
+                
+                // Setup filter buttons
+                setupFilterButtons();
+                
+                // Setup mobile menu
+                setupMobileMenu();
+            }
+
+            // Render projects to grid
+            function renderProjects(projectsToRender) {
+                portfolioGrid.innerHTML = '';
+                
+                projectsToRender.forEach((project, index) => {
+                    const projectElement = createProjectElement(project, index);
+                    portfolioGrid.appendChild(projectElement);
+                    
+                    // Animate in with delay
+                    setTimeout(() => {
+                        projectElement.style.opacity = '1';
+                        projectElement.style.transform = 'scale(1)';
+                    }, 100 + (index * 100));
+                });
+            }
+
+            // Create project element
+            function createProjectElement(project, index) {
+                const div = document.createElement('div');
+                div.className = 'grid-item group relative bg-[#111] rounded-2xl overflow-hidden border border-white/5 transition-all duration-500';
+                div.style.opacity = '0';
+                div.style.transform = 'scale(0.9)';
+                div.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                div.innerHTML = `
+                    <div class="relative h-[300px] md:h-[400px] overflow-hidden">
+                        <img 
+                            src="${project.img}" 
+                            alt="${project.title}"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80"></div>
+                        
+                        <div class="absolute bottom-0 left-0 p-6 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <span class="text-gold-500 text-xs font-mono tracking-widest uppercase mb-2 block">
+                                ${project.category}
+                            </span>
+                            <h3 class="text-2xl font-serif font-bold mb-2">${project.title}</h3>
+                            <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                ${project.desc}
+                            </p>
+                            <button class="view-project mt-4 flex items-center gap-2 text-xs font-bold tracking-tighter uppercase group-hover:text-gold-500" data-id="${project.id}">
+                                View Project Details <span class="text-xl">→</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                // Add hover effect
+                div.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1)';
+                });
+                
+                div.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                return div;
+            }
+
+            // Setup filter buttons
+            function setupFilterButtons() {
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const filterValue = this.getAttribute('data-filter');
+                        
+                        // Update active button
+                        filterButtons.forEach(btn => {
+                            if (btn.getAttribute('data-filter') === filterValue) {
+                                btn.classList.add('active', 'bg-gold-500', 'border-gold-500', 'text-black', 'shadow-[0_0_20px_rgba(212,175,55,0.3)]');
+                                btn.classList.remove('border-white/10', 'text-gray-500');
+                            } else {
+                                btn.classList.remove('active', 'bg-gold-500', 'border-gold-500', 'text-black', 'shadow-[0_0_20px_rgba(212,175,55,0.3)]');
+                                btn.classList.add('border-white/10', 'text-gray-500');
+                            }
+                        });
+                        
+                        // Update current filter
+                        currentFilter = filterValue;
+                        
+                        // Filter projects
+                        if (filterValue === 'All') {
+                            filteredProjects = [...projects];
+                        } else {
+                            filteredProjects = projects.filter(p => p.category === filterValue);
+                        }
+                        
+                        // Animate out then in
+                        animateFilterChange();
+                    });
+                });
+            }
+
+            // Animate filter change
+            function animateFilterChange() {
+                // Fade out existing projects
+                const items = portfolioGrid.querySelectorAll('.grid-item');
+                items.forEach(item => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.9)';
+                });
+                
+                // After fade out, render new projects
+                setTimeout(() => {
+                    renderProjects(filteredProjects);
+                    
+                    // Update count in header if needed
+                    updateProjectCount();
+                }, 300);
+            }
+
+            // Update project count display
+            function updateProjectCount() {
+                // You could update a counter element if you add one
+                // For example: document.getElementById('project-count').textContent = filteredProjects.length;
+            }
+
+            // Setup mobile menu
+            function setupMobileMenu() {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                });
+                
+                closeMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+                
+                // Close menu when clicking a filter link
+                mobileMenu.querySelectorAll('.filter-btn').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const filterValue = link.getAttribute('data-filter');
+                        
+                        // Update filter
+                        document.querySelector(`.filter-btn[data-filter="${filterValue}"]`).click();
+                        
+                        // Close menu
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                    });
+                });
+            }
+
+            // View project details
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.view-project')) {
+                    const button = e.target.closest('.view-project');
+                    const projectId = button.getAttribute('data-id');
+                    const project = projects.find(p => p.id == projectId);
+                    
+                    if (project) {
+                        // Create a modal or alert for project details
+                        alert(`Project: ${project.title}\n\nCategory: ${project.category}\n\nDescription: ${project.desc}\n\nMore details coming soon!`);
+                    }
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    if (targetId === '#top') {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                        return;
+                    }
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Initialize the page
+            init();
+        });
+    </script>
+</body>
+</html>
