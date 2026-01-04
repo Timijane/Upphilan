@@ -77,7 +77,32 @@
         .slide-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.6), rgba(0,0,0,0.85));
+        }
+        
+        /* Text overlay for better readability */
+        .text-overlay {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            padding: 20px 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Enhanced text shadow for hero text */
+        .hero-text-shadow {
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.8),
+                0 4px 8px rgba(0, 0, 0, 0.6),
+                0 6px 12px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-text-shadow-light {
+            text-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.7),
+                0 2px 6px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(0, 0, 0, 0.4);
         }
         
         /* Slider Controls */
@@ -128,12 +153,15 @@
         
         /* Text outline effect */
         .text-outline {
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.8);
             color: transparent;
+            text-shadow: none;
         }
         
         .text-outline:hover {
-            -webkit-text-stroke: 1px rgba(212, 175, 55, 1);
+            -webkit-text-stroke: 2px rgba(212, 175, 55, 1);
+            color: rgba(212, 175, 55, 0.3);
+            transition: all 0.5s ease;
         }
         
         /* Custom scrollbar */
@@ -164,6 +192,38 @@
         .fade-in {
             animation: fadeIn 1s ease-out;
         }
+        
+        /* Mobile menu close button styling */
+        .close-menu-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--gold-500);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .close-menu-btn:hover {
+            background: var(--gold-500);
+            transform: rotate(90deg);
+        }
+        
+        .close-menu-btn:hover svg {
+            stroke: #000;
+        }
+        
+        /* Mobile menu backdrop */
+        .mobile-menu-backdrop {
+            background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(10,10,10,0.98) 100%);
+        }
     </style>
 </head>
 <body class="bg-onyx text-white selection:bg-gold-500 selection:text-black overflow-x-hidden">
@@ -180,26 +240,29 @@
             <a href="upphilan.html" class="hover:text-gold-500 transition-colors">Upphilan</a>
             <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
         </div>
-        <button id="mobile-menu-btn" class="lg:hidden text-gold-500">
+        <button id="mobile-menu-btn" class="lg:hidden text-gold-500 p-2 hover:bg-white/10 rounded-lg transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-6 text-xl uppercase tracking-widest">
-        <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 hover:text-white transition-colors">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <!-- Mobile Menu with improved X button -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 mobile-menu-backdrop backdrop-blur-lg hidden flex-col justify-center items-center space-y-8 text-xl uppercase tracking-widest">
+        <button id="close-menu-btn" class="close-menu-btn">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
-        <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
-        <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
-        <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
-        <a href="blog.html" class="hover:text-gold-500 transition-colors">Blog</a>
-        <a href="young.html" class="hover:text-gold-500 transition-colors">Young</a>
-        <a href="upphilan.html" class="hover:text-gold-500 transition-colors">Upphilan</a>
-        <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
+        <div class="flex flex-col items-center space-y-6">
+            <a href="about.html" class="hover:text-gold-500 transition-colors text-2xl">About</a>
+            <a href="inquiry.html" class="hover:text-gold-500 transition-colors text-2xl">Inquiry</a>
+            <a href="vision.html" class="hover:text-gold-500 transition-colors text-2xl">Vision</a>
+            <a href="blog.html" class="hover:text-gold-500 transition-colors text-2xl">Blog</a>
+            <a href="young.html" class="hover:text-gold-500 transition-colors text-2xl">Young</a>
+            <a href="upphilan.html" class="hover:text-gold-500 transition-colors text-2xl">Upphilan</a>
+            <a href="portfolio.html" class="hover:text-gold-500 transition-colors text-2xl">Portfolio</a>
+        </div>
     </div>
 
     <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -208,37 +271,46 @@
             <!-- Slides will be dynamically added by JavaScript -->
         </div>
         
+        <!-- Dark overlay for better text readability -->
+        <div class="absolute inset-0 bg-black/40 z-0"></div>
+        
         <!-- Slider Navigation Dots -->
         <div class="slider-dots">
             <!-- Dots will be dynamically added by JavaScript -->
         </div>
 
+        <!-- Hero content with improved text visibility -->
         <div class="relative z-10 text-center max-w-5xl px-6 fade-in">
-            <span id="voice-text" class="text-gold-500 tracking-[0.4em] uppercase text-sm mb-4 block opacity-0 drop-shadow-md">
-                A Voice for the Voiceless
-            </span>
-            <h1 class="reveal-text text-5xl md:text-9xl font-serif font-black mb-6 leading-[0.9] drop-shadow-2xl">
-                P. PAUL <br /> 
-                <span class="italic text-outline hover:text-white transition-all duration-700">(THE GREAT)</span>
-            </h1>
+            <div class="inline-block mb-8">
+                <span id="voice-text" class="text-gold-500 tracking-[0.4em] uppercase text-sm mb-4 block opacity-0 hero-text-shadow-light bg-black/30 px-4 py-2 rounded-full">
+                    A Voice for the Voiceless
+                </span>
+            </div>
             
-            <p class="reveal-text text-xl md:text-3xl font-bold text-white mb-4 tracking-wide max-w-3xl mx-auto drop-shadow-lg">
-                Poet. Spoken Word Artist. Public Speaker.
-            </p>
-            <p class="reveal-text text-lg md:text-xl font-medium text-gray-200 mb-10 tracking-wide max-w-2xl mx-auto italic drop-shadow-md">
-                Speaking the language of peace, healing, and human transformation
-            </p>
+            <div class="text-overlay inline-block p-8 md:p-12 mb-8">
+                <h1 class="reveal-text text-5xl md:text-9xl font-serif font-black mb-6 leading-[0.9] hero-text-shadow text-white">
+                    P. PAUL <br /> 
+                    <span class="italic text-outline hover:text-white/90 transition-all duration-700">(THE GREAT)</span>
+                </h1>
+                
+                <p class="reveal-text text-xl md:text-3xl font-bold text-white mb-4 tracking-wide max-w-3xl mx-auto hero-text-shadow-light">
+                    Poet. Spoken Word Artist. Public Speaker.
+                </p>
+                <p class="reveal-text text-lg md:text-xl font-medium text-gray-100 mb-10 tracking-wide max-w-2xl mx-auto italic hero-text-shadow-light">
+                    Speaking the language of peace, healing, and human transformation
+                </p>
+            </div>
             
-            <div class="reveal-text flex flex-col sm:flex-row gap-5 justify-center items-center">
-                <a href="inquiry.html" class="bg-gold-500 hover:bg-gold-600 text-black px-10 py-4 rounded-full font-bold transition-all transform hover:scale-110 active:scale-95 shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+            <div class="reveal-text flex flex-col sm:flex-row gap-5 justify-center items-center mt-8">
+                <a href="inquiry.html" class="bg-gold-500 hover:bg-gold-600 text-black px-10 py-4 rounded-full font-bold transition-all transform hover:scale-110 active:scale-95 shadow-[0_0_20px_rgba(212,175,55,0.6)] hero-text-shadow-light border-2 border-gold-600">
                     Invite Me to Speak
                 </a>
                 
-                <a href="blog.html" class="border border-white/50 hover:bg-white hover:text-black hover:border-white px-10 py-4 rounded-full font-bold backdrop-blur-sm transition-all bg-black/30">
+                <a href="blog.html" class="border-2 border-white/60 hover:bg-white hover:text-black hover:border-white px-10 py-4 rounded-full font-bold backdrop-blur-sm transition-all bg-black/50 hero-text-shadow-light">
                     Read The Blog
                 </a>
                 
-                <a href="https://www.instagram.com/reel/DSaZw-oDUch/?igsh=MjYwb3B4bWtzazBn" target="_blank" class="flex items-center gap-2 text-gold-500 hover:text-white transition-colors underline underline-offset-4 bg-black/30 px-4 py-2 rounded-lg">
+                <a href="https://www.instagram.com/reel/DSaZw-oDUch/?igsh=MjYwb3B4bWtzazBn" target="_blank" class="flex items-center gap-2 text-gold-500 hover:text-white transition-colors underline underline-offset-4 bg-black/50 px-6 py-3 rounded-full hero-text-shadow-light border border-gold-500/30">
                     <span>▶ Watch Inspiration</span>
                 </a>
             </div>
@@ -341,22 +413,33 @@
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.remove('hidden');
                 mobileMenu.classList.add('flex');
+                document.body.style.overflow = 'hidden';
             });
             
             closeMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
                 mobileMenu.classList.remove('flex');
+                document.body.style.overflow = 'auto';
             });
             
             // Close mobile menu when clicking a link
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
-                    // Slight delay to allow navigation to process
                     setTimeout(() => {
                         mobileMenu.classList.add('hidden');
                         mobileMenu.classList.remove('flex');
+                        document.body.style.overflow = 'auto';
                     }, 100);
                 });
+            });
+            
+            // Close menu when clicking outside
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
             });
             
             // Hero Image Slider
@@ -366,10 +449,16 @@
             
             // Create slides and dots
             for (let i = 1; i <= imageCount; i++) {
-                // Create slide
+                // Create slide with overlay
                 const slide = document.createElement('div');
                 slide.className = `slide ${i === 1 ? 'active' : ''}`;
                 slide.style.backgroundImage = `url('p${i}.jpg')`;
+                
+                // Add overlay div for better text readability
+                const slideOverlay = document.createElement('div');
+                slideOverlay.className = 'slide-overlay';
+                slide.appendChild(slideOverlay);
+                
                 heroSlider.appendChild(slide);
                 
                 // Create dot
@@ -429,11 +518,13 @@
                 ease: "power4.out"
             });
             
-            // Animate "A Voice for the Voiceless" text
+            // Animate "A Voice for the Voiceless" text with better visibility
             gsap.to("#voice-text", {
                 opacity: 1,
                 duration: 1.5,
-                delay: 0.5
+                delay: 0.5,
+                y: 0,
+                ease: "back.out(1.7)"
             });
             
             // Add click event to navigation logo for homepage
@@ -441,7 +532,20 @@
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+            
+            // Add subtle animation to hero text for better visibility
+            gsap.to(".text-overlay", {
+                backgroundColor: "rgba(0,0,0,0.4)",
+                duration: 2,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: "#home",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
         });
     </script>
 </body>
-</html>
+    </html>
