@@ -3,367 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P. Paul (The Great) | Poet & Speaker</title>
+    <title>P. Paul (The Great) | Poet & Humanitarian Advocate</title>
+    <meta name="description" content="Speaking the language of peace, healing, and human transformation.">
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <style>
+        /* Custom CSS with Tailwind configuration */
         :root {
-            --glass: rgba(255, 255, 255, 0.88);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --primary-gold: #D4AF37;
-            --deep-dark: #1a1a1a;
-            --text-main: #2d3436;
+            --gold-400: #e1b76a;
+            --gold-500: #d4af37;
+            --gold-600: #bc9a2e;
+            --onyx: #0a0a0a;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        
+        .selection\\:bg-gold-500 *::selection, .selection\\:bg-gold-500::selection {
+            background-color: var(--gold-500);
         }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-main);
-            overflow-x: hidden;
-            background: #000;
+        
+        .selection\\:text-black *::selection, .selection\\:text-black::selection {
+            color: #000;
         }
-
-        h1, h2, h3, .serif {
-            font-family: 'Playfair Display', serif;
+        
+        .bg-onyx {
+            background-color: var(--onyx);
         }
-
-        /* --- DYNAMIC BACKGROUND SLIDER --- */
-        .background-slider {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+        
+        .text-gold-500 {
+            color: var(--gold-500);
         }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            animation: imageFade 25s infinite;
-            filter: brightness(0.6) contrast(1.1);
+        
+        .border-gold-500 {
+            border-color: var(--gold-500);
         }
-
-        /* Assigning images p1 to p5 */
-        .slide:nth-child(1) { background-image: url('p1.jpg'); animation-delay: 0s; }
-        .slide:nth-child(2) { background-image: url('p2.jpg'); animation-delay: 5s; }
-        .slide:nth-child(3) { background-image: url('p3.jpg'); animation-delay: 10s; }
-        .slide:nth-child(4) { background-image: url('p4.jpg'); animation-delay: 15s; }
-        .slide:nth-child(5) { background-image: url('p5.jpg'); animation-delay: 20s; }
-
-        @keyframes imageFade {
-            0% { opacity: 0; transform: scale(1); }
-            10% { opacity: 1; }
-            20% { opacity: 1; }
-            30% { opacity: 0; transform: scale(1.1); }
-            100% { opacity: 0; }
+        
+        .bg-gold-500 {
+            background-color: var(--gold-500);
         }
-
-        /* --- FLOATING PLAYCARD STYLING --- */
-        .playcard {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        
+        .hover\\:bg-gold-600:hover {
+            background-color: var(--gold-600);
         }
-
-        .playcard:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        
+        .shadow-\\[0_0_20px_rgba\\(212\\2c 175\\2c 55\\2c 0\\.4\\)\\] {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 25px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+        
+        .bg-gold-500\\/20 {
+            background-color: rgba(212, 175, 55, 0.2);
         }
-
-        .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        
+        .group:hover .group-hover\\:bg-gold-500 {
+            background-color: var(--gold-500);
         }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
+        
+        .group:hover .group-hover\\:bg-gold-500\\/30 {
+            background-color: rgba(212, 175, 55, 0.3);
         }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
-
-        .nav-links a:hover {
-            color: var(--primary-gold);
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
+        
+        .animate-pulse-slow {
+            animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
-
-        .hero-card {
-            max-width: 800px;
-            animation: fadeInUp 1.2s ease;
+        
+        .animate-float {
+            animation: floating 3s ease-in-out infinite;
         }
-
-        .hero-card h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            color: var(--deep-dark);
+        
+        /* Text outline effect */
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
         }
-
-        .hero-card h2 {
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: var(--primary-gold);
-            margin-bottom: 20px;
+        
+        .text-outline:hover {
+            -webkit-text-stroke: 1px rgba(212, 175, 55, 1);
         }
-
-        .hero-card p {
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            line-height: 1.8;
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
-
-        /* --- BUTTONS --- */
-        .btn {
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-            margin: 10px;
+        
+        ::-webkit-scrollbar-track {
+            background: #111;
         }
-
-        .btn-primary {
-            background: var(--deep-dark);
-            color: white;
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-500);
+            border-radius: 5px;
         }
-
-        .btn-outline {
-            border: 2px solid var(--deep-dark);
-            color: var(--deep-dark);
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            background: var(--primary-gold);
-            border-color: var(--primary-gold);
-            color: white;
-        }
-
-        /* --- SECTIONS --- */
-        .section-container {
-            padding: 100px 10%;
-            display: flex;
-            flex-direction: column;
-            gap: 100px;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .capabilities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .cap-card {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .cap-card i {
-            font-size: 2.5rem;
-            color: var(--primary-gold);
-            margin-bottom: 20px;
-        }
-
-        /* --- QUOTE SECTION --- */
-        .impact-quote {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .impact-quote blockquote {
-            font-size: 2rem;
-            font-style: italic;
-            line-height: 1.4;
-            color: var(--deep-dark);
-        }
-
-        footer {
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-card h1 { font-size: 2.5rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
-<body>
-
-    <div class="background-slider">
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-    </div>
-
-    <nav>
-        <div class="logo">P. PAUL</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Portfolio</a>
-            <a href="#">Blog</a>
-            <a href="#">Upphilan</a>
-            <a href="#">Vision</a>
-            <a href="#">Contact</a>
+<body class="bg-onyx text-white selection:bg-gold-500 selection:text-black overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/20 border-b border-white/10">
+        <div class="text-2xl font-serif font-bold tracking-tighter italic">P. Paul <span class="text-gold-500">.</span></div>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+            <a href="#home" class="hover:text-gold-500 transition-colors">Home</a>
+            <a href="#portfolio" class="hover:text-gold-500 transition-colors">Portfolio</a>
+            <a href="#upphilan" class="hover:text-gold-500 transition-colors">Upphilan</a>
+            <a href="#blog" class="hover:text-gold-500 transition-colors">Blog</a>
+            <a href="#contact" class="hover:text-gold-500 transition-colors">Contact</a>
         </div>
+        <button id="mobile-menu-btn" class="md:hidden text-gold-500">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
     </nav>
 
-    <section class="hero">
-        <div class="playcard hero-card animate__animated animate__fadeIn">
-            <h2>Poet • Artist • Speaker</h2>
-            <h1>P. Paul (The Great)</h1>
-            <p>“Speaking the language of peace, healing, and human transformation. Empowering young people to believe deeply in their potential—regardless of age, color, or background.”</p>
-            <div class="cta-area">
-                <a href="#contact" class="btn btn-primary">Invite Me to Speak</a>
-                <a href="#about" class="btn btn-outline">My Story</a>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/90 backdrop-blur-lg hidden flex-col justify-center items-center space-y-8 text-xl">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 text-3xl">×</button>
+        <a href="#home" class="hover:text-gold-500 transition-colors">Home</a>
+        <a href="#portfolio" class="hover:text-gold-500 transition-colors">Portfolio</a>
+        <a href="#upphilan" class="hover:text-gold-500 transition-colors">Upphilan</a>
+        <a href="#blog" class="hover:text-gold-500 transition-colors">Blog</a>
+        <a href="#contact" class="hover:text-gold-500 transition-colors">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Scattered Image Background -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <img id="hero-img-1" src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" class="absolute w-48 h-64 top-[15%] left-[5%] opacity-30 rounded-lg object-cover grayscale" alt="p1">
+            <img id="hero-img-2" src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="absolute w-64 h-80 top-[10%] right-[10%] opacity-20 rounded-lg object-cover" alt="p2">
+            <img id="hero-img-3" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="absolute w-56 h-72 bottom-[15%] left-[12%] opacity-40 rounded-lg object-cover" alt="p3">
+            <img id="hero-img-4" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="absolute w-40 h-56 bottom-[10%] right-[15%] opacity-25 rounded-lg object-cover grayscale" alt="p4">
+            <img id="hero-img-5" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" class="absolute w-32 h-32 top-[45%] right-[5%] opacity-15 rounded-full object-cover animate-pulse-slow" alt="p5">
+        </div>
+
+        <div class="relative z-10 text-center max-w-5xl px-6">
+            <span id="voice-text" class="text-gold-500 tracking-[0.4em] uppercase text-sm mb-4 block opacity-0">
+                A Voice for the Voiceless
+            </span>
+            <h1 class="reveal-text text-5xl md:text-9xl font-serif font-black mb-6 leading-[0.9]">
+                P. PAUL <br /> 
+                <span class="italic text-outline hover:text-white transition-all duration-700">(THE GREAT)</span>
+            </h1>
+            <p class="reveal-text text-xl md:text-2xl font-light text-gray-300 mb-10 tracking-wide max-w-2xl mx-auto">
+                Poet. Spoken Word Artist. Public Speaker. <br />
+                <span class="text-gray-500">Speaking the language of peace, healing, and human transformation.</span>
+            </p>
+            
+            <div class="reveal-text flex flex-col sm:flex-row gap-5 justify-center">
+                <button id="speak-btn" class="bg-gold-500 hover:bg-gold-600 text-black px-10 py-4 rounded-full font-bold transition-all transform hover:scale-110 active:scale-95 shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                    Invite Me to Speak
+                </button>
+                <button id="story-btn" class="border border-white/30 hover:border-white px-10 py-4 rounded-full font-bold backdrop-blur-sm transition-all">
+                    Read My Story
+                </button>
             </div>
         </div>
     </section>
 
-    <div class="section-container">
-        
-        <section id="about" class="about-grid">
-            <div class="image-box animate__animated animate__fadeInLeft">
-                <div style="width: 100%; height: 500px; background: url('p1.jpg') center/cover; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);"></div>
-            </div>
-            <div class="playcard animate__animated animate__fadeInRight">
-                <h3 style="color: var(--primary-gold); text-transform: uppercase; letter-spacing: 2px;">Who I Am</h3>
-                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Paul Okewunmi</h2>
-                <p style="line-height: 1.8; margin-bottom: 20px;">
-                    Widely known as <strong>P. Paul (The Great)</strong>, I am a music composer, and public speaker driven by a passion for youth development. As an undergraduate of Law, I bring structure and advocacy into my work—using both words and action as instruments of influence.
+    <!-- About Preview -->
+    <section id="about" class="py-20 md:py-32 px-6 md:px-10 bg-white text-black rounded-t-[3rem] -mt-10 relative z-20">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="space-y-8">
+                <h2 class="text-4xl md:text-7xl font-serif font-bold">About P. Paul</h2>
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                    My name is <span class="font-bold text-black">Paul Okewunmi</span>, popularly known as P. Paul (The Great). 
+                    I am a poet, spoken word artist, and public speaker passionate about youth development and human transformation.
                 </p>
-                <a href="#" class="btn btn-outline">Discover My Story</a>
-            </div>
-        </section>
-
-        <section class="what-i-do">
-            <div class="playcard" style="margin-bottom: 50px; text-align: center;">
-                <h2 style="font-size: 2.5rem;">What I Do</h2>
-            </div>
-            <div class="capabilities-grid">
-                <div class="playcard cap-card">
-                    <i class="fa-solid fa-microphone-lines"></i>
-                    <h3>Spoken Word</h3>
-                    <p>Giving voice to truths that provoke reflection and healing.</p>
+                <div class="border-l-4 border-gold-500 pl-6 py-2 italic text-xl md:text-2xl text-gray-500">
+                    "Helping young people believe they can become whoever they dream to be."
                 </div>
-                <div class="playcard cap-card">
-                    <i class="fa-solid fa-users-rays"></i>
-                    <h3>Public Speaking</h3>
-                    <p>Compelling messages centered on leadership and self-belief.</p>
-                </div>
-                <div class="playcard cap-card">
-                    <i class="fa-solid fa-music"></i>
-                    <h3>Music Composition</h3>
-                    <p>Producing meaningful soundscapes that complement storytelling.</p>
-                </div>
-                <div class="playcard cap-card">
-                    <i class="fa-solid fa-hand-holding-heart"></i>
-                    <h3>Advocacy</h3>
-                    <p>Nurturing potential through community-led initiatives.</p>
-                </div>
+                <button id="read-more-btn" class="group flex items-center gap-3 text-lg font-bold">
+                    Read More About Me 
+                    <span class="w-10 h-10 rounded-full bg-onyx text-white flex items-center justify-center group-hover:bg-gold-500 transition-colors">→</span>
+                </button>
             </div>
-        </section>
-
-        <section class="impact-quote">
-            <div class="playcard">
-                <i class="fa-solid fa-quote-left" style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 20px;"></i>
-                <blockquote>
-                    “I count it a great joy to contribute to the lives and destinies of young people—helping them believe they can become whoever they dare to dream of.”
-                </blockquote>
+            <div class="relative group mt-10 lg:mt-0">
+                <div class="absolute -inset-4 bg-gold-500/20 rounded-2xl blur-xl group-hover:bg-gold-500/30 transition-all"></div>
+                <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" class="relative rounded-2xl shadow-2xl w-full h-[400px] md:h-[600px] object-cover" alt="Paul Profile">
             </div>
-        </section>
-
-    </div>
-
-    <footer>
-        <h2 class="serif" style="font-size: 2rem; margin-bottom: 10px;">P. Paul (The Great)</h2>
-        <p style="opacity: 0.7; margin-bottom: 30px;">Speaking the language of peace, healing, and human transformation.</p>
-        <div class="nav-links" style="display: block; margin-bottom: 30px;">
-            <a href="#" style="margin: 0 15px;"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" style="margin: 0 15px;"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" style="margin: 0 15px;"><i class="fa-brands fa-youtube"></i></a>
         </div>
-        <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2026 P. Paul (The Great). All Rights Reserved.</p>
+    </section>
+
+    <!-- What I Do -->
+    <section id="portfolio" class="py-20 md:py-32 px-6 md:px-10 bg-[#050505]">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12 md:mb-20">
+                <h2 class="text-3xl md:text-6xl font-serif mb-4">What I Do</h2>
+                <div class="w-24 h-1 bg-gold-500"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-1px bg-white/10 border border-white/10 rounded-3xl overflow-hidden">
+                <div class="bg-onyx p-8 md:p-12 hover:bg-white/[0.03] transition-colors flex flex-col justify-between group">
+                    <div>
+                        <div class="text-4xl mb-6 group-hover:scale-125 transition-transform inline-block">🖋️</div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">Poetry & Spoken Word</h3>
+                        <p class="text-gray-400 leading-relaxed">Giving voice to emotions that inspire reflection and healing.</p>
+                    </div>
+                    <button class="mt-8 text-gold-500 font-bold tracking-widest uppercase text-xs">Explore Service</button>
+                </div>
+                
+                <div class="bg-onyx p-8 md:p-12 hover:bg-white/[0.03] transition-colors flex flex-col justify-between group">
+                    <div>
+                        <div class="text-4xl mb-6 group-hover:scale-125 transition-transform inline-block">🎤</div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">Public Speaking</h3>
+                        <p class="text-gray-400 leading-relaxed">Engaging audiences with messages of leadership and self-belief.</p>
+                    </div>
+                    <button class="mt-8 text-gold-500 font-bold tracking-widest uppercase text-xs">Explore Service</button>
+                </div>
+                
+                <div class="bg-onyx p-8 md:p-12 hover:bg-white/[0.03] transition-colors flex flex-col justify-between group">
+                    <div>
+                        <div class="text-4xl mb-6 group-hover:scale-125 transition-transform inline-block">🎹</div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">Music Composition</h3>
+                        <p class="text-gray-400 leading-relaxed">Creating soundscapes that complement storytelling.</p>
+                    </div>
+                    <button class="mt-8 text-gold-500 font-bold tracking-widest uppercase text-xs">Explore Service</button>
+                </div>
+                
+                <div class="bg-onyx p-8 md:p-12 hover:bg-white/[0.03] transition-colors flex flex-col justify-between group">
+                    <div>
+                        <div class="text-4xl mb-6 group-hover:scale-125 transition-transform inline-block">🌍</div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">Humanitarian Advocacy</h3>
+                        <p class="text-gray-400 leading-relaxed">Mobilizing individuals toward service and positive society.</p>
+                    </div>
+                    <button class="mt-8 text-gold-500 font-bold tracking-widest uppercase text-xs">Explore Service</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-16 md:py-20 border-t border-white/10 px-6 md:px-10 text-center">
+        <h2 class="text-3xl font-serif italic mb-6">P. Paul (The Great)</h2>
+        <p class="text-gray-500 max-w-md mx-auto mb-10">Speaking the language of peace, healing, and human transformation.</p>
+        <div class="flex justify-center space-x-6 mb-10">
+            <a href="#" class="hover:text-gold-500">Instagram</a>
+            <a href="#" class="hover:text-gold-500">LinkedIn</a>
+            <a href="#" class="hover:text-gold-500">YouTube</a>
+        </div>
+        <p class="text-xs text-gray-600 uppercase tracking-widest font-mono">
+            © 2026 P. Paul (The Great) — All Rights Reserved.
+        </p>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Artistic Scroll Reveal Effect
-        window.addEventListener('scroll', () => {
-            const cards = document.querySelectorAll('.playcard');
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                if (cardTop < window.innerHeight - 100) {
-                    card.style.opacity = '1';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize GSAP ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
+            });
+            
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+            
+            // Close mobile menu when clicking a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+            });
+            
+            // Hero images parallax effect
+            const heroImages = [
+                document.getElementById('hero-img-1'),
+                document.getElementById('hero-img-2'),
+                document.getElementById('hero-img-3'),
+                document.getElementById('hero-img-4'),
+                document.getElementById('hero-img-5')
+            ];
+            
+            heroImages.forEach((img, i) => {
+                if (img) {
+                    gsap.to(img, {
+                        y: -100 * (i + 1),
+                        rotation: i % 2 === 0 ? 5 : -5,
+                        scrollTrigger: {
+                            trigger: img,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: 1,
+                        }
+                    });
                 }
+            });
+            
+            // Text reveal animation
+            gsap.from(".reveal-text", {
+                y: 80,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power4.out"
+            });
+            
+            // Animate "A Voice for the Voiceless" text
+            gsap.to("#voice-text", {
+                opacity: 1,
+                duration: 1.5,
+                delay: 0.5
+            });
+            
+            // Button interactions
+            document.getElementById('speak-btn')?.addEventListener('click', () => {
+                alert("Thank you for your interest! P. Paul would be honored to speak at your event.");
+            });
+            
+            document.getElementById('story-btn')?.addEventListener('click', () => {
+                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.getElementById('read-more-btn')?.addEventListener('click', () => {
+                alert("P. Paul's full biography and journey will be available soon!");
+            });
+            
+            // Smooth scrolling for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add floating animation to hero images on hover
+            heroImages.forEach(img => {
+                img.addEventListener('mouseenter', () => {
+                    img.classList.add('animate-float');
+                });
+                
+                img.addEventListener('mouseleave', () => {
+                    img.classList.remove('animate-float');
+                });
             });
         });
     </script>
 </body>
-</html>
+            </html>
