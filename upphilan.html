@@ -105,6 +105,81 @@
                          0 0 20px rgba(212, 175, 55, 0.3),
                          0 0 30px rgba(212, 175, 55, 0.1);
         }
+        
+        /* Mobile menu styling - 45% width */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .mobile-menu-container.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--gold-500);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-close:hover {
+            background: var(--gold-500);
+            transform: rotate(90deg);
+        }
+        
+        .mobile-menu-close:hover svg {
+            stroke: #000;
+        }
+        
+        /* Overlay for mobile menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Featured projects loading animation */
+        .project-card-skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
     </style>
 </head>
 <body class="bg-[#030303] text-white selection:bg-gold-500 selection:text-black overflow-x-hidden cursor-default">
@@ -112,30 +187,48 @@
     <div id="magic-blob" class="fixed w-[300px] h-[300px] bg-gold-500/20 rounded-full blur-[100px] pointer-events-none z-0 opacity-70"></div>
     
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/20 border-b border-white/10">
-        <div class="text-2xl font-serif font-bold tracking-tighter italic">Upphilan <span class="text-gold-500">.</span></div>
-        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/80 border-b border-white/10">
+        <a href="index.html" class="text-2xl font-serif font-bold tracking-tighter italic hover:text-gold-500 transition-colors">
+            P. Paul (The Great) <span class="text-gold-500">.</span>
+        </a>
+        <div class="hidden lg:flex space-x-6 text-xs uppercase tracking-widest font-medium">
             <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
-            <a href="#philosophy" class="hover:text-gold-500 transition-colors">Philosophy</a>
-            <a href="#process" class="hover:text-gold-500 transition-colors">Process</a>
-            <a href="#projects" class="hover:text-gold-500 transition-colors">Projects</a>
+            <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
+            <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
             <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
+            <a href="blog.html" class="hover:text-gold-500 transition-colors">Blog</a>
+            <a href="young.html" class="hover:text-gold-500 transition-colors">Young</a>
+            <a href="upphilan.html" class="text-gold-500 font-bold transition-colors">Upphilan</a>
+            <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
         </div>
-        <button id="mobile-menu-btn" class="md:hidden text-gold-500">
+        <button id="mobile-menu-btn" class="lg:hidden text-gold-500 p-2 hover:bg-white/10 rounded-lg transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-8 text-xl">
-        <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 text-3xl">×</button>
-        <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
-        <a href="#philosophy" class="hover:text-gold-500 transition-colors">Philosophy</a>
-        <a href="#process" class="hover:text-gold-500 transition-colors">Process</a>
-        <a href="#projects" class="hover:text-gold-500 transition-colors">Projects</a>
-        <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    
+    <!-- Mobile Menu (45% width) -->
+    <div id="mobile-menu" class="mobile-menu-container">
+        <button id="close-menu-btn" class="mobile-menu-close">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <div class="flex flex-col items-center justify-center h-full space-y-8 p-10">
+            <a href="index.html" class="text-2xl hover:text-gold-500 transition-colors">Home</a>
+            <a href="about.html" class="text-2xl hover:text-gold-500 transition-colors">About</a>
+            <a href="inquiry.html" class="text-2xl hover:text-gold-500 transition-colors">Inquiry</a>
+            <a href="vision.html" class="text-2xl hover:text-gold-500 transition-colors">Vision</a>
+            <a href="blog.html" class="text-2xl hover:text-gold-500 transition-colors">Blog</a>
+            <a href="young.html" class="text-2xl hover:text-gold-500 transition-colors">Young</a>
+            <a href="upphilan.html" class="text-2xl text-gold-500 font-bold transition-colors">Upphilan</a>
+            <a href="portfolio.html" class="text-2xl hover:text-gold-500 transition-colors">Portfolio</a>
+        </div>
     </div>
 
     <!-- Header Section -->
@@ -164,7 +257,7 @@
             <div class="order-2 lg:order-1">
                 <div class="relative group">
                    <div class="absolute -inset-1 bg-gradient-to-r from-gold-500 to-white opacity-30 blur group-hover:opacity-100 transition duration-1000"></div>
-                   <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="relative rounded-lg w-full h-[400px] md:h-[500px] object-cover" alt="Creative Process">
+                   <img src="pelumi.jpg" class="relative rounded-lg w-full h-[400px] md:h-[500px] object-cover" alt="Creative Process">
                 </div>
             </div>
             <div class="order-1 lg:order-2 space-y-8">
@@ -268,51 +361,17 @@
         <div class="max-w-7xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-serif font-bold mb-10 text-center">Featured Projects</h2>
             
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="group overflow-hidden rounded-2xl bg-black text-white">
-                    <div class="h-48 bg-gradient-to-br from-gold-500 to-black relative">
-                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
-                        <div class="absolute bottom-4 left-4">
-                            <span class="text-xs uppercase tracking-widest text-gold-400">Poetry</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2">Silent Echoes</h4>
-                        <p class="text-gray-400 text-sm">A spoken word album exploring the spaces between words and meaning.</p>
-                    </div>
-                </div>
-                
-                <div class="group overflow-hidden rounded-2xl bg-black text-white">
-                    <div class="h-48 bg-gradient-to-br from-black to-gold-500 relative">
-                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
-                        <div class="absolute bottom-4 left-4">
-                            <span class="text-xs uppercase tracking-widest text-gold-400">Music</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2">Sound of Awakening</h4>
-                        <p class="text-gray-400 text-sm">Musical compositions paired with transformative spoken word pieces.</p>
-                    </div>
-                </div>
-                
-                <div class="group overflow-hidden rounded-2xl bg-black text-white">
-                    <div class="h-48 bg-gradient-to-br from-gold-500 via-black to-gold-500 relative">
-                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
-                        <div class="absolute bottom-4 left-4">
-                            <span class="text-xs uppercase tracking-widest text-gold-400">Performance</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2">Live at The Temple</h4>
-                        <p class="text-gray-400 text-sm">A recorded live performance merging poetry, music, and visual art.</p>
-                    </div>
-                </div>
+            <div id="featured-projects-container" class="grid md:grid-cols-3 gap-6">
+                <!-- Projects will be loaded dynamically from portfolio.html -->
+                <div class="project-card-skeleton h-64 rounded-2xl"></div>
+                <div class="project-card-skeleton h-64 rounded-2xl"></div>
+                <div class="project-card-skeleton h-64 rounded-2xl"></div>
             </div>
             
             <div class="text-center mt-12">
-                <button id="all-projects-btn" class="px-8 py-3 border border-black rounded-full font-bold hover:bg-black hover:text-white transition-colors">
+                <a href="portfolio.html" class="px-8 py-3 border border-black rounded-full font-bold hover:bg-black hover:text-white transition-colors inline-block">
                     View All Projects
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -324,10 +383,10 @@
             <p class="text-gray-600 mb-8">Where legal precision meets artistic soul. Where structure dances with freedom.</p>
             
             <div class="flex flex-wrap justify-center gap-6 mb-8">
-                <a href="#" class="text-gray-500 hover:text-gold-500 transition-colors">Instagram</a>
-                <a href="#" class="text-gray-500 hover:text-gold-500 transition-colors">SoundCloud</a>
-                <a href="#" class="text-gray-500 hover:text-gold-500 transition-colors">YouTube</a>
-                <a href="mailto:contact@upphilan.com" class="text-gray-500 hover:text-gold-500 transition-colors">Contact</a>
+                <a href="https://www.instagram.com/p.paulthegreat?igsh=dDVsempnMnBrZGw2" target="_blank" class="text-gray-500 hover:text-gold-500 transition-colors">Instagram</a>
+                <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-500 hover:text-gold-500 transition-colors">LinkedIn</a>
+                <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="text-gray-500 hover:text-gold-500 transition-colors">YouTube</a>
+                <a href="inquiry.html" class="text-gray-500 hover:text-gold-500 transition-colors">Contact</a>
             </div>
             
             <p class="text-xs font-mono tracking-widest uppercase opacity-40 italic">Designed for 2039 — P. Paul (The Great)</p>
@@ -340,26 +399,36 @@
     <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu functionality
+            // Mobile menu functionality (45% width with X button)
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
             const closeMenuBtn = document.getElementById('close-menu-btn');
             
+            // Open mobile menu
             mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('flex');
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
             
-            closeMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-            });
+            // Close mobile menu
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Close menu with X button
+            closeMenuBtn.addEventListener('click', closeMobileMenu);
+            
+            // Close menu when clicking overlay
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
             
             // Close mobile menu when clicking a link
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
+                    setTimeout(closeMobileMenu, 300);
                 });
             });
             
@@ -382,10 +451,6 @@
                 document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
             });
             
-            document.getElementById('all-projects-btn')?.addEventListener('click', () => {
-                alert("All Upphilan projects will be showcased here soon!");
-            });
-            
             // Animate the header text on load
             gsap.from('h1', {
                 opacity: 0.05,
@@ -393,6 +458,129 @@
                 duration: 2,
                 ease: "power2.out"
             });
+            
+            // Function to load featured projects from portfolio.html
+            async function loadFeaturedProjects() {
+                const container = document.getElementById('featured-projects-container');
+                if (!container) return;
+                
+                try {
+                    // First, try to load portfolio.html
+                    const response = await fetch('portfolio.html');
+                    const html = await response.text();
+                    
+                    // Create a temporary DOM element to parse the HTML
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Look for featured projects in portfolio.html
+                    // Adjust the selector based on your portfolio.html structure
+                    const portfolioProjects = doc.querySelectorAll('.portfolio-item, .project-item, .featured-work');
+                    
+                    // Clear skeleton loaders
+                    container.innerHTML = '';
+                    
+                    if (portfolioProjects.length > 0) {
+                        // Take up to 3 featured projects
+                        const featuredProjects = Array.from(portfolioProjects).slice(0, 3);
+                        
+                        featuredProjects.forEach((project, index) => {
+                            // Create project card based on portfolio.html structure
+                            const projectCard = document.createElement('div');
+                            projectCard.className = 'group overflow-hidden rounded-2xl bg-black text-white h-64';
+                            
+                            // Try to extract project data
+                            const title = project.querySelector('h3, h4, .project-title')?.textContent || `Project ${index + 1}`;
+                            const description = project.querySelector('p, .project-desc')?.textContent || 'Creative work from portfolio';
+                            const image = project.querySelector('img')?.src || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80';
+                            const category = project.querySelector('.category, .tag')?.textContent || 'Creative';
+                            
+                            projectCard.innerHTML = `
+                                <div class="h-48 bg-gradient-to-br from-gold-500 to-black relative" style="background-image: url('${image}'); background-size: cover; background-position: center;">
+                                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+                                    <div class="absolute bottom-4 left-4">
+                                        <span class="text-xs uppercase tracking-widest text-gold-400">${category}</span>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <h4 class="text-xl font-bold mb-2">${title}</h4>
+                                    <p class="text-gray-400 text-sm">${description.substring(0, 100)}${description.length > 100 ? '...' : ''}</p>
+                                </div>
+                            `;
+                            
+                            // Add click event to view project
+                            projectCard.addEventListener('click', () => {
+                                window.location.href = 'portfolio.html';
+                            });
+                            
+                            container.appendChild(projectCard);
+                        });
+                    } else {
+                        // Fallback to default projects if no projects found
+                        loadDefaultProjects();
+                    }
+                } catch (error) {
+                    console.error('Error loading portfolio projects:', error);
+                    // Fallback to default projects
+                    loadDefaultProjects();
+                }
+            }
+            
+            // Function to load default projects (fallback)
+            function loadDefaultProjects() {
+                const container = document.getElementById('featured-projects-container');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                const defaultProjects = [
+                    {
+                        title: "Silent Echoes",
+                        description: "A spoken word album exploring the spaces between words and meaning.",
+                        category: "Poetry",
+                        image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                    },
+                    {
+                        title: "Sound of Awakening",
+                        description: "Musical compositions paired with transformative spoken word pieces.",
+                        category: "Music",
+                        image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                    },
+                    {
+                        title: "Live at The Temple",
+                        description: "A recorded live performance merging poetry, music, and visual art.",
+                        category: "Performance",
+                        image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                    }
+                ];
+                
+                defaultProjects.forEach(project => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'group overflow-hidden rounded-2xl bg-black text-white h-64 cursor-pointer';
+                    
+                    projectCard.innerHTML = `
+                        <div class="h-48 bg-gradient-to-br from-gold-500 to-black relative" style="background-image: url('${project.image}'); background-size: cover; background-position: center;">
+                            <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="text-xs uppercase tracking-widest text-gold-400">${project.category}</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold mb-2">${project.title}</h4>
+                            <p class="text-gray-400 text-sm">${project.description}</p>
+                        </div>
+                    `;
+                    
+                    projectCard.addEventListener('click', () => {
+                        window.location.href = 'portfolio.html';
+                    });
+                    
+                    container.appendChild(projectCard);
+                });
+            }
+            
+            // Load featured projects
+            loadFeaturedProjects();
             
             // Animate sections on scroll
             const observerOptions = {
@@ -403,7 +591,12 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-fade-in');
+                        gsap.from(entry.target, {
+                            opacity: 0,
+                            y: 50,
+                            duration: 1,
+                            ease: "power2.out"
+                        });
                     }
                 });
             }, observerOptions);
@@ -412,19 +605,6 @@
             document.querySelectorAll('section > div').forEach((section) => {
                 observer.observe(section);
             });
-            
-            // Add custom animation class
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in {
-                    animation: fadeIn 0.8s ease-out forwards;
-                }
-            `;
-            document.head.appendChild(style);
             
             // Smooth scrolling for all anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -451,14 +631,22 @@
             // Add hover effect to cards
             document.querySelectorAll('.group').forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
+                    gsap.to(this, {
+                        y: -5,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
                 });
                 
                 card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
+                    gsap.to(this, {
+                        y: 0,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
                 });
             });
         });
     </script>
 </body>
-</html>
+    </html>
