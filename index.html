@@ -51,6 +51,62 @@
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
         
+        /* Hero Image Slider */
+        .hero-slider {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+        }
+        
+        /* Slider Controls */
+        .slider-dots {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            z-index: 10;
+        }
+        
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.3);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-dot.active {
+            background-color: var(--gold-500);
+            transform: scale(1.2);
+        }
+        
         /* Animations */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -98,11 +154,23 @@
         html {
             scroll-behavior: smooth;
         }
+        
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
     </style>
 </head>
 <body class="bg-onyx text-white selection:bg-gold-500 selection:text-black overflow-x-hidden">
     <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/50 border-b border-white/10">
-        <div class="text-2xl font-serif font-bold tracking-tighter italic">P. Paul (The Great) <span class="text-gold-500">.</span></div>
+        <a href="#" class="text-2xl font-serif font-bold tracking-tighter italic hover:text-gold-500 transition-colors">
+            P. Paul (The Great) <span class="text-gold-500">.</span>
+        </a>
         <div class="hidden lg:flex space-x-6 text-xs uppercase tracking-widest font-medium">
             <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
             <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
@@ -120,7 +188,11 @@
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-6 text-xl uppercase tracking-widest">
-        <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 text-3xl">×</button>
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 hover:text-white transition-colors">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
         <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
         <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
         <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
@@ -131,17 +203,17 @@
     </div>
 
     <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <img id="hero-img-1" src="p1.jpg" class="absolute w-48 h-64 top-[25%] left-[5%] opacity-80 rounded-lg object-cover shadow-2xl border border-white/10" alt="p1">
-            <img id="hero-img-2" src="p2.jpg" class="absolute w-64 h-80 top-[20%] right-[8%] opacity-70 rounded-lg object-cover shadow-2xl border border-white/10" alt="p2">
-            <img id="hero-img-3" src="p3.jpg" class="absolute w-56 h-72 bottom-[10%] left-[10%] opacity-80 rounded-lg object-cover shadow-2xl border border-white/10" alt="p3">
-            <img id="hero-img-4" src="p4.jpg" class="absolute w-40 h-56 bottom-[5%] right-[15%] opacity-75 rounded-lg object-cover shadow-2xl border border-white/10" alt="p4">
-            <img id="hero-img-5" src="p5.jpg" class="absolute w-32 h-32 top-[55%] right-[5%] opacity-90 rounded-full object-cover animate-pulse-slow border-2 border-gold-500" alt="p5">
-            
-            <div class="absolute inset-0 bg-black/40 z-0"></div>
+        <!-- Hero Image Slider -->
+        <div class="hero-slider">
+            <!-- Slides will be dynamically added by JavaScript -->
+        </div>
+        
+        <!-- Slider Navigation Dots -->
+        <div class="slider-dots">
+            <!-- Dots will be dynamically added by JavaScript -->
         </div>
 
-        <div class="relative z-10 text-center max-w-5xl px-6">
+        <div class="relative z-10 text-center max-w-5xl px-6 fade-in">
             <span id="voice-text" class="text-gold-500 tracking-[0.4em] uppercase text-sm mb-4 block opacity-0 drop-shadow-md">
                 A Voice for the Voiceless
             </span>
@@ -287,29 +359,66 @@
                 });
             });
             
-            // Hero images parallax effect
-            const heroImages = [
-                document.getElementById('hero-img-1'),
-                document.getElementById('hero-img-2'),
-                document.getElementById('hero-img-3'),
-                document.getElementById('hero-img-4'),
-                document.getElementById('hero-img-5')
-            ];
+            // Hero Image Slider
+            const heroSlider = document.querySelector('.hero-slider');
+            const sliderDots = document.querySelector('.slider-dots');
+            const imageCount = 8; // p1.jpg to p8.jpg
             
-            heroImages.forEach((img, i) => {
-                if (img) {
-                    gsap.to(img, {
-                        y: -100 * (i + 1),
-                        rotation: i % 2 === 0 ? 5 : -5,
-                        scrollTrigger: {
-                            trigger: img,
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: 1,
-                        }
-                    });
-                }
-            });
+            // Create slides and dots
+            for (let i = 1; i <= imageCount; i++) {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = `slide ${i === 1 ? 'active' : ''}`;
+                slide.style.backgroundImage = `url('p${i}.jpg')`;
+                heroSlider.appendChild(slide);
+                
+                // Create dot
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${i === 1 ? 'active' : ''}`;
+                dot.dataset.index = i - 1;
+                
+                // Add click event to dot
+                dot.addEventListener('click', () => {
+                    goToSlide(i - 1);
+                    resetTimer();
+                });
+                
+                sliderDots.appendChild(dot);
+            }
+            
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            function goToSlide(index) {
+                // Remove active class from current slide and dot
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                
+                // Update current slide
+                currentSlide = index;
+                
+                // Add active class to new slide and dot
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+            
+            function nextSlide() {
+                goToSlide((currentSlide + 1) % slides.length);
+            }
+            
+            function startTimer() {
+                slideInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+            }
+            
+            function resetTimer() {
+                clearInterval(slideInterval);
+                startTimer();
+            }
+            
+            // Start the automatic slideshow
+            startTimer();
             
             // Text reveal animation
             gsap.from(".reveal-text", {
@@ -327,17 +436,10 @@
                 delay: 0.5
             });
             
-            // Add floating animation to hero images on hover
-            heroImages.forEach(img => {
-                if(img) {
-                    img.addEventListener('mouseenter', () => {
-                        img.classList.add('animate-float');
-                    });
-                    
-                    img.addEventListener('mouseleave', () => {
-                        img.classList.remove('animate-float');
-                    });
-                }
+            // Add click event to navigation logo for homepage
+            document.querySelector('nav a').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     </script>
