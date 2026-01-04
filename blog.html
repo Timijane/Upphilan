@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Inkwell Journal | P. Paul (The Great)</title>
+    <meta name="description" content="Words are seeds; when spoken with purpose, they grow into destinies.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        /* Custom CSS with Tailwind configuration */
+        :root {
+            --gold-400: #e1b76a;
+            --gold-500: #d4af37;
+            --gold-600: #bc9a2e;
+            --onyx: #0a0a0a;
+        }
+        
+        .selection\\:bg-gold-500 *::selection, .selection\\:bg-gold-500::selection {
+            background-color: var(--gold-500);
+        }
+        
+        .selection\\:text-black *::selection, .selection\\:text-black::selection {
+            color: #000;
+        }
+        
+        .text-gold-500 {
+            color: var(--gold-500);
+        }
+        
+        .bg-gold-500 {
+            background-color: var(--gold-500);
+        }
+        
+        .border-gold-500 {
+            border-color: var(--gold-500);
+        }
+        
+        .hover\\:bg-gold-600:hover {
+            background-color: var(--gold-600);
+        }
+        
+        .hover\\:grayscale-0:hover {
+            filter: grayscale(0);
+        }
+        
+        .hover\\:rotate-2:hover {
+            transform: rotate(2deg);
+        }
+        
+        .line-clamp-2 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0c0c0c;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-500);
+            border-radius: 5px;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Reading progress bar animation */
+        .progress-bar {
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        /* Fade in animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Scale animation */
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-[#0c0c0c] text-white selection:bg-gold-500 selection:text-black overflow-x-hidden font-sans">
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress" class="fixed top-0 left-0 h-1 bg-gold-500 z-50 progress-bar"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/20 border-b border-white/10">
+        <div class="text-2xl font-serif font-bold tracking-tighter italic">The Inkwell <span class="text-gold-500">.</span></div>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+            <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
+            <a href="#featured" class="hover:text-gold-500 transition-colors">Featured</a>
+            <a href="#articles" class="hover:text-gold-500 transition-colors">Articles</a>
+            <a href="#newsletter" class="hover:text-gold-500 transition-colors">Newsletter</a>
+            <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-gold-500">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-30 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-8 text-xl">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 text-3xl">×</button>
+        <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
+        <a href="#featured" class="hover:text-gold-500 transition-colors">Featured</a>
+        <a href="#articles" class="hover:text-gold-500 transition-colors">Articles</a>
+        <a href="#newsletter" class="hover:text-gold-500 transition-colors">Newsletter</a>
+        <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
+    </div>
+
+    <!-- Blog Header -->
+    <section class="pt-32 md:pt-40 pb-12 md:pb-20 px-6 md:px-10 max-w-7xl mx-auto">
+        <div id="blog-header" class="flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-10 opacity-0">
+            <div>
+                <span class="text-gold-500 font-mono tracking-[0.3em] uppercase text-xs mb-4 block">The Inkwell</span>
+                <h1 class="text-6xl md:text-9xl font-serif font-black tracking-tighter">Journal.</h1>
+            </div>
+            <p class="text-gray-500 max-w-xs text-right italic font-serif mt-6 md:mt-0">
+                "Words are seeds; when spoken with purpose, they grow into destinies."
+            </p>
+        </div>
+        
+        <!-- Blog Stats -->
+        <div class="mt-8 flex flex-wrap gap-6 text-sm text-gray-500">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-gold-500 rounded-full"></div>
+                <span>12 Articles</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-gold-500 rounded-full"></div>
+                <span>4 Categories</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-gold-500 rounded-full"></div>
+                <span>Updated Weekly</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section id="featured" class="px-6 md:px-10 mb-20 md:mb-32">
+        <div id="featured-post" class="max-w-7xl mx-auto relative h-[50vh] md:h-[70vh] rounded-2xl md:rounded-[2rem] overflow-hidden cursor-pointer group opacity-0">
+            <img 
+                src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+                alt="Featured post"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 md:p-12 lg:p-20">
+                <span class="bg-gold-500 text-black px-4 py-1 rounded-full text-xs font-bold mb-4 md:mb-6 inline-block uppercase tracking-widest">
+                    Latest Insight
+                </span>
+                <h2 class="text-2xl md:text-4xl lg:text-6xl font-serif font-bold mb-4 md:mb-6 max-w-3xl leading-tight">
+                    Shaping a Generation that Believes in its Potential.
+                </h2>
+                <button id="read-featured-btn" class="text-white border-b-2 border-gold-500 pb-2 font-bold tracking-widest uppercase text-sm hover:text-gold-500 transition-colors">
+                    Read the full Entry
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post Grid -->
+    <section id="articles" class="px-6 md:px-10 pb-20 md:pb-32">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12 border-b border-white/10 pb-6">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold">Latest Articles</h2>
+                <p class="text-gray-500 mt-2">Deep thoughts, poetic insights, and transformative ideas</p>
+            </div>
+            
+            <div id="posts-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-16">
+                <!-- Posts will be dynamically loaded here -->
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-16">
+                <button id="load-more-btn" class="px-8 py-3 border border-white/20 rounded-full font-bold uppercase tracking-widest text-sm hover:border-gold-500 hover:text-gold-500 transition-colors">
+                    Load More Articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Sidebar (Mobile dropdown / Desktop sidebar) -->
+    <div class="px-6 md:px-10 max-w-7xl mx-auto mb-10">
+        <div class="border-t border-white/10 pt-6">
+            <h3 class="text-sm uppercase tracking-widest text-gray-500 mb-4">Browse by Category</h3>
+            <div class="flex flex-wrap gap-3">
+                <button class="category-btn active px-4 py-2 bg-gold-500 text-black rounded-full text-sm font-bold uppercase tracking-widest" data-category="all">
+                    All
+                </button>
+                <button class="category-btn px-4 py-2 border border-white/20 rounded-full text-sm font-bold uppercase tracking-widest hover:border-gold-500 transition-colors" data-category="transformation">
+                    Transformation
+                </button>
+                <button class="category-btn px-4 py-2 border border-white/20 rounded-full text-sm font-bold uppercase tracking-widest hover:border-gold-500 transition-colors" data-category="youth">
+                    Youth Empowerment
+                </button>
+                <button class="category-btn px-4 py-2 border border-white/20 rounded-full text-sm font-bold uppercase tracking-widest hover:border-gold-500 transition-colors" data-category="poetry">
+                    Poetry
+                </button>
+                <button class="category-btn px-4 py-2 border border-white/20 rounded-full text-sm font-bold uppercase tracking-widest hover:border-gold-500 transition-colors" data-category="leadership">
+                    Leadership
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="py-16 md:py-32 bg-white text-black text-center px-6 md:px-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-6xl font-serif font-bold mb-6 md:mb-8 italic">Stay Inspired.</h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 md:mb-12">Receive weekly poetic sparks and leadership insights directly from P. Paul.</p>
+            <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input 
+                    type="email" 
+                    id="email-input"
+                    placeholder="Your email address" 
+                    class="flex-1 bg-gray-100 border-none px-6 py-4 rounded-full focus:ring-2 focus:ring-gold-500 outline-none text-black"
+                />
+                <button id="subscribe-btn" class="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-gold-600 transition-colors">
+                    Subscribe
+                </button>
+            </div>
+            <p class="text-gray-500 text-sm mt-6">No spam. Only meaningful content. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 text-center border-t border-white/10">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-gray-600 text-xs tracking-widest uppercase mb-4">The Inkwell Journal — P. Paul (The Great)</p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-500 mb-6">
+                <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
+                <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
+                <a href="upphilan.html" class="hover:text-gold-500 transition-colors">Upphilan</a>
+                <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
+                <a href="#top" class="hover:text-gold-500 transition-colors">Back to Top</a>
+            </div>
+            <div class="text-xs text-gray-600">
+                © 2026 The Inkwell Journal. All thoughts and writings are original works.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Blog posts data
+            const posts = [
+                {
+                    id: 1,
+                    tag: "Transformation",
+                    category: "transformation",
+                    date: "Oct 12, 2025",
+                    title: "The Silence Between the Stanza",
+                    excerpt: "Why the moments of stillness in spoken word carry more weight than the words themselves...",
+                    img: "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
+                    readTime: "5 min read"
+                },
+                {
+                    id: 2,
+                    tag: "Youth Empowerment",
+                    category: "youth",
+                    date: "Sep 28, 2025",
+                    title: "Law, Logic, and the Creative Soul",
+                    excerpt: "How the discipline of legal studies refined my approach to humanitarian advocacy.",
+                    img: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                    readTime: "7 min read"
+                },
+                {
+                    id: 3,
+                    tag: "Poetry",
+                    category: "poetry",
+                    date: "Aug 15, 2025",
+                    title: "Healing Through Rhythm",
+                    excerpt: "Exploring the psychological impact of rhythmic speech on community healing.",
+                    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
+                    readTime: "4 min read"
+                },
+                {
+                    id: 4,
+                    tag: "Leadership",
+                    category: "leadership",
+                    date: "Jul 30, 2025",
+                    title: "The Art of Listening",
+                    excerpt: "How true leadership begins not with speaking, but with listening deeply to others.",
+                    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                    readTime: "6 min read"
+                },
+                {
+                    id: 5,
+                    tag: "Transformation",
+                    category: "transformation",
+                    date: "Jun 18, 2025",
+                    title: "Breaking the Cycle",
+                    excerpt: "Personal stories of transformation and breaking free from limiting beliefs.",
+                    img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                    readTime: "8 min read"
+                },
+                {
+                    id: 6,
+                    tag: "Poetry",
+                    category: "poetry",
+                    date: "May 5, 2025",
+                    title: "Urban Symphony",
+                    excerpt: "Finding poetry in the everyday sounds and rhythms of city life.",
+                    img: "https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    readTime: "5 min read"
+                }
+            ];
+
+            // DOM elements
+            const progressBar = document.getElementById('reading-progress');
+            const postsGrid = document.getElementById('posts-grid');
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const blogHeader = document.getElementById('blog-header');
+            const featuredPost = document.getElementById('featured-post');
+            
+            // Current state
+            let currentCategory = 'all';
+            let displayedPosts = 3;
+            
+            // Initialize
+            function init() {
+                // Animate header and featured post
+                gsap.to(blogHeader, {
+                    opacity: 1,
+                    duration: 1,
+                    delay: 0.3
+                });
+                
+                gsap.to(featuredPost, {
+                    opacity: 1,
+                    duration: 1,
+                    delay: 0.5
+                });
+                
+                // Load initial posts
+                renderPosts(posts.slice(0, displayedPosts));
+                
+                // Setup event listeners
+                setupEventListeners();
+                
+                // Setup reading progress bar
+                setupProgressBar();
+            }
+            
+            // Render posts to grid
+            function renderPosts(postsToRender) {
+                postsGrid.innerHTML = '';
+                
+                postsToRender.forEach((post, index) => {
+                    const postElement = createPostElement(post, index);
+                    postsGrid.appendChild(postElement);
+                });
+            }
+            
+            // Create post element
+            function createPostElement(post, index) {
+                const article = document.createElement('article');
+                article.className = 'group cursor-pointer opacity-0';
+                article.style.animationDelay = `${index * 0.1}s`;
+                article.classList.add('animate-fade-in-up');
+                
+                article.innerHTML = `
+                    <div class="relative aspect-[4/5] overflow-hidden rounded-2xl md:rounded-3xl mb-6 md:mb-8">
+                        <img 
+                            src="${post.img}" 
+                            class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:rotate-2" 
+                            alt="${post.title}"
+                        />
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-black/70 text-white text-xs px-3 py-1 rounded-full">${post.readTime}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 mb-4 text-xs font-mono text-gray-500">
+                        <span class="text-gold-500">${post.tag}</span>
+                        <span>/</span>
+                        <span>${post.date}</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-serif font-bold group-hover:text-gold-400 transition-colors mb-4">
+                        ${post.title}
+                    </h3>
+                    <p class="text-gray-500 leading-relaxed line-clamp-2 mb-6">
+                        ${post.excerpt}
+                    </p>
+                    <button class="read-post-btn text-white border-b border-gold-500/30 pb-1 font-bold tracking-widest uppercase text-sm hover:text-gold-500 transition-colors" data-id="${post.id}">
+                        Read Article →
+                    </button>
+                `;
+                
+                // Add hover effect
+                article.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                article.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+                
+                return article;
+            }
+            
+            // Setup event listeners
+            function setupEventListeners() {
+                // Mobile menu
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                });
+                
+                closeMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+                
+                // Close menu when clicking a link
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                    });
+                });
+                
+                // Category filtering
+                categoryButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const category = this.getAttribute('data-category');
+                        
+                        // Update active button
+                        categoryButtons.forEach(btn => {
+                            btn.classList.remove('active', 'bg-gold-500', 'text-black');
+                            btn.classList.add('border', 'border-white/20');
+                        });
+                        
+                        this.classList.add('active', 'bg-gold-500', 'text-black');
+                        this.classList.remove('border', 'border-white/20');
+                        
+                        // Update current category
+                        currentCategory = category;
+                        
+                        // Filter posts
+                        let filteredPosts;
+                        if (category === 'all') {
+                            filteredPosts = posts;
+                        } else {
+                            filteredPosts = posts.filter(p => p.category === category);
+                        }
+                        
+                        // Reset displayed posts count
+                        displayedPosts = 3;
+                        
+                        // Render filtered posts
+                        renderPosts(filteredPosts.slice(0, displayedPosts));
+                        
+                        // Show/hide load more button
+                        const loadMoreBtn = document.getElementById('load-more-btn');
+                        if (filteredPosts.length <= displayedPosts) {
+                            loadMoreBtn.style.display = 'none';
+                        } else {
+                            loadMoreBtn.style.display = 'inline-block';
+                        }
+                    });
+                });
+                
+                // Load more button
+                document.getElementById('load-more-btn')?.addEventListener('click', function() {
+                    let filteredPosts;
+                    if (currentCategory === 'all') {
+                        filteredPosts = posts;
+                    } else {
+                        filteredPosts = posts.filter(p => p.category === currentCategory);
+                    }
+                    
+                    displayedPosts += 3;
+                    
+                    if (displayedPosts >= filteredPosts.length) {
+                        this.style.display = 'none';
+                    }
+                    
+                    renderPosts(filteredPosts.slice(0, displayedPosts));
+                });
+                
+                // Read post buttons
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('.read-post-btn')) {
+                        const button = e.target.closest('.read-post-btn');
+                        const postId = button.getAttribute('data-id');
+                        const post = posts.find(p => p.id == postId);
+                        
+                        if (post) {
+                            // In a real implementation, this would open a full article page
+                            // For now, we'll show a modal or alert
+                            alert(`Article: ${post.title}\n\n${post.excerpt}\n\nFull article content would be displayed here.`);
+                        }
+                    }
+                    
+                    // Featured post button
+                    if (e.target.id === 'read-featured-btn') {
+                        alert(`Featured Article: "Shaping a Generation that Believes in its Potential"\n\nThis is the full featured article content. In a real implementation, this would link to a full article page with complete content, images, and comments.`);
+                    }
+                });
+                
+                // Subscribe button
+                document.getElementById('subscribe-btn')?.addEventListener('click', function() {
+                    const emailInput = document.getElementById('email-input');
+                    const email = emailInput.value.trim();
+                    
+                    if (email && validateEmail(email)) {
+                        alert(`Thank you for subscribing with ${email}! You'll receive weekly insights from P. Paul.`);
+                        emailInput.value = '';
+                    } else {
+                        alert('Please enter a valid email address.');
+                        emailInput.focus();
+                    }
+                });
+                
+                // Email validation on Enter key
+                document.getElementById('email-input')?.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        document.getElementById('subscribe-btn').click();
+                    }
+                });
+            }
+            
+            // Setup reading progress bar
+            function setupProgressBar() {
+                window.addEventListener('scroll', function() {
+                    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = (window.pageYOffset / totalHeight) * 100;
+                    progressBar.style.width = `${progress}%`;
+                });
+            }
+            
+            // Email validation helper
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            // Initialize the page
+            init();
+        });
+    </script>
+</body>
+              </html>
