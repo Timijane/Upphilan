@@ -101,16 +101,16 @@
     </style>
 </head>
 <body class="bg-onyx text-white selection:bg-gold-500 selection:text-black overflow-x-hidden">
-    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/20 border-b border-white/10">
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/50 border-b border-white/10">
         <div class="text-2xl font-serif font-bold tracking-tighter italic">P. Paul (The Great) <span class="text-gold-500">.</span></div>
         <div class="hidden lg:flex space-x-6 text-xs uppercase tracking-widest font-medium">
             <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
             <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
-            <a href="#vision" class="hover:text-gold-500 transition-colors">Vision</a>
-            <a href="#blog" class="hover:text-gold-500 transition-colors">Blog</a>
-            <a href="#young" class="hover:text-gold-500 transition-colors">Young</a>
-            <a href="#upphilan" class="hover:text-gold-500 transition-colors">Upphilan</a>
-            <a href="#portfolio" class="hover:text-gold-500 transition-colors">Portfolio</a>
+            <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
+            <a href="blog.html" class="hover:text-gold-500 transition-colors">Blog</a>
+            <a href="young.html" class="hover:text-gold-500 transition-colors">Young</a>
+            <a href="upphilan.html" class="hover:text-gold-500 transition-colors">Upphilan</a>
+            <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
         </div>
         <button id="mobile-menu-btn" class="lg:hidden text-gold-500">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,31 +119,33 @@
         </button>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/90 backdrop-blur-lg hidden flex-col justify-center items-center space-y-6 text-xl uppercase tracking-widest">
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-6 text-xl uppercase tracking-widest">
         <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 text-3xl">×</button>
         <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
         <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
-        <a href="#vision" class="hover:text-gold-500 transition-colors">Vision</a>
-        <a href="#blog" class="hover:text-gold-500 transition-colors">Blog</a>
-        <a href="#young" class="hover:text-gold-500 transition-colors">Young</a>
-        <a href="#upphilan" class="hover:text-gold-500 transition-colors">Upphilan</a>
-        <a href="#portfolio" class="hover:text-gold-500 transition-colors">Portfolio</a>
+        <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
+        <a href="blog.html" class="hover:text-gold-500 transition-colors">Blog</a>
+        <a href="young.html" class="hover:text-gold-500 transition-colors">Young</a>
+        <a href="upphilan.html" class="hover:text-gold-500 transition-colors">Upphilan</a>
+        <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
     </div>
 
     <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <img id="hero-img-1" src="p1.jpg" class="absolute w-48 h-64 top-[25%] left-[5%] opacity-30 rounded-lg object-cover grayscale" alt="p1">
-            <img id="hero-img-2" src="p2.jpg" class="absolute w-64 h-80 top-[20%] right-[8%] opacity-20 rounded-lg object-cover" alt="p2">
-            <img id="hero-img-3" src="p3.jpg" class="absolute w-56 h-72 bottom-[10%] left-[10%] opacity-40 rounded-lg object-cover" alt="p3">
-            <img id="hero-img-4" src="p4.jpg" class="absolute w-40 h-56 bottom-[5%] right-[15%] opacity-25 rounded-lg object-cover grayscale" alt="p4">
-            <img id="hero-img-5" src="p5.jpg" class="absolute w-32 h-32 top-[55%] right-[5%] opacity-15 rounded-full object-cover animate-pulse-slow" alt="p5">
+            <img id="hero-img-1" src="p1.jpg" class="absolute w-48 h-64 top-[25%] left-[5%] opacity-80 rounded-lg object-cover shadow-2xl border border-white/10" alt="p1">
+            <img id="hero-img-2" src="p2.jpg" class="absolute w-64 h-80 top-[20%] right-[8%] opacity-70 rounded-lg object-cover shadow-2xl border border-white/10" alt="p2">
+            <img id="hero-img-3" src="p3.jpg" class="absolute w-56 h-72 bottom-[10%] left-[10%] opacity-80 rounded-lg object-cover shadow-2xl border border-white/10" alt="p3">
+            <img id="hero-img-4" src="p4.jpg" class="absolute w-40 h-56 bottom-[5%] right-[15%] opacity-75 rounded-lg object-cover shadow-2xl border border-white/10" alt="p4">
+            <img id="hero-img-5" src="p5.jpg" class="absolute w-32 h-32 top-[55%] right-[5%] opacity-90 rounded-full object-cover animate-pulse-slow border-2 border-gold-500" alt="p5">
+            
+            <div class="absolute inset-0 bg-black/40 z-0"></div>
         </div>
 
         <div class="relative z-10 text-center max-w-5xl px-6">
-            <span id="voice-text" class="text-gold-500 tracking-[0.4em] uppercase text-sm mb-4 block opacity-0">
+            <span id="voice-text" class="text-gold-500 tracking-[0.4em] uppercase text-sm mb-4 block opacity-0 drop-shadow-md">
                 A Voice for the Voiceless
             </span>
-            <h1 class="reveal-text text-5xl md:text-9xl font-serif font-black mb-6 leading-[0.9]">
+            <h1 class="reveal-text text-5xl md:text-9xl font-serif font-black mb-6 leading-[0.9] drop-shadow-2xl">
                 P. PAUL <br /> 
                 <span class="italic text-outline hover:text-white transition-all duration-700">(THE GREAT)</span>
             </h1>
@@ -151,7 +153,7 @@
             <p class="reveal-text text-xl md:text-3xl font-bold text-white mb-4 tracking-wide max-w-3xl mx-auto drop-shadow-lg">
                 Poet. Spoken Word Artist. Public Speaker.
             </p>
-            <p class="reveal-text text-lg md:text-xl font-medium text-gray-300 mb-10 tracking-wide max-w-2xl mx-auto italic">
+            <p class="reveal-text text-lg md:text-xl font-medium text-gray-200 mb-10 tracking-wide max-w-2xl mx-auto italic drop-shadow-md">
                 Speaking the language of peace, healing, and human transformation
             </p>
             
@@ -160,11 +162,11 @@
                     Invite Me to Speak
                 </a>
                 
-                <a href="#blog" class="border border-white/30 hover:bg-white hover:text-black hover:border-white px-10 py-4 rounded-full font-bold backdrop-blur-sm transition-all">
+                <a href="blog.html" class="border border-white/50 hover:bg-white hover:text-black hover:border-white px-10 py-4 rounded-full font-bold backdrop-blur-sm transition-all bg-black/30">
                     Read The Blog
                 </a>
                 
-                <a href="https://www.instagram.com/reel/DSaZw-oDUch/?igsh=MjYwb3B4bWtzazBn" target="_blank" class="flex items-center gap-2 text-gold-500 hover:text-white transition-colors underline underline-offset-4">
+                <a href="https://www.instagram.com/reel/DSaZw-oDUch/?igsh=MjYwb3B4bWtzazBn" target="_blank" class="flex items-center gap-2 text-gold-500 hover:text-white transition-colors underline underline-offset-4 bg-black/30 px-4 py-2 rounded-lg">
                     <span>▶ Watch Inspiration</span>
                 </a>
             </div>
@@ -277,8 +279,11 @@
             // Close mobile menu when clicking a link
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
+                    // Slight delay to allow navigation to process
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                    }, 100);
                 });
             });
             
@@ -320,23 +325,6 @@
                 opacity: 1,
                 duration: 1.5,
                 delay: 0.5
-            });
-            
-            // Smooth scrolling for all anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    // Only scroll if on the same page
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        e.preventDefault();
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
             });
             
             // Add floating animation to hero images on hover
