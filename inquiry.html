@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Booking Inquiry | P. Paul (The Great)</title>
+    <meta name="description" content="Secure inquiry form for booking P. Paul for speaking engagements, performances, and collaborations.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom CSS with Tailwind configuration */
+        :root {
+            --gold-400: #e1b76a;
+            --gold-500: #d4af37;
+            --gold-600: #bc9a2e;
+            --onyx: #0a0a0a;
+        }
+        
+        .bg-onyx {
+            background-color: var(--onyx);
+        }
+        
+        .text-gold-500 {
+            color: var(--gold-500);
+        }
+        
+        .bg-gold-500 {
+            background-color: var(--gold-500);
+        }
+        
+        .border-gold-500 {
+            border-color: var(--gold-500);
+        }
+        
+        .bg-gold-500\\/5 {
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+        
+        .bg-gold-500\\/10 {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+        
+        .hover\\:bg-gold-500:hover {
+            background-color: var(--gold-500);
+        }
+        
+        .shadow-\\[0_0_30px_rgba\\(212\\2c 175\\2c 55\\2c 0\\.4\\)\\] {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-500);
+            border-radius: 4px;
+        }
+        
+        /* Smooth transitions */
+        .step-transition {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* Input focus effects */
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Hide calendar icon on date input */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.7;
+            cursor: pointer;
+        }
+        
+        /* Step animation */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideOutLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+        }
+        
+        .step-active {
+            animation: slideInRight 0.5s ease-out forwards;
+        }
+        
+        .step-exit-right {
+            animation: slideOutLeft 0.3s ease-out forwards;
+        }
+        
+        .step-exit-left {
+            animation: slideOutRight 0.3s ease-out forwards;
+        }
+        
+        /* Pulse animation for progress bar */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-onyx text-white overflow-x-hidden">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-gold-500/5 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-gold-500/3 rounded-full blur-[80px] animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[200px] h-[200px] bg-gold-500/2 rounded-full blur-[60px] animate-pulse"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="min-h-screen flex flex-col justify-center px-4 md:px-6 lg:px-20 py-12 md:py-20 relative z-10">
+        <div class="max-w-4xl w-full mx-auto relative">
+            <!-- Header -->
+            <div class="mb-8 md:mb-16 text-center">
+                <a href="index.html" class="inline-block text-2xl font-serif font-bold tracking-tighter italic mb-6 hover:text-gold-500 transition-colors">
+                    P. Paul <span class="text-gold-500">.</span>
+                </a>
+                <h1 class="text-3xl md:text-5xl font-serif font-bold mb-4">Official Booking Inquiry</h1>
+                <p class="text-gray-400 max-w-md mx-auto">Complete this form to request P. Paul for speaking engagements, performances, or collaborations.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div id="progress-container" class="flex gap-2 mb-8 md:mb-12">
+                <div class="h-1 flex-1 rounded-full bg-white/10 step-progress" data-step="1"></div>
+                <div class="h-1 flex-1 rounded-full bg-white/10 step-progress" data-step="2"></div>
+                <div class="h-1 flex-1 rounded-full bg-white/10 step-progress" data-step="3"></div>
+                <div class="h-1 flex-1 rounded-full bg-white/10 step-progress" data-step="4"></div>
+            </div>
+
+            <!-- Step Indicator -->
+            <div class="mb-6 md:mb-10">
+                <span id="step-indicator" class="text-gold-500 font-mono text-sm tracking-widest uppercase mb-2 block">Step 01 / 04</span>
+                <h2 id="step-title" class="text-2xl md:text-4xl lg:text-6xl font-serif font-bold mb-4 md:mb-6 leading-tight">
+                    Who are we speaking with?
+                </h2>
+            </div>
+
+            <!-- Form Steps Container -->
+            <div id="form-steps-container" class="mb-8 md:mb-12 min-h-[300px] overflow-hidden">
+                <!-- Step 1: Name & Organization -->
+                <div id="step-1" class="step-content step-active">
+                    <div class="space-y-4 md:space-y-6">
+                        <div>
+                            <label class="text-gray-400 text-sm mb-2 block">Full Name *</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                placeholder="Enter your full name" 
+                                class="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-lg md:text-2xl outline-none focus:border-gold-500 transition-colors"
+                            />
+                            <div id="name-error" class="text-red-400 text-sm mt-1 hidden">Please enter your name</div>
+                        </div>
+                        <div>
+                            <label class="text-gray-400 text-sm mb-2 block">Organization</label>
+                            <input 
+                                type="text" 
+                                id="organization" 
+                                placeholder="Company, School, or Organization (Optional)" 
+                                class="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-lg md:text-2xl outline-none focus:border-gold-500 transition-colors"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Contact Information -->
+                <div id="step-2" class="step-content hidden">
+                    <div class="space-y-4 md:space-y-6">
+                        <div>
+                            <label class="text-gray-400 text-sm mb-2 block">Email Address *</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                placeholder="Enter your email address" 
+                                class="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-lg md:text-2xl outline-none focus:border-gold-500 transition-colors"
+                            />
+                            <div id="email-error" class="text-red-400 text-sm mt-1 hidden">Please enter a valid email address</div>
+                        </div>
+                        <div>
+                            <label class="text-gray-400 text-sm mb-2 block">Phone Number *</label>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                placeholder="Enter your phone number" 
+                                class="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-lg md:text-2xl outline-none focus:border-gold-500 transition-colors"
+                            />
+                            <div id="phone-error" class="text-red-400 text-sm mt-1 hidden">Please enter a valid phone number</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Engagement Type -->
+                <div id="step-3" class="step-content hidden">
+                    <div>
+                        <label class="text-gray-400 text-sm mb-4 block">Select the type of engagement *</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                            <button type="button" class="engagement-btn p-4 md:p-6 rounded-xl border transition-all text-left hover:border-gold-500 hover:bg-gold-500/5" data-type="Spoken Word Performance">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mr-4">
+                                        <i class="fas fa-microphone text-gold-500"></i>
+                                    </div>
+                                    <span class="font-medium">Spoken Word Performance</span>
+                                </div>
+                                <p class="text-gray-400 text-sm mt-2">Live poetry and spoken word delivery</p>
+                            </button>
+                            
+                            <button type="button" class="engagement-btn p-4 md:p-6 rounded-xl border border-white/10 transition-all text-left hover:border-gold-500 hover:bg-gold-500/5" data-type="Public Speaking">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mr-4">
+                                        <i class="fas fa-bullhorn text-gold-500"></i>
+                                    </div>
+                                    <span class="font-medium">Public Speaking</span>
+                                </div>
+                                <p class="text-gray-400 text-sm mt-2">Keynote addresses, conferences, events</p>
+                            </button>
+                            
+                            <button type="button" class="engagement-btn p-4 md:p-6 rounded-xl border border-white/10 transition-all text-left hover:border-gold-500 hover:bg-gold-500/5" data-type="Youth Workshop">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mr-4">
+                                        <i class="fas fa-users text-gold-500"></i>
+                                    </div>
+                                    <span class="font-medium">Youth Workshop</span>
+                                </div>
+                                <p class="text-gray-400 text-sm mt-2">Interactive sessions for young people</p>
+                            </button>
+                            
+                            <button type="button" class="engagement-btn p-4 md:p-6 rounded-xl border border-white/10 transition-all text-left hover:border-gold-500 hover:bg-gold-500/5" data-type="Humanitarian Collaboration">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center mr-4">
+                                        <i class="fas fa-hands-helping text-gold-500"></i>
+                                    </div>
+                                    <span class="font-medium">Humanitarian Collaboration</span>
+                                </div>
+                                <p class="text-gray-400 text-sm mt-2">Partnerships for social impact projects</p>
+                            </button>
+                        </div>
+                        <div id="type-error" class="text-red-400 text-sm mt-4 hidden">Please select an engagement type</div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Event Details -->
+                <div id="step-4" class="step-content hidden">
+                    <div class="space-y-4 md:space-y-6">
+                        <div>
+                            <label class="text-gray-400 text-sm mb-2 block">Preferred Date (Optional)</label>
+                            <input 
+                                type="date" 
+                                id="date" 
+                                class="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-lg md:text-2xl outline-none focus:border-gold-500 transition-colors text-gray-400"
+                            />
+                        </div>
+                        <div>
+                            <label class="text-gray-400 text-sm mb-2 block">Tell us about your vision for this event *</label>
+                            <textarea 
+                                id="message" 
+                                placeholder="Describe the event, audience, goals, and any specific themes or messages you'd like P. Paul to address..." 
+                                rows="4"
+                                class="w-full bg-transparent border border-white/20 rounded-lg p-4 text-lg outline-none focus:border-gold-500 transition-colors resize-none"
+                            ></textarea>
+                            <div id="message-error" class="text-red-400 text-sm mt-1 hidden">Please tell us about your event</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center border-t border-white/10 pt-6 md:pt-10">
+                <button 
+                    id="prev-btn"
+                    class="text-sm uppercase tracking-widest font-bold opacity-0 cursor-default flex items-center gap-2 transition-opacity"
+                >
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                
+                <div class="flex items-center gap-4">
+                    <button 
+                        id="next-btn"
+                        class="bg-white text-black px-6 md:px-10 py-3 md:py-4 rounded-full font-bold hover:bg-gold-500 transition-all flex items-center gap-2 md:gap-3"
+                    >
+                        Next Step <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <button 
+                        id="submit-btn"
+                        class="bg-gold-500 text-black px-8 md:px-12 py-3 md:py-5 rounded-full font-black uppercase tracking-widest shadow-[0_0_30px_rgba(212,175,55,0.4)] hidden"
+                    >
+                        Submit Inquiry
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form Data Summary (Hidden until completion) -->
+            <div id="summary-container" class="hidden mt-8 border border-white/20 rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-4">Your Inquiry Summary</h3>
+                <div id="summary-content" class="space-y-2 text-gray-300"></div>
+            </div>
+
+            <!-- Confirmation Message (Hidden until submission) -->
+            <div id="confirmation-message" class="hidden mt-8 text-center p-8 border border-gold-500/30 rounded-xl bg-gold-500/5">
+                <div class="w-16 h-16 rounded-full bg-gold-500 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-2xl text-black"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Inquiry Submitted Successfully!</h3>
+                <p class="text-gray-300 mb-4">Thank you for your interest. P. Paul's team will review your inquiry and contact you within 3-5 business days.</p>
+                <a href="index.html" class="text-gold-500 hover:underline">Return to Homepage</a>
+            </div>
+
+            <!-- Footer Note -->
+            <footer class="mt-8 md:mt-20 text-center opacity-50 text-xs tracking-tighter uppercase font-mono">
+                <i class="fas fa-lock mr-2"></i> Secured & Confidential • P. Paul (The Great) Official Booking
+            </footer>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form state
+            let currentStep = 1;
+            const totalSteps = 4;
+            const formData = {
+                name: '',
+                organization: '',
+                email: '',
+                phone: '',
+                type: '',
+                date: '',
+                message: ''
+            };
+
+            // DOM Elements
+            const stepTitle = document.getElementById('step-title');
+            const stepIndicator = document.getElementById('step-indicator');
+            const progressBars = document.querySelectorAll('.step-progress');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const stepContents = document.querySelectorAll('.step-content');
+            const engagementButtons = document.querySelectorAll('.engagement-btn');
+            const summaryContainer = document.getElementById('summary-container');
+            const summaryContent = document.getElementById('summary-content');
+            const confirmationMessage = document.getElementById('confirmation-message');
+
+            // Step titles
+            const stepTitles = [
+                "Who are we speaking with?",
+                "How can we reach you?",
+                "What is the nature of the engagement?",
+                "Final Details"
+            ];
+
+            // Initialize
+            function init() {
+                // Set up event listeners
+                prevBtn.addEventListener('click', goToPreviousStep);
+                nextBtn.addEventListener('click', goToNextStep);
+                submitBtn.addEventListener('click', submitForm);
+                
+                // Set up engagement type buttons
+                engagementButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Remove active class from all buttons
+                        engagementButtons.forEach(btn => {
+                            btn.classList.remove('border-gold-500', 'bg-gold-500/10');
+                            btn.classList.add('border-white/10');
+                        });
+                        
+                        // Add active class to clicked button
+                        this.classList.add('border-gold-500', 'bg-gold-500/10');
+                        this.classList.remove('border-white/10');
+                        
+                        // Store selection
+                        formData.type = this.getAttribute('data-type');
+                        
+                        // Clear error
+                        document.getElementById('type-error').classList.add('hidden');
+                    });
+                });
+                
+                // Set up input listeners to store data
+                document.getElementById('name').addEventListener('input', function() {
+                    formData.name = this.value;
+                });
+                
+                document.getElementById('organization').addEventListener('input', function() {
+                    formData.organization = this.value;
+                });
+                
+                document.getElementById('email').addEventListener('input', function() {
+                    formData.email = this.value;
+                });
+                
+                document.getElementById('phone').addEventListener('input', function() {
+                    formData.phone = this.value;
+                });
+                
+                document.getElementById('date').addEventListener('input', function() {
+                    formData.date = this.value;
+                });
+                
+                document.getElementById('message').addEventListener('input', function() {
+                    formData.message = this.value;
+                });
+                
+                // Update UI for initial step
+                updateUI();
+            }
+
+            // Go to next step
+            function goToNextStep() {
+                if (!validateCurrentStep()) {
+                    return;
+                }
+                
+                // Hide current step with animation
+                const currentStepEl = document.getElementById(`step-${currentStep}`);
+                currentStepEl.classList.remove('step-active');
+                currentStepEl.classList.add('step-exit-right');
+                
+                // Move to next step
+                setTimeout(() => {
+                    currentStepEl.classList.add('hidden');
+                    currentStepEl.classList.remove('step-exit-right');
+                    
+                    currentStep++;
+                    
+                    // Show next step with animation
+                    const nextStepEl = document.getElementById(`step-${currentStep}`);
+                    nextStepEl.classList.remove('hidden');
+                    nextStepEl.classList.add('step-active');
+                    
+                    // Update UI
+                    updateUI();
+                }, 300);
+            }
+
+            // Go to previous step
+            function goToPreviousStep() {
+                // Hide current step with animation
+                const currentStepEl = document.getElementById(`step-${currentStep}`);
+                currentStepEl.classList.remove('step-active');
+                currentStepEl.classList.add('step-exit-left');
+                
+                // Move to previous step
+                setTimeout(() => {
+                    currentStepEl.classList.add('hidden');
+                    currentStepEl.classList.remove('step-exit-left');
+                    
+                    currentStep--;
+                    
+                    // Show previous step with animation
+                    const prevStepEl = document.getElementById(`step-${currentStep}`);
+                    prevStepEl.classList.remove('hidden');
+                    prevStepEl.classList.add('step-active');
+                    
+                    // Update UI
+                    updateUI();
+                }, 300);
+            }
+
+            // Validate current step
+            function validateCurrentStep() {
+                let isValid = true;
+                
+                // Reset errors
+                document.querySelectorAll('[id$="-error"]').forEach(error => {
+                    error.classList.add('hidden');
+                });
+                
+                // Step 1 validation
+                if (currentStep === 1) {
+                    const name = document.getElementById('name').value.trim();
+                    if (!name) {
+                        document.getElementById('name-error').classList.remove('hidden');
+                        isValid = false;
+                    }
+                }
+                
+                // Step 2 validation
+                if (currentStep === 2) {
+                    const email = document.getElementById('email').value.trim();
+                    const phone = document.getElementById('phone').value.trim();
+                    
+                    if (!email || !isValidEmail(email)) {
+                        document.getElementById('email-error').classList.remove('hidden');
+                        isValid = false;
+                    }
+                    
+                    if (!phone || !isValidPhone(phone)) {
+                        document.getElementById('phone-error').classList.remove('hidden');
+                        isValid = false;
+                    }
+                }
+                
+                // Step 3 validation
+                if (currentStep === 3) {
+                    if (!formData.type) {
+                        document.getElementById('type-error').classList.remove('hidden');
+                        isValid = false;
+                    }
+                }
+                
+                // Step 4 validation
+                if (currentStep === 4) {
+                    const message = document.getElementById('message').value.trim();
+                    if (!message) {
+                        document.getElementById('message-error').classList.remove('hidden');
+                        isValid = false;
+                    }
+                }
+                
+                return isValid;
+            }
+
+            // Update UI based on current step
+            function updateUI() {
+                // Update step title and indicator
+                stepTitle.textContent = stepTitles[currentStep - 1];
+                stepIndicator.textContent = `Step ${currentStep.toString().padStart(2, '0')} / ${totalSteps.toString().padStart(2, '0')}`;
+                
+                // Update progress bars
+                progressBars.forEach(bar => {
+                    const stepNum = parseInt(bar.getAttribute('data-step'));
+                    if (stepNum <= currentStep) {
+                        bar.classList.remove('bg-white/10');
+                        bar.classList.add('bg-gold-500');
+                    } else {
+                        bar.classList.remove('bg-gold-500');
+                        bar.classList.add('bg-white/10');
+                    }
+                });
+                
+                // Update navigation buttons
+                if (currentStep === 1) {
+                    prevBtn.style.opacity = '0';
+                    prevBtn.style.cursor = 'default';
+                } else {
+                    prevBtn.style.opacity = '1';
+                    prevBtn.style.cursor = 'pointer';
+                }
+                
+                if (currentStep === totalSteps) {
+                    nextBtn.classList.add('hidden');
+                    submitBtn.classList.remove('hidden');
+                    
+                    // Update summary
+                    updateSummary();
+                    summaryContainer.classList.remove('hidden');
+                } else {
+                    nextBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
+                    summaryContainer.classList.add('hidden');
+                }
+                
+                // Scroll to top of form
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Update the summary display
+            function updateSummary() {
+                const summaryHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-400 text-sm">Name</p>
+                            <p>${formData.name || 'Not provided'}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Organization</p>
+                            <p>${formData.organization || 'Not provided'}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Email</p>
+                            <p>${formData.email || 'Not provided'}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Phone</p>
+                            <p>${formData.phone || 'Not provided'}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Engagement Type</p>
+                            <p>${formData.type || 'Not selected'}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Preferred Date</p>
+                            <p>${formData.date ? new Date(formData.date).toLocaleDateString() : 'Not specified'}</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="text-gray-400 text-sm">Event Vision</p>
+                            <p class="mt-1">${formData.message || 'Not provided'}</p>
+                        </div>
+                    </div>
+                `;
+                
+                summaryContent.innerHTML = summaryHTML;
+            }
+
+            // Submit the form
+            function submitForm() {
+                if (!validateCurrentStep()) {
+                    return;
+                }
+                
+                // In a real implementation, you would send the data to a server here
+                // For now, we'll simulate a successful submission
+                
+                // Hide the form and show confirmation
+                document.querySelector('.max-w-4xl > *:not(#confirmation-message)').style.display = 'none';
+                confirmationMessage.classList.remove('hidden');
+                
+                // Log form data to console (for testing)
+                console.log('Form submitted with data:', formData);
+                
+                // In a real application, you would send this data to your backend
+                // Example: 
+                // fetch('/api/inquiry', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(formData)
+                // })
+                // .then(response => response.json())
+                // .then(data => {
+                //     // Show success message
+                // })
+                // .catch(error => {
+                //     // Show error message
+                // });
+            }
+
+            // Validation helpers
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            function isValidPhone(phone) {
+                // Simple phone validation - at least 10 digits
+                const digitsOnly = phone.replace(/\D/g, '');
+                return digitsOnly.length >= 10;
+            }
+
+            // Initialize the form
+            init();
+        });
+    </script>
+</body>
+</html>
