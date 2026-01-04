@@ -6,9 +6,7 @@
     <title>Vision for the Young | P. Paul (The Great)</title>
     <meta name="description" content="Young Generation of Exploits - Empowering young minds with mindset, values, and confidence.">
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
@@ -21,334 +19,197 @@
             --onyx: #0a0a0a;
         }
         
-        .selection\\:bg-gold-500 *::selection, .selection\\:bg-gold-500::selection {
-            background-color: var(--gold-500);
-        }
-        
-        .selection\\:text-black *::selection, .selection\\:text-black::selection {
-            color: #000;
-        }
-        
-        .bg-onyx {
-            background-color: var(--onyx);
-        }
-        
-        .text-gold-500 {
-            color: var(--gold-500);
-        }
-        
-        .border-gold-500 {
-            border-color: var(--gold-500);
-        }
-        
-        .bg-gold-500 {
-            background-color: var(--gold-500);
-        }
-        
-        .hover\\:bg-gold-600:hover {
-            background-color: var(--gold-600);
-        }
-        
-        .from-gold-900\\/10 {
-            background: linear-gradient(to bottom, rgba(188, 154, 46, 0.1), transparent);
-        }
-        
-        .from-gold-900\\/20 {
-            background: linear-gradient(to top, rgba(188, 154, 46, 0.2), transparent);
-        }
-        
-        .shadow-\\[0_0_15px_\\#d4af37\\] {
-            box-shadow: 0 0 15px #d4af37;
-        }
-        
-        .bg-white\\/\\[0\\.02\\] {
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-        
-        .hover\\:grayscale-0:hover {
-            filter: grayscale(0);
-        }
+        .text-gold-500 { color: var(--gold-500); }
+        .bg-gold-500 { background-color: var(--gold-500); }
+        .border-gold-500 { border-color: var(--gold-500); }
+        .hover\:bg-gold-600:hover { background-color: var(--gold-600); }
+        .hover\:text-gold-500:hover { color: var(--gold-500); }
         
         /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-500); border-radius: 5px; }
         
-        ::-webkit-scrollbar-track {
-            background: #050505;
-        }
+        html { scroll-behavior: smooth; }
         
-        ::-webkit-scrollbar-thumb {
-            background: var(--gold-500);
-            border-radius: 5px;
-        }
-        
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Fade-in animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out;
+        /* Form Animation */
+        .modal-enter { animation: modalIn 0.3s ease-out forwards; }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
     </style>
 </head>
 <body class="bg-[#050505] text-white selection:bg-gold-500 selection:text-black overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/20 border-b border-white/10">
+
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/50 border-b border-white/10">
         <div class="text-2xl font-serif font-bold tracking-tighter italic">P. Paul <span class="text-gold-500">.</span></div>
-        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+        <div class="hidden lg:flex space-x-6 text-xs uppercase tracking-widest font-medium">
             <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
-            <a href="#overview" class="hover:text-gold-500 transition-colors">Overview</a>
-            <a href="#mission" class="hover:text-gold-500 transition-colors">Mission</a>
-            <a href="#vision" class="hover:text-gold-500 transition-colors">Vision</a>
-            <a href="#belief" class="hover:text-gold-500 transition-colors">Core Belief</a>
+            <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
+            <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
+            <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
+            <a href="blog.html" class="hover:text-gold-500 transition-colors">Blog</a>
+            <a href="young.html" class="text-gold-500 transition-colors">Young</a>
+            <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
         </div>
-        <button id="mobile-menu-btn" class="md:hidden text-gold-500">
+        <button id="mobile-menu-btn" class="lg:hidden text-gold-500">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-8 text-xl">
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-6 text-xl uppercase tracking-widest">
         <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 text-3xl">×</button>
         <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
-        <a href="#overview" class="hover:text-gold-500 transition-colors">Overview</a>
-        <a href="#mission" class="hover:text-gold-500 transition-colors">Mission</a>
-        <a href="#vision" class="hover:text-gold-500 transition-colors">Vision</a>
-        <a href="#belief" class="hover:text-gold-500 transition-colors">Core Belief</a>
+        <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
+        <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
+        <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
+        <a href="young.html" class="text-gold-500 transition-colors">Young</a>
+        <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
     </div>
 
-    <!-- Page Header -->
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden border-b border-white/10 pt-20">
-        <div class="absolute inset-0 bg-gradient-to-b from-gold-900/10 to-transparent"></div>
-        <div id="page-header" class="text-center z-10 px-6 opacity-0">
-            <h1 class="text-5xl md:text-8xl font-serif font-black tracking-tighter mb-4">
-                VISION FOR <br /> <span class="text-gold-500 italic">THE YOUNG</span>
-            </h1>
-            <div class="w-20 h-1 bg-gold-500 mx-auto mb-6"></div>
-            <p class="uppercase tracking-[0.3em] text-sm text-gray-400">Young Generation of Exploits</p>
-        </div>
-    </section>
-
-    <!-- Content Journey -->
-    <section class="vision-container relative max-w-6xl mx-auto py-12 md:py-24 px-6 md:px-10 grid lg:grid-cols-[1fr_auto_1fr] gap-10">
-        
-        <!-- Left Side: Overview & Mission -->
-        <div class="space-y-20 md:space-y-32 text-right py-10 md:py-20">
-            <div id="overview-section" class="opacity-0">
-                <h2 class="text-gold-500 text-xs font-mono uppercase tracking-widest mb-4 italic">01. The Overview</h2>
-                <p class="text-xl md:text-3xl font-light leading-snug">
-                    A purpose-driven initiative founded to empower young minds with the 
-                    <span class="text-white font-medium"> mindset, values, and confidence </span> 
-                    needed to lead responsibly.
-                </p>
-            </div>
-
-            <div id="mission-section" class="opacity-0">
-                <h2 class="text-gold-500 text-xs font-mono uppercase tracking-widest mb-4 italic">02. Our Mission</h2>
-                <h3 class="text-3xl md:text-4xl font-serif mb-6 italic">To inspire, equip, and build.</h3>
-                <p class="text-gray-400 text-lg">
-                    We nurture potential and create opportunities for impact, ensuring every young person 
-                    contributes positively to the fabric of our society.
-                </p>
-            </div>
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-20 px-6">
+        <div class="absolute inset-0 z-0">
+            <img src="young1.jpg" alt="Young Generation" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#050505]"></div>
         </div>
 
-        <!-- Center: The Progress Line -->
-        <div class="hidden lg:flex flex-col items-center">
-            <div class="w-[1px] h-full bg-white/10 relative">
-                <div class="progress-line absolute top-0 w-[2px] bg-gold-500 shadow-[0_0_15px_#d4af37]"></div>
-            </div>
-        </div>
-
-        <!-- Right Side: Vision & Core Belief -->
-        <div class="space-y-20 md:space-y-32 text-left py-10 md:py-20">
-            <div id="vision-section" class="opacity-0">
-                <h2 class="text-gold-500 text-xs font-mono uppercase tracking-widest mb-4 italic">03. Our Vision</h2>
-                <p class="text-xl md:text-3xl font-serif italic text-white">
-                    "To raise a generation of confident, value-conscious individuals committed to 
-                    excellence, peace, and positive transformation."
-                </p>
+        <div class="relative z-10 bg-white text-black max-w-4xl mx-auto p-8 md:p-14 rounded-[2rem] shadow-[0_0_50px_rgba(212,175,55,0.3)] animate-fade-in">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl md:text-6xl font-serif font-black mb-2">VISION FOR THE YOUNG</h1>
+                <p class="text-gold-600 font-bold tracking-widest uppercase text-sm">Young Generation of Exploits</p>
+                <div class="w-24 h-1.5 bg-gold-500 mx-auto mt-6 rounded-full"></div>
             </div>
 
-            <div id="belief-section" class="opacity-0">
-                <h2 class="text-gold-500 text-xs font-mono uppercase tracking-widest mb-4 italic">04. The Core Belief</h2>
-                <p class="text-gray-400 text-lg">
-                    Regardless of age, color, or background—if you can dare to dream, you can become. 
-                    We are the architects of the future.
+            <div class="space-y-6 text-lg text-gray-800 leading-relaxed font-light">
+                <p>
+                    <span class="font-bold text-black">Vision for the Young</span> is a purpose-driven platform founded in 2019 by Okewunmi Pelumi, popularly known as <span class="font-bold">P. Paul the Great</span>. The vision was born out of a deep concern for the future of young people and a passion to inspire them to see beyond their immediate limitations. Since its inception, Vision for the Young has reached secondary schools and universities across Ota, Ogun State, Nigeria, offering hope, direction, and practical motivation to students at critical stages of their lives.
                 </p>
-                <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="mt-10 rounded-2xl w-full h-48 md:h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl" alt="Vision impact">
+                
+                <p>
+                    Through school visits, talks, and personal engagements, P. Paul challenges young people to dream more, think more, act more, and go further than society often expects of them. Importantly, he does not only speak—he lives the message he teaches. His personal journey stands as a powerful testimony. Admitted to Ladoke Akintola University of Technology to study microbiology, he later realized the path did not align with his purpose. Despite financial hardship and societal pressure, he made the bold decision to start again—returning home, studying arts subjects, attending tutorials, and retaking O’Level and JAMB examinations. Today, he is a <span class="font-bold">law student</span> at a private university in Nigeria.
+                </p>
+
+                <p class="font-medium italic border-l-4 border-gold-500 pl-4 text-gray-900">
+                    Vision for the Young has since helped many Nigerian youths break mental barriers, rediscover purpose, and believe that transformation is possible through courage, discipline, and faith in one’s vision.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="py-16 md:py-32 px-6 md:px-10 bg-gradient-to-t from-gold-900/20 to-transparent text-center">
-        <div class="max-w-4xl mx-auto border border-white/10 p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] backdrop-blur-xl bg-white/[0.02]">
-            <h2 class="text-3xl md:text-6xl font-serif mb-8">Ready to transform?</h2>
-            <p class="text-lg md:text-xl text-gray-400 mb-10">Join the Young Generation of Exploits or invite P. Paul to speak at your school or organization.</p>
-            <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
-                <button id="partner-btn" class="px-8 md:px-10 py-4 md:py-5 bg-white text-black rounded-full font-black uppercase tracking-widest hover:bg-gold-500 transition-colors">
+    <section class="py-20 px-6 md:px-10 text-center relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-serif mb-8 text-white">Make an Impact Today</h2>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <button id="open-partner-modal" class="w-full sm:w-auto px-10 py-5 bg-gold-500 text-black rounded-full font-black uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.4)]">
                     Partner With Us
                 </button>
-                <button id="involve-btn" class="px-8 md:px-10 py-4 md:py-5 border border-white/20 rounded-full font-black uppercase tracking-widest hover:border-gold-500 transition-colors">
-                    Get Involved
-                </button>
+                
+                <a href="inquiry.html" class="w-full sm:w-auto px-10 py-5 border border-white/30 rounded-full font-bold uppercase tracking-widest hover:border-gold-500 hover:text-gold-500 transition-colors bg-white/5 backdrop-blur-sm">
+                    Invite P. Paul for a Talk
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-10 text-center border-t border-white/5">
+    <footer class="py-10 text-center border-t border-white/5 bg-black">
         <p class="text-gray-600 text-xs tracking-widest uppercase">P. Paul (The Great) — Visionary</p>
         <div class="mt-4 flex justify-center space-x-6">
             <a href="index.html" class="text-gray-500 hover:text-gold-500 transition-colors">Home</a>
-            <a href="#top" class="text-gray-500 hover:text-gold-500 transition-colors">Back to Top</a>
+            <a href="portfolio.html" class="text-gray-500 hover:text-gold-500 transition-colors">Portfolio</a>
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <div id="partner-modal" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md flex items-center justify-center px-4">
+        <div class="bg-white text-black w-full max-w-lg rounded-2xl p-8 relative modal-enter">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-3xl font-bold">&times;</button>
+            
+            <h3 class="text-2xl font-serif font-bold mb-2">Partner With Us</h3>
+            <p class="text-sm text-gray-500 mb-6">Join us in empowering the next generation.</p>
+            
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-600 mb-1">Full Name</label>
+                    <input type="text" placeholder="Your Name" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-gold-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-600 mb-1">Email Address</label>
+                    <input type="email" placeholder="email@example.com" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-gold-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-600 mb-1">How would you like to partner?</label>
+                    <select class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-gold-500 outline-none">
+                        <option>Sponsorship / Donation</option>
+                        <option>Volunteering</option>
+                        <option>Resource Partnership</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gray-600 mb-1">Message</label>
+                    <textarea rows="3" placeholder="Tell us more..." class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-gold-500 outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-gold-500 hover:bg-gold-600 text-white font-bold py-4 rounded-lg shadow-lg transition-transform active:scale-95">
+                    Send Proposal
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize GSAP ScrollTrigger
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Mobile menu functionality
+            // Mobile Menu Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const closeMenuBtn = document.getElementById('close-menu-btn');
             
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('flex');
-            });
-            
-            closeMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-            });
-            
-            // Close mobile menu when clicking a link
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
+            function toggleMenu(show) {
+                if(show) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                } else {
                     mobileMenu.classList.add('hidden');
                     mobileMenu.classList.remove('flex');
-                });
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', () => toggleMenu(true));
+            closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => toggleMenu(false));
             });
-            
-            // Animate page header
-            gsap.to("#page-header", {
-                opacity: 1,
-                duration: 1.5,
-                y: 0
+
+            // --- PARTNER MODAL LOGIC ---
+            const modal = document.getElementById('partner-modal');
+            const openModalBtn = document.getElementById('open-partner-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            openModalBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
             });
-            
-            // Scroll-linked progress line
-            gsap.to(".progress-line", {
-                height: "100%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".vision-container",
-                    start: "top center",
-                    end: "bottom center",
-                    scrub: true
+
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+
+            // Close modal if clicking outside the form
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
                 }
             });
+
+            // --- ANIMATIONS ---
+            gsap.registerPlugin(ScrollTrigger);
             
-            // Animate sections on scroll
-            const sections = [
-                { id: "overview-section", delay: 0 },
-                { id: "mission-section", delay: 0.2 },
-                { id: "vision-section", delay: 0.4 },
-                { id: "belief-section", delay: 0.6 }
-            ];
-            
-            sections.forEach(section => {
-                gsap.from(`#${section.id}`, {
-                    opacity: 0,
-                    x: section.id.includes("overview") || section.id.includes("mission") ? -50 : 50,
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: `#${section.id}`,
-                        start: "top 80%",
-                        end: "top 30%",
-                        scrub: false,
-                        toggleActions: "play none none none"
-                    }
-                });
-            });
-            
-            // Button interactions
-            document.getElementById('partner-btn')?.addEventListener('click', () => {
-                alert("Thank you for your interest in partnering with us! We'll be in touch soon.");
-            });
-            
-            document.getElementById('involve-btn')?.addEventListener('click', () => {
-                alert("Thank you for your interest in getting involved! We'll share opportunities with you.");
-            });
-            
-            // Smooth scrolling for all anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    if (targetId === '#top') {
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
-                        });
-                        return;
-                    }
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Account for fixed header
-                        const headerHeight = document.querySelector('nav').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Add scroll-based header effect
-            let lastScrollTop = 0;
-            const header = document.querySelector('nav');
-            
-            window.addEventListener('scroll', () => {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollTop > lastScrollTop) {
-                    // Scrolling down
-                    header.style.transform = 'translateY(-100%)';
-                } else {
-                    // Scrolling up
-                    header.style.transform = 'translateY(0)';
-                }
-                
-                // Add/remove background based on scroll position
-                if (scrollTop > 100) {
-                    header.classList.add('bg-black/80');
-                } else {
-                    header.classList.remove('bg-black/80');
-                }
-                
-                lastScrollTop = scrollTop;
+            // Fade in the white card
+            gsap.from(".bg-white.text-black", {
+                y: 50,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
             });
         });
     </script>
