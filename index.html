@@ -120,6 +120,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            filter: brightness(1.1); /* Increased brightness */
         }
         
         .slide.active {
@@ -271,10 +272,12 @@
         .secret-admin-link {
             cursor: pointer;
             position: relative;
+            transition: all 0.3s ease;
         }
         
         .secret-admin-link:hover {
             color: var(--gold-400);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
         
         /* Subtitle Section */
@@ -284,11 +287,36 @@
             z-index: 20;
         }
         
-        /* REMOVED ANIMATIONS: */
-        /* Quick Fade Animation - REMOVED */
-        /* Slide-in Animation - REMOVED */
-        /* Slide-out Animation - REMOVED */
-        /* Loading Animation - REMOVED */
+        /* Brighter Overlay for Hero Section */
+        .hero-overlay {
+            background: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 0.4) 0%, 
+                rgba(0, 0, 0, 0.2) 50%, 
+                rgba(0, 0, 0, 0.4) 100%);
+        }
+        
+        /* Brightness enhancement for hero images */
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.05); /* White overlay for brightness */
+            pointer-events: none;
+        }
+        
+        /* Secret admin link click effect */
+        .secret-clicked {
+            animation: secretPulse 0.5s ease-in-out;
+        }
+        
+        @keyframes secretPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
@@ -412,15 +440,18 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Now Brighter -->
     <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         <!-- Hero Slider -->
         <div class="hero-slider">
             <!-- Slides will be populated by JavaScript -->
         </div>
         
-        <!-- Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70 z-0"></div>
+        <!-- Brighter Gradient Overlay -->
+        <div class="absolute inset-0 hero-overlay z-0"></div>
+        
+        <!-- Additional Brightness Layer -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/5 z-0 opacity-40"></div>
         
         <!-- Hero Content -->
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
@@ -917,30 +948,30 @@
                 startTimer();
             });
             
-            // Secret Admin Link Functionality
+            // Secret Admin Link Functionality - FIXED: Now responds on first click
             const secretAdminLink = document.getElementById('secretAdminLink');
-            let clickCount = 0;
-            let clickTimer = null;
             
             secretAdminLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                clickCount++;
                 
-                // Reset click count after 1 second
-                if (clickTimer) clearTimeout(clickTimer);
-                clickTimer = setTimeout(() => {
-                    clickCount = 0;
-                }, 1000);
+                // Add visual feedback
+                this.classList.add('secret-clicked');
                 
-                // If clicked 3 times quickly, go to admin page
-                if (clickCount === 3) {
-                    // Quick redirect with no animation
+                // Show confirmation dialog
+                const confirmed = confirm("Access admin panel? This area is restricted.");
+                
+                if (confirmed) {
+                    // Redirect immediately to admin page
                     window.location.href = 'admin.html';
-                    clickCount = 0;
                 }
+                
+                // Remove animation class after animation completes
+                setTimeout(() => {
+                    this.classList.remove('secret-clicked');
+                }, 500);
             });
             
-            // Add subtle visual feedback for secret link clicks
+            // Add subtle visual feedback for secret link hover
             secretAdminLink.addEventListener('mousedown', function() {
                 this.style.transform = 'scale(0.95)';
             });
@@ -949,8 +980,9 @@
                 this.style.transform = 'scale(1)';
             });
             
-            // REMOVED: All GSAP text animations
-            // Text appears instantly without animation
+            secretAdminLink.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
             
             // Smooth scroll for navigation links (kept for better UX)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -980,4 +1012,4 @@
         });
     </script>
 </body>
-                                                               </html>
+    </html>
