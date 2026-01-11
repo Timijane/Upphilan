@@ -6,96 +6,245 @@
     <title>Vision for the Young | P. Paul (The Great)</title>
     <meta name="description" content="Young Generation of Exploits - Empowering young minds with mindset, values, and confidence.">
     
-    <!-- Tailwind CSS CDN -->
+    <!-- Enhanced Tailwind for 2030 design -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom scroll animation library -->
     <style>
-        /* Custom CSS with Tailwind configuration */
+        /* 2030 Design System Variables */
         :root {
-            --gold-400: #e1b76a;
+            --gold-400: #f0c674;
             --gold-500: #d4af37;
-            --gold-600: #bc9a2e;
-            --onyx: #0a0a0a;
+            --gold-600: #b8941f;
+            --onyx: #050505;
+            --neon-glow: 0 0 30px rgba(212, 175, 55, 0.6);
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --glass-bg: rgba(10, 10, 10, 0.85);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f0c674 100%);
         }
         
-        .selection\\:bg-gold-500 *::selection, .selection\\:bg-gold-500::selection {
-            background-color: var(--gold-500);
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
         
-        .selection\\:text-black *::selection, .selection\\:text-black::selection {
-            color: #000;
-        }
-        
-        .bg-onyx {
-            background-color: var(--onyx);
-        }
-        
-        .text-gold-500 {
-            color: var(--gold-500);
-        }
-        
-        .border-gold-500 {
-            border-color: var(--gold-500);
-        }
-        
-        .bg-gold-500 {
-            background-color: var(--gold-500);
-        }
-        
-        .hover\\:bg-gold-600:hover {
-            background-color: var(--gold-600);
-        }
-        
-        .from-gold-900\\/10 {
-            background: linear-gradient(to bottom, rgba(188, 154, 46, 0.1), transparent);
-        }
-        
-        .from-gold-900\\/20 {
-            background: linear-gradient(to top, rgba(188, 154, 46, 0.2), transparent);
-        }
-        
-        .shadow-\\[0_0_15px_\\#d4af37\\] {
-            box-shadow: 0 0 15px #d4af37;
-        }
-        
-        .bg-white\\/\\[0\\.02\\] {
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-        
-        .hover\\:grayscale-0:hover {
-            filter: grayscale(0);
-        }
-        
-        /* Custom scrollbar */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
         
         ::-webkit-scrollbar-track {
-            background: #050505;
+            background: #0a0a0a;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: var(--gold-500);
+            background: linear-gradient(to bottom, var(--gold-500), var(--gold-600));
             border-radius: 5px;
         }
         
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        /* Selection Styling */
+        ::selection {
+            background: var(--gold-500);
+            color: #000;
         }
         
-        /* Fade-in animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Utility Classes */
+        .bg-onyx { background-color: var(--onyx); }
+        .text-gold-500 { color: var(--gold-500); }
+        .bg-gold-500 { background-color: var(--gold-500); }
+        .border-gold-500 { border-color: var(--gold-500); }
+        
+        /* Glass Morphism Effect */
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
         
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out;
+        /* Futuristic Card */
+        .futuristic-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .futuristic-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(212, 175, 55, 0.05) 0%,
+                transparent 50%,
+                rgba(212, 175, 55, 0.05) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .futuristic-card:hover::before {
+            opacity: 1;
+        }
+        
+        .futuristic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--neon-glow);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Hero Background with Image */
+        .hero-with-bg {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-bg-image {
+            position: absolute;
+            inset: 0;
+            background-image: url('pp.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.8) saturate(1.2); /* Light but slightly darker for text contrast */
+            z-index: 1;
+        }
+        
+        /* Dark overlay for better text readability */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65); /* Adjusted opacity for better contrast */
+            z-index: 2;
+        }
+        
+        /* Hero content styling */
+        .hero-content-container {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        /* Mobile Menu - Sidebar 50% */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%;
+            min-width: 300px;
+            max-width: 400px;
+            height: 100vh;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu-container.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Menu Close Button */
+        .menu-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .menu-close-btn:hover {
+            background: var(--gold-500);
+            transform: rotate(90deg);
+        }
+        
+        .menu-close-btn:hover i {
+            color: #000;
+        }
+        
+        /* Responsive Typography */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 3rem;
+                line-height: 1.1;
+            }
+            
+            .mobile-menu-container {
+                width: 85%;
+                min-width: 280px;
+            }
+            
+            .hero-bg-image {
+                background-position: center 20%;
+            }
+        }
+        
+        /* Section Spacing */
+        section {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Text Animations */
+        .text-gradient {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Progress Line for Timeline */
+        .progress-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 0;
+            background: var(--gradient-gold);
+            transition: height 0.3s ease;
         }
         
         /* Modal styles */
@@ -104,7 +253,7 @@
             inset: 0;
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -135,30 +284,6 @@
             transform: translateY(0);
         }
         
-        .form-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 12px 16px;
-            color: white;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--gold-500);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        }
-        
-        .form-label {
-            color: var(--gold-500);
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: block;
-        }
-        
         /* Close button for modal */
         .close-modal-btn {
             position: absolute;
@@ -183,220 +308,561 @@
             transform: rotate(90deg);
         }
         
-        /* Hero section with image */
-        .hero-with-image {
-            position: relative;
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+        /* Form Input Styling */
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
         }
         
-        .hero-bg {
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold-500);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .form-label {
+            color: var(--gold-500);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        /* Pulse Animation */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        /* Timeline Section Styles */
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--gold-500);
             position: absolute;
-            inset: 0;
-            background-image: url('young.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
         }
         
-        .hero-bg::after {
+        /* Gradient Underline */
+        .gradient-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gradient-underline::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 800px;
-            margin: 100px auto 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--gold-500);
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
         }
     </style>
 </head>
-<body class="bg-[#050505] text-white selection:bg-gold-500 selection:text-black overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/80 border-b border-white/10">
-        <a href="index.html" class="text-2xl font-serif font-bold tracking-tighter italic hover:text-gold-500 transition-colors">
-            P. Paul (The Great) <span class="text-gold-500">.</span>
-        </a>
-        <div class="hidden lg:flex space-x-6 text-xs uppercase tracking-widest font-medium">
-            <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
-            <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
-            <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
-            <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
-            <a href="blog.html" class="hover:text-gold-500 transition-colors">Blog</a>
-            <a href="young.html" class="text-gold-500 font-bold transition-colors">Young</a>
-            <a href="upphilan.html" class="hover:text-gold-500 transition-colors">Upphilan</a>
-            <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
+<body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 py-4 px-6 md:px-10 glass-effect border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                    <span class="font-bold text-black text-lg">P</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight group-hover:text-gold-500 transition-colors">P. PAUL</span>
+                    <span class="text-xs text-gray-400">The Great</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="index.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Home
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="about.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    About
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="inquiry.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Inquiry
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="blog.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Blog
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="young.html" class="text-sm font-medium text-gold-500 relative group">
+                    Young
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gold-500"></span>
+                </a>
+                <a href="upphilan.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Upphilan
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="portfolio.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Portfolio
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                
+                <!-- CTA Button -->
+                <a href="inquiry.html" class="ml-4 px-6 py-2 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    Book Now
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="lg:hidden flex flex-col space-y-1.5 p-2">
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-4 h-0.5 bg-white ml-auto"></span>
+            </button>
         </div>
-        <button id="mobile-menu-btn" class="lg:hidden text-gold-500 p-2 hover:bg-white/10 rounded-lg transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden flex-col justify-center items-center space-y-8 text-xl">
-        <button id="close-menu-btn" class="absolute top-6 right-6 text-gold-500 hover:text-white transition-colors text-4xl font-bold p-2">×</button>
-        <a href="index.html" class="hover:text-gold-500 transition-colors text-2xl">Home</a>
-        <a href="about.html" class="hover:text-gold-500 transition-colors text-2xl">About</a>
-        <a href="inquiry.html" class="hover:text-gold-500 transition-colors text-2xl">Inquiry</a>
-        <a href="vision.html" class="hover:text-gold-500 transition-colors text-2xl">Vision</a>
-        <a href="blog.html" class="hover:text-gold-500 transition-colors text-2xl">Blog</a>
-        <a href="young.html" class="text-gold-500 font-bold transition-colors text-2xl">Young</a>
-        <a href="upphilan.html" class="hover:text-gold-500 transition-colors text-2xl">Upphilan</a>
-        <a href="portfolio.html" class="hover:text-gold-500 transition-colors text-2xl">Portfolio</a>
+    <!-- Mobile Menu Backdrop -->
+    <div id="mobileMenuBackdrop" class="mobile-menu-backdrop"></div>
+
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobileMenu" class="mobile-menu-container glass-effect">
+        <button id="closeMenuBtn" class="menu-close-btn">
+            <i class="fas fa-times text-lg"></i>
+        </button>
+        
+        <div class="h-full flex flex-col pt-20 px-8">
+            <div class="mb-10">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                        <span class="font-bold text-black text-xl">P</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl">P. PAUL</h3>
+                        <p class="text-gray-400 text-sm">The Great</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <a href="index.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-home w-6 mr-3"></i> Home
+                    </a>
+                    <a href="about.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-user w-6 mr-3"></i> About
+                    </a>
+                    <a href="inquiry.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-envelope w-6 mr-3"></i> Inquiry
+                    </a>
+                    <a href="blog.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-blog w-6 mr-3"></i> Blog
+                    </a>
+                    <a href="young.html" class="block text-lg font-medium text-gold-500 py-2 border-b border-white/5">
+                        <i class="fas fa-users w-6 mr-3"></i> Young
+                    </a>
+                    <a href="upphilan.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-hands-helping w-6 mr-3"></i> Upphilan
+                    </a>
+                    <a href="portfolio.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-briefcase w-6 mr-3"></i> Portfolio
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-auto pb-10">
+                <a href="inquiry.html" class="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-lg flex items-center justify-center space-x-2 hover:shadow-lg transition-all">
+                    <i class="fas fa-microphone"></i>
+                    <span>Invite to Speak</span>
+                </a>
+                
+                <div class="flex justify-center space-x-6 mt-8">
+                    <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Hero Section with Image -->
-    <section class="hero-with-image pt-20">
-        <div class="hero-bg"></div>
+    <!-- Hero Section with Background Image -->
+    <section class="hero-with-bg pt-20">
+        <!-- Background Image -->
+        <div class="hero-bg-image"></div>
         
-        <div class="hero-content animate-fade-in text-black">
-            <h1 class="text-4xl md:text-5xl font-serif font-black mb-6 text-center">
-                VISION FOR <span class="text-gold-500">THE YOUNG</span>
-            </h1>
-            <div class="w-24 h-1 bg-gold-500 mx-auto mb-8"></div>
+        <!-- Dark Overlay for Text Readability -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content-container text-center py-20">
+            <div class="inline-block mb-8 animate-fade-in">
+                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide">
+                    <i class="fas fa-users mr-2"></i> Young Generation of Exploits
+                </span>
+            </div>
             
-            <div class="space-y-6 text-gray-700">
-                <p>
-                    Vision for the Young is a purpose-driven platform founded in 2019 by Okewunmi Pelumi, 
-                    popularly known as P. Paul the Great (P.PAULTHEGREAT). The vision was born out of a 
-                    deep concern for the future of young people and a passion to inspire them to see beyond 
-                    their immediate limitations.
+            <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-fade-in" style="animation-delay: 0.2s;">
+                <span class="text-gradient block">VISION FOR</span>
+                <span class="text-white block mt-2">THE YOUNG</span>
+            </h1>
+            
+            <div class="w-32 h-1 bg-gradient-to-r from-gold-500 to-gold-600 mx-auto my-8 rounded-full animate-fade-in" style="animation-delay: 0.4s;"></div>
+            
+            <div class="max-w-4xl mx-auto">
+                <p class="text-xl md:text-2xl text-gray-300 italic mb-8 animate-fade-in" style="animation-delay: 0.6s;">
+                    Empowering young minds with mindset, values, and confidence to become architects of their future
                 </p>
                 
-                <p>
-                    Since its inception, Vision for the Young has reached secondary schools and universities 
-                    across Ota, Ogun State, Nigeria, offering hope, direction, and practical motivation to 
-                    students at critical stages of their lives.
-                </p>
-                
-                <p>
-                    Through school visits, talks, and personal engagements, P. Paul challenges young people 
-                    to dream more, think more, act more, and go further than society often expects of them. 
-                    Importantly, he does not only speak—he lives the message he teaches.
-                </p>
-                
-                <p>
-                    His personal journey stands as a powerful testimony. Admitted to Ladoke Akintola University 
-                    of Technology to study microbiology, he later realized the path did not align with his purpose. 
-                    Despite financial hardship and societal pressure, he made the bold decision to start 
-                    again—returning home, studying arts subjects, attending tutorials, and retaking O'Level 
-                    and JAMB examinations. Today, he is a law student at a private university in Nigeria.
-                </p>
-                
-                <p>
-                    Vision for the Young has since helped many Nigerian youths break mental barriers, 
-                    rediscover purpose, and believe that transformation is possible through courage, 
-                    discipline, and faith in one's vision.
-                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style="animation-delay: 0.8s;">
+                    <a href="#about-vision" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
+                        <i class="fas fa-eye"></i>
+                        <span>Explore Vision</span>
+                    </a>
+                    
+                    <button id="partnerBtn" class="px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full hover:bg-gold-500/10 transition-all duration-300 flex items-center justify-center space-x-3">
+                        <i class="fas fa-handshake"></i>
+                        <span>Partner With Us</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Content Journey -->
-    <section class="vision-container relative max-w-6xl mx-auto py-12 md:py-24 px-6 md:px-10 grid lg:grid-cols-[1fr_auto_1fr] gap-10">
-        
-        <!-- Left Side: Overview & Mission -->
-        <div class="space-y-20 md:space-y-32 text-right py-10 md:py-20">
-            <div id="overview-section" class="opacity-0">
-                <h2 class="text-gold-500 text-xs font-mono uppercase tracking-widest mb-4 italic">01. The Overview</h2>
-                <p class="text-xl md:text-3xl font-light leading-snug">
-                    A purpose-driven initiative founded to empower young minds with the 
-                    <span class="text-white font-medium"> mindset, values, and confidence </span> 
-                    needed to lead responsibly.
-                </p>
-            </div>
-
-            <div id="mission-section" class="opacity-0">
-                <h2 class="text-gold-500 text-xs font-mono uppercase tracking-widest mb-4 italic">02. Our Mission</h2>
-                <h3 class="text-3xl md:text-4xl font-serif mb-6 italic">To inspire, equip, and build.</h3>
-                <p class="text-gray-400 text-lg">
-                    We nurture potential and create opportunities for impact, ensuring every young person 
-                    contributes positively to the fabric of our society.
-                </p>
-            </div>
-        </div>
-
-        <!-- Center: The Progress Line -->
-        <div class="hidden lg:flex flex-col items-center">
-            <div class="w-[1px] h-full bg-white/10 relative">
-                <div class="progress-line absolute top-0 w-[2px] bg-gold-500 shadow-[0_0_15px_#d4af37]"></div>
-            </div>
-        </div>
-
-        <!-- Right Side: Vision & Core Belief -->
-        <div class="space-y-20 md:space-y-32 text-left py-10 md:py-20">
-            <div id="vision-section" class="opacity-0">
-                <h2 class="text-gold-500 text-xs font-mono uppercase tracking-widest mb-4 italic">03. Our Vision</h2>
-                <p class="text-xl md:text-3xl font-serif italic text-white">
-                    "To raise a generation of confident, value-conscious individuals committed to 
-                    excellence, peace, and positive transformation."
-                </p>
-            </div>
-
-            <div id="belief-section" class="opacity-0">
-                <h2 class="text-gold-500 text-xs font-mono uppercase tracking-widest mb-4 italic">04. The Core Belief</h2>
-                <p class="text-gray-400 text-lg">
-                    Regardless of age, color, or background—if you can dare to dream, you can become. 
-                    We are the architects of the future.
-                </p>
-                <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="mt-10 rounded-2xl w-full h-48 md:h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl" alt="Vision impact">
+    <!-- Vision Story Section -->
+    <section id="about-vision" class="py-20 md:py-32 px-6 md:px-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                            The <span class="text-gradient">Origin Story</span>
+                        </h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-500 to-gold-600 rounded-full"></div>
+                    </div>
+                    
+                    <div class="space-y-6 text-gray-300">
+                        <p class="text-lg leading-relaxed">
+                            Vision for the Young is a purpose-driven platform founded in 2019 by Okewunmi Pelumi, 
+                            popularly known as P. Paul the Great (P.PAULTHEGREAT). The vision was born out of a 
+                            deep concern for the future of young people and a passion to inspire them to see beyond 
+                            their immediate limitations.
+                        </p>
+                        
+                        <div class="futuristic-card p-6 border-l-4 border-gold-500">
+                            <p class="text-xl italic text-gray-200">
+                                "Helping young people believe they can become whoever they dream to be."
+                            </p>
+                        </div>
+                        
+                        <p class="text-lg leading-relaxed">
+                            Since its inception, Vision for the Young has reached secondary schools and universities 
+                            across Ota, Ogun State, Nigeria, offering hope, direction, and practical motivation to 
+                            students at critical stages of their lives.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Image/Stats Card -->
+                <div class="relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-gold-500/20 to-transparent rounded-3xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <div class="bg-gradient-to-br from-black to-gray-900 p-8 h-full">
+                            <div class="grid grid-cols-2 gap-6 mb-8">
+                                <div class="text-center">
+                                    <div class="text-4xl font-bold text-gold-500 mb-2">2019</div>
+                                    <div class="text-sm text-gray-400">Year Founded</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-4xl font-bold text-gold-500 mb-2">50+</div>
+                                    <div class="text-sm text-gray-400">Schools Reached</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-4xl font-bold text-gold-500 mb-2">10K+</div>
+                                    <div class="text-sm text-gray-400">Students Impacted</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-4xl font-bold text-gold-500 mb-2">100+</div>
+                                    <div class="text-sm text-gray-400">Events Held</div>
+                                </div>
+                            </div>
+                            <div class="text-center p-6 border-t border-white/10">
+                                <p class="text-lg font-semibold mb-2">Personal Journey</p>
+                                <p class="text-gray-400 text-sm">
+                                    From microbiology to law, P. Paul's transformation stands as a powerful testimony 
+                                    to young people that change is possible through courage and faith in one's vision.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="py-16 md:py-32 px-6 md:px-10 bg-gradient-to-t from-gold-900/20 to-transparent text-center">
-        <div class="max-w-4xl mx-auto border border-white/10 p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] backdrop-blur-xl bg-white/[0.02]">
-            <h2 class="text-3xl md:text-6xl font-serif mb-8">Ready to transform?</h2>
-            <p class="text-lg md:text-xl text-gray-400 mb-10">Join the Young Generation of Exploits or invite P. Paul to speak at your school or organization.</p>
-            <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
-                <button id="partner-btn" class="px-8 md:px-10 py-4 md:py-5 bg-white text-black rounded-full font-black uppercase tracking-widest hover:bg-gold-500 transition-colors">
-                    Partner With Us
-                </button>
-                <a href="inquiry.html" class="px-8 md:px-10 py-4 md:py-5 border border-white/20 rounded-full font-black uppercase tracking-widest hover:border-gold-500 transition-colors text-center">
-                    Invite P.Paul for a Talk
-                </a>
+    <!-- Mission & Vision Section -->
+    <section class="py-20 md:py-32 px-6 md:px-10 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Our <span class="text-gradient">Purpose</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    A comprehensive framework for youth empowerment and transformation
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Overview -->
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">01. Overview</h3>
+                    <p class="text-gray-400 mb-6">
+                        A purpose-driven initiative empowering young minds with mindset, values, and confidence needed to lead responsibly.
+                    </p>
+                    <div class="text-xs text-gold-500 font-mono uppercase tracking-widest">The Foundation</div>
+                </div>
+                
+                <!-- Mission -->
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">02. Our Mission</h3>
+                    <p class="text-gray-400 mb-6">
+                        To inspire, equip, and build. Nurturing potential and creating opportunities for positive societal impact.
+                    </p>
+                    <div class="text-xs text-gold-500 font-mono uppercase tracking-widest">The Action</div>
+                </div>
+                
+                <!-- Vision -->
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">03. Our Vision</h3>
+                    <p class="text-gray-400 mb-6">
+                        "To raise a generation of confident, value-conscious individuals committed to excellence, peace, and positive transformation."
+                    </p>
+                    <div class="text-xs text-gold-500 font-mono uppercase tracking-widest">The Dream</div>
+                </div>
+                
+                <!-- Core Belief -->
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">04. Core Belief</h3>
+                    <p class="text-gray-400 mb-6">
+                        Regardless of age, color, or background—if you can dare to dream, you can become. We are the architects of the future.
+                    </p>
+                    <div class="text-xs text-gold-500 font-mono uppercase tracking-widest">The Philosophy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & Testimonials -->
+    <section class="py-20 md:py-32 px-6 md:px-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Voices of <span class="text-gradient">Impact</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    What educators and students say about Vision for the Young
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="futuristic-card p-8">
+                    <div class="text-gold-500 text-2xl mb-4">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        P. Paul's visit transformed our students' perspective on education and personal development. 
+                        His story is a powerful testament to resilience.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center mr-3">
+                            <i class="fas fa-user-graduate text-gold-500"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Principal Adeyemi</p>
+                            <p class="text-sm text-gray-500">Secondary School Administrator</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="futuristic-card p-8">
+                    <div class="text-gold-500 text-2xl mb-4">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        The Vision for the Young program helped our university students rediscover purpose 
+                        and direction at a critical stage in their lives.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center mr-3">
+                            <i class="fas fa-chalkboard-teacher text-gold-500"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Dr. Chinedu Obi</p>
+                            <p class="text-sm text-gray-500">University Dean</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="futuristic-card p-8">
+                    <div class="text-gold-500 text-2xl mb-4">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        After attending P. Paul's talk, I changed my course of study to follow my passion. 
+                        Today, I'm studying what I love and excelling at it.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-gold-500"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Chioma Eze</p>
+                            <p class="text-sm text-gray-500">University Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="futuristic-card p-12 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 to-transparent"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 relative z-10">
+                    Ready to Transform Young Lives?
+                </h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">
+                    Invite P. Paul to speak at your school or organization and inspire the next generation.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                    <a href="inquiry.html" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-microphone mr-2"></i> Book a Speaking Engagement
+                    </a>
+                    <button id="partnerBtn2" class="px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full hover:bg-gold-500/10 transition-all duration-300">
+                        <i class="fas fa-handshake mr-2"></i> Explore Partnership
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 text-center border-t border-white/5">
-        <p class="text-gray-600 text-xs tracking-widest uppercase">P. Paul (The Great) — Visionary</p>
-        <div class="mt-4 flex justify-center space-x-6">
-            <a href="index.html" class="text-gray-500 hover:text-gold-500 transition-colors">Home</a>
-            <a href="#top" class="text-gray-500 hover:text-gold-500 transition-colors">Back to Top</a>
+    <footer class="py-12 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                            <span class="font-bold text-black">P</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">P. PAUL</h3>
+                            <p class="text-sm text-gray-500">The Great</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Speaking the language of peace, healing, and human transformation.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">About</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Blog</a></li>
+                        <li><a href="young.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Young Leaders</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="inquiry.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Public Speaking</a></li>
+                        <li><a href="young.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Youth Empowerment</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Workshops</a></li>
+                        <li><a href="upphilan.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Advocacy Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="mailto:contact@ppaulthegreat.com" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Available for school visits, youth programs, and organizational talks.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/10 text-center">
+                <p class="text-gray-500 text-sm">
+                    © 2026 P. Paul (The Great). All rights reserved. | Vision for the Young Initiative
+                </p>
+                <p class="text-gray-600 text-xs mt-2">
+                    "Helping young people believe they can become whoever they dream to be." - P. Paul
+                </p>
+            </div>
         </div>
     </footer>
 
-    <!-- Partnership Form Modal -->
-    <div id="partnership-modal" class="modal-overlay">
+    <!-- Partnership Modal -->
+    <div id="partnershipModal" class="modal-overlay">
         <div class="modal-content">
-            <button id="close-modal-btn" class="close-modal-btn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
+            <button id="closeModalBtn" class="close-modal-btn">
+                <i class="fas fa-times"></i>
             </button>
             
-            <h2 class="text-3xl font-serif font-bold mb-2 text-center">Partner With Us</h2>
+            <h2 class="text-3xl font-bold mb-2 text-center text-gold-500">Partner With Us</h2>
             <p class="text-gray-400 text-center mb-8">Join us in empowering the next generation</p>
             
-            <form id="partnership-form" class="space-y-6">
+            <form id="partnershipForm" class="space-y-6">
                 <div>
                     <label for="name" class="form-label">Full Name</label>
                     <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
@@ -434,108 +900,68 @@
                     <textarea id="message" name="message" class="form-input h-32" placeholder="Tell us about your partnership interest..." required></textarea>
                 </div>
                 
-                <button type="submit" class="w-full bg-gold-500 hover:bg-gold-600 text-black font-bold py-4 rounded-full transition-colors">
+                <button type="submit" class="w-full bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold py-4 rounded-full hover:shadow-lg transition-all">
                     Submit Partnership Request
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize GSAP ScrollTrigger
-            gsap.registerPlugin(ScrollTrigger);
+            // Mobile Menu Functionality
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
             
-            // Mobile menu functionality
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuBtn = document.getElementById('close-menu-btn');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('flex');
+            function openMobileMenu() {
+                mobileMenu.classList.add('active');
+                mobileMenuBackdrop.classList.add('active');
                 document.body.style.overflow = 'hidden';
-            });
+            }
             
-            closeMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                mobileMenuBackdrop.classList.remove('active');
                 document.body.style.overflow = 'auto';
-            });
+            }
             
-            // Close mobile menu when clicking a link
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+            closeMenuBtn.addEventListener('click', closeMobileMenu);
+            mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+            
+            // Close menu when clicking links
             mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
-                    document.body.style.overflow = 'auto';
-                });
+                link.addEventListener('click', closeMobileMenu);
             });
             
-            // Animate page header
-            gsap.to("#page-header", {
-                opacity: 1,
-                duration: 1.5,
-                y: 0
-            });
+            // Modal Functionality
+            const partnershipModal = document.getElementById('partnershipModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const partnerBtns = document.querySelectorAll('#partnerBtn, #partnerBtn2');
+            const partnershipForm = document.getElementById('partnershipForm');
             
-            // Scroll-linked progress line
-            gsap.to(".progress-line", {
-                height: "100%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".vision-container",
-                    start: "top center",
-                    end: "bottom center",
-                    scrub: true
-                }
-            });
-            
-            // Animate sections on scroll
-            const sections = [
-                { id: "overview-section", delay: 0 },
-                { id: "mission-section", delay: 0.2 },
-                { id: "vision-section", delay: 0.4 },
-                { id: "belief-section", delay: 0.6 }
-            ];
-            
-            sections.forEach(section => {
-                gsap.from(`#${section.id}`, {
-                    opacity: 0,
-                    x: section.id.includes("overview") || section.id.includes("mission") ? -50 : 50,
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: `#${section.id}`,
-                        start: "top 80%",
-                        end: "top 30%",
-                        scrub: false,
-                        toggleActions: "play none none none"
-                    }
-                });
-            });
-            
-            // Modal functionality for Partnership Form
-            const partnershipModal = document.getElementById('partnership-modal');
-            const openModalBtn = document.getElementById('partner-btn');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            const partnershipForm = document.getElementById('partnership-form');
-            
-            openModalBtn.addEventListener('click', () => {
+            function openPartnershipModal() {
                 partnershipModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-            });
+            }
             
-            closeModalBtn.addEventListener('click', () => {
+            function closePartnershipModal() {
                 partnershipModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
+            }
+            
+            partnerBtns.forEach(btn => {
+                btn.addEventListener('click', openPartnershipModal);
             });
+            
+            closeModalBtn.addEventListener('click', closePartnershipModal);
             
             // Close modal when clicking outside
             partnershipModal.addEventListener('click', (e) => {
                 if (e.target === partnershipModal) {
-                    partnershipModal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
+                    closePartnershipModal();
                 }
             });
             
@@ -554,75 +980,73 @@
                 alert('Thank you for your partnership interest! We will contact you soon.');
                 
                 // Close modal and reset form
-                partnershipModal.classList.remove('active');
+                closePartnershipModal();
                 partnershipForm.reset();
-                document.body.style.overflow = 'auto';
             });
             
-            // Smooth scrolling for all anchor links
+            // Smooth scroll for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
                     
-                    if (targetId === '#top') {
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
-                        });
-                        return;
-                    }
-                    
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        // Account for fixed header
-                        const headerHeight = document.querySelector('nav').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        
+                        e.preventDefault();
                         window.scrollTo({
-                            top: targetPosition,
+                            top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
             
-            // Add scroll-based header effect
-            let lastScrollTop = 0;
-            const header = document.querySelector('nav');
+            // GSAP Animations
+            gsap.registerPlugin(ScrollTrigger);
             
-            window.addEventListener('scroll', () => {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollTop > lastScrollTop) {
-                    // Scrolling down
-                    header.style.transform = 'translateY(-100%)';
-                } else {
-                    // Scrolling up
-                    header.style.transform = 'translateY(0)';
-                }
-                
-                // Add/remove background based on scroll position
-                if (scrollTop > 100) {
-                    header.classList.add('bg-black/80');
-                } else {
-                    header.classList.remove('bg-black/80');
-                }
-                
-                lastScrollTop = scrollTop;
+            // Animate cards on scroll
+            gsap.utils.toArray('.futuristic-card').forEach(card => {
+                gsap.from(card, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                });
             });
             
-            // Animate hero content
-            gsap.from(".hero-content", {
-                opacity: 0,
-                y: 50,
-                duration: 1.5,
-                delay: 0.3,
-                ease: "power3.out"
+            // Animate mission/vision sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                gsap.from(section, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+            
+            // Background image parallax effect
+            const heroBg = document.querySelector('.hero-bg-image');
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                heroBg.style.transform = `translateY(${rate}px)`;
+            });
+            
+            // Logo click to go home
+            document.querySelector('nav a[href="index.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'index.html';
             });
         });
     </script>
 </body>
-    </html>
+                    </html>
