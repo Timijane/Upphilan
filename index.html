@@ -243,6 +243,43 @@
             color: #000;
         }
         
+        /* Admin Link Styling */
+        .admin-link {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-link:hover {
+            color: var(--gold-500);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+        }
+        
+        .admin-link::after {
+            content: '✦';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: var(--gold-500);
+            font-size: 0.8rem;
+        }
+        
+        .admin-link:hover::after {
+            opacity: 1;
+        }
+        
+        /* Hero Tagline Position */
+        .hero-tagline-container {
+            position: absolute;
+            bottom: 120px;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        
         /* Responsive Typography */
         @media (max-width: 640px) {
             .hero-title {
@@ -257,6 +294,16 @@
             .mobile-menu-container {
                 width: 85%;
                 min-width: 280px;
+            }
+            
+            .hero-tagline-container {
+                bottom: 100px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-tagline-container {
+                bottom: 140px;
             }
         }
         
@@ -296,6 +343,22 @@
             background-size: 200% auto;
             animation: shimmer 3s infinite linear;
         }
+        
+        /* Fade-in Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
     </style>
 </head>
 <body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
@@ -313,7 +376,7 @@
                 </div>
             </a>
 
-            <!-- Desktop Navigation - Vision removed -->
+            <!-- Desktop Navigation -->
             <div class="hidden lg:flex items-center space-x-8">
                 <a href="about.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
                     About
@@ -408,7 +471,7 @@
                     <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
                         <i class="fab fa-instagram text-xl"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/paul-okewunmi" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                    <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
                         <i class="fab fa-linkedin text-xl"></i>
                     </a>
                     <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
@@ -439,17 +502,10 @@
             
             <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-bold mb-6">
                 <span class="text-gradient block">P. PAUL</span>
-                <span class="text-white block italic text-4xl md:text-6xl lg:text-7xl mt-2">(THE GREAT)</span>
+                <span id="adminLink" class="admin-link text-white block italic text-4xl md:text-6xl lg:text-7xl mt-2 hover:text-gold-500 transition-colors">
+                    (THE GREAT)
+                </span>
             </h1>
-            
-            <div class="futuristic-card inline-block px-8 py-6 md:px-12 md:py-8 max-w-4xl mx-auto mb-10">
-                <p class="hero-subtitle text-xl md:text-2xl font-semibold text-gray-100 mb-3">
-                    Poet • Spoken Word Artist • Public Speaker
-                </p>
-                <p class="text-lg md:text-xl text-gray-300 italic">
-                    Speaking the language of peace, healing, and human transformation
-                </p>
-            </div>
             
             <!-- Slider Dots -->
             <div class="slider-dots flex justify-center space-x-3 mb-10">
@@ -475,6 +531,20 @@
                     </div>
                     <span>Watch Inspiration</span>
                 </a>
+            </div>
+        </div>
+        
+        <!-- Hero Tagline Container (moved below) -->
+        <div class="hero-tagline-container">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="futuristic-card px-8 py-6 fade-in-up" style="animation-delay: 1s;">
+                    <p class="hero-subtitle text-xl md:text-2xl font-semibold text-gray-100 mb-3 text-center">
+                        Poet • Spoken Word Artist • Public Speaker
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-300 italic text-center">
+                        Speaking the language of peace, healing, and human transformation
+                    </p>
+                </div>
             </div>
         </div>
         
@@ -753,7 +823,7 @@
                         <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/paul-okewunmi" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                        <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
                             <i class="fab fa-linkedin"></i>
                         </a>
                         <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
@@ -886,6 +956,72 @@
                 startTimer();
             });
             
+            // Admin Link Functionality (hidden navigation)
+            const adminLink = document.getElementById('adminLink');
+            let clickCount = 0;
+            let clickTimer;
+            
+            adminLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                clickCount++;
+                
+                if (clickCount === 1) {
+                    // First click - show subtle hint
+                    gsap.to(adminLink, {
+                        duration: 0.3,
+                        color: '#d4af37',
+                        textShadow: '0 0 10px rgba(212, 175, 55, 0.5)',
+                        onComplete: function() {
+                            gsap.to(adminLink, {
+                                duration: 1,
+                                color: '#ffffff',
+                                textShadow: 'none'
+                            });
+                        }
+                    });
+                    
+                    // Reset click count after 2 seconds
+                    clickTimer = setTimeout(() => {
+                        clickCount = 0;
+                    }, 2000);
+                } else if (clickCount === 2) {
+                    // Second click within 2 seconds - navigate to admin page
+                    clearTimeout(clickTimer);
+                    clickCount = 0;
+                    
+                    // Show confirmation animation
+                    gsap.to(adminLink, {
+                        duration: 0.5,
+                        color: '#d4af37',
+                        textShadow: '0 0 20px rgba(212, 175, 55, 0.8)',
+                        scale: 1.1,
+                        onComplete: function() {
+                            // Navigate to admin page
+                            window.location.href = 'admin.html';
+                        }
+                    });
+                }
+            });
+            
+            // Add hover effect for admin link
+            adminLink.addEventListener('mouseenter', function() {
+                gsap.to(this, {
+                    duration: 0.3,
+                    color: '#d4af37',
+                    textShadow: '0 0 15px rgba(212, 175, 55, 0.6)'
+                });
+            });
+            
+            adminLink.addEventListener('mouseleave', function() {
+                if (clickCount === 0) {
+                    gsap.to(this, {
+                        duration: 0.3,
+                        color: '#ffffff',
+                        textShadow: 'none'
+                    });
+                }
+            });
+            
             // Animations with GSAP
             // Hero text animation
             gsap.from('.hero-title span', {
@@ -896,20 +1032,31 @@
                 ease: "power4.out"
             });
             
+            // Hero tagline animation
+            gsap.from('.hero-tagline-container .futuristic-card', {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 1,
+                ease: "power3.out"
+            });
+            
             // Card animations on scroll
             gsap.utils.toArray('.futuristic-card').forEach((card, i) => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    ease: "power3.out"
-                });
+                if (!card.closest('.hero-tagline-container') && !card.closest('.hero-section')) {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 0.8,
+                        delay: i * 0.1,
+                        ease: "power3.out"
+                    });
+                }
             });
             
             // Navigation scroll effect
