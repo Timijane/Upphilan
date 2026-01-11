@@ -192,6 +192,21 @@
         input:checked + .toggle-slider:before {
             transform: translateX(24px);
         }
+        
+        /* Remove autocomplete styling */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            -webkit-text-fill-color: white;
+            -webkit-box-shadow: 0 0 0px 1000px rgba(20, 20, 20, 0.9) inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -210,11 +225,12 @@
             
             <div class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
-                    <input type="email" id="admin-email" 
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                    <input type="text" id="admin-username" 
                            class="w-full px-4 py-3 rounded-xl" 
-                           placeholder="admin@ppaulthegreat.com"
-                           autocomplete="off">
+                           placeholder="websiteppaul.com"
+                           autocomplete="username"
+                           value="websiteppaul.com">
                 </div>
                 
                 <div>
@@ -222,12 +238,13 @@
                     <input type="password" id="admin-password" 
                            class="w-full px-4 py-3 rounded-xl" 
                            placeholder="••••••••"
-                           autocomplete="off">
+                           autocomplete="current-password"
+                           value="ppaul">
                 </div>
                 
                 <div class="flex items-center justify-between">
                     <label class="flex items-center space-x-2 cursor-pointer">
-                        <input type="checkbox" id="remember-me" class="rounded">
+                        <input type="checkbox" id="remember-me" class="rounded" checked>
                         <span class="text-sm text-gray-400">Remember me</span>
                     </label>
                     
@@ -505,12 +522,12 @@
     </div>
 
     <script>
-        // Configuration
+        // Configuration - UPDATED CREDENTIALS
         const CONFIG = {
             cloudName: 'djaucqaxs',
             uploadPreset: 'ppaul_content',
-            adminEmail: 'websiteppaul.com',
-            adminPassword: 'thelawpp'
+            adminUsername: 'websiteppaul.com',
+            adminPassword: 'ppaul'
         };
 
         // State Management
@@ -595,6 +612,22 @@
 
         // Initialize App
         function initApp() {
+            // Check if user was previously logged in
+            const rememberMe = localStorage.getItem('ppaul_remember') === 'true';
+            if (rememberMe) {
+                // Auto-login if credentials exist in localStorage
+                const savedUsername = localStorage.getItem('ppaul_username');
+                const savedPassword = localStorage.getItem('ppaul_password');
+                
+                if (savedUsername === CONFIG.adminUsername && savedPassword === CONFIG.adminPassword) {
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('dashboard').classList.remove('hidden');
+                    renderContent();
+                    updateStats();
+                    showToast('Welcome back!', 'success');
+                }
+            }
+
             // Login functionality
             document.getElementById('login-btn').addEventListener('click', handleLogin);
             document.getElementById('admin-password').addEventListener('keypress', (e) => {
@@ -630,6 +663,11 @@
             // Toast close
             document.getElementById('toast-close').addEventListener('click', hideToast);
 
+            // Forgot password
+            document.getElementById('forgot-password').addEventListener('click', () => {
+                alert('For admin access, please use:\n\nUsername: websiteppaul.com\nPassword: ppaul');
+            });
+
             // Initialize
             setContentType('blog');
             updateTitleCounter();
@@ -637,14 +675,30 @@
             initCloudinaryWidget();
         }
 
-        // Login Handler
+        // Login Handler - UPDATED FOR USERNAME FIELD
         function handleLogin() {
-            const email = document.getElementById('admin-email').value;
+            const username = document.getElementById('admin-username').value.trim();
             const password = document.getElementById('admin-password').value;
+            const remember = document.getElementById('remember-me').checked;
             const errorDiv = document.getElementById('login-error');
 
-            if (email === CONFIG.adminEmail && password === CONFIG.adminPassword) {
-                // Success
+            // Clear any previous error
+            errorDiv.classList.add('hidden');
+
+            // Validate credentials - CASE SENSITIVE
+            if (username === CONFIG.adminUsername && password === CONFIG.adminPassword) {
+                // Success - Save remember me preference
+                if (remember) {
+                    localStorage.setItem('ppaul_remember', 'true');
+                    localStorage.setItem('ppaul_username', username);
+                    localStorage.setItem('ppaul_password', password);
+                } else {
+                    localStorage.removeItem('ppaul_remember');
+                    localStorage.removeItem('ppaul_username');
+                    localStorage.removeItem('ppaul_password');
+                }
+
+                // Show dashboard
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.remove('hidden');
                 
@@ -652,20 +706,45 @@
                 renderContent();
                 updateStats();
                 
-                showToast('Welcome back!', 'success');
+                showToast('Welcome back! Dashboard loaded.', 'success');
             } else {
+                // Show error with detailed message
                 errorDiv.classList.remove('hidden');
-                setTimeout(() => errorDiv.classList.add('hidden'), 3000);
+                
+                // Clear password field for security
+                document.getElementById('admin-password').value = '';
+                
+                // Auto-hide error after 3 seconds
+                setTimeout(() => {
+                    errorDiv.classList.add('hidden');
+                }, 3000);
+                
+                // Focus back to appropriate field
+                if (username !== CONFIG.adminUsername) {
+                    document.getElementById('admin-username').focus();
+                    document.getElementById('admin-username').select();
+                } else {
+                    document.getElementById('admin-password').focus();
+                }
             }
         }
 
         // Logout Handler
         function handleLogout() {
             if (confirm('Are you sure you want to logout?')) {
+                // Clear any saved credentials
+                localStorage.removeItem('ppaul_remember');
+                localStorage.removeItem('ppaul_username');
+                localStorage.removeItem('ppaul_password');
+                
+                // Hide dashboard, show login
                 document.getElementById('dashboard').classList.add('hidden');
                 document.getElementById('login-screen').style.display = 'flex';
-                document.getElementById('admin-password').value = '';
+                
+                // Reset form fields
                 resetForm();
+                document.getElementById('admin-password').value = 'ppaul'; // Reset to default for convenience
+                
                 showToast('Logged out successfully', 'info');
             }
         }
@@ -1075,4 +1154,4 @@
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
-                                </html>
+    </html>
