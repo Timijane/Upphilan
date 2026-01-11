@@ -116,26 +116,6 @@
             color: transparent;
         }
         
-        /* Floating Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        /* Pulse Animation */
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
-            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
-        }
-        
-        .pulse-glow {
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-        
         /* Mobile Menu - Sidebar 50% */
         .mobile-menu-container {
             position: fixed;
@@ -263,21 +243,6 @@
             border-radius: 2px;
         }
         
-        /* Loading Animation */
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        
-        .shimmer-text {
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(212, 175, 55, 0.5) 50%, 
-                transparent 100%);
-            background-size: 200% auto;
-            animation: shimmer 3s infinite linear;
-        }
-        
         /* Timeline Style */
         .timeline-item {
             position: relative;
@@ -331,6 +296,11 @@
         .mission-highlight:hover::before {
             left: 100%;
         }
+        
+        /* REMOVED ANIMATIONS: */
+        /* Floating Animation - REMOVED */
+        /* Pulse Animation - REMOVED */
+        /* Loading Animation - REMOVED */
     </style>
 </head>
 <body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
@@ -469,7 +439,7 @@
         <!-- Hero Content -->
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
             <div class="inline-block mb-8">
-                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide animate-float">
+                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide">
                     <i class="fas fa-star mr-2"></i> The Journey & Mission
                 </span>
             </div>
@@ -490,10 +460,10 @@
             
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#journey" class="group px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full flex items-center space-x-3 hover:shadow-2xl hover:scale-105 transition-all duration-300 pulse-glow">
+                <a href="#journey" class="group px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full flex items-center space-x-3 hover:shadow-2xl hover:scale-105 transition-all duration-300">
                     <i class="fas fa-book-open"></i>
                     <span>Explore Journey</span>
-                    <i class="fas fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                    <i class="fas fa-arrow-down"></i>
                 </a>
                 
                 <a href="inquiry.html" class="group px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full flex items-center space-x-3 hover:bg-gold-500/10 transition-all duration-300">
@@ -505,7 +475,7 @@
         
         <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-            <a href="#journey" class="flex flex-col items-center text-gray-400 hover:text-gold-500 transition-colors animate-bounce">
+            <a href="#journey" class="flex flex-col items-center text-gray-400 hover:text-gold-500 transition-colors">
                 <span class="text-sm mb-2">Discover</span>
                 <i class="fas fa-chevron-down"></i>
             </a>
@@ -620,7 +590,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Purpose Card -->
                 <div class="futuristic-card p-8 group">
-                    <div class="text-5xl mb-6 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                    <div class="text-5xl mb-6 text-gold-500">
                         <i class="fas fa-compass"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Purpose</h3>
@@ -635,7 +605,7 @@
                 
                 <!-- Peace Card -->
                 <div class="futuristic-card p-8 group">
-                    <div class="text-5xl mb-6 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                    <div class="text-5xl mb-6 text-gold-500">
                         <i class="fas fa-dove"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Peace</h3>
@@ -650,7 +620,7 @@
                 
                 <!-- Impact Card -->
                 <div class="futuristic-card p-8 group">
-                    <div class="text-5xl mb-6 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                    <div class="text-5xl mb-6 text-gold-500">
                         <i class="fas fa-hand-sparkles"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Impact</h3>
@@ -791,9 +761,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Register GSAP plugins
-            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-            
             // Mobile Menu Functionality
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
@@ -821,69 +788,8 @@
                 link.addEventListener('click', closeMobileMenu);
             });
             
-            // Animations with GSAP
-            // Hero text animation
-            gsap.from('.hero-title span', {
-                y: 100,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.3,
-                ease: "power4.out"
-            });
-            
-            // Hero card animation
-            gsap.from('.hero-subtitle', {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.5,
-                ease: "power3.out"
-            });
-            
-            // Card animations on scroll
-            gsap.utils.toArray('.futuristic-card').forEach((card, i) => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    ease: "power3.out"
-                });
-            });
-            
-            // Timeline items animation
-            gsap.utils.toArray('.timeline-item').forEach((item, i) => {
-                gsap.from(item, {
-                    scrollTrigger: {
-                        trigger: item,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    },
-                    x: -30,
-                    opacity: 0,
-                    duration: 0.7,
-                    delay: i * 0.2,
-                    ease: "power3.out"
-                });
-            });
-            
-            // Navigation scroll effect
-            gsap.to('nav', {
-                scrollTrigger: {
-                    trigger: '#journey',
-                    start: "top top",
-                    end: "+=100",
-                    scrub: true
-                },
-                backgroundColor: "rgba(5,5,5,0.95)",
-                backdropFilter: "blur(20px)",
-                ease: "none"
-            });
+            // REMOVED: All GSAP text animations
+            // Text appears instantly without animation
             
             // Smooth scroll for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -894,13 +800,9 @@
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         e.preventDefault();
-                        gsap.to(window, {
-                            duration: 1,
-                            scrollTo: {
-                                y: targetElement,
-                                offsetY: 80
-                            },
-                            ease: "power3.inOut"
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
                         });
                     }
                 });
@@ -910,63 +812,13 @@
             document.querySelector('nav a[href="index.html"]').addEventListener('click', function(e) {
                 if (window.location.pathname.endsWith('index.html')) {
                     e.preventDefault();
-                    gsap.to(window, {
-                        duration: 1,
-                        scrollTo: 0,
-                        ease: "power3.inOut"
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
                     });
                 }
-            });
-            
-            // Quote animation
-            gsap.from('blockquote', {
-                scrollTrigger: {
-                    trigger: 'blockquote',
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                },
-                scale: 0.9,
-                opacity: 0,
-                duration: 1,
-                ease: "back.out(1.7)"
-            });
-            
-            // Mission highlight animation
-            gsap.from('.mission-highlight', {
-                scrollTrigger: {
-                    trigger: '.mission-highlight',
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                },
-                scale: 0.95,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-            
-            // Add loading animation to images
-            document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('load', function() {
-                    this.classList.add('loaded');
-                });
-                
-                if (img.complete) {
-                    img.classList.add('loaded');
-                }
-            });
-            
-            // Parallax effect for hero section
-            gsap.to('.hero-title', {
-                scrollTrigger: {
-                    trigger: '.hero-title',
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                },
-                y: -100,
-                ease: "none"
             });
         });
     </script>
 </body>
-    </html>
+                        </html>
