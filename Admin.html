@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engine Room v2 | P. Paul</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --gold: #d4af37; --onyx: #0a0a0a; }
+        body { background: var(--onyx); color: white; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        input, textarea, select { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; padding: 12px; border-radius: 12px; outline: none; }
+        .edit-mode { border: 2px solid var(--gold) !important; }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+    <div id="login-zone" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
+        <div class="glass p-10 rounded-[2rem] w-full max-w-md text-center">
+            <h1 class="text-2xl font-serif italic text-gold-500 mb-6 font-bold">P. Paul Engine Room</h1>
+            <input type="email" id="email" placeholder="Gmail" class="w-full mb-4">
+            <input type="password" id="pass" placeholder="Password" class="w-full mb-6">
+            <button onclick="auth()" class="w-full bg-white text-black font-black py-4 rounded-xl">INITIALIZE</button>
+        </div>
+    </div>
+
+    <div id="console" class="hidden max-w-6xl mx-auto">
+        <header class="flex justify-between items-center mb-12">
+            <h2 class="text-3xl font-serif italic">The Engine <span class="text-gold-500">Room</span></h2>
+            <div class="flex gap-4">
+                <button id="cancel-edit" class="hidden text-xs text-red-500 border border-red-500 px-4 py-2 rounded-full" onclick="exitEdit()">Cancel Edit</button>
+                <button onclick="location.reload()" class="text-xs text-gray-500 uppercase">Logout</button>
+            </div>
+        </header>
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-12">
+            <div class="glass p-8 rounded-[2rem]">
+                <h3 id="form-title" class="text-xl font-bold mb-6">🖋️ New Post</h3>
+                <div class="flex flex-col gap-4">
+                    <select id="post-type">
+                        <option value="blog">Blog Post</option>
+                        <option value="portfolio">Portfolio Work</option>
+                    </select>
+                    <input type="text" id="p-title" placeholder="Headline / Project Name">
+                    <input type="text" id="p-img" placeholder="Image URL">
+                    <textarea id="p-content" rows="4" placeholder="Description or Content"></textarea>
+                    <button id="submit-btn" onclick="savePost()" class="bg-gold-500 text-black font-black py-4 rounded-xl transition-all">Publish Content</button>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-[2rem]">
+                <h3 class="text-xl font-bold mb-6 italic">Database Management</h3>
+                <div id="entries-list" class="space-y-3 h-[400px] overflow-y-auto pr-2">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let editIndex = -1;
+        let editType = '';
+
+        function auth() {
+            if(document.getElementById('email').value === "websiteppaul.com" && document.getElementById('pass').value === "thelawpp") {
+                document.getElementById('login-zone').classList.add('hidden');
+                document.getElementById('console').classList.remove('hidden');
+                renderList();
+            }
+        }
+
+        function savePost() {
+            const type = document.getElementById('post-type').value;
+            const title = document.getElementById('p-title').value;
+            const img = document.getElementById('p-img').value;
+            const content = document.getElementById('p-content').value;
+
+            let data = JSON.parse(localStorage.getItem(type) || "[]");
+            const entry = { title, image: img, content, date: new Date().toLocaleDateString() };
+
+            if (editIndex > -1) {
+                data[editIndex] = entry; // Update
+            } else {
+                data.unshift(entry); // New
+            }
+
+            localStorage.setItem(type, JSON.stringify(data));
+            exitEdit();
+            renderList();
+            alert("Engine Updated!");
+        }
+
+        function renderList() {
+            const list = document.getElementById('entries-list');
+            list.innerHTML = '';
+            ['blog', 'portfolio'].forEach(type => {
+                let items = JSON.parse(localStorage.getItem(type) || "[]");
+                items.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.className = "flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5";
+                    div.innerHTML = `
+                        <div>
+                            <p class="text-[10px] text-gold-500 uppercase font-black">${type}</p>
+                            <p class="text-sm font-bold">${item.title}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="startEdit('${type}', ${index})" class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded">Edit</button>
+                            <button onclick="deletePost('${type}', ${index})" class="text-xs bg-red-500/20 text-red-400 px-3 py-1 rounded">Del</button>
+                        </div>
+                    `;
+                    list.appendChild(div);
+                });
+            });
+        }
+
+        function startEdit(type, index) {
+            const data = JSON.parse(localStorage.getItem(type))[index];
+            editIndex = index;
+            editType = type;
+            
+            document.getElementById('post-type').value = type;
+            document.getElementById('p-title').value = data.title;
+            document.getElementById('p-img').value = data.image;
+            document.getElementById('p-content').value = data.content || data.desc;
+            
+            document.getElementById('submit-btn').innerText = "Update Entry";
+            document.getElementById('form-title').innerText = "🛠️ Editing Mode";
+            document.getElementById('cancel-edit').classList.remove('hidden');
+        }
+
+        function exitEdit() {
+            editIndex = -1;
+            document.getElementById('p-title').value = '';
+            document.getElementById('p-img').value = '';
+            document.getElementById('p-content').value = '';
+            document.getElementById('submit-btn').innerText = "Publish Content";
+            document.getElementById('cancel-edit').classList.add('hidden');
+        }
+
+        function deletePost(type, index) {
+            if(confirm("Permanently delete this?")) {
+                let data = JSON.parse(localStorage.getItem(type));
+                data.splice(index, 1);
+                localStorage.setItem(type, JSON.stringify(data));
+                renderList();
+            }
+        }
+    </script>
+</body>
+</html>
