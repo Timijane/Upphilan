@@ -1,29 +1,62 @@
-<script>
-function generateShareLinks(title, image) {
-    const url = window.location.href;
-    const text = encodeURIComponent(`PPaul the Great: ${title}`);
-    return {
-        fb: `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`,
-        li: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-        wa: `https://api.whatsapp.com/send?text=${text}%20${url}`,
-        ig: `https://instagram.com` // Note: Instagram requires manual upload, so this directs to the app
-    };
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Inkwell | PPaul the Great</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #0c0c0c; color: white; font-family: 'Inter', sans-serif; }
+        .blog-post { border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .share-btn { transition: all 0.3s; opacity: 0.6; }
+        .share-btn:hover { opacity: 1; transform: scale(1.1); }
+    </style>
+</head>
+<body>
+    <nav class="p-10 flex justify-between items-center">
+        <a href="index.html" class="text-2xl font-serif italic">The Inkwell</a>
+        <a href="portfolio.html" class="text-[10px] font-bold uppercase tracking-widest bg-white text-black px-6 py-2 rounded-full">Portfolio</a>
+    </nav>
 
-// ... inside your blog .map function ...
-`
-<article class="blog-card group">
-    <div class="relative overflow-hidden rounded-2xl mb-6">
-        <img src="${post.image}" class="w-full h-64 object-cover">
-        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-             <a href="${generateShareLinks(post.title).wa}" target="_blank" class="p-2 bg-green-500 rounded-full">WA</a>
-             <a href="${generateShareLinks(post.title).fb}" target="_blank" class="p-2 bg-blue-600 rounded-full">FB</a>
-             <a href="${generateShareLinks(post.title).li}" target="_blank" class="p-2 bg-blue-800 rounded-full">IN</a>
-        </div>
-    </div>
-    <p class="text-[10px] text-gold-500 font-bold mb-2">PPaul The Great — ${post.date}</p>
-    <h3 class="text-2xl font-serif font-bold mb-4">${post.title}</h3>
-    <p class="text-gray-400 text-sm mb-6">${post.content}</p>
-</article>
-`
-</script>
+    <main id="blog-container" class="max-w-4xl mx-auto px-6 py-20 space-y-32">
+        </main>
+
+    <script>
+        function share(platform, title) {
+            const url = window.location.href;
+            const text = `PPaul the Great shared a new insight: "${title}"\n\nRead here:`;
+            
+            let link = "";
+            if(platform === 'wa') link = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}%20${url}`;
+            if(platform === 'fb') link = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            if(platform === 'li') link = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            
+            window.open(link, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('blog-container');
+            const blogs = JSON.parse(localStorage.getItem('blog') || "[]");
+
+            container.innerHTML = blogs.map(post => `
+                <article class="blog-post pb-20">
+                    <img src="${post.image}" class="w-full h-[500px] object-cover rounded-[3rem] mb-10 shadow-2xl">
+                    <div class="flex items-center gap-6 mb-6">
+                        <span class="text-[#d4af37] text-xs font-black uppercase tracking-widest">PPaul The Great</span>
+                        <span class="text-gray-600 text-xs">${post.date}</span>
+                    </div>
+                    <h2 class="text-5xl font-serif italic font-bold mb-8 leading-tight">${post.title}</h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-10">${post.content}</p>
+                    
+                    <div class="flex items-center gap-8 border-t border-white/5 pt-8">
+                        <span class="text-[10px] font-bold uppercase text-gray-500">Share Story:</span>
+                        <button onclick="share('wa', '${post.title}')" class="share-btn text-green-500 font-bold">WhatsApp</button>
+                        <button onclick="share('fb', '${post.title}')" class="share-btn text-blue-500 font-bold">Facebook</button>
+                        <button onclick="share('li', '${post.title}')" class="share-btn text-blue-300 font-bold">LinkedIn</button>
+                    </div>
+                </article>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
