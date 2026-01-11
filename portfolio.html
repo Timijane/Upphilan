@@ -3,272 +3,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selected Works | PPaul the Great | Portfolio of Transformative Artistry</title>
-    
-    <!-- Meta for SEO and Social Sharing -->
-    <meta name="description" content="A curated collection of transformative works by PPaul the Great - Poet, Speaker, and Humanitarian Advocate.">
-    <meta property="og:title" content="Portfolio | PPaul the Great - Selected Works">
-    <meta property="og:description" content="Verifiable Testimonies of Transformation through Poetry, Speaking, and Humanitarian Work.">
-    <meta property="og:image" content="https://yourwebsite.com/default-preview.jpg">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Portfolio | P. Paul (The Great) - Selected Works</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Custom CSS -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Portfolio | P. Paul (The Great)">
+    <meta property="og:description" content="Verifiable Testimonies of Transformation - Poetry, Spoken Word, and Humanitarian Work">
+    <meta property="og:image" content="https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/portfolio-cover.jpg">
+    <meta property="og:url" content="https://ppaulthegreat.com/portfolio.html">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <style>
         :root {
-            --primary-gold: #d4af37;
-            --dark-bg: #050505;
-            --light-bg: #0f0f0f;
-            --text-primary: #f5f5f5;
-            --text-secondary: #a3a3a3;
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --light-gold: #F0C674;
+            --bg-dark: #080808;
+            --bg-card: rgba(20, 20, 20, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
         }
         
         body {
-            background-color: var(--dark-bg);
+            background: var(--bg-dark);
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
             overflow-x: hidden;
         }
         
-        .serif-font {
-            font-family: 'Playfair Display', serif;
+        .gold-gradient-text {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--light-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 15, 15, 0.5);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-gold);
-            border-radius: 5px;
-        }
-        
-        /* Elegant text selection */
-        ::selection {
-            background-color: rgba(212, 175, 55, 0.3);
-            color: #fff;
-        }
-        
-        /* Portfolio card styling */
         .portfolio-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            background: linear-gradient(145deg, #0f0f0f, #0a0a0a);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .portfolio-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.15);
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(212, 175, 55, 0.25);
+            border-color: var(--primary-gold);
         }
         
-        .portfolio-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.03), transparent);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            z-index: 1;
+        .card-image {
+            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
-        .portfolio-card:hover::before {
-            opacity: 1;
+        .portfolio-card:hover .card-image {
+            transform: scale(1.1);
         }
         
-        /* Image styling */
-        .portfolio-image {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-            filter: brightness(0.85) contrast(1.1);
+        .card-overlay {
+            background: linear-gradient(to top, rgba(8, 8, 8, 0.95) 0%, transparent 50%);
+            transition: all 0.8s ease;
         }
         
-        .portfolio-card:hover .portfolio-image {
-            transform: scale(1.08);
-            filter: brightness(1) contrast(1.1);
+        .portfolio-card:hover .card-overlay {
+            background: linear-gradient(to top, rgba(8, 8, 8, 0.98) 0%, transparent 30%);
         }
         
-        /* Gradient overlay */
-        .gradient-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 70%;
-            background: linear-gradient(to top, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.7) 30%, transparent 100%);
-            z-index: 1;
-        }
-        
-        /* Content fade-in */
-        .content-fade {
-            opacity: 0;
+        .card-content {
             transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
-        .portfolio-card:hover .content-fade {
-            opacity: 1;
+        .portfolio-card:hover .card-content {
             transform: translateY(0);
         }
         
-        /* Navigation styling */
-        .nav-blend {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background-color: rgba(5, 5, 5, 0.85);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-        
-        /* Hero section */
-        .hero-title {
-            font-size: clamp(3.5rem, 10vw, 8rem);
-            line-height: 0.9;
-            letter-spacing: -0.02em;
-        }
-        
-        /* Loading animation */
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-        
-        .shimmer-effect {
-            background: linear-gradient(90deg, #0f0f0f 25%, #1a1a1a 50%, #0f0f0f 75%);
-            background-size: 1000px 100%;
-            animation: shimmer 2s infinite linear;
-        }
-        
-        /* Category filter */
-        .category-filter {
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
         
-        .category-filter.active {
-            color: var(--primary-gold);
-            border-bottom: 2px solid var(--primary-gold);
+        .filter-btn.active {
+            background: var(--primary-gold);
+            color: #000;
+            font-weight: 600;
         }
         
-        /* Empty state */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
-            text-align: center;
+        .filter-btn:hover:not(.active) {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--primary-gold);
         }
         
-        /* Footer */
-        .footer-border {
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .stagger-delay-1 { animation-delay: 0.1s; }
+        .stagger-delay-2 { animation-delay: 0.2s; }
+        .stagger-delay-3 { animation-delay: 0.3s; }
+        .stagger-delay-4 { animation-delay: 0.4s; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page-transition {
+            animation: pageTransition 1s ease-out;
+        }
+        
+        @keyframes pageTransition {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .scrollbar-custom {
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-gold) rgba(255, 255, 255, 0.05);
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 3px;
+        }
+        
+        .modal-overlay {
+            animation: modalFadeIn 0.3s ease-out;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            animation: modalSlideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(50px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .text-shadow-glow {
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .typewriter-text {
+            overflow: hidden;
+            border-right: 2px solid var(--primary-gold);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-gold) }
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        @media (max-width: 768px) {
+            .parallax-bg {
+                background-attachment: scroll;
+            }
         }
     </style>
 </head>
 <body class="antialiased">
     <!-- Navigation -->
-    <nav class="nav-blend fixed top-0 w-full z-50 flex justify-between items-center p-6 md:p-8">
-        <a href="index.html" class="flex items-center space-x-3 group">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f0c674] flex items-center justify-center">
-                <span class="font-bold text-black text-lg">P</span>
+    <nav class="fixed top-0 w-full z-50 py-6 px-6 bg-black/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center">
+                    <span class="font-black text-black text-lg">P</span>
+                </div>
+                <div>
+                    <h1 class="text-lg font-black tracking-tight">P. PAUL</h1>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">The Great</p>
+                </div>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors relative group">
+                    <span>Home</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="about.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors relative group">
+                    <span>About</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="blog.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors relative group">
+                    <span>Blog</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="portfolio.html" class="text-sm font-medium text-[#D4AF37] relative group">
+                    <span>Portfolio</span>
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#D4AF37]"></span>
+                </a>
+                <a href="inquiry.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors relative group">
+                    <span>Contact</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
+                </a>
             </div>
-            <div class="flex flex-col">
-                <span class="font-bold text-lg tracking-tight group-hover:text-[#d4af37] transition-colors">P. PAUL</span>
-                <span class="text-xs text-gray-400">The Great</span>
-            </div>
-        </a>
-
-        <div class="flex gap-6 md:gap-8 text-xs md:text-sm uppercase tracking-widest font-medium">
-            <a href="index.html" class="hover:text-[#d4af37] transition-colors duration-300">Home</a>
-            <a href="blog.html" class="hover:text-[#d4af37] transition-colors duration-300">Journal</a>
-            <a href="portfolio.html" class="text-[#d4af37]">Works</a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Navigation -->
+    <div id="mobileNav" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center hidden">
+        <button id="closeMobileMenu" class="absolute top-6 right-6 text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="text-center space-y-8">
+            <a href="index.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">
+                Home
+            </a>
+            <a href="about.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">
+                About
+            </a>
+            <a href="blog.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">
+                Blog
+            </a>
+            <a href="portfolio.html" class="block text-2xl font-medium text-[#D4AF37]">
+                Portfolio
+            </a>
+            <a href="inquiry.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">
+                Contact
+            </a>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <header class="pt-32 md:pt-40 px-6 md:px-10 pb-16 md:pb-24 max-w-7xl mx-auto">
-        <div class="mb-8">
-            <span class="text-xs uppercase tracking-[0.3em] text-[#d4af37] font-semibold">Portfolio</span>
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-grid-pattern">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 border border-[#D4AF37] rounded-full animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-64 h-64 border border-[#D4AF37] rounded-full animate-pulse delay-1000"></div>
         </div>
         
-        <h1 class="hero-title font-black uppercase mb-6">
-            Selected<br>
-            <span class="serif-font italic text-[#d4af37]">Works</span>
-        </h1>
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-20">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] text-sm font-medium mb-8">
+                    <i class="fas fa-star mr-2"></i> Selected Works
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-black mb-6 leading-none tracking-tight">
+                    <span class="block">Selected</span>
+                    <span class="gold-gradient-text italic font-serif">Works</span>
+                </h1>
+                
+                <div class="max-w-3xl mx-auto">
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+                        A curated collection of transformative poetry, spoken word performances, and humanitarian initiatives 
+                        that have inspired change and touched lives across communities.
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center gap-4 mb-12">
+                        <div class="flex items-center text-gray-400">
+                            <i class="fas fa-microphone mr-2 text-[#D4AF37]"></i>
+                            <span>Spoken Word</span>
+                        </div>
+                        <div class="flex items-center text-gray-400">
+                            <i class="fas fa-pen-nib mr-2 text-[#D4AF37]"></i>
+                            <span>Poetry</span>
+                        </div>
+                        <div class="flex items-center text-gray-400">
+                            <i class="fas fa-users mr-2 text-[#D4AF37]"></i>
+                            <span>Community Work</span>
+                        </div>
+                        <div class="flex items-center text-gray-400">
+                            <i class="fas fa-music mr-2 text-[#D4AF37]"></i>
+                            <span>Music</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#portfolio-grid" 
+                   class="inline-flex items-center text-[#D4AF37] font-bold text-lg group hover-lift">
+                    Explore Projects
+                    <i class="fas fa-arrow-down ml-3 group-hover:translate-y-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
         
-        <div class="max-w-3xl">
-            <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
-                A curated collection of transformative projects, performances, and creative expressions that embody the pursuit of peace, healing, and human connection.
-            </p>
-            
-            <!-- Category Filters -->
-            <div class="flex flex-wrap gap-4 mb-12">
-                <button class="category-filter active px-4 py-2 text-sm font-medium" data-filter="all">All Works</button>
-                <button class="category-filter px-4 py-2 text-sm font-medium" data-filter="poetry">Poetry & Spoken Word</button>
-                <button class="category-filter px-4 py-2 text-sm font-medium" data-filter="speaking">Public Speaking</button>
-                <button class="category-filter px-4 py-2 text-sm font-medium" data-filter="advocacy">Humanitarian Advocacy</button>
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+            <div class="animate-bounce">
+                <div class="w-6 h-10 border-2 border-[#D4AF37] rounded-full flex justify-center">
+                    <div class="w-1 h-3 bg-[#D4AF37] rounded-full mt-2 animate-pulse"></div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Portfolio Grid -->
-    <main class="max-w-7xl mx-auto px-6 md:px-10 pb-32">
-        <div id="portfolio-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Portfolio items will be dynamically inserted here -->
-            
-            <!-- Empty State (if no portfolio items) -->
-            <div id="empty-state" class="empty-state col-span-3 hidden">
-                <div class="w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-[#d4af37]/10 to-transparent flex items-center justify-center">
-                    <svg class="w-12 h-12 text-[#d4af37]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                    </svg>
+    <!-- Filter Section -->
+    <section class="py-12 px-6 bg-black/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+                <div>
+                    <h2 class="text-2xl font-bold">Filter by Category</h2>
+                    <p class="text-gray-400 text-sm">Browse works by type and focus area</p>
                 </div>
-                <h3 class="text-xl font-semibold mb-3">No Works Added Yet</h3>
-                <p class="text-gray-400 max-w-md mb-6">Portfolio items will appear here once they are added. Check back soon for transformative works.</p>
-                <a href="index.html" class="px-6 py-3 bg-gradient-to-r from-[#d4af37] to-[#f0c674] text-black font-semibold rounded-full hover:shadow-lg transition-all duration-300">
-                    Return to Home
+                
+                <div class="flex flex-wrap gap-3">
+                    <button class="filter-btn active px-4 py-2 rounded-full gold-border text-sm" data-filter="all">
+                        All Works
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full gold-border text-sm" data-filter="poetry">
+                        Poetry
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full gold-border text-sm" data-filter="spoken-word">
+                        Spoken Word
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full gold-border text-sm" data-filter="music">
+                        Music
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full gold-border text-sm" data-filter="community">
+                        Community
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <main id="portfolio-grid" class="max-w-7xl mx-auto px-6 py-20">
+        <!-- Portfolio Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+            <div class="gold-border rounded-2xl p-6 text-center">
+                <div class="text-3xl font-bold mb-2 gold-gradient-text" id="total-projects">0</div>
+                <div class="text-sm text-gray-400">Total Projects</div>
+            </div>
+            <div class="gold-border rounded-2xl p-6 text-center">
+                <div class="text-3xl font-bold mb-2 gold-gradient-text" id="poetry-count">0</div>
+                <div class="text-sm text-gray-400">Poetry Works</div>
+            </div>
+            <div class="gold-border rounded-2xl p-6 text-center">
+                <div class="text-3xl font-bold mb-2 gold-gradient-text" id="spoken-word-count">0</div>
+                <div class="text-sm text-gray-400">Spoken Word</div>
+            </div>
+            <div class="gold-border rounded-2xl p-6 text-center">
+                <div class="text-3xl font-bold mb-2 gold-gradient-text" id="music-count">0</div>
+                <div class="text-sm text-gray-400">Music Projects</div>
+            </div>
+        </div>
+
+        <!-- Portfolio Items -->
+        <div id="portfolio-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Portfolio items will be loaded here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-20">
+            <div class="max-w-md mx-auto">
+                <i class="fas fa-palette text-6xl text-gray-600 mb-6"></i>
+                <h3 class="text-2xl font-bold mb-4">Portfolio Coming Soon</h3>
+                <p class="text-gray-400 mb-8">
+                    New works are being added regularly. Check back soon for the latest projects 
+                    and creative expressions.
+                </p>
+                <a href="inquiry.html" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full">
+                    <i class="fas fa-envelope mr-2"></i> Commission Work
                 </a>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="hidden text-center py-12">
+            <div class="inline-block">
+                <div class="w-16 h-16 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin"></div>
+                <p class="mt-4 text-gray-400">Loading portfolio...</p>
             </div>
         </div>
     </main>
 
-    <!-- Call to Action -->
-    <section class="py-16 px-6 md:px-10 bg-gradient-to-b from-transparent to-[#0a0a0a]">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-block p-1 rounded-2xl bg-gradient-to-r from-[#d4af37] to-[#f0c674] mb-8">
-                <div class="bg-[#050505] rounded-xl p-8 md:p-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Interested in Collaboration?</h2>
-                    <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
-                        Let's create something transformative together. Reach out to discuss speaking engagements, creative projects, or humanitarian initiatives.
+    <!-- Testimonials Section -->
+    <section class="py-20 px-6 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Impact <span class="gold-gradient-text">Stories</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Testimonials and feedback from communities transformed through creative expression
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="gold-border rounded-3xl p-8">
+                    <div class="text-4xl text-[#D4AF37] mb-6">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        P. Paul's work transformed our community's perspective on youth empowerment. 
+                        His words became our anthem for change.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center mr-4">
+                            <span class="font-black text-black">S</span>
+                        </div>
+                        <div>
+                            <p class="font-bold">Sarah Johnson</p>
+                            <p class="text-sm text-gray-500">Community Leader</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gold-border rounded-3xl p-8">
+                    <div class="text-4xl text-[#D4AF37] mb-6">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        The poetry sessions conducted by P. Paul gave our students a voice they never knew they had.
+                        Transformative in every sense.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center mr-4">
+                            <span class="font-black text-black">D</span>
+                        </div>
+                        <div>
+                            <p class="font-bold">Dr. Michael Ade</p>
+                            <p class="text-sm text-gray-500">University Dean</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gold-border rounded-3xl p-8">
+                    <div class="text-4xl text-[#D4AF37] mb-6">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        A masterful blend of art and advocacy. P. Paul's work proves that creativity can indeed change the world.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center mr-4">
+                            <span class="font-black text-black">A</span>
+                        </div>
+                        <div>
+                            <p class="font-bold">Amina Yusuf</p>
+                            <p class="text-sm text-gray-500">Arts Critic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="gold-border rounded-3xl p-12 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/5 to-transparent"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        Ready to <span class="gold-gradient-text">Collaborate</span>?
+                    </h2>
+                    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                        Interested in commissioning a work, booking a performance, or collaborating 
+                        on a community project?
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="inquiry.html" class="px-8 py-3 bg-gradient-to-r from-[#d4af37] to-[#f0c674] text-black font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
-                            Start a Conversation
+                        <a href="inquiry.html" 
+                           class="px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                            <i class="fas fa-handshake mr-2"></i> Start a Project
                         </a>
-                        <a href="index.html" class="px-8 py-3 border border-[#d4af37]/30 font-semibold rounded-full hover:bg-[#d4af37]/10 transition-all duration-300">
-                            Learn More About Me
+                        <a href="mailto:contact@ppaulthegreat.com" 
+                           class="px-8 py-4 gold-border font-bold rounded-full hover:bg-[#D4AF37]/10 transition-all duration-300">
+                            <i class="fas fa-envelope mr-2"></i> Send Inquiry
                         </a>
                     </div>
                 </div>
@@ -277,196 +526,483 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 md:px-10 footer-border">
+    <footer class="border-t border-white/10 py-12 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f0c674] flex items-center justify-center">
-                            <span class="font-bold text-black text-lg">P</span>
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center">
+                            <span class="font-black text-black">P</span>
                         </div>
                         <div>
-                            <h3 class="font-bold">P. PAUL THE GREAT</h3>
-                            <p class="text-xs text-gray-500">Poet • Speaker • Humanitarian</p>
+                            <h3 class="font-bold">P. PAUL</h3>
+                            <p class="text-sm text-gray-500">The Great</p>
                         </div>
                     </div>
+                    <p class="text-sm text-gray-400">
+                        Transforming lives through creative expression and humanitarian advocacy.
+                    </p>
                 </div>
                 
-                <div class="flex space-x-6">
-                    <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="text-gray-400 hover:text-[#d4af37] transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-400 hover:text-[#d4af37] transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="text-gray-400 hover:text-[#d4af37] transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clip-rule="evenodd"/>
-                        </svg>
-                    </a>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">About</a></li>
+                        <li><a href="blog.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Blog</a></li>
+                        <li><a href="portfolio.html" class="text-sm text-[#D4AF37]">Portfolio</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="inquiry.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Public Speaking</a></li>
+                        <li><a href="inquiry.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Poetry Performances</a></li>
+                        <li><a href="inquiry.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Workshops</a></li>
+                        <li><a href="inquiry.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Commissioned Work</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.instagram.com/p.paulthegreat" target="_blank" 
+                           class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291" target="_blank"
+                           class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@p.paulthegreat" target="_blank"
+                           class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="mailto:contact@ppaulthegreat.com"
+                           class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-400">
+                        Available for global engagements
+                    </p>
                 </div>
             </div>
             
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center">
+            <div class="pt-8 border-t border-white/10 text-center">
                 <p class="text-sm text-gray-500">
-                    © 2024 P. Paul (The Great). All rights reserved. | "Speaking the language of peace, healing, and human transformation."
+                    © 2026 P. Paul (The Great). All rights reserved.
+                </p>
+                <p class="text-xs text-gray-600 mt-2">
+                    "Creativity is responsibility expressed through art." - P. Paul
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+        
+        <div class="modal-content absolute inset-4 md:inset-20 bg-black/95 border border-[#D4AF37]/30 rounded-3xl overflow-hidden">
+            <button id="closeModal" class="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="h-full overflow-y-auto scrollbar-custom p-6">
+                <div id="modal-content" class="max-w-4xl mx-auto">
+                    <!-- Modal content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Configuration
+        const PORTFOLIO_CONFIG = {
+            itemsPerPage: 9,
+            currentFilter: 'all'
+        };
+
+        // State
+        let allProjects = [];
+        let currentProject = null;
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            const portfolioList = document.getElementById('portfolio-list');
-            const emptyState = document.getElementById('empty-state');
-            const filterButtons = document.querySelectorAll('.category-filter');
-            let portfolioData = [];
-            let activeFilter = 'all';
-            
-            // Try to get portfolio data from localStorage
-            try {
-                portfolioData = JSON.parse(localStorage.getItem('portfolio') || "[]");
-            } catch (e) {
-                console.error("Error loading portfolio data:", e);
-                portfolioData = [];
-            }
-            
-            // If no portfolio data, show empty state
-            if (portfolioData.length === 0) {
-                emptyState.classList.remove('hidden');
-                portfolioList.classList.add('hidden');
-            } else {
-                // Render portfolio items
-                renderPortfolioItems(portfolioData);
-                
-                // Add event listeners to filter buttons
-                filterButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        // Update active filter
-                        filterButtons.forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
-                        activeFilter = button.dataset.filter;
-                        
-                        // Filter and render items
-                        const filteredItems = activeFilter === 'all' 
-                            ? portfolioData 
-                            : portfolioData.filter(item => item.category === activeFilter);
-                        
-                        renderPortfolioItems(filteredItems);
-                    });
+            // Mobile Navigation
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileNav = document.getElementById('mobileNav');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileNav.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMobileMenu.addEventListener('click', () => {
+                mobileNav.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close mobile menu when clicking links
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
                 });
+            });
+
+            // Filter Buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const filter = e.currentTarget.dataset.filter;
+                    
+                    // Update active state
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    e.currentTarget.classList.add('active');
+                    
+                    // Filter projects
+                    filterProjects(filter);
+                });
+            });
+
+            // Load portfolio
+            loadPortfolio();
+
+            // Modal Controls
+            const projectModal = document.getElementById('projectModal');
+            const closeModal = document.getElementById('closeModal');
+
+            closeModal.addEventListener('click', () => {
+                projectModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+
+            projectModal.addEventListener('click', (e) => {
+                if (e.target === projectModal || e.target.classList.contains('modal-overlay')) {
+                    projectModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !projectModal.classList.contains('hidden')) {
+                    projectModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Load Portfolio
+        function loadPortfolio() {
+            const loadingState = document.getElementById('loading-state');
+            const emptyState = document.getElementById('empty-state');
+            const portfolioList = document.getElementById('portfolio-list');
+            
+            // Show loading
+            loadingState.classList.remove('hidden');
+            portfolioList.innerHTML = '';
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                // Load from localStorage
+                const storedProjects = JSON.parse(localStorage.getItem('ppaul_portfolio') || '[]');
+                
+                // Filter only published projects
+                allProjects = storedProjects.filter(project => project.published !== false);
+                
+                // Update stats
+                updatePortfolioStats();
+                
+                // Hide loading
+                loadingState.classList.add('hidden');
+                
+                if (allProjects.length === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    renderPortfolioItems(PORTFOLIO_CONFIG.currentFilter);
+                }
+            }, 1000);
+        }
+
+        // Update Portfolio Stats
+        function updatePortfolioStats() {
+            const totalProjects = allProjects.length;
+            const poetryCount = allProjects.filter(p => p.category === 'poetry' || p.type === 'poetry').length;
+            const spokenWordCount = allProjects.filter(p => p.category === 'spoken-word' || p.type === 'spoken-word').length;
+            const musicCount = allProjects.filter(p => p.category === 'music' || p.type === 'music').length;
+            
+            document.getElementById('total-projects').textContent = totalProjects;
+            document.getElementById('poetry-count').textContent = poetryCount;
+            document.getElementById('spoken-word-count').textContent = spokenWordCount;
+            document.getElementById('music-count').textContent = musicCount;
+        }
+
+        // Filter Projects
+        function filterProjects(filter) {
+            PORTFOLIO_CONFIG.currentFilter = filter;
+            renderPortfolioItems(filter);
+        }
+
+        // Render Portfolio Items
+        function renderPortfolioItems(filter) {
+            const portfolioList = document.getElementById('portfolio-list');
+            
+            // Filter projects
+            let filteredProjects = allProjects;
+            if (filter !== 'all') {
+                filteredProjects = allProjects.filter(project => 
+                    project.category === filter || project.type === filter
+                );
             }
             
-            function renderPortfolioItems(items) {
-                if (items.length === 0) {
-                    portfolioList.innerHTML = `
-                        <div class="col-span-3 empty-state">
-                            <div class="w-20 h-20 mb-4 rounded-full bg-gradient-to-br from-[#d4af37]/10 to-transparent flex items-center justify-center">
-                                <svg class="w-10 h-10 text-[#d4af37]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-semibold mb-2">No Works in this Category</h3>
-                            <p class="text-gray-400 text-sm">Try selecting a different category or view all works.</p>
-                        </div>
-                    `;
-                    return;
-                }
+            // Sort by date (newest first)
+            filteredProjects.sort((a, b) => b.id - a.id);
+            
+            // Render items
+            portfolioList.innerHTML = filteredProjects.map((project, index) => {
+                const delayClass = `stagger-delay-${(index % 4) + 1}`;
+                const category = project.category || project.type || 'general';
                 
-                portfolioList.innerHTML = items.map(item => {
-                    // Determine category color
-                    let categoryColor = 'text-[#d4af37]';
-                    let categoryText = 'Creative Work';
-                    
-                    if (item.category === 'poetry') {
-                        categoryText = 'Poetry & Spoken Word';
-                    } else if (item.category === 'speaking') {
-                        categoryText = 'Public Speaking';
-                    } else if (item.category === 'advocacy') {
-                        categoryText = 'Humanitarian Advocacy';
-                    }
-                    
-                    // Truncate description if too long
-                    const maxLength = 120;
-                    const description = item.content.length > maxLength 
-                        ? item.content.substring(0, maxLength) + '...' 
-                        : item.content;
-                    
-                    return `
-                        <div class="portfolio-card" data-category="${item.category || 'general'}">
-                            <div class="relative overflow-hidden rounded-t-2xl h-80">
-                                <img src="${item.image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" 
-                                     alt="${item.title}" 
-                                     class="portfolio-image">
-                                <div class="gradient-overlay"></div>
-                                <div class="absolute top-4 right-4 z-10">
-                                    <span class="text-xs px-3 py-1 rounded-full bg-black/70 backdrop-blur-sm text-white font-medium">
-                                        ${categoryText}
-                                    </span>
+                return `
+                    <div class="portfolio-card gold-border rounded-3xl overflow-hidden fade-in ${delayClass}"
+                         data-category="${category}"
+                         onclick="openProjectDetail(${project.id})">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="${project.image || 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/portfolio-placeholder.jpg'}" 
+                                 alt="${project.title}"
+                                 class="card-image w-full h-full object-cover">
+                            <div class="card-overlay absolute inset-0"></div>
+                            <div class="absolute top-4 right-4">
+                                <span class="px-3 py-1 bg-[#D4AF37] text-black text-xs font-bold rounded-full">
+                                    ${getCategoryLabel(category)}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-content p-8">
+                            <div class="flex items-center text-xs text-gray-400 mb-4">
+                                <span>${project.date || 'Recent Work'}</span>
+                                <span class="mx-2">•</span>
+                                <span>${getProjectTypeIcon(category)} ${getCategoryLabel(category)}</span>
+                            </div>
+                            
+                            <h3 class="text-2xl font-serif font-bold mb-4 leading-tight">${project.title}</h3>
+                            
+                            <p class="text-gray-300 text-sm mb-6 line-clamp-3">${project.content}</p>
+                            
+                            <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                                <button class="text-[#D4AF37] font-medium text-sm hover:underline">
+                                    View Details
+                                    <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                                
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="event.stopPropagation(); shareProject(${project.id})" 
+                                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                                        <i class="fas fa-share-alt text-xs"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="p-6">
-                                <div class="mb-4">
-                                    <span class="text-xs uppercase tracking-widest font-bold ${categoryColor}">
-                                        PPaul The Great
-                                    </span>
-                                    <h3 class="text-xl font-bold mt-2 mb-3 serif-font italic">${item.title}</h3>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Get Category Label
+        function getCategoryLabel(category) {
+            const labels = {
+                'poetry': 'Poetry',
+                'spoken-word': 'Spoken Word',
+                'music': 'Music',
+                'community': 'Community',
+                'general': 'Project'
+            };
+            return labels[category] || 'Project';
+        }
+
+        // Get Project Type Icon
+        function getProjectTypeIcon(category) {
+            const icons = {
+                'poetry': 'fas fa-pen-nib',
+                'spoken-word': 'fas fa-microphone',
+                'music': 'fas fa-music',
+                'community': 'fas fa-users',
+                'general': 'fas fa-star'
+            };
+            return `<i class="${icons[category] || 'fas fa-star'} mr-1"></i>`;
+        }
+
+        // Open Project Detail
+        function openProjectDetail(projectId) {
+            const project = allProjects.find(p => p.id === projectId);
+            if (!project) return;
+
+            currentProject = project;
+            const modalContent = document.getElementById('modal-content');
+            const projectModal = document.getElementById('projectModal');
+            
+            modalContent.innerHTML = `
+                <div class="space-y-8">
+                    <!-- Project Header -->
+                    <div class="relative h-96 rounded-2xl overflow-hidden">
+                        <img src="${project.image || 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/portfolio-detail.jpg'}" 
+                             alt="${project.title}"
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <span class="inline-block px-4 py-2 bg-[#D4AF37] text-black text-sm font-bold rounded-full mb-4">
+                                ${getCategoryLabel(project.category || project.type || 'general')}
+                            </span>
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">${project.title}</h2>
+                            <div class="flex items-center text-gray-300">
+                                <i class="fas fa-calendar mr-2"></i>
+                                <span>${project.date || 'Date not specified'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Content -->
+                    <div class="prose prose-invert max-w-none">
+                        <div class="text-lg leading-relaxed text-gray-300 whitespace-pre-line">
+                            ${project.content}
+                        </div>
+                        
+                        <!-- Project Details -->
+                        <div class="mt-12 pt-8 border-t border-white/10">
+                            <h3 class="text-2xl font-bold mb-6 text-[#D4AF37]">Project Details</h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-4">
+                                    <div>
+                                        <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2">Type</h4>
+                                        <p class="flex items-center">
+                                            ${getProjectTypeIcon(project.category || project.type)}
+                                            ${getCategoryLabel(project.category || project.type)}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2">Date</h4>
+                                        <p>${project.date || 'Not specified'}</p>
+                                    </div>
                                 </div>
-                                <div class="content-fade">
-                                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">${description}</p>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-xs text-gray-500">
-                                            ${item.date || 'Transformative Work'}
-                                        </span>
-                                        <button class="text-xs font-semibold text-[#d4af37] hover:text-[#f0c674] transition-colors flex items-center">
-                                            View Details
-                                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                            </svg>
-                                        </button>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2">Impact</h4>
+                                        <p>Community Transformation & Creative Expression</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2">Status</h4>
+                                        <p class="flex items-center">
+                                            <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                            Completed
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    `;
-                }).join('');
-                
-                // Add click events to "View Details" buttons
-                document.querySelectorAll('.portfolio-card button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        // In a real application, this would open a modal or navigate to a detail page
-                        alert('In a complete implementation, this would show detailed information about the selected work.');
+                        
+                        <!-- Share Section -->
+                        <div class="mt-12 pt-8 border-t border-white/10">
+                            <h3 class="text-2xl font-bold mb-6 text-[#D4AF37]">Share This Work</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="shareProject(${project.id}, 'whatsapp')" 
+                                        class="px-6 py-3 rounded-full bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white transition-all flex items-center">
+                                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+                                </button>
+                                <button onclick="shareProject(${project.id}, 'facebook')" 
+                                        class="px-6 py-3 rounded-full bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition-all flex items-center">
+                                    <i class="fab fa-facebook mr-2"></i> Facebook
+                                </button>
+                                <button onclick="shareProject(${project.id}, 'twitter')" 
+                                        class="px-6 py-3 rounded-full bg-blue-400/10 text-blue-300 hover:bg-blue-400 hover:text-white transition-all flex items-center">
+                                    <i class="fab fa-twitter mr-2"></i> Twitter
+                                </button>
+                                <button onclick="shareProject(${project.id}, 'linkedin')" 
+                                        class="px-6 py-3 rounded-full bg-blue-600/10 text-blue-500 hover:bg-blue-600 hover:text-white transition-all flex items-center">
+                                    <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            projectModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Share Project
+        function shareProject(projectId, platform = 'copy') {
+            const project = allProjects.find(p => p.id === projectId);
+            if (!project) return;
+
+            const url = `${window.location.origin}${window.location.pathname}?project=${projectId}`;
+            const text = `Check out "${project.title}" by P. Paul (The Great)\n\n`;
+            
+            let shareUrl = '';
+            
+            switch(platform) {
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + url)}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+                    break;
+                default:
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(url).then(() => {
+                        showNotification('Link copied to clipboard!', 'success');
                     });
-                });
+                    return;
             }
             
-            // Add a subtle parallax effect on scroll
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const heroTitle = document.querySelector('.hero-title');
-                if (heroTitle) {
-                    heroTitle.style.transform = `translateY(${scrolled * 0.05}px)`;
-                }
-            });
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        }
+
+        // Show Notification
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-xl shadow-lg ${
+                type === 'success' ? 'bg-green-500/90' : 'bg-[#D4AF37]/90'
+            }`;
+            notification.textContent = message;
             
-            // Add loading animation for images
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                img.addEventListener('load', function() {
-                    this.classList.remove('shimmer-effect');
-                });
-                
-                // Add shimmer effect while loading
-                if (!img.complete) {
-                    img.classList.add('shimmer-effect');
-                }
-            });
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Check URL for project parameter
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('project');
+            
+            if (projectId) {
+                // Wait for projects to load
+                setTimeout(() => {
+                    openProjectDetail(parseInt(projectId));
+                }, 1500);
+            }
         });
     </script>
 </body>
-    </html>
+                            </html>
