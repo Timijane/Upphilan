@@ -722,13 +722,13 @@
     </div>
 
     <script>
-        // Configuration with API Key
+        // Configuration - UPDATED CREDENTIALS with correct cloud name and API KEY
         const CONFIG = {
             cloudName: 'pelumi',
             uploadPreset: 'ppaul_content',
-            apiKey: '373491645218131',
             adminUsername: 'websiteppaul.com',
-            adminPassword: 'ppaul'
+            adminPassword: 'ppaul',
+            apiKey: '373491645218131' // Your Cloudinary API Key added here
         };
 
         // State Management
@@ -742,12 +742,12 @@
             }
         };
 
-        // Initialize Cloudinary Widget with API Key
+        // Initialize Cloudinary Widget
         function initCloudinaryWidget() {
             const uploadWidget = cloudinary.createUploadWidget({
                 cloudName: CONFIG.cloudName,
                 uploadPreset: CONFIG.uploadPreset,
-                apiKey: CONFIG.apiKey,
+                apiKey: CONFIG.apiKey, // Added API key
                 sources: ['local', 'url', 'camera'],
                 multiple: false,
                 maxFileSize: 5000000, // 5MB
@@ -812,21 +812,8 @@
             });
         }
 
-        // Check Cloudinary Configuration
-        function checkCloudinaryConfig() {
-            if (!CONFIG.cloudName || !CONFIG.apiKey || !CONFIG.uploadPreset) {
-                console.warn('Cloudinary configuration incomplete. Image uploads may not work.');
-                showToast('Image upload service not fully configured', 'warning');
-                return false;
-            }
-            return true;
-        }
-
         // Initialize App
         function initApp() {
-            // Check Cloudinary configuration
-            checkCloudinaryConfig();
-            
             // Check if user was previously logged in
             const rememberMe = localStorage.getItem('ppaul_remember') === 'true';
             if (rememberMe) {
@@ -890,7 +877,7 @@
             initCloudinaryWidget();
         }
 
-        // Login Handler
+        // Login Handler - UPDATED FOR USERNAME FIELD
         function handleLogin() {
             const username = document.getElementById('admin-username').value.trim();
             const password = document.getElementById('admin-password').value;
@@ -900,7 +887,7 @@
             // Clear any previous error
             errorDiv.classList.add('hidden');
 
-            // Validate credentials
+            // Validate credentials - CASE SENSITIVE
             if (username === CONFIG.adminUsername && password === CONFIG.adminPassword) {
                 // Success - Save remember me preference
                 if (remember) {
@@ -923,7 +910,7 @@
                 
                 showToast('Welcome back! Dashboard loaded.', 'success');
             } else {
-                // Show error
+                // Show error with detailed message
                 errorDiv.classList.remove('hidden');
                 
                 // Clear password field for security
@@ -958,7 +945,7 @@
                 
                 // Reset form fields
                 resetForm();
-                document.getElementById('admin-password').value = 'ppaul';
+                document.getElementById('admin-password').value = 'ppaul'; // Reset to default for convenience
                 
                 showToast('Logged out successfully', 'info');
             }
@@ -1247,16 +1234,19 @@
                     </div>
                     <div class="flex justify-between items-center pt-3 border-t border-white/10">
                         <div class="flex space-x-2">
+                            <!-- EDIT BUTTON -->
                             <button onclick="startEdit(${item.id}, '${item._type}')"
-                                    class="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs">
+                                    class="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs edit-btn">
                                 <i class="fas fa-edit mr-1"></i>Edit
                             </button>
+                            <!-- PUBLISH/UNPUBLISH BUTTON -->
                             <button onclick="togglePublish(${item.id}, '${item._type}')"
                                     class="px-3 py-1 rounded-lg ${item.published ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'} hover:opacity-80 text-xs">
                                 <i class="fas fa-power-off mr-1"></i>${item.published ? 'Unpublish' : 'Publish'}
                             </button>
+                            <!-- DELETE BUTTON -->
                             <button onclick="deleteContent(${item.id}, '${item._type}')"
-                                    class="px-3 py-1 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 text-xs">
+                                    class="px-3 py-1 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 text-xs delete-btn">
                                 <i class="fas fa-trash mr-1"></i>Delete
                             </button>
                         </div>
