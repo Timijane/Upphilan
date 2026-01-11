@@ -3,144 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engine Room v2 | P. Paul</title>
+    <title>Engine Room | PPaul the Great</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --onyx: #0a0a0a; }
-        body { background: var(--onyx); color: white; font-family: 'Inter', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        input, textarea, select { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; padding: 12px; border-radius: 12px; outline: none; }
-        .edit-mode { border: 2px solid var(--gold) !important; }
+        body { background: #050505; color: white; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        input, textarea, select { background: #111 !important; border: 1px solid #222 !important; color: white !important; padding: 12px; border-radius: 12px; width: 100%; outline: none; }
+        input:focus { border-color: #d4af37 !important; }
+        .gold-gradient { background: linear-gradient(to right, #d4af37, #f2d06b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body class="p-6 md:p-12">
-    <div id="login-zone" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
-        <div class="glass p-10 rounded-[2rem] w-full max-w-md text-center">
-            <h1 class="text-2xl font-serif italic text-gold-500 mb-6 font-bold">P. Paul Engine Room</h1>
-            <input type="email" id="email" placeholder="Gmail" class="w-full mb-4">
-            <input type="password" id="pass" placeholder="Password" class="w-full mb-6">
-            <button onclick="auth()" class="w-full bg-white text-black font-black py-4 rounded-xl">INITIALIZE</button>
+<body class="p-4 md:p-10">
+    <div id="login-overlay" class="fixed inset-0 z-[100] bg-black flex items-center justify-center p-6">
+        <div class="glass p-10 rounded-[2.5rem] w-full max-w-md text-center">
+            <h1 class="text-3xl font-serif italic gold-gradient mb-8">PPaul Console</h1>
+            <input type="email" id="adm-email" placeholder="Gmail" class="mb-4">
+            <input type="password" id="adm-pass" placeholder="Password" class="mb-6">
+            <button onclick="login()" class="w-full bg-white text-black font-black py-4 rounded-xl hover:bg-[#d4af37] transition-all">ACCESS ENGINE</button>
+            <p id="err" class="text-red-500 text-xs mt-4 hidden">Unauthorized Access</p>
         </div>
     </div>
 
-    <div id="console" class="hidden max-w-6xl mx-auto">
+    <main id="dashboard" class="hidden max-w-6xl mx-auto">
         <header class="flex justify-between items-center mb-12">
-            <h2 class="text-3xl font-serif italic">The Engine <span class="text-gold-500">Room</span></h2>
-            <div class="flex gap-4">
-                <button id="cancel-edit" class="hidden text-xs text-red-500 border border-red-500 px-4 py-2 rounded-full" onclick="exitEdit()">Cancel Edit</button>
-                <button onclick="location.reload()" class="text-xs text-gray-500 uppercase">Logout</button>
+            <div>
+                <h2 class="text-4xl font-black tracking-tighter uppercase">Engine <span class="gold-gradient italic font-serif capitalize">Room</span></h2>
+                <p class="text-gray-500 text-[10px] tracking-[0.4em] uppercase">Control System v2.0</p>
             </div>
+            <button onclick="location.reload()" class="bg-white/10 hover:bg-red-500/20 text-xs px-6 py-2 rounded-full transition-all">SHUTDOWN</button>
         </header>
 
-        <div class="grid lg:grid-cols-2 gap-8 mb-12">
-            <div class="glass p-8 rounded-[2rem]">
-                <h3 id="form-title" class="text-xl font-bold mb-6">🖋️ New Post</h3>
-                <div class="flex flex-col gap-4">
-                    <select id="post-type">
+        <div class="grid lg:grid-cols-5 gap-10">
+            <div class="lg:col-span-2 glass p-8 rounded-[2rem] h-fit sticky top-10">
+                <h3 id="form-mode" class="text-xl font-bold mb-6">Create Content</h3>
+                <div class="space-y-4">
+                    <select id="type">
                         <option value="blog">Blog Post</option>
-                        <option value="portfolio">Portfolio Work</option>
+                        <option value="portfolio">Portfolio Project</option>
                     </select>
-                    <input type="text" id="p-title" placeholder="Headline / Project Name">
-                    <input type="text" id="p-img" placeholder="Image URL">
-                    <textarea id="p-content" rows="4" placeholder="Description or Content"></textarea>
-                    <button id="submit-btn" onclick="savePost()" class="bg-gold-500 text-black font-black py-4 rounded-xl transition-all">Publish Content</button>
+                    <input type="text" id="title" placeholder="Headline / Title">
+                    <input type="text" id="image" placeholder="Image URL (Direct link)">
+                    <textarea id="content" rows="6" placeholder="Body Content / Description"></textarea>
+                    <button id="main-btn" onclick="handleSave()" class="w-full bg-[#d4af37] text-black font-black py-4 rounded-xl shadow-lg shadow-[#d4af37]/20">PUBLISH TO SITE</button>
+                    <button id="cancel-btn" onclick="resetForm()" class="hidden w-full border border-white/20 py-2 rounded-xl text-xs">CANCEL EDIT</button>
                 </div>
             </div>
 
-            <div class="glass p-8 rounded-[2rem]">
-                <h3 class="text-xl font-bold mb-6 italic">Database Management</h3>
-                <div id="entries-list" class="space-y-3 h-[400px] overflow-y-auto pr-2">
-                    </div>
+            <div class="lg:col-span-3 space-y-6">
+                <h3 class="text-sm font-black tracking-widest text-gray-500 uppercase">Live Content Management</h3>
+                <div id="entries" class="grid gap-4"></div>
             </div>
         </div>
-    </div>
+    </main>
 
     <script>
-        let editIndex = -1;
+        let editIdx = -1;
         let editType = '';
 
-        function auth() {
-            if(document.getElementById('email').value === "websiteppaul.com" && document.getElementById('pass').value === "thelawpp") {
-                document.getElementById('login-zone').classList.add('hidden');
-                document.getElementById('console').classList.remove('hidden');
-                renderList();
-            }
+        function login() {
+            const e = document.getElementById('adm-email').value;
+            const p = document.getElementById('adm-pass').value;
+            if(e === "websiteppaul.com" && p === "thelawpp") {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('dashboard').classList.remove('hidden');
+                render();
+            } else { document.getElementById('err').classList.remove('hidden'); }
         }
 
-        function savePost() {
-            const type = document.getElementById('post-type').value;
-            const title = document.getElementById('p-title').value;
-            const img = document.getElementById('p-img').value;
-            const content = document.getElementById('p-content').value;
+        function handleSave() {
+            const type = document.getElementById('type').value;
+            const data = {
+                title: document.getElementById('title').value,
+                image: document.getElementById('image').value,
+                content: document.getElementById('content').value,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+            };
 
-            let data = JSON.parse(localStorage.getItem(type) || "[]");
-            const entry = { title, image: img, content, date: new Date().toLocaleDateString() };
-
-            if (editIndex > -1) {
-                data[editIndex] = entry; // Update
+            let store = JSON.parse(localStorage.getItem(type) || "[]");
+            
+            if(editIdx > -1) {
+                store[editIdx] = data;
             } else {
-                data.unshift(entry); // New
+                store.unshift(data);
             }
 
-            localStorage.setItem(type, JSON.stringify(data));
-            exitEdit();
-            renderList();
-            alert("Engine Updated!");
+            localStorage.setItem(type, JSON.stringify(store));
+            resetForm();
+            render();
+            alert("Site Updated Successfully!");
         }
 
-        function renderList() {
-            const list = document.getElementById('entries-list');
-            list.innerHTML = '';
+        function render() {
+            const container = document.getElementById('entries');
+            container.innerHTML = '';
             ['blog', 'portfolio'].forEach(type => {
-                let items = JSON.parse(localStorage.getItem(type) || "[]");
-                items.forEach((item, index) => {
-                    const div = document.createElement('div');
-                    div.className = "flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5";
-                    div.innerHTML = `
-                        <div>
-                            <p class="text-[10px] text-gold-500 uppercase font-black">${type}</p>
-                            <p class="text-sm font-bold">${item.title}</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="startEdit('${type}', ${index})" class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded">Edit</button>
-                            <button onclick="deletePost('${type}', ${index})" class="text-xs bg-red-500/20 text-red-400 px-3 py-1 rounded">Del</button>
+                const items = JSON.parse(localStorage.getItem(type) || "[]");
+                items.forEach((item, idx) => {
+                    container.innerHTML += `
+                        <div class="glass p-5 rounded-2xl flex justify-between items-center group">
+                            <div class="flex items-center gap-4">
+                                <img src="${item.image}" class="w-12 h-12 rounded-lg object-cover bg-zinc-800">
+                                <div>
+                                    <p class="text-[9px] font-black text-gold-500 uppercase">${type}</p>
+                                    <h4 class="font-bold text-sm">${item.title}</h4>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="startEdit('${type}', ${idx})" class="text-[10px] bg-white/10 px-4 py-2 rounded-lg hover:bg-white hover:text-black">EDIT</button>
+                                <button onclick="deleteItem('${type}', ${idx})" class="text-[10px] bg-red-500/10 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white">DEL</button>
+                            </div>
                         </div>
                     `;
-                    list.appendChild(div);
                 });
             });
         }
 
-        function startEdit(type, index) {
-            const data = JSON.parse(localStorage.getItem(type))[index];
-            editIndex = index;
-            editType = type;
-            
-            document.getElementById('post-type').value = type;
-            document.getElementById('p-title').value = data.title;
-            document.getElementById('p-img').value = data.image;
-            document.getElementById('p-content').value = data.content || data.desc;
-            
-            document.getElementById('submit-btn').innerText = "Update Entry";
-            document.getElementById('form-title').innerText = "🛠️ Editing Mode";
-            document.getElementById('cancel-edit').classList.remove('hidden');
+        function startEdit(type, idx) {
+            const item = JSON.parse(localStorage.getItem(type))[idx];
+            editIdx = idx; editType = type;
+            document.getElementById('type').value = type;
+            document.getElementById('title').value = item.title;
+            document.getElementById('image').value = item.image;
+            document.getElementById('content').value = item.content;
+            document.getElementById('main-btn').innerText = "UPDATE POST";
+            document.getElementById('form-mode').innerText = "Edit Mode";
+            document.getElementById('cancel-btn').classList.remove('hidden');
         }
 
-        function exitEdit() {
-            editIndex = -1;
-            document.getElementById('p-title').value = '';
-            document.getElementById('p-img').value = '';
-            document.getElementById('p-content').value = '';
-            document.getElementById('submit-btn').innerText = "Publish Content";
-            document.getElementById('cancel-edit').classList.add('hidden');
+        function resetForm() {
+            editIdx = -1;
+            document.getElementById('title').value = '';
+            document.getElementById('image').value = '';
+            document.getElementById('content').value = '';
+            document.getElementById('main-btn').innerText = "PUBLISH TO SITE";
+            document.getElementById('cancel-btn').classList.add('hidden');
         }
 
-        function deletePost(type, index) {
-            if(confirm("Permanently delete this?")) {
-                let data = JSON.parse(localStorage.getItem(type));
-                data.splice(index, 1);
-                localStorage.setItem(type, JSON.stringify(data));
-                renderList();
+        function deleteItem(type, idx) {
+            if(confirm("Confirm deletion?")) {
+                let store = JSON.parse(localStorage.getItem(type));
+                store.splice(idx, 1);
+                localStorage.setItem(type, JSON.stringify(store));
+                render();
             }
         }
     </script>
