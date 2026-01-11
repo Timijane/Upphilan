@@ -3,783 +3,1054 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Inkwell | PPaul the Great | Transformative Insights & Writings</title>
-    
-    <!-- Meta for SEO and Social Sharing -->
-    <meta name="description" content="The Inkwell - A collection of transformative writings, poetry, and insights by PPaul the Great. Explore thoughts on peace, healing, and human transformation.">
-    
-    <!-- Google Fonts for optimal reading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <title>The Inkwell | P. Paul (The Great) - Official Blog</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom CSS -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;800;900&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags for Better Sharing -->
+    <meta property="og:title" content="The Inkwell | P. Paul (The Great)">
+    <meta property="og:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian">
+    <meta property="og:image" content="https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg">
+    <meta property="og:url" content="https://ppaulthegreat.com/blog.html">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <style>
         :root {
-            --primary-gold: #d4af37;
-            --secondary-gold: #f0c674;
-            --dark-bg: #0c0c0c;
-            --light-bg: #141414;
-            --text-primary: #f5f5f5;
-            --text-secondary: #a3a3a3;
-            --accent-color: #d4af37;
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --light-gold: #F0C674;
+            --bg-dark: #0A0A0A;
+            --bg-card: rgba(20, 20, 20, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
         }
         
         body {
-            background-color: var(--dark-bg);
+            background: var(--bg-dark);
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            line-height: 1.7;
-        }
-        
-        .reading-font {
-            font-family: 'Lora', serif;
-        }
-        
-        /* Smooth scrolling */
-        html {
+            line-height: 1.6;
             scroll-behavior: smooth;
         }
         
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(10, 10, 10, 1) 100%);
         }
         
-        ::-webkit-scrollbar-track {
-            background: rgba(20, 20, 20, 0.5);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, var(--primary-gold), var(--secondary-gold));
-            border-radius: 5px;
-        }
-        
-        /* Text selection */
-        ::selection {
-            background-color: rgba(212, 175, 55, 0.3);
-            color: #fff;
-        }
-        
-        /* Navigation styling */
-        .nav-gradient {
-            background: linear-gradient(to bottom, rgba(12, 12, 12, 0.95) 0%, rgba(12, 12, 12, 0.8) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-        
-        /* Blog post card styling */
-        .blog-post {
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            background: linear-gradient(145deg, #141414, #0f0f0f);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        
-        .blog-post:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-        
-        .blog-post::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.03), transparent);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            z-index: 1;
-        }
-        
-        .blog-post:hover::before {
-            opacity: 1;
-        }
-        
-        /* Image styling */
-        .blog-image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-            filter: brightness(0.85) contrast(1.1);
-        }
-        
-        .blog-post:hover .blog-image {
-            transform: scale(1.05);
-            filter: brightness(0.9) contrast(1.1);
-        }
-        
-        /* Gradient overlay on images */
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40%;
-            background: linear-gradient(to top, rgba(12, 12, 12, 0.95) 0%, transparent 100%);
-        }
-        
-        /* Share buttons */
-        .share-btn {
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            border-radius: 8px;
-            padding: 10px 16px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .share-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Reading progress indicator */
-        .reading-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-gold), var(--secondary-gold));
-            transform-origin: 0%;
-            z-index: 9999;
-        }
-        
-        /* Typography enhancements for reading */
-        .article-content {
+        .article-body {
+            font-family: 'Source Serif Pro', serif;
             font-size: 1.125rem;
             line-height: 1.8;
-            color: var(--text-primary);
         }
         
-        .article-content p {
+        .article-body p {
             margin-bottom: 1.5rem;
         }
         
-        .article-content h2, .article-content h3 {
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
+        .article-body h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem 0;
             color: var(--primary-gold);
+        }
+        
+        .article-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
             font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
         }
         
-        /* Author badge */
-        .author-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 16px;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 50px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         
-        /* Table of Contents */
-        .toc-container {
-            position: sticky;
-            top: 100px;
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-        }
-        
-        /* Empty state */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 20px;
-            text-align: center;
-        }
-        
-        /* Back to top button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-            color: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
+        .gold-hover:hover {
+            border-color: var(--primary-gold);
+            transform: translateY(-2px);
             transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
         
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
         }
         
-        /* Quote styling */
-        .quote-block {
-            border-left: 4px solid var(--primary-gold);
-            padding-left: 24px;
-            margin: 2rem 0;
-            font-style: italic;
-            color: var(--text-secondary);
-            font-size: 1.25rem;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Loading animation */
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
+        .stagger-delay-1 { animation-delay: 0.1s; }
+        .stagger-delay-2 { animation-delay: 0.2s; }
+        .stagger-delay-3 { animation-delay: 0.3s; }
+        
+        .share-btn {
+            position: relative;
+            overflow: hidden;
         }
         
-        .shimmer-effect {
-            background: linear-gradient(90deg, #141414 25%, #1a1a1a 50%, #141414 75%);
-            background-size: 1000px 100%;
-            animation: shimmer 2s infinite linear;
+        .share-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .share-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .scrollbar-custom {
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-gold) rgba(255, 255, 255, 0.05);
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 3px;
+        }
+        
+        .read-time {
+            position: relative;
+        }
+        
+        .read-time::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -12px;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 3px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+        
+        /* Loading Animation */
+        .loading-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
 </head>
 <body class="antialiased">
-    <!-- Reading Progress Bar -->
-    <div class="reading-progress" id="reading-progress"></div>
-    
     <!-- Navigation -->
-    <nav class="nav-gradient fixed top-0 w-full z-50 py-5 px-6 md:px-10 flex justify-between items-center">
-        <div class="flex items-center space-x-4">
+    <nav class="fixed top-0 w-full z-50 py-4 px-6 bg-black/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
             <a href="index.html" class="flex items-center space-x-3 group">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f0c674] flex items-center justify-center">
-                    <span class="font-bold text-black text-lg">P</span>
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center">
+                    <span class="font-black text-black text-lg">P</span>
                 </div>
-                <div class="flex flex-col">
-                    <span class="font-bold text-lg tracking-tight group-hover:text-[#d4af37] transition-colors">P. PAUL</span>
-                    <span class="text-xs text-gray-400">The Great</span>
+                <div>
+                    <h1 class="text-xl font-black tracking-tight">The Inkwell</h1>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">by P. Paul</p>
                 </div>
             </a>
-            <div class="hidden md:block border-l border-gray-700 h-6 ml-4"></div>
-            <a href="index.html" class="hidden md:block text-gray-400 hover:text-[#d4af37] transition-colors text-sm">Home</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">
+                    Home
+                </a>
+                <a href="about.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">
+                    About
+                </a>
+                <a href="portfolio.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">
+                    Portfolio
+                </a>
+                <a href="inquiry.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">
+                    Contact
+                </a>
+                <a href="#subscribe" class="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-sm hover:shadow-lg hover:scale-105 transition-all">
+                    Subscribe
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
-        
-        <a href="portfolio.html" class="text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-[#d4af37] to-[#f0c674] text-black px-6 py-3 rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
-            View Portfolio
-        </a>
     </nav>
 
-    <!-- Blog Header -->
-    <header class="pt-32 md:pt-40 px-6 md:px-10 pb-16 max-w-7xl mx-auto">
-        <div class="mb-8">
-            <span class="text-xs uppercase tracking-[0.3em] text-[#d4af37] font-semibold">The Inkwell</span>
-        </div>
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobileNav" class="mobile-nav fixed inset-0 z-40 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center">
+        <button id="closeMobileMenu" class="absolute top-6 right-6 text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
         
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                    <span class="reading-font italic text-[#d4af37]">The Inkwell</span><br>
-                    <span class="text-4xl md:text-6xl">of PPaul the Great</span>
-                </h1>
-                <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-                    A collection of transformative writings, poetic insights, and reflections on peace, healing, and the human journey. Dive into thoughts that inspire change.
-                </p>
-                <div class="flex items-center space-x-4">
-                    <div class="author-badge">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f0c674]"></div>
-                        <span class="text-sm font-medium">PPaul The Great</span>
-                    </div>
-                    <span class="text-gray-500 text-sm">•</span>
-                    <span class="text-gray-400 text-sm" id="post-count">0 Writings</span>
+        <div class="text-center space-y-8">
+            <a href="index.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">
+                Home
+            </a>
+            <a href="about.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">
+                About
+            </a>
+            <a href="portfolio.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">
+                Portfolio
+            </a>
+            <a href="inquiry.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">
+                Contact
+            </a>
+            <a href="#subscribe" class="inline-block mt-8 px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-lg">
+                Subscribe
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6 hero-gradient relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] text-sm font-medium mb-6">
+                <i class="fas fa-feather-alt mr-2"></i> Official Blog
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
+                <span class="text-white">The</span> 
+                <span class="bg-gradient-to-r from-[#D4AF37] to-[#F0C674] bg-clip-text text-transparent">Inkwell</span>
+            </h1>
+            
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
+                Where words transform into wisdom, and thoughts become movements. 
+                Dive into reflections on creativity, purpose, and human transformation.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-book-open mr-2 text-[#D4AF37]"></i>
+                    <span id="total-posts">0 Articles</span>
+                </div>
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-clock mr-2 text-[#D4AF37]"></i>
+                    <span>Updated Weekly</span>
+                </div>
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-users mr-2 text-[#D4AF37]"></i>
+                    <span>Community of Readers</span>
                 </div>
             </div>
             
-            <div class="relative">
-                <div class="absolute -inset-4 bg-gradient-to-r from-[#d4af37]/20 to-transparent rounded-3xl blur-xl opacity-50"></div>
-                <div class="relative rounded-2xl overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                         alt="The Inkwell" 
-                         class="w-full h-64 md:h-80 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-10 h-10 rounded-full bg-[#d4af37] flex items-center justify-center">
-                                <i class="fas fa-pen-nib text-black"></i>
-                            </div>
-                            <div>
-                                <p class="font-semibold">Words flow where wisdom grows</p>
-                                <p class="text-sm text-gray-300">- P. Paul</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a href="#featured" class="inline-flex items-center text-[#D4AF37] font-bold text-lg group">
+                Start Reading
+                <i class="fas fa-arrow-down ml-2 group-hover:translate-y-1 transition-transform"></i>
+            </a>
+        </div>
+        
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 border border-[#D4AF37] rounded-full"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-48 h-48 border border-[#D4AF37] rounded-full"></div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 md:px-10 pb-32">
-        <div class="grid lg:grid-cols-4 gap-12">
-            <!-- Sidebar / Table of Contents -->
-            <div class="lg:col-span-1">
-                <div class="toc-container hidden lg:block">
-                    <h3 class="font-bold text-lg mb-4 text-[#d4af37]">In This Collection</h3>
-                    <div class="space-y-3" id="toc-list">
-                        <!-- Table of contents will be dynamically generated -->
-                        <div class="text-gray-400 text-sm">Writings will appear here</div>
-                    </div>
-                    
-                    <div class="mt-8 pt-6 border-t border-gray-800">
-                        <h4 class="font-bold text-sm mb-3 uppercase tracking-wider text-gray-400">Categories</h4>
-                        <div class="space-y-2">
-                            <button class="category-filter text-left w-full px-3 py-2 rounded hover:bg-gray-800/50 transition-colors text-sm" data-category="all">
-                                <span class="flex items-center justify-between">
-                                    <span>All Writings</span>
-                                    <span class="text-gray-500 text-xs" id="count-all">0</span>
-                                </span>
-                            </button>
-                            <button class="category-filter text-left w-full px-3 py-2 rounded hover:bg-gray-800/50 transition-colors text-sm" data-category="poetry">
-                                <span class="flex items-center justify-between">
-                                    <span>Poetry</span>
-                                    <span class="text-gray-500 text-xs" id="count-poetry">0</span>
-                                </span>
-                            </button>
-                            <button class="category-filter text-left w-full px-3 py-2 rounded hover:bg-gray-800/50 transition-colors text-sm" data-category="reflections">
-                                <span class="flex items-center justify-between">
-                                    <span>Reflections</span>
-                                    <span class="text-gray-500 text-xs" id="count-reflections">0</span>
-                                </span>
-                            </button>
-                            <button class="category-filter text-left w-full px-3 py-2 rounded hover:bg-gray-800/50 transition-colors text-sm" data-category="speaking">
-                                <span class="flex items-center justify-between">
-                                    <span>Speaking Insights</span>
-                                    <span class="text-gray-500 text-xs" id="count-speaking">0</span>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8 pt-6 border-t border-gray-800">
-                        <h4 class="font-bold text-sm mb-3 uppercase tracking-wider text-gray-400">Subscribe</h4>
-                        <p class="text-gray-400 text-sm mb-4">Get notified when new writings are published.</p>
-                        <div class="flex">
-                            <input type="email" placeholder="Your email" class="flex-grow bg-gray-900 border border-gray-700 rounded-l-lg px-4 py-2 text-sm focus:outline-none focus:border-[#d4af37]">
-                            <button class="bg-gradient-to-r from-[#d4af37] to-[#f0c674] text-black px-4 py-2 rounded-r-lg text-sm font-medium hover:opacity-90 transition-opacity">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </div>
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <!-- Featured Posts Section -->
+        <section id="featured" class="mb-20 fade-in">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold">Featured <span class="text-[#D4AF37]">Articles</span></h2>
+                <div class="flex items-center space-x-2">
+                    <button id="sort-newest" class="text-sm px-4 py-2 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] font-medium">
+                        Newest First
+                    </button>
+                    <button id="sort-popular" class="text-sm px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                        Most Read
+                    </button>
                 </div>
             </div>
             
-            <!-- Blog Posts -->
-            <div class="lg:col-span-3">
-                <div id="blog-container" class="space-y-16">
-                    <!-- Blog posts will be dynamically inserted here -->
+            <!-- Featured Posts Grid -->
+            <div id="featured-posts" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Featured posts will be loaded here -->
+            </div>
+        </section>
+
+        <!-- All Articles Section -->
+        <section class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12">All <span class="text-[#D4AF37]">Articles</span></h2>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Articles Column -->
+                <div class="lg:col-span-2">
+                    <div id="blog-container" class="space-y-16">
+                        <!-- Blog posts will be loaded here -->
+                    </div>
+                    
+                    <!-- Loading State -->
+                    <div id="loading-state" class="hidden text-center py-12">
+                        <div class="loading-pulse space-y-8 max-w-2xl mx-auto">
+                            <div class="h-64 bg-white/5 rounded-3xl"></div>
+                            <div class="h-64 bg-white/5 rounded-3xl"></div>
+                        </div>
+                    </div>
                     
                     <!-- Empty State -->
-                    <div id="empty-state" class="empty-state hidden">
-                        <div class="w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-[#d4af37]/10 to-transparent flex items-center justify-center">
-                            <svg class="w-12 h-12 text-[#d4af37]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
+                    <div id="empty-state" class="hidden text-center py-20">
+                        <div class="max-w-md mx-auto">
+                            <i class="fas fa-feather-alt text-6xl text-gray-600 mb-6"></i>
+                            <h3 class="text-2xl font-bold mb-4">Coming Soon</h3>
+                            <p class="text-gray-400 mb-8">
+                                New articles are being crafted. Subscribe to be the first to know when new content is published.
+                            </p>
+                            <a href="#subscribe" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full">
+                                <i class="fas fa-bell mr-2"></i> Get Notified
+                            </a>
                         </div>
-                        <h3 class="text-xl font-semibold mb-3">The Inkwell is Empty</h3>
-                        <p class="text-gray-400 max-w-md mb-6">No writings have been added yet. Check back soon for transformative insights and poetry.</p>
-                        <a href="index.html" class="px-6 py-3 bg-gradient-to-r from-[#d4af37] to-[#f0c674] text-black font-semibold rounded-full hover:shadow-lg transition-all duration-300">
-                            Return to Home
-                        </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Newsletter Section -->
-    <section class="py-20 px-6 md:px-10 bg-gradient-to-b from-transparent to-[#0a0a0a]">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-block p-1 rounded-2xl bg-gradient-to-r from-[#d4af37] to-[#f0c674] mb-8">
-                <div class="bg-[#0c0c0c] rounded-xl p-8 md:p-12">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-transparent flex items-center justify-center">
-                        <i class="fas fa-feather-alt text-2xl text-[#d4af37]"></i>
-                    </div>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Stay Connected with The Inkwell</h2>
-                    <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
-                        Subscribe to receive new writings, poetic insights, and reflections directly in your inbox. Join a community of thoughtful readers.
-                    </p>
-                    <div class="max-w-md mx-auto">
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <input type="email" placeholder="Enter your email address" class="flex-grow bg-gray-900 border border-gray-700 rounded-lg px-6 py-3 text-sm focus:outline-none focus:border-[#d4af37]">
-                            <button class="px-8 py-3 bg-gradient-to-r from-[#d4af37] to-[#f0c674] text-black font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300">
-                                Subscribe
-                            </button>
-                        </div>
-                        <p class="text-gray-500 text-xs mt-4">No spam. Unsubscribe at any time.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 px-6 md:px-10 border-t border-gray-900">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f0c674] flex items-center justify-center">
-                            <span class="font-bold text-black text-lg">P</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold">THE INKWELL</h3>
-                            <p class="text-xs text-gray-500">by P. Paul The Great</p>
-                        </div>
+                    
+                    <!-- Load More Button -->
+                    <div id="load-more-container" class="hidden text-center mt-12">
+                        <button id="load-more" class="px-8 py-3 gold-border rounded-full font-bold hover:bg-[#D4AF37]/10 transition-all">
+                            Load More Articles
+                        </button>
                     </div>
                 </div>
                 
-                <div class="flex space-x-8">
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-[#d4af37]" id="total-posts">0</div>
-                        <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Writings</div>
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- About Author -->
+                    <div class="gold-border rounded-3xl p-6 mb-8">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center">
+                                <span class="font-black text-black text-xl">P</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">P. Paul (The Great)</h4>
+                                <p class="text-sm text-gray-400">Poet & Humanitarian</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-6">
+                            Speaking the language of peace, healing, and human transformation through poetry and spoken word.
+                        </p>
+                        <a href="about.html" class="inline-flex items-center text-[#D4AF37] font-medium text-sm">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-[#d4af37]" id="total-words">0</div>
-                        <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Words Shared</div>
+                    
+                    <!-- Categories -->
+                    <div class="gold-border rounded-3xl p-6 mb-8">
+                        <h4 class="font-bold text-lg mb-6">Categories</h4>
+                        <div class="space-y-3">
+                            <a href="#" class="flex items-center justify-between text-gray-300 hover:text-[#D4AF37] transition-colors">
+                                <span>Poetry & Spoken Word</span>
+                                <span class="text-sm text-gray-500">12</span>
+                            </a>
+                            <a href="#" class="flex items-center justify-between text-gray-300 hover:text-[#D4AF37] transition-colors">
+                                <span>Youth Development</span>
+                                <span class="text-sm text-gray-500">8</span>
+                            </a>
+                            <a href="#" class="flex items-center justify-between text-gray-300 hover:text-[#D4AF37] transition-colors">
+                                <span>Creative Process</span>
+                                <span class="text-sm text-gray-500">6</span>
+                            </a>
+                            <a href="#" class="flex items-center justify-between text-gray-300 hover:text-[#D4AF37] transition-colors">
+                                <span>Social Impact</span>
+                                <span class="text-sm text-gray-500">4</span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-[#d4af37]">∞</div>
-                        <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Insights</div>
+                    
+                    <!-- Newsletter -->
+                    <div class="gold-border rounded-3xl p-6">
+                        <h4 class="font-bold text-lg mb-4">Join the Journey</h4>
+                        <p class="text-sm text-gray-300 mb-6">
+                            Get exclusive content, early access to new articles, and invitations to virtual events.
+                        </p>
+                        <form id="subscribe-form" class="space-y-3">
+                            <input type="email" 
+                                   placeholder="Your email address" 
+                                   class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[#D4AF37] focus:outline-none">
+                            <button type="submit" 
+                                    class="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-xl hover:shadow-lg transition-all">
+                                Subscribe Now
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Subscribe Section -->
+        <section id="subscribe" class="mb-20">
+            <div class="gold-border rounded-3xl p-8 md:p-12 text-center">
+                <div class="max-w-2xl mx-auto">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] text-sm font-medium mb-6">
+                        <i class="fas fa-gem mr-2"></i> Premium Content
+                    </div>
+                    
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        Never Miss an <span class="text-[#D4AF37]">Insight</span>
+                    </h2>
+                    
+                    <p class="text-xl text-gray-300 mb-8">
+                        Join 1,000+ readers who receive exclusive poetry, behind-the-scenes content, 
+                        and invitations to live spoken word sessions.
+                    </p>
+                    
+                    <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+                        <input type="email" 
+                               placeholder="Enter your email" 
+                               class="flex-1 px-6 py-4 rounded-full bg-white/5 border border-white/10 focus:border-[#D4AF37] focus:outline-none">
+                        <button type="submit" 
+                                class="px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full hover:shadow-xl hover:scale-105 transition-all">
+                            Subscribe
+                        </button>
+                    </form>
+                    
+                    <p class="text-sm text-gray-500 mt-6">
+                        No spam. Unsubscribe anytime.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center">
+                            <span class="font-black text-black">P</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">The Inkwell</h3>
+                            <p class="text-xs text-gray-500">by P. Paul</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-400">
+                        A space for transformative words and impactful stories.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">About</a></li>
+                        <li><a href="portfolio.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Portfolio</a></li>
+                        <li><a href="inquiry.html" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Poetry</a></li>
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Youth Empowerment</a></li>
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Creative Writing</a></li>
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors">Social Impact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.instagram.com/p.paulthegreat" target="_blank" 
+                           class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291" target="_blank"
+                           class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@p.paulthegreat" target="_blank"
+                           class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="mailto:contact@ppaulthegreat.com"
+                           class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-400">
+                        Available for speaking engagements
+                    </p>
+                </div>
+            </div>
             
-            <div class="mt-8 pt-8 border-t border-gray-900 text-center">
+            <div class="pt-8 border-t border-white/10 text-center">
                 <p class="text-sm text-gray-500">
-                    © 2024 The Inkwell by P. Paul (The Great). All writings reflect personal insights and transformative perspectives. 
-                    <span class="block mt-1">"Words have power. Use them wisely." - P. Paul</span>
+                    © 2026 The Inkwell by P. Paul (The Great). All rights reserved.
+                </p>
+                <p class="text-xs text-gray-600 mt-2">
+                    "Words have power. Use them wisely."
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <div class="back-to-top" id="back-to-top">
-        <i class="fas fa-chevron-up"></i>
+    <!-- Share Modal -->
+    <div id="shareModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm">
+        <div class="min-h-screen flex items-center justify-center p-6">
+            <div class="gold-border rounded-3xl p-8 max-w-md w-full">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="text-xl font-bold">Share This Article</h3>
+                    <button id="closeShareModal" class="text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-4 gap-4 mb-8">
+                    <button data-platform="whatsapp" class="share-btn bg-green-500/10 text-green-400 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <i class="fab fa-whatsapp text-2xl mb-2"></i>
+                        <span class="text-xs">WhatsApp</span>
+                    </button>
+                    
+                    <button data-platform="facebook" class="share-btn bg-blue-500/10 text-blue-400 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <i class="fab fa-facebook text-2xl mb-2"></i>
+                        <span class="text-xs">Facebook</span>
+                    </button>
+                    
+                    <button data-platform="twitter" class="share-btn bg-blue-400/10 text-blue-300 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <i class="fab fa-twitter text-2xl mb-2"></i>
+                        <span class="text-xs">Twitter</span>
+                    </button>
+                    
+                    <button data-platform="linkedin" class="share-btn bg-blue-600/10 text-blue-500 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <i class="fab fa-linkedin text-2xl mb-2"></i>
+                        <span class="text-xs">LinkedIn</span>
+                    </button>
+                    
+                    <button data-platform="telegram" class="share-btn bg-blue-300/10 text-blue-200 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <i class="fab fa-telegram text-2xl mb-2"></i>
+                        <span class="text-xs">Telegram</span>
+                    </button>
+                    
+                    <button data-platform="email" class="share-btn bg-gray-500/10 text-gray-300 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <i class="fas fa-envelope text-2xl mb-2"></i>
+                        <span class="text-xs">Email</span>
+                    </button>
+                    
+                    <button data-platform="copy" class="share-btn bg-purple-500/10 text-purple-400 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <i class="fas fa-copy text-2xl mb-2"></i>
+                        <span class="text-xs">Copy Link</span>
+                    </button>
+                    
+                    <button data-platform="more" class="share-btn bg-[#D4AF37]/10 text-[#D4AF37] p-4 rounded-xl flex flex-col items-center justify-center">
+                        <i class="fas fa-ellipsis-h text-2xl mb-2"></i>
+                        <span class="text-xs">More</span>
+                    </button>
+                </div>
+                
+                <div class="p-4 bg-white/5 rounded-xl">
+                    <p class="text-sm text-gray-400 mb-2">Share via URL</p>
+                    <div class="flex">
+                        <input id="share-url" 
+                               type="text" 
+                               readonly 
+                               class="flex-1 px-4 py-2 rounded-l-xl bg-white/5 border border-white/10 text-sm truncate">
+                        <button id="copy-url" 
+                                class="px-4 py-2 bg-[#D4AF37] text-black rounded-r-xl font-medium">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
+        // Configuration
+        const BLOG_CONFIG = {
+            postsPerPage: 3,
+            featuredCount: 3,
+            sortOrder: 'newest' // 'newest' or 'oldest'
+        };
+
+        // State
+        let currentPostId = null;
+        let allPosts = [];
+        let displayedPosts = 0;
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            const blogContainer = document.getElementById('blog-container');
-            const emptyState = document.getElementById('empty-state');
-            const tocList = document.getElementById('toc-list');
-            const readingProgress = document.getElementById('reading-progress');
-            const backToTop = document.getElementById('back-to-top');
-            const categoryFilters = document.querySelectorAll('.category-filter');
-            const postCountElement = document.getElementById('post-count');
-            const totalPostsElement = document.getElementById('total-posts');
-            const totalWordsElement = document.getElementById('total-words');
-            const categoryCounts = {
-                'all': document.getElementById('count-all'),
-                'poetry': document.getElementById('count-poetry'),
-                'reflections': document.getElementById('count-reflections'),
-                'speaking': document.getElementById('count-speaking')
-            };
-            
-            let blogData = [];
-            let activeCategory = 'all';
-            
-            // Try to get blog data from localStorage
-            try {
-                blogData = JSON.parse(localStorage.getItem('blog') || "[]");
-            } catch (e) {
-                console.error("Error loading blog data:", e);
-                blogData = [];
-            }
-            
-            // Calculate word counts and category counts
-            function calculateStats() {
-                const totalPosts = blogData.length;
-                let totalWords = 0;
-                const categoryCount = {
-                    'all': totalPosts,
-                    'poetry': 0,
-                    'reflections': 0,
-                    'speaking': 0
-                };
-                
-                blogData.forEach(post => {
-                    // Count words in content
-                    if (post.content) {
-                        totalWords += post.content.split(/\s+/).length;
-                    }
-                    
-                    // Count categories
-                    const category = post.category || 'reflections';
-                    if (categoryCount[category] !== undefined) {
-                        categoryCount[category] += 1;
-                    }
+            // Mobile Navigation
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileNav = document.getElementById('mobileNav');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileNav.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMobileMenu.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close mobile menu when clicking links
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 });
-                
-                // Update UI
-                postCountElement.textContent = `${totalPosts} ${totalPosts === 1 ? 'Writing' : 'Writings'}`;
-                totalPostsElement.textContent = totalPosts;
-                totalWordsElement.textContent = totalWords.toLocaleString();
-                
-                // Update category counts
-                Object.keys(categoryCounts).forEach(key => {
-                    if (categoryCounts[key]) {
-                        categoryCounts[key].textContent = categoryCount[key] || 0;
-                    }
-                });
-                
-                return { totalPosts, totalWords, categoryCount };
-            }
-            
-            // If no blog data, show empty state
-            if (blogData.length === 0) {
-                emptyState.classList.remove('hidden');
-                blogContainer.classList.add('hidden');
-            } else {
-                // Calculate and display stats
-                calculateStats();
-                
-                // Render blog items
-                renderBlogPosts(blogData);
-                
-                // Generate table of contents
-                generateTOC(blogData);
-                
-                // Add event listeners to category filters
-                categoryFilters.forEach(button => {
-                    button.addEventListener('click', () => {
-                        // Update active category
-                        categoryFilters.forEach(btn => btn.classList.remove('bg-gray-800', 'text-[#d4af37]'));
-                        button.classList.add('bg-gray-800', 'text-[#d4af37]');
-                        activeCategory = button.dataset.category;
-                        
-                        // Filter and render items
-                        const filteredItems = activeCategory === 'all' 
-                            ? blogData 
-                            : blogData.filter(item => (item.category || 'reflections') === activeCategory);
-                        
-                        renderBlogPosts(filteredItems);
-                    });
-                });
-            }
-            
-            function renderBlogPosts(posts) {
-                if (posts.length === 0) {
-                    blogContainer.innerHTML = `
-                        <div class="empty-state">
-                            <div class="w-20 h-20 mb-4 rounded-full bg-gradient-to-br from-[#d4af37]/10 to-transparent flex items-center justify-center">
-                                <svg class="w-10 h-10 text-[#d4af37]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-semibold mb-2">No Writings in this Category</h3>
-                            <p class="text-gray-400 text-sm">Try selecting a different category or view all writings.</p>
-                        </div>
-                    `;
-                    return;
+            });
+
+            // Load blog posts
+            loadBlogPosts();
+
+            // Sorting
+            document.getElementById('sort-newest').addEventListener('click', () => {
+                BLOG_CONFIG.sortOrder = 'newest';
+                document.getElementById('sort-newest').classList.add('bg-[#D4AF37]/10', 'text-[#D4AF37]');
+                document.getElementById('sort-popular').classList.remove('bg-[#D4AF37]/10', 'text-[#D4AF37]');
+                renderBlogPosts();
+            });
+
+            document.getElementById('sort-popular').addEventListener('click', () => {
+                BLOG_CONFIG.sortOrder = 'popular';
+                document.getElementById('sort-popular').classList.add('bg-[#D4AF37]/10', 'text-[#D4AF37]');
+                document.getElementById('sort-newest').classList.remove('bg-[#D4AF37]/10', 'text-[#D4AF37]');
+                renderBlogPosts();
+            });
+
+            // Load More
+            document.getElementById('load-more').addEventListener('click', loadMorePosts);
+
+            // Share Modal
+            const shareModal = document.getElementById('shareModal');
+            const closeShareModal = document.getElementById('closeShareModal');
+            const copyUrlBtn = document.getElementById('copy-url');
+            const shareUrlInput = document.getElementById('share-url');
+
+            closeShareModal.addEventListener('click', () => {
+                shareModal.classList.add('hidden');
+            });
+
+            shareModal.addEventListener('click', (e) => {
+                if (e.target === shareModal) {
+                    shareModal.classList.add('hidden');
                 }
+            });
+
+            copyUrlBtn.addEventListener('click', () => {
+                shareUrlInput.select();
+                document.execCommand('copy');
                 
-                blogContainer.innerHTML = posts.map(post => {
-                    // Determine category and color
-                    const category = post.category || 'reflections';
-                    let categoryText = 'Reflection';
-                    let categoryColor = 'bg-blue-500/20 text-blue-400';
-                    
-                    if (category === 'poetry') {
-                        categoryText = 'Poetry';
-                        categoryColor = 'bg-purple-500/20 text-purple-400';
-                    } else if (category === 'speaking') {
-                        categoryText = 'Speaking Insight';
-                        categoryColor = 'bg-amber-500/20 text-amber-400';
-                    }
-                    
-                    // Format date
-                    const date = post.date || 'Recently';
-                    
-                    // Truncate content for preview
-                    const maxLength = 200;
-                    const previewContent = post.content.length > maxLength 
-                        ? post.content.substring(0, maxLength) + '...' 
-                        : post.content;
-                    
-                    // Estimate reading time (assuming 200 words per minute)
-                    const wordCount = post.content.split(/\s+/).length;
-                    const readingTime = Math.max(1, Math.ceil(wordCount / 200));
-                    
-                    return `
-                        <article class="blog-post p-6 md:p-8">
-                            <div class="relative overflow-hidden rounded-xl mb-6">
-                                <img src="${post.image || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" 
-                                     alt="${post.title}" 
-                                     class="blog-image">
-                                <div class="image-overlay"></div>
-                                <div class="absolute top-4 right-4 z-10">
-                                    <span class="text-xs px-3 py-1 rounded-full ${categoryColor} font-medium">
-                                        ${categoryText}
-                                    </span>
-                                </div>
-                            </div>
-                            
-                            <div class="flex flex-wrap items-center gap-4 mb-4">
-                                <div class="author-badge">
-                                    <div class="w-6 h-6 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f0c674]"></div>
-                                    <span class="text-sm font-medium">PPaul The Great</span>
-                                </div>
-                                <span class="text-gray-500">•</span>
-                                <span class="text-gray-400 text-sm">${date}</span>
-                                <span class="text-gray-500">•</span>
-                                <span class="text-gray-400 text-sm">${readingTime} min read</span>
-                            </div>
-                            
-                            <h2 class="text-2xl md:text-3xl font-bold mb-4 reading-font">${post.title}</h2>
-                            
-                            <div class="article-content text-gray-300 mb-6">
-                                <p>${previewContent}</p>
-                            </div>
-                            
-                            <div class="flex items-center justify-between pt-6 border-t border-gray-800">
-                                <button class="text-sm font-semibold text-[#d4af37] hover:text-[#f0c674] transition-colors flex items-center read-more-btn" data-id="${post.id || ''}">
-                                    Continue Reading
-                                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                                </button>
-                                
-                                <div class="flex items-center space-x-2">
-                                    <span class="text-xs text-gray-500 font-medium uppercase tracking-wider">Share:</span>
-                                    <button onclick="share('wa', '${post.title.replace(/'/g, "\\'")}')" class="share-btn bg-green-500/10 text-green-400">
-                                        <i class="fab fa-whatsapp"></i>
-                                        <span class="hidden sm:inline">WhatsApp</span>
-                                    </button>
-                                    <button onclick="share('fb', '${post.title.replace(/'/g, "\\'")}')" class="share-btn bg-blue-500/10 text-blue-400">
-                                        <i class="fab fa-facebook"></i>
-                                        <span class="hidden sm:inline">Facebook</span>
-                                    </button>
-                                    <button onclick="share('li', '${post.title.replace(/'/g, "\\'")}')" class="share-btn bg-blue-300/10 text-blue-300">
-                                        <i class="fab fa-linkedin"></i>
-                                        <span class="hidden sm:inline">LinkedIn</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-                    `;
-                }).join('');
+                // Show feedback
+                const originalText = copyUrlBtn.textContent;
+                copyUrlBtn.textContent = 'Copied!';
+                copyUrlBtn.classList.add('bg-green-500');
                 
-                // Add click events to "Continue Reading" buttons
-                document.querySelectorAll('.read-more-btn').forEach(button => {
-                    button.addEventListener('click', function() {
-                        // In a real application, this would open a full article view or modal
-                        alert('In a complete implementation, this would open the full article for reading.');
-                    });
-                });
-            }
-            
-            function generateTOC(posts) {
-                if (posts.length === 0) {
-                    tocList.innerHTML = '<div class="text-gray-400 text-sm">No writings yet</div>';
-                    return;
-                }
-                
-                // Limit TOC to first 5 posts
-                const recentPosts = posts.slice(0, 5);
-                
-                tocList.innerHTML = recentPosts.map((post, index) => `
-                    <a href="#" class="block py-2 px-3 rounded hover:bg-gray-800/50 transition-colors group" data-index="${index}">
-                        <div class="flex items-start">
-                            <span class="text-xs text-gray-500 font-mono mr-3">${String(index + 1).padStart(2, '0')}</span>
-                            <span class="text-sm text-gray-300 group-hover:text-[#d4af37] transition-colors truncate">${post.title}</span>
-                        </div>
-                    </a>
-                `).join('');
-                
-                // Add click events to TOC items
-                tocList.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const index = parseInt(this.dataset.index);
-                        const postElement = document.querySelectorAll('.blog-post')[index];
-                        if (postElement) {
-                            postElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    copyUrlBtn.textContent = originalText;
+                    copyUrlBtn.classList.remove('bg-green-500');
+                }, 2000);
+            });
+
+            // Share buttons in modal
+            document.querySelectorAll('.share-btn[data-platform]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const platform = e.currentTarget.dataset.platform;
+                    if (platform === 'more') {
+                        // Native share if available
+                        if (navigator.share) {
+                            navigator.share({
+                                title: document.title,
+                                url: shareUrlInput.value
+                            });
                         }
-                    });
-                });
-            }
-            
-            // Share function
-            window.share = function(platform, title) {
-                const url = window.location.href;
-                const text = `PPaul the Great shared a new insight: "${title}"\n\nRead here:`;
-                
-                let link = "";
-                if(platform === 'wa') link = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}%20${url}`;
-                if(platform === 'fb') link = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-                if(platform === 'li') link = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-                
-                window.open(link, '_blank');
-            };
-            
-            // Reading progress indicator
-            window.addEventListener('scroll', () => {
-                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (window.scrollY / windowHeight) * 100;
-                readingProgress.style.transform = `scaleX(${scrolled / 100})`;
-                
-                // Show/hide back to top button
-                if (window.scrollY > 500) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            });
-            
-            // Back to top functionality
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            
-            // Add loading animation for images
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                img.addEventListener('load', function() {
-                    this.classList.remove('shimmer-effect');
-                });
-                
-                // Add shimmer effect while loading
-                if (!img.complete) {
-                    img.classList.add('shimmer-effect');
-                }
-            });
-            
-            // Subscribe form handler
-            const subscribeButtons = document.querySelectorAll('button:contains("Subscribe")');
-            subscribeButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const emailInput = this.closest('.flex').querySelector('input[type="email"]');
-                    if (emailInput && emailInput.value) {
-                        alert('Thank you for subscribing to The Inkwell! You\'ll receive updates on new writings.');
-                        emailInput.value = '';
                     } else {
-                        alert('Please enter your email address.');
+                        shareArticle(platform, currentPostId);
                     }
                 });
             });
+
+            // Subscribe Form
+            document.getElementById('subscribe-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = e.target.querySelector('input[type="email"]').value;
+                
+                // In a real app, you would send this to your server
+                localStorage.setItem('subscribed_email', email);
+                
+                // Show success message
+                alert('Thank you for subscribing! You\'ll receive updates soon.');
+                e.target.reset();
+            });
+
+            // Newsletter form in hero
+            const newsletterForm = document.querySelector('form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = e.target.querySelector('input[type="email"]').value;
+                    
+                    // In a real app, you would send this to your server
+                    localStorage.setItem('newsletter_email', email);
+                    
+                    // Show success message
+                    alert('Thank you for joining The Inkwell community!');
+                    e.target.reset();
+                });
+            }
+        });
+
+        // Load Blog Posts
+        function loadBlogPosts() {
+            const loadingState = document.getElementById('loading-state');
+            const emptyState = document.getElementById('empty-state');
+            const blogContainer = document.getElementById('blog-container');
+            
+            // Show loading
+            loadingState.classList.remove('hidden');
+            blogContainer.innerHTML = '';
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                // Load from localStorage
+                const storedPosts = JSON.parse(localStorage.getItem('ppaul_blog') || '[]');
+                
+                // Filter only published posts
+                allPosts = storedPosts.filter(post => post.published !== false);
+                
+                // Update count
+                document.getElementById('total-posts').textContent = `${allPosts.length} ${allPosts.length === 1 ? 'Article' : 'Articles'}`;
+                
+                // Hide loading
+                loadingState.classList.add('hidden');
+                
+                if (allPosts.length === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    renderBlogPosts();
+                }
+            }, 800);
+        }
+
+        // Render Blog Posts
+        function renderBlogPosts() {
+            const blogContainer = document.getElementById('blog-container');
+            const featuredContainer = document.getElementById('featured-posts');
+            const loadMoreContainer = document.getElementById('load-more-container');
+            
+            // Sort posts
+            let sortedPosts = [...allPosts];
+            if (BLOG_CONFIG.sortOrder === 'newest') {
+                sortedPosts.sort((a, b) => b.id - a.id);
+            } else if (BLOG_CONFIG.sortOrder === 'popular') {
+                // For now, sort by date (you can add view counts later)
+                sortedPosts.sort((a, b) => b.id - a.id);
+            }
+            
+            // Reset displayed count
+            displayedPosts = Math.min(BLOG_CONFIG.postsPerPage, sortedPosts.length);
+            
+            // Render featured posts (first 3)
+            const featuredPosts = sortedPosts.slice(0, BLOG_CONFIG.featuredCount);
+            featuredContainer.innerHTML = featuredPosts.map((post, index) => `
+                <div class="gold-border rounded-3xl overflow-hidden gold-hover fade-in stagger-delay-${index}">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="${post.image || 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/placeholder.jpg'}" 
+                             alt="${post.title}"
+                             class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-[#D4AF37] text-black text-xs font-bold rounded-full">
+                                Featured
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-400 mb-4">
+                            <span>${post.date || 'Recent'}</span>
+                            <span class="read-time ml-3">${calculateReadTime(post.content)} min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 line-clamp-2">${post.title}</h3>
+                        <p class="text-gray-300 text-sm mb-6 line-clamp-3">${post.content.substring(0, 150)}...</p>
+                        <div class="flex items-center justify-between">
+                            <a href="#post-${post.id}" 
+                               onclick="scrollToPost(${post.id})"
+                               class="text-[#D4AF37] font-medium text-sm hover:underline">
+                                Read Full Article
+                            </a>
+                            <button onclick="openShareModal(${post.id})" 
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                                <i class="fas fa-share-alt text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Render main posts
+            blogContainer.innerHTML = '';
+            const postsToShow = sortedPosts.slice(0, displayedPosts);
+            
+            postsToShow.forEach((post, index) => {
+                const postElement = createPostElement(post, index);
+                blogContainer.appendChild(postElement);
+            });
+            
+            // Show/Hide load more button
+            if (sortedPosts.length > displayedPosts) {
+                loadMoreContainer.classList.remove('hidden');
+            } else {
+                loadMoreContainer.classList.add('hidden');
+            }
+        }
+
+        // Create Post Element
+        function createPostElement(post, index) {
+            const div = document.createElement('div');
+            div.id = `post-${post.id}`;
+            div.className = `blog-post pb-16 fade-in stagger-delay-${index % 3}`;
+            
+            div.innerHTML = `
+                <div class="mb-10">
+                    <div class="flex items-center gap-6 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center mr-3">
+                                <span class="font-black text-black text-sm">P</span>
+                            </div>
+                            <div>
+                                <span class="text-[#D4AF37] text-sm font-bold uppercase tracking-wider">P. Paul The Great</span>
+                                <div class="flex items-center text-xs text-gray-600 mt-1">
+                                    <span>${post.date || 'Recent'}</span>
+                                    <span class="read-time ml-3">${calculateReadTime(post.content)} min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${post.image ? `
+                        <img src="${post.image}" 
+                             alt="${post.title}"
+                             class="w-full h-[400px] object-cover rounded-[2rem] mb-10 shadow-2xl gold-hover">
+                    ` : ''}
+                    
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8 leading-tight">${post.title}</h2>
+                    
+                    <div class="article-body text-gray-300 mb-10">
+                        ${formatContent(post.content)}
+                    </div>
+                </div>
+                
+                <div class="border-t border-white/10 pt-8">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <span class="text-sm font-bold uppercase text-gray-500">Share This Story:</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="shareArticle('whatsapp', ${post.id})" 
+                                    class="share-btn w-12 h-12 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                            <button onclick="shareArticle('facebook', ${post.id})" 
+                                    class="share-btn w-12 h-12 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button onclick="shareArticle('twitter', ${post.id})" 
+                                    class="share-btn w-12 h-12 rounded-full bg-blue-400/10 text-blue-300 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button onclick="shareArticle('linkedin', ${post.id})" 
+                                    class="share-btn w-12 h-12 rounded-full bg-blue-600/10 text-blue-500 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
+                                <i class="fab fa-linkedin-in"></i>
+                            </button>
+                            <button onclick="openShareModal(${post.id})" 
+                                    class="share-btn w-12 h-12 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-white/5">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Poetry</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Inspiration</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Creative Writing</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // Load More Posts
+        function loadMorePosts() {
+            const sortedPosts = [...allPosts].sort((a, b) => b.id - a.id);
+            const blogContainer = document.getElementById('blog-container');
+            const loadMoreContainer = document.getElementById('load-more-container');
+            
+            const nextPosts = sortedPosts.slice(displayedPosts, displayedPosts + BLOG_CONFIG.postsPerPage);
+            
+            nextPosts.forEach((post, index) => {
+                const postElement = createPostElement(post, (displayedPosts + index) % 3);
+                blogContainer.appendChild(postElement);
+            });
+            
+            displayedPosts += nextPosts.length;
+            
+            if (displayedPosts >= sortedPosts.length) {
+                loadMoreContainer.classList.add('hidden');
+            }
+        }
+
+        // Calculate Read Time
+        function calculateReadTime(content) {
+            const wordsPerMinute = 200;
+            const words = content.trim().split(/\s+/).length;
+            return Math.ceil(words / wordsPerMinute);
+        }
+
+        // Format Content (add paragraphs, etc.)
+        function formatContent(content) {
+            // Split by double newlines for paragraphs
+            const paragraphs = content.split('\n\n').filter(p => p.trim());
+            
+            return paragraphs.map(paragraph => {
+                // Check if it's a heading
+                if (paragraph.length < 100 && !paragraph.includes('. ')) {
+                    return `<h3 class="text-2xl font-serif font-bold my-8 text-[#D4AF37]">${paragraph}</h3>`;
+                }
+                return `<p>${paragraph}</p>`;
+            }).join('');
+        }
+
+        // Scroll to Post
+        function scrollToPost(postId) {
+            const element = document.getElementById(`post-${postId}`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Add highlight effect
+                element.classList.add('bg-[#D4AF37]/5');
+                setTimeout(() => {
+                    element.classList.remove('bg-[#D4AF37]/5');
+                }, 2000);
+            }
+        }
+
+        // Share Article
+        function shareArticle(platform, postId) {
+            const post = allPosts.find(p => p.id === postId);
+            if (!post) return;
+            
+            const url = `${window.location.origin}${window.location.pathname}#post-${postId}`;
+            const text = `Check out "${post.title}" by P. Paul (The Great)\n\n`;
+            
+            let shareUrl = '';
+            
+            switch(platform) {
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + url)}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(text + url)}`;
+                    break;
+                case 'copy':
+                    navigator.clipboard.writeText(url).then(() => {
+                        showNotification('Link copied to clipboard!', 'success');
+                    });
+                    return;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        }
+
+        // Open Share Modal
+        function openShareModal(postId) {
+            currentPostId = postId;
+            const post = allPosts.find(p => p.id === postId);
+            const shareModal = document.getElementById('shareModal');
+            const shareUrlInput = document.getElementById('share-url');
+            
+            if (post) {
+                const url = `${window.location.origin}${window.location.pathname}#post-${postId}`;
+                shareUrlInput.value = url;
+                shareModal.classList.remove('hidden');
+            }
+        }
+
+        // Show Notification
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-xl shadow-lg ${
+                type === 'success' ? 'bg-green-500/90' : 'bg-[#D4AF37]/90'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Check URL hash on load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const postId = parseInt(hash.replace('#post-', ''));
+                if (postId) {
+                    // Wait for posts to load
+                    setTimeout(() => scrollToPost(postId), 1000);
+                }
+            }
         });
     </script>
 </body>
-                            </html>
+    </html>
