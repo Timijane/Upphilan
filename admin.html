@@ -722,10 +722,11 @@
     </div>
 
     <script>
-        // Configuration - UPDATED CREDENTIALS with correct cloud name
+        // Configuration with API Key
         const CONFIG = {
-            cloudName: 'pelumi', // Changed from 'djaucqaxs' to your cloud name 'pelumi'
+            cloudName: 'pelumi',
             uploadPreset: 'ppaul_content',
+            apiKey: '373491645218131',
             adminUsername: 'websiteppaul.com',
             adminPassword: 'ppaul'
         };
@@ -741,11 +742,12 @@
             }
         };
 
-        // Initialize Cloudinary Widget
+        // Initialize Cloudinary Widget with API Key
         function initCloudinaryWidget() {
             const uploadWidget = cloudinary.createUploadWidget({
                 cloudName: CONFIG.cloudName,
                 uploadPreset: CONFIG.uploadPreset,
+                apiKey: CONFIG.apiKey,
                 sources: ['local', 'url', 'camera'],
                 multiple: false,
                 maxFileSize: 5000000, // 5MB
@@ -810,8 +812,21 @@
             });
         }
 
+        // Check Cloudinary Configuration
+        function checkCloudinaryConfig() {
+            if (!CONFIG.cloudName || !CONFIG.apiKey || !CONFIG.uploadPreset) {
+                console.warn('Cloudinary configuration incomplete. Image uploads may not work.');
+                showToast('Image upload service not fully configured', 'warning');
+                return false;
+            }
+            return true;
+        }
+
         // Initialize App
         function initApp() {
+            // Check Cloudinary configuration
+            checkCloudinaryConfig();
+            
             // Check if user was previously logged in
             const rememberMe = localStorage.getItem('ppaul_remember') === 'true';
             if (rememberMe) {
@@ -875,7 +890,7 @@
             initCloudinaryWidget();
         }
 
-        // Login Handler - UPDATED FOR USERNAME FIELD
+        // Login Handler
         function handleLogin() {
             const username = document.getElementById('admin-username').value.trim();
             const password = document.getElementById('admin-password').value;
@@ -885,7 +900,7 @@
             // Clear any previous error
             errorDiv.classList.add('hidden');
 
-            // Validate credentials - CASE SENSITIVE
+            // Validate credentials
             if (username === CONFIG.adminUsername && password === CONFIG.adminPassword) {
                 // Success - Save remember me preference
                 if (remember) {
@@ -908,7 +923,7 @@
                 
                 showToast('Welcome back! Dashboard loaded.', 'success');
             } else {
-                // Show error with detailed message
+                // Show error
                 errorDiv.classList.remove('hidden');
                 
                 // Clear password field for security
@@ -943,7 +958,7 @@
                 
                 // Reset form fields
                 resetForm();
-                document.getElementById('admin-password').value = 'ppaul'; // Reset to default for convenience
+                document.getElementById('admin-password').value = 'ppaul';
                 
                 showToast('Logged out successfully', 'info');
             }
@@ -1354,4 +1369,4 @@
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
-        </html>
+    </html>
