@@ -3,55 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | P. Paul (The Great)</title>
+    <title>Selected Works | PPaul the Great</title>
+    
+    <meta property="og:title" content="Portfolio | PPaul the Great">
+    <meta property="og:description" content="Verifiable Testimonies of Transformation.">
+    <meta property="og:image" content="https://yourwebsite.com/default-preview.jpg">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root { --gold: #d4af37; --onyx: #080808; }
-        body { background: var(--onyx); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .glass-nav { backdrop-filter: blur(20px); background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .bento-card { transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-        .bento-card:hover { transform: translateY(-10px); }
+        body { background: #080808; color: white; font-family: 'Inter', sans-serif; }
+        .portfolio-card { transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.5s; }
+        .portfolio-card:hover { transform: scale(0.98) translateY(-10px); }
     </style>
 </head>
 <body>
-    <nav class="fixed top-0 w-full z-50 glass-nav flex justify-between items-center px-10 py-6">
-        <a href="index.html" class="text-xl font-serif italic font-bold">P. Paul <span class="text-gold-500">.</span></a>
-        <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold">
-            <a href="index.html" class="hover:text-gold-500">Home</a>
-            <a href="blog.html" class="hover:text-gold-500">Blog</a>
-            <a href="portfolio.html" class="text-gold-500">Works</a>
+    <nav class="fixed top-0 w-full z-50 mix-blend-difference flex justify-between p-8">
+        <a href="index.html" class="font-serif italic text-2xl">P.</a>
+        <div class="flex gap-8 text-[10px] uppercase tracking-widest font-bold">
+            <a href="index.html">Home</a>
+            <a href="blog.html">Journal</a>
+            <a href="portfolio.html" class="text-[#d4af37]">Works</a>
         </div>
     </nav>
 
-    <header class="pt-40 pb-20 text-center">
-        <h1 class="text-6xl md:text-9xl font-serif font-black tracking-tighter mb-4">Selected <span class="italic text-gold-500">Works</span></h1>
-        <p class="text-gray-500 uppercase tracking-[0.5em] text-[10px]">Testimonies of Transformation</p>
+    <header class="pt-40 px-10 pb-20 max-w-7xl mx-auto">
+        <h1 class="text-[12vw] font-black leading-[0.85] tracking-tighter uppercase">Selected<br><span class="italic font-serif text-[#d4af37]">Works</span></h1>
     </header>
 
-    <section id="portfolio-grid" class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
-        </section>
+    <div id="portfolio-list" class="max-w-7xl mx-auto px-10 grid md:grid-cols-2 lg:grid-cols-3 gap-8 pb-40">
+        </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const grid = document.getElementById('portfolio-grid');
-            const engineItems = JSON.parse(localStorage.getItem('portfolio') || "[]");
+            const list = document.getElementById('portfolio-list');
+            const data = JSON.parse(localStorage.getItem('portfolio') || "[]");
             
-            // Placeholder defaults if engine is empty
-            const defaults = [
-                { title: "Echoes of Peace", category: "Poetry", image: "https://images.unsplash.com/photo-1544717305-2782549b5136", desc: "Spoken word journey." },
-                { title: "Youth Summit", category: "Speaking", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353", desc: "Keynote on values." }
-            ];
-
-            const finalData = engineItems.length > 0 ? engineItems : defaults;
-
-            grid.innerHTML = finalData.map((item, i) => `
-                <div class="bento-card group relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-zinc-900 border border-white/5">
-                    <img src="${item.image}" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                    <div class="absolute bottom-0 p-8">
-                        <span class="text-gold-500 text-[9px] font-black uppercase tracking-widest block mb-2">${item.category}</span>
-                        <h3 class="text-2xl font-serif font-bold text-white leading-none mb-3">${item.title}</h3>
-                        <p class="text-gray-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500">${item.desc}</p>
+            list.innerHTML = data.map(item => `
+                <div class="portfolio-card group relative aspect-[3/4] rounded-[2.5rem] overflow-hidden bg-zinc-900">
+                    <img src="${item.image}" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[1.5s]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 p-10">
+                        <span class="text-[10px] font-black uppercase text-[#d4af37] tracking-[0.3em] mb-2 block">PPaul The Great</span>
+                        <h3 class="text-3xl font-serif italic mb-4">${item.title}</h3>
+                        <p class="text-gray-400 text-xs opacity-0 group-hover:opacity-100 transition-all duration-500">${item.content}</p>
                     </div>
                 </div>
             `).join('');
