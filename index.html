@@ -159,26 +159,6 @@
             animation: pulse-glow 3s ease-in-out infinite;
         }
         
-        /* Slide-in Animation */
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .slide-in-right {
-            animation: slideInRight 0.3s ease-out forwards;
-        }
-        
-        /* Slide-out Animation */
-        @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-        
-        .slide-out-right {
-            animation: slideOutRight 0.3s ease-in forwards;
-        }
-        
         /* Mobile Menu - Sidebar 50% */
         .mobile-menu-container {
             position: fixed;
@@ -282,21 +262,6 @@
             border-radius: 2px;
         }
         
-        /* Loading Animation */
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        
-        .shimmer-text {
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(212, 175, 55, 0.5) 50%, 
-                transparent 100%);
-            background-size: 200% auto;
-            animation: shimmer 3s infinite linear;
-        }
-        
         /* Title Line Break Fix */
         .title-line-break {
             display: block;
@@ -312,22 +277,18 @@
             color: var(--gold-400);
         }
         
-        /* Quick Fade Animation */
-        @keyframes quickFadeIn {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        .quick-fade {
-            animation: quickFadeIn 0.5s ease-out forwards;
-        }
-        
         /* Subtitle Section */
         .subtitle-section {
             margin-top: -50px;
             position: relative;
             z-index: 20;
         }
+        
+        /* REMOVED ANIMATIONS: */
+        /* Quick Fade Animation - REMOVED */
+        /* Slide-in Animation - REMOVED */
+        /* Slide-out Animation - REMOVED */
+        /* Loading Animation - REMOVED */
     </style>
 </head>
 <body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
@@ -464,7 +425,7 @@
         <!-- Hero Content -->
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
             <div class="inline-block mb-8">
-                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide animate-float">
+                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide">
                     <i class="fas fa-volume-up mr-2"></i> A Voice for the Voiceless
                 </span>
             </div>
@@ -481,7 +442,7 @@
             
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="inquiry.html" class="group px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full flex items-center space-x-3 hover:shadow-2xl hover:scale-105 transition-all duration-300 pulse-glow">
+                <a href="inquiry.html" class="group px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full flex items-center space-x-3 hover:shadow-2xl hover:scale-105 transition-all duration-300">
                     <i class="fas fa-microphone"></i>
                     <span>Invite Me to Speak</span>
                     <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
@@ -503,7 +464,7 @@
         
         <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-            <a href="#subtitle-section" class="flex flex-col items-center text-gray-400 hover:text-gold-500 transition-colors animate-bounce">
+            <a href="#subtitle-section" class="flex flex-col items-center text-gray-400 hover:text-gold-500 transition-colors">
                 <span class="text-sm mb-2">Explore</span>
                 <i class="fas fa-chevron-down"></i>
             </a>
@@ -598,7 +559,7 @@
                 <div class="relative group">
                     <div class="absolute -inset-4 bg-gradient-to-r from-gold-500/20 to-transparent rounded-3xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                     <div class="relative rounded-2xl overflow-hidden">
-                        <img src="paul.jpg" alt="P. Paul - Poet & Speaker" class="w-full h-[500px] object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="paul.jpg" alt="P. Paul - Poet & Speaker" class="w-full h-[500px] object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                         <div class="absolute bottom-6 left-6 right-6">
                             <div class="flex items-center space-x-4">
@@ -632,7 +593,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Poetry Card -->
                 <div class="futuristic-card p-6 group">
-                    <div class="text-4xl mb-4 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                    <div class="text-4xl mb-4 text-gold-500">
                         <i class="fas fa-feather-alt"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Poetry & Spoken Word</h3>
@@ -641,13 +602,13 @@
                     </p>
                     <a href="portfolio.html#poetry" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
                         Explore Works
-                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
                 <!-- Speaking Card -->
                 <div class="futuristic-card p-6 group">
-                    <div class="text-4xl mb-4 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                    <div class="text-4xl mb-4 text-gold-500">
                         <i class="fas fa-microphone"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Public Speaking</h3>
@@ -656,13 +617,13 @@
                     </p>
                     <a href="inquiry.html" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
                         Book a Session
-                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
                 <!-- Music Card -->
                 <div class="futuristic-card p-6 group">
-                    <div class="text-4xl mb-4 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                    <div class="text-4xl mb-4 text-gold-500">
                         <i class="fas fa-music"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Music Composition</h3>
@@ -671,13 +632,13 @@
                     </p>
                     <a href="portfolio.html#music" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
                         Listen Now
-                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
                 <!-- Advocacy Card -->
                 <div class="futuristic-card p-6 group">
-                    <div class="text-4xl mb-4 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                    <div class="text-4xl mb-4 text-gold-500">
                         <i class="fas fa-hands-helping"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Humanitarian Advocacy</h3>
@@ -686,7 +647,7 @@
                     </p>
                     <a href="upphilan.html" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
                         Join Movement
-                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
@@ -854,9 +815,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Register GSAP plugins
-            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-            
             // Mobile Menu Functionality
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
@@ -991,59 +949,10 @@
                 this.style.transform = 'scale(1)';
             });
             
-            // Animations with GSAP
-            // Hero text animation - faster animation
-            gsap.from('.hero-title span', {
-                y: 100,
-                opacity: 0,
-                duration: 0.7,
-                stagger: 0.2,
-                ease: "power4.out"
-            });
+            // REMOVED: All GSAP text animations
+            // Text appears instantly without animation
             
-            // Subtitle section animation
-            gsap.from('#subtitle-section', {
-                scrollTrigger: {
-                    trigger: '#subtitle-section',
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 30,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power3.out"
-            });
-            
-            // Card animations on scroll
-            gsap.utils.toArray('.futuristic-card').forEach((card, i) => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    ease: "power3.out"
-                });
-            });
-            
-            // Navigation scroll effect
-            gsap.to('nav', {
-                scrollTrigger: {
-                    trigger: '#about',
-                    start: "top top",
-                    end: "+=100",
-                    scrub: true
-                },
-                backgroundColor: "rgba(5,5,5,0.95)",
-                backdropFilter: "blur(20px)",
-                ease: "none"
-            });
-            
-            // Smooth scroll for navigation links
+            // Smooth scroll for navigation links (kept for better UX)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     const targetId = this.getAttribute('href');
@@ -1052,13 +961,9 @@
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         e.preventDefault();
-                        gsap.to(window, {
-                            duration: 1,
-                            scrollTo: {
-                                y: targetElement,
-                                offsetY: 80
-                            },
-                            ease: "power3.inOut"
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
                         });
                     }
                 });
@@ -1067,36 +972,12 @@
             // Logo click to scroll to top
             document.querySelector('nav a[href="#"]').addEventListener('click', function(e) {
                 e.preventDefault();
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: 0,
-                    ease: "power3.inOut"
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
-            });
-            
-            // Add loading animation to images
-            document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('load', function() {
-                    this.classList.add('loaded');
-                });
-                
-                if (img.complete) {
-                    img.classList.add('loaded');
-                }
-            });
-            
-            // Parallax effect for hero section
-            gsap.to('.hero-slider', {
-                scrollTrigger: {
-                    trigger: '#home',
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                },
-                scale: 1.1,
-                ease: "none"
             });
         });
     </script>
 </body>
-                                </html>
+                                                               </html>
