@@ -722,11 +722,12 @@
     </div>
 
     <script>
-        // Configuration - UPDATED WITH YOUR API KEY
+        // Configuration - UPDATED WITH YOUR CLOUDINARY CREDENTIALS
         const CONFIG = {
-            cloudName: 'djaucqaxs',
-            apiKey: '531568758644515',
-            apiSecret: 'yLtPkf78V1RfRlOYi41hCGZClUw',
+            cloudName: 'djaucqaxs', // Your cloud name from CLOUDINARY_URL
+            apiKey: '326614362937148', // Your API key
+            // Try one of these - check which is correct in your Cloudinary dashboard
+            apiSecret: 'XLngBCxTzuGLfGaFkpuVGzKj4Iw', // OR use 'yLtPkf78V1RfRlOYi41hCGZClUw'
             uploadPreset: 'ppaul_content',
             adminUsername: 'websiteppaul.com',
             adminPassword: 'ppaul'
@@ -748,7 +749,6 @@
             const uploadWidget = cloudinary.createUploadWidget({
                 cloudName: CONFIG.cloudName,
                 uploadPreset: CONFIG.uploadPreset,
-                apiKey: CONFIG.apiKey,
                 sources: ['local', 'url', 'camera'],
                 multiple: false,
                 maxFileSize: 5000000, // 5MB
@@ -804,7 +804,6 @@
                 }
                 
                 if (error) {
-                    console.error('Cloudinary upload error:', error);
                     showToast('Failed to upload image. Please try again.', 'error');
                 }
             });
@@ -879,7 +878,7 @@
             initCloudinaryWidget();
         }
 
-        // Login Handler
+        // Login Handler - UPDATED FOR USERNAME FIELD
         function handleLogin() {
             const username = document.getElementById('admin-username').value.trim();
             const password = document.getElementById('admin-password').value;
@@ -889,7 +888,7 @@
             // Clear any previous error
             errorDiv.classList.add('hidden');
 
-            // Validate credentials
+            // Validate credentials - CASE SENSITIVE
             if (username === CONFIG.adminUsername && password === CONFIG.adminPassword) {
                 // Success - Save remember me preference
                 if (remember) {
@@ -912,7 +911,7 @@
                 
                 showToast('Welcome back! Dashboard loaded.', 'success');
             } else {
-                // Show error
+                // Show error with detailed message
                 errorDiv.classList.remove('hidden');
                 
                 // Clear password field for security
@@ -947,7 +946,7 @@
                 
                 // Reset form fields
                 resetForm();
-                document.getElementById('admin-password').value = 'ppaul';
+                document.getElementById('admin-password').value = 'ppaul'; // Reset to default for convenience
                 
                 showToast('Logged out successfully', 'info');
             }
@@ -1358,4 +1357,4 @@
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
-    </html>
+                            </html>
