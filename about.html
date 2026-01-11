@@ -1,285 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About — P. Paul (The Great)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Architect | P. Paul (The Great)</title>
+    
+    <meta property="og:title" content="About P. Paul (The Great) | The Architect of Transformation">
+    <meta property="og:description" content="Poet, Law Scholar, and Humanitarian Advocate speaking the language of peace.">
+    <meta property="og:image" content="https://yourwebsite.com/about-preview.jpg">
 
-<meta name="description" content="Learn more about P. Paul (The Great) — poet, spoken word artist, public speaker, and humanitarian advocate dedicated to peace, youth empowerment, and human transformation." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --bg:#070707;
-  --text:#f5f5f5;
-  --muted:#b0b0b0;
-  --accent:#8ef0c8;
-  --glass:rgba(255,255,255,0.06);
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.7;
-}
-
-/* NAV */
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:1.5rem 4rem;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(7,7,7,0.7);
-  backdrop-filter:blur(14px);
-  z-index:100;
-}
-
-header nav a{
-  margin-left:2rem;
-  color:var(--muted);
-  text-decoration:none;
-}
-
-header nav a:hover{color:var(--accent);}
-
-.logo{font-weight:800;letter-spacing:1px;}
-
-/* PAGE HERO */
-.page-hero{
-  min-height:70vh;
-  display:flex;
-  align-items:center;
-  padding:8rem 4rem 4rem;
-  position:relative;
-}
-
-.page-hero h1{
-  font-size:4rem;
-  line-height:1.1;
-}
-
-.page-hero span{color:var(--accent);}
-
-.page-hero p{
-  max-width:720px;
-  margin-top:1.5rem;
-  color:var(--muted);
-  font-size:1.1rem;
-}
-
-.hero-glow{
-  position:absolute;
-  width:480px;
-  height:480px;
-  background:radial-gradient(circle,var(--accent),transparent 70%);
-  filter:blur(140px);
-  right:10%;
-  top:25%;
-}
-
-/* SECTIONS */
-section{padding:6rem 4rem;}
-
-.center{text-align:center;}
-
-.content{
-  max-width:900px;
-  margin:auto;
-}
-
-.content p{
-  margin-bottom:1.6rem;
-  font-size:1.05rem;
-}
-
-/* VALUES */
-.values{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:2rem;
-  margin-top:3rem;
-}
-
-.card{
-  background:var(--glass);
-  padding:2.5rem;
-  border-radius:18px;
-  backdrop-filter:blur(12px);
-}
-
-.card h3{margin-bottom:0.8rem;}
-
-/* QUOTE */
-blockquote{
-  font-size:1.5rem;
-  max-width:900px;
-  margin:auto;
-  font-weight:500;
-}
-
-/* CTA */
-.final-cta h2{font-size:2.5rem;}
-.final-cta p{color:var(--muted);margin:1rem 0 2rem;}
-
-/* FOOTER */
-footer{
-  padding:3rem;
-  text-align:center;
-  color:var(--muted);
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  header{padding:1.2rem 2rem;}
-  section{padding:5rem 2rem;}
-  .page-hero h1{font-size:3rem;}
-}
-</style>
+    <style>
+        :root { --gold: #d4af37; --onyx: #050505; }
+        body { background: var(--onyx); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .gold-gradient { background: linear-gradient(to right, #d4af37, #f2d06b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Kinetic Text Effect */
+        .reveal-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+        
+        .bento-item { transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
+        .bento-item:hover { background: rgba(255, 255, 255, 0.05); transform: translateY(-5px); border-color: var(--gold); }
+    </style>
 </head>
-
 <body>
 
-<header>
-  <div class="logo">P. Paul</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="#">Work</a>
-    <a href="#">Media</a>
-    <a href="#">Contact</a>
-  </nav>
-</header>
+    <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center bg-black/50 backdrop-blur-lg border-b border-white/5">
+        <a href="index.html" class="text-xl font-serif italic font-bold">P. Paul <span class="text-gold-500">.</span></a>
+        <div class="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[0.4em]">
+            <a href="index.html" class="hover:text-gold-500 transition-all">Home</a>
+            <a href="about.html" class="text-gold-500">The Architect</a>
+            <a href="portfolio.html" class="hover:text-gold-500 transition-all">Works</a>
+            <a href="blog.html" class="hover:text-gold-500 transition-all">Journal</a>
+        </div>
+        <a href="admin.html" class="text-[9px] border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all">ENGINE ROOM</a>
+    </nav>
 
-<section class="page-hero">
-  <div>
-    <h1>About <span>P. Paul (The Great)</span></h1>
-    <p>
-      Poet. Spoken Word Artist. Public Speaker. Humanitarian Advocate.  
-      A voice committed to peace, healing, and human transformation.
-    </p>
-  </div>
-  <div class="hero-glow"></div>
-</section>
+    <section class="min-h-screen pt-40 px-6 md:px-12 flex flex-col justify-center">
+        <div class="max-w-7xl mx-auto w-full">
+            <h1 class="reveal-text text-6xl md:text-[10vw] font-black uppercase leading-[0.85] tracking-tighter">
+                The <span class="gold-gradient italic font-serif capitalize">Architect</span><br>of Purpose.
+            </h1>
+            <div class="mt-12 flex flex-col md:flex-row justify-between items-end gap-8">
+                <p class="max-w-xl text-gray-400 text-lg md:text-xl leading-relaxed">
+                    My name is <span class="text-white font-bold">Paul Okewunmi</span>. professionally known as P. Paul (The Great). 
+                    I bridge the discipline of Law with the soul of Spoken Word to ignite a generation.
+                </p>
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 rounded-full border border-gold-500 flex items-center justify-center animate-bounce">
+                        <span class="text-gold-500">↓</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <div class="content">
-    <p>
-      My name is <strong>Paul Okewunmi</strong>, professionally known as
-      <strong>P. Paul (The Great)</strong>. I am a poet, spoken word artist,
-      music composer, public speaker, and humanitarian advocate deeply committed
-      to human development and youth empowerment.
-    </p>
+    <section class="py-20 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="md:col-span-2 glass p-10 rounded-[3rem] bento-item">
+                <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gold-500 mb-6">The Mission</h3>
+                <p class="text-2xl md:text-3xl font-serif italic leading-snug">
+                    "I am the Founder of Young Generation of Exploits, established to build confident, value-conscious, and impact-oriented young people."
+                </p>
+                <div class="mt-10 h-[1px] w-full bg-white/10"></div>
+                <p class="mt-10 text-gray-400 leading-relaxed">
+                    As an undergraduate of Law, I bring structure, advocacy, and ethical awareness into my work—bridging creativity with responsibility, and inspiration with action. At the core of everything I do is a defining belief: young people can become whoever they dare to dream of.
+                </p>
+            </div>
 
-    <p>
-      I am the Founder of <strong>Young Generation of Exploits</strong>,
-      a purpose-driven initiative established to build confident,
-      value-conscious, and impact-oriented young people. Through this platform,
-      I help young individuals develop clarity of purpose, self-belief, and the
-      courage to contribute meaningfully to society.
-    </p>
+            <div class="glass p-10 rounded-[3rem] bento-item flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gold-500 mb-10">Pillars</h3>
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4">
+                            <span class="text-gold-500 font-bold">01.</span>
+                            <span class="text-xl font-bold">Law & Ethics</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span class="text-gold-500 font-bold">02.</span>
+                            <span class="text-xl font-bold">Poetic Advocacy</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span class="text-gold-500 font-bold">03.</span>
+                            <span class="text-xl font-bold">Youth Empowerment</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-10">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-500">Active Since</p>
+                    <p class="text-4xl font-black italic">2026</p>
+                </div>
+            </div>
 
-    <p>
-      As an undergraduate of <strong>Law</strong>, I bring structure,
-      advocacy, and ethical awareness into my work—bridging creativity
-      with responsibility, and inspiration with action.
-    </p>
+        </div>
+    </section>
 
-    <p>
-      At the core of everything I do is a defining belief:
-      <strong>young people can become whoever they dare to dream of—regardless
-      of age, color, or background.</strong>
-    </p>
+    <section class="py-32 px-6 md:px-12 bg-white text-black rounded-[4rem]">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-20">The <span class="italic font-serif">Philosophy</span></h2>
+            
+            <div class="grid md:grid-cols-3 gap-16">
+                <div>
+                    <h4 class="text-3xl font-serif italic mb-4">Purpose</h4>
+                    <p class="text-gray-600">Helping individuals discover meaning, direction, and clarity beyond the noise of the world.</p>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-serif italic mb-4">Peace</h4>
+                    <p class="text-gray-600">Using words and creativity as surgical instruments of healing and communal unity.</p>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-serif italic mb-4">Impact</h4>
+                    <p class="text-gray-600">Creating real, measurable change in lives, communities, and global futures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <p>
-      Through poetry, spoken word performances, public speaking engagements,
-      music, and community initiatives, I contribute to lives and destinies.
-      My work is grounded in lived experiences, measurable impact, and
-      verifiable testimonies of transformation.
-    </p>
+    <section class="py-40 px-6 md:px-12 text-center">
+        <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-8">Ready to <span class="gold-gradient italic font-serif capitalize">Transform?</span></h2>
+        <p class="text-gray-500 max-w-2xl mx-auto mb-12">Collaborate with P. Paul (The Great) for speaking engagements, spoken word performances, or humanitarian initiatives.</p>
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
+            <a href="mailto:hello@websiteppaul.com" class="bg-[#d4af37] text-black font-black px-12 py-5 rounded-full hover:scale-105 transition-all">INVITE TO SPEAK</a>
+            <a href="portfolio.html" class="border border-white/20 text-white font-black px-12 py-5 rounded-full hover:bg-white hover:text-black transition-all">VIEW RECENT WORKS</a>
+        </div>
+    </section>
 
-    <p>
-      I speak the language of <strong>peace, healing, and human transformation</strong>,
-      using creativity as a tool to restore hope, ignite purpose, and inspire
-      a generation to rise beyond limitations.
-    </p>
-  </div>
-</section>
+    <footer class="py-20 px-6 border-t border-white/5 text-center">
+        <p class="text-xs font-black uppercase tracking-[0.5em] text-gray-600">P. Paul (The Great)</p>
+        <p class="mt-4 font-serif italic text-gray-400">"Creativity is not just expression—it is responsibility."</p>
+        <div class="mt-10 flex justify-center gap-8 text-[10px] font-bold text-gray-500">
+            <a href="#">INSTAGRAM</a>
+            <a href="#">LINKEDIN</a>
+            <a href="#">WHATSAPP</a>
+        </div>
+        <p class="mt-10 text-[9px] text-gray-800 uppercase tracking-widest">© 2026 All Rights Reserved.</p>
+    </footer>
 
-<section class="center">
-  <h2>What I Stand For</h2>
-  <div class="values">
-    <div class="card">
-      <h3>Purpose</h3>
-      <p>Helping individuals discover meaning, direction, and clarity in life.</p>
-    </div>
-    <div class="card">
-      <h3>Peace</h3>
-      <p>Using words and creativity as instruments of healing and unity.</p>
-    </div>
-    <div class="card">
-      <h3>Impact</h3>
-      <p>Creating real, lasting change in lives, communities, and futures.</p>
-    </div>
-  </div>
-</section>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
 
-<section class="center">
-  <blockquote>
-    “Creativity is not just expression—it is responsibility.  
-    When words are used rightly, they heal, build, and transform lives.”
-  </blockquote>
-</section>
+        // Hero Animation
+        gsap.from(".reveal-text", {
+            y: 100,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power4.out"
+        });
 
-<section class="final-cta center">
-  <h2>Let’s Create Meaningful Impact</h2>
-  <p>
-    If my journey, message, or mission resonates with you,
-    I would be honored to collaborate.
-  </p>
-  <a href="#" class="btn primary">Invite Me to Speak or Perform</a>
-</section>
+        // Bento Cards staggered reveal
+        gsap.from(".bento-item", {
+            scrollTrigger: {
+                trigger: ".bento-item",
+                start: "top 80%"
+            },
+            y: 50,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 1
+        });
 
-<footer>
-  <p><strong>P. Paul (The Great)</strong></p>
-  <p>Speaking the language of peace, healing, and human transformation.</p>
-  <small>© 2026 P. Paul (The Great). All Rights Reserved.</small>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-<script>
-gsap.registerPlugin(ScrollTrigger);
-
-gsap.from(".page-hero h1",{y:90,opacity:0,duration:1.4,ease:"power4.out"});
-gsap.from(".page-hero p",{y:40,opacity:0,delay:0.3,duration:1.2});
-
-gsap.to(".hero-glow",{
-  y:-120,
-  scrollTrigger:{
-    trigger:".page-hero",
-    start:"top top",
-    end:"bottom top",
-    scrub:true
-  }
-});
-
-gsap.utils.toArray("section").forEach(sec=>{
-  gsap.from(sec,{
-    opacity:0,
-    y:70,
-    duration:1.2,
-    scrollTrigger:{trigger:sec,start:"top 80%"}
-  });
-});
-</script>
-
+        // Section Color Change on Scroll
+        gsap.to("body", {
+            scrollTrigger: {
+                trigger: ".bg-white",
+                start: "top center",
+                end: "bottom center",
+                toggleActions: "play reverse play reverse"
+            },
+            backgroundColor: "#ffffff",
+            duration: 0.5
+        });
+    </script>
 </body>
 </html>
