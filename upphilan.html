@@ -6,347 +6,626 @@
     <title>Upphilan Creative Lab | P. Paul (The Great)</title>
     <meta name="description" content="Where thoughts breathe, words ignite, and sounds find their soul. The creative lab bridging idea and transformation.">
     
-    <!-- Tailwind CSS CDN -->
+    <!-- Enhanced Tailwind for 2030 design -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom scroll animation library -->
     <style>
-        /* Custom CSS with Tailwind configuration */
+        /* 2030 Design System Variables */
         :root {
-            --gold-400: #e1b76a;
+            --gold-400: #f0c674;
             --gold-500: #d4af37;
-            --gold-600: #bc9a2e;
-            --onyx: #0a0a0a;
+            --gold-600: #b8941f;
+            --onyx: #050505;
+            --neon-glow: 0 0 30px rgba(212, 175, 55, 0.6);
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --glass-bg: rgba(10, 10, 10, 0.85);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f0c674 100%);
         }
         
-        .selection\\:bg-gold-500 *::selection, .selection\\:bg-gold-500::selection {
-            background-color: var(--gold-500);
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
         
-        .selection\\:text-black *::selection, .selection\\:text-black::selection {
-            color: #000;
-        }
-        
-        .bg-onyx {
-            background-color: var(--onyx);
-        }
-        
-        .text-gold-500 {
-            color: var(--gold-500);
-        }
-        
-        .bg-gold-500 {
-            background-color: var(--gold-500);
-        }
-        
-        .bg-gold-500\\/20 {
-            background-color: rgba(212, 175, 55, 0.2);
-        }
-        
-        .from-gold-500 {
-            background: linear-gradient(to right, #d4af37, #ffffff);
-        }
-        
-        .to-white {
-            background: linear-gradient(to right, var(--gold-500), #ffffff);
-        }
-        
-        .bg-white\\/5 {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        
-        .hover\\:bg-gold-600:hover {
-            background-color: var(--gold-600);
-        }
-        
-        /* Custom scrollbar */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
         
         ::-webkit-scrollbar-track {
-            background: #030303;
+            background: #0a0a0a;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: var(--gold-500);
+            background: linear-gradient(to bottom, var(--gold-500), var(--gold-600));
             border-radius: 5px;
         }
         
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        /* Selection Styling */
+        ::selection {
+            background: var(--gold-500);
+            color: #000;
         }
         
-        /* Blur effect */
-        .blur-\\[100px\\] {
-            filter: blur(100px);
+        /* Utility Classes */
+        .bg-onyx { background-color: var(--onyx); }
+        .text-gold-500 { color: var(--gold-500); }
+        .bg-gold-500 { background-color: var(--gold-500); }
+        .border-gold-500 { border-color: var(--gold-500); }
+        
+        /* Glass Morphism Effect */
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
         
-        /* Gradient text effect */
-        .gradient-text {
-            background: linear-gradient(45deg, #d4af37, #ffffff, #d4af37);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 200% 200%;
-            animation: gradient-flow 3s ease infinite;
+        /* Futuristic Card */
+        .futuristic-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        @keyframes gradient-flow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        .futuristic-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(212, 175, 55, 0.05) 0%,
+                transparent 50%,
+                rgba(212, 175, 55, 0.05) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         
-        /* Glow effect */
-        .glow {
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5),
-                         0 0 20px rgba(212, 175, 55, 0.3),
-                         0 0 30px rgba(212, 175, 55, 0.1);
+        .futuristic-card:hover::before {
+            opacity: 1;
         }
         
-        /* Mobile menu styling - 45% width */
+        .futuristic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--neon-glow);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Hero Background with Image */
+        .hero-with-bg {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-bg-image {
+            position: absolute;
+            inset: 0;
+            background-image: url('upphilan-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.8) saturate(1.2);
+            z-index: 1;
+        }
+        
+        /* Dark overlay for better text readability */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2;
+        }
+        
+        /* Hero content styling */
+        .hero-content-container {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        /* Mobile Menu - Sidebar 50% */
         .mobile-menu-container {
             position: fixed;
             top: 0;
             right: 0;
-            width: 45%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
+            width: 50%;
+            min-width: 300px;
+            max-width: 400px;
+            height: 100vh;
             z-index: 1000;
             transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .mobile-menu-container.active {
             transform: translateX(0);
         }
         
-        .mobile-menu-close {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid var(--gold-500);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1001;
-        }
-        
-        .mobile-menu-close:hover {
-            background: var(--gold-500);
-            transform: rotate(90deg);
-        }
-        
-        .mobile-menu-close:hover svg {
-            stroke: #000;
-        }
-        
-        /* Overlay for mobile menu */
-        .mobile-menu-overlay {
+        .mobile-menu-backdrop {
             position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
         }
         
-        .mobile-menu-overlay.active {
+        .mobile-menu-backdrop.active {
             opacity: 1;
             visibility: visible;
         }
         
-        /* Featured projects loading animation */
-        .project-card-skeleton {
-            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
+        /* Menu Close Button */
+        .menu-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
         }
         
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        .menu-close-btn:hover {
+            background: var(--gold-500);
+            transform: rotate(90deg);
+        }
+        
+        .menu-close-btn:hover i {
+            color: #000;
+        }
+        
+        /* Responsive Typography */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 3rem;
+                line-height: 1.1;
+            }
+            
+            .mobile-menu-container {
+                width: 85%;
+                min-width: 280px;
+            }
+            
+            .hero-bg-image {
+                background-position: center 20%;
+            }
+        }
+        
+        /* Section Spacing */
+        section {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Text Animations */
+        .text-gradient {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Gradient Underline */
+        .gradient-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gradient-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+        
+        /* Pulse Animation */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        /* Process Section Background */
+        .process-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #050505 100%);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        /* Animated blob */
+        .magic-blob {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0) 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
         }
     </style>
 </head>
-<body class="bg-[#030303] text-white selection:bg-gold-500 selection:text-black overflow-x-hidden cursor-default">
-    <!-- Magical Background Blob -->
-    <div id="magic-blob" class="fixed w-[300px] h-[300px] bg-gold-500/20 rounded-full blur-[100px] pointer-events-none z-0 opacity-70"></div>
+<body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
+    <!-- Animated Blob -->
+    <div id="magicBlob" class="magic-blob"></div>
     
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 backdrop-blur-md bg-black/80 border-b border-white/10">
-        <a href="index.html" class="text-2xl font-serif font-bold tracking-tighter italic hover:text-gold-500 transition-colors">
-            P. Paul (The Great) <span class="text-gold-500">.</span>
-        </a>
-        <div class="hidden lg:flex space-x-6 text-xs uppercase tracking-widest font-medium">
-            <a href="index.html" class="hover:text-gold-500 transition-colors">Home</a>
-            <a href="about.html" class="hover:text-gold-500 transition-colors">About</a>
-            <a href="inquiry.html" class="hover:text-gold-500 transition-colors">Inquiry</a>
-            <a href="vision.html" class="hover:text-gold-500 transition-colors">Vision</a>
-            <a href="blog.html" class="hover:text-gold-500 transition-colors">Blog</a>
-            <a href="young.html" class="hover:text-gold-500 transition-colors">Young</a>
-            <a href="upphilan.html" class="text-gold-500 font-bold transition-colors">Upphilan</a>
-            <a href="portfolio.html" class="hover:text-gold-500 transition-colors">Portfolio</a>
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 py-4 px-6 md:px-10 glass-effect border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                    <span class="font-bold text-black text-lg">P</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight group-hover:text-gold-500 transition-colors">P. PAUL</span>
+                    <span class="text-xs text-gray-400">The Great</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="index.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Home
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="about.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    About
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="inquiry.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Inquiry
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="blog.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Blog
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="young.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Young
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="upphilan.html" class="text-sm font-medium text-gold-500 relative group">
+                    Upphilan
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gold-500"></span>
+                </a>
+                <a href="portfolio.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Portfolio
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                
+                <!-- CTA Button -->
+                <a href="inquiry.html" class="ml-4 px-6 py-2 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    Book Now
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="lg:hidden flex flex-col space-y-1.5 p-2">
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-4 h-0.5 bg-white ml-auto"></span>
+            </button>
         </div>
-        <button id="mobile-menu-btn" class="lg:hidden text-gold-500 p-2 hover:bg-white/10 rounded-lg transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
-    
-    <!-- Mobile Menu (45% width) -->
-    <div id="mobile-menu" class="mobile-menu-container">
-        <button id="close-menu-btn" class="mobile-menu-close">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
+    <!-- Mobile Menu Backdrop -->
+    <div id="mobileMenuBackdrop" class="mobile-menu-backdrop"></div>
+
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobileMenu" class="mobile-menu-container glass-effect">
+        <button id="closeMenuBtn" class="menu-close-btn">
+            <i class="fas fa-times text-lg"></i>
         </button>
         
-        <div class="flex flex-col items-center justify-center h-full space-y-8 p-10">
-            <a href="index.html" class="text-2xl hover:text-gold-500 transition-colors">Home</a>
-            <a href="about.html" class="text-2xl hover:text-gold-500 transition-colors">About</a>
-            <a href="inquiry.html" class="text-2xl hover:text-gold-500 transition-colors">Inquiry</a>
-            <a href="vision.html" class="text-2xl hover:text-gold-500 transition-colors">Vision</a>
-            <a href="blog.html" class="text-2xl hover:text-gold-500 transition-colors">Blog</a>
-            <a href="young.html" class="text-2xl hover:text-gold-500 transition-colors">Young</a>
-            <a href="upphilan.html" class="text-2xl text-gold-500 font-bold transition-colors">Upphilan</a>
-            <a href="portfolio.html" class="text-2xl hover:text-gold-500 transition-colors">Portfolio</a>
+        <div class="h-full flex flex-col pt-20 px-8">
+            <div class="mb-10">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                        <span class="font-bold text-black text-xl">P</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl">P. PAUL</h3>
+                        <p class="text-gray-400 text-sm">The Great</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <a href="index.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-home w-6 mr-3"></i> Home
+                    </a>
+                    <a href="about.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-user w-6 mr-3"></i> About
+                    </a>
+                    <a href="inquiry.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-envelope w-6 mr-3"></i> Inquiry
+                    </a>
+                    <a href="blog.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-blog w-6 mr-3"></i> Blog
+                    </a>
+                    <a href="young.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-users w-6 mr-3"></i> Young
+                    </a>
+                    <a href="upphilan.html" class="block text-lg font-medium text-gold-500 py-2 border-b border-white/5">
+                        <i class="fas fa-palette w-6 mr-3"></i> Upphilan
+                    </a>
+                    <a href="portfolio.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-briefcase w-6 mr-3"></i> Portfolio
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-auto pb-10">
+                <a href="inquiry.html" class="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-lg flex items-center justify-center space-x-2 hover:shadow-lg transition-all">
+                    <i class="fas fa-microphone"></i>
+                    <span>Invite to Speak</span>
+                </a>
+                
+                <div class="flex justify-center space-x-6 mt-8">
+                    <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Header Section -->
-    <section class="relative pt-32 pb-20 px-6 md:px-10 z-10">
-        <div class="max-w-7xl mx-auto">
-            <h1 class="text-7xl md:text-[12rem] font-serif font-black uppercase leading-none opacity-10 select-none animate-pulse">
-                Upphilan
+    <!-- Hero Section with Background Image -->
+    <section class="hero-with-bg pt-20">
+        <!-- Background Image -->
+        <div class="hero-bg-image"></div>
+        
+        <!-- Dark Overlay for Text Readability -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content-container text-center py-20">
+            <div class="inline-block mb-8 animate-fade-in">
+                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide">
+                    <i class="fas fa-palette mr-2"></i> Creative Lab
+                </span>
+            </div>
+            
+            <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-fade-in" style="animation-delay: 0.2s;">
+                <span class="text-gradient block">UPHILAN</span>
+                <span class="text-white block mt-2 italic text-3xl md:text-5xl">Creative Lab</span>
             </h1>
-            <div class="relative pt-10 md:pt-20">
-                <h2 class="text-4xl md:text-7xl font-serif italic mb-6">The Creative Lab.</h2>
-                <p class="max-w-xl text-gray-400 text-lg md:text-xl leading-relaxed">
-                    Where thoughts breathe, words ignite, and sounds find their soul. 
-                    Upphilan is the bridge between the unseen idea and the heard transformation.
+            
+            <div class="w-32 h-1 bg-gradient-to-r from-gold-500 to-gold-600 mx-auto my-8 rounded-full animate-fade-in" style="animation-delay: 0.4s;"></div>
+            
+            <div class="max-w-4xl mx-auto">
+                <p class="text-xl md:text-2xl text-gray-300 italic mb-8 animate-fade-in" style="animation-delay: 0.6s;">
+                    Where thoughts breathe, words ignite, and sounds find their soul. The creative lab bridging idea and transformation.
                 </p>
-                <div class="mt-10 flex items-center space-x-4">
-                    <div class="w-10 h-[1px] bg-gold-500"></div>
-                    <span class="text-sm text-gray-500 uppercase tracking-widest">Est. 2024</span>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style="animation-delay: 0.8s;">
+                    <a href="#philosophy" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
+                        <i class="fas fa-eye"></i>
+                        <span>Explore Philosophy</span>
+                    </a>
+                    
+                    <a href="portfolio.html" class="px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full hover:bg-gold-500/10 transition-all duration-300 flex items-center justify-center space-x-3">
+                        <i class="fas fa-briefcase"></i>
+                        <span>View Projects</span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Philosophy Section -->
-    <section id="philosophy" class="py-20 px-6 md:px-10 relative z-10">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div class="order-2 lg:order-1">
+    <section id="philosophy" class="py-20 md:py-32 px-6 md:px-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                            The <span class="text-gradient">Philosophy</span>
+                        </h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-500 to-gold-600 rounded-full"></div>
+                    </div>
+                    
+                    <div class="space-y-6 text-gray-300">
+                        <p class="text-lg leading-relaxed">
+                            At Upphilan, we don't just create; we curate experiences. Whether it's the rhythm 
+                            of a spoken word piece or the structural flow of a new composition, every project 
+                            is handled with the precision of a lawyer and the heart of a poet.
+                        </p>
+                        
+                        <div class="futuristic-card p-6 border-l-4 border-gold-500">
+                            <p class="text-xl italic text-gray-200">
+                                "Art is the sound of a waking soul."
+                            </p>
+                        </div>
+                        
+                        <p class="text-lg leading-relaxed">
+                            Upphilan is the bridge between the unseen idea and the heard transformation. 
+                            Where legal precision meets artistic freedom, and where every word is chosen 
+                            with intention.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Image -->
                 <div class="relative group">
-                   <div class="absolute -inset-1 bg-gradient-to-r from-gold-500 to-white opacity-30 blur group-hover:opacity-100 transition duration-1000"></div>
-                   <img src="pelumi.jpg" class="relative rounded-lg w-full h-[400px] md:h-[500px] object-cover" alt="Creative Process">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-gold-500/20 to-transparent rounded-3xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="pelumi.jpg" alt="P. Paul - Creative Process" class="w-full h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-full bg-gold-500 flex items-center justify-center">
+                                    <i class="fas fa-quote-left text-black"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Structured creativity, purposeful art.</p>
+                                    <p class="text-sm text-gray-300">- P. Paul</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="order-1 lg:order-2 space-y-8">
-                <div class="flex items-center space-x-4 mb-4">
-                    <div class="w-16 h-[1px] bg-gold-500"></div>
-                    <span class="text-gold-500 uppercase text-sm tracking-widest">The Philosophy</span>
+            
+            <!-- Process Phases -->
+            <div class="mt-20 grid md:grid-cols-3 gap-6">
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="text-gold-500 font-mono text-sm mb-2">PHASE I</div>
+                    <h3 class="text-xl font-bold mb-3">Conception</h3>
+                    <p class="text-gray-400 mb-6">
+                        Idea germination and vision mapping. The birth of creative concepts and initial structuring.
+                    </p>
+                    <div class="text-xs text-gold-500 uppercase tracking-widest">Vision • Mapping • Foundation</div>
                 </div>
-                <h3 class="text-2xl md:text-3xl font-serif text-gold-400 italic">"Art is the sound of a waking soul."</h3>
-                <p class="text-gray-300 text-lg leading-relaxed">
-                    At Upphilan, we don't just create; we curate experiences. Whether it's the rhythm 
-                    of a spoken word piece or the structural flow of a new composition, every project 
-                    is handled with the precision of a lawyer and the heart of a poet.
-                </p>
-                <div class="grid grid-cols-2 gap-4 md:gap-6">
-                    <div class="p-6 border border-white/10 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors group">
-                        <span class="text-gold-500 font-mono text-sm block mb-2 group-hover:scale-110 transition-transform">PHASE I</span>
-                        <h4 class="font-bold uppercase tracking-widest text-xs">Conception</h4>
-                        <p class="text-gray-400 text-sm mt-2">Idea germination and vision mapping</p>
+                
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-gem"></i>
                     </div>
-                    <div class="p-6 border border-white/10 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors group">
-                        <span class="text-gold-500 font-mono text-sm block mb-2 group-hover:scale-110 transition-transform">PHASE II</span>
-                        <h4 class="font-bold uppercase tracking-widest text-xs">Refinement</h4>
-                        <p class="text-gray-400 text-sm mt-2">Crafting and perfecting the message</p>
-                    </div>
+                    <div class="text-gold-500 font-mono text-sm mb-2">PHASE II</div>
+                    <h3 class="text-xl font-bold mb-3">Refinement</h3>
+                    <p class="text-gray-400 mb-6">
+                        Crafting and perfecting the message. Polishing creative elements with artistic precision.
+                    </p>
+                    <div class="text-xs text-gold-500 uppercase tracking-widest">Crafting • Polishing • Precision</div>
                 </div>
-                <div class="pt-4">
-                    <div class="p-6 border border-white/10 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors group">
-                        <span class="text-gold-500 font-mono text-sm block mb-2 group-hover:scale-110 transition-transform">PHASE III</span>
-                        <h4 class="font-bold uppercase tracking-widest text-xs">Manifestation</h4>
-                        <p class="text-gray-400 text-sm mt-2">Bringing the vision to life through art</p>
+                
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-rocket"></i>
                     </div>
+                    <div class="text-gold-500 font-mono text-sm mb-2">PHASE III</div>
+                    <h3 class="text-xl font-bold mb-3">Manifestation</h3>
+                    <p class="text-gray-400 mb-6">
+                        Bringing the vision to life through art. Transforming concepts into tangible creative works.
+                    </p>
+                    <div class="text-xs text-gold-500 uppercase tracking-widest">Execution • Realization • Creation</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Process Section -->
-    <section id="process" class="py-20 md:py-32 bg-white text-black px-6 md:px-10 rounded-t-[3rem] md:rounded-t-[5rem]">
+    <section id="process" class="py-20 md:py-32 px-6 md:px-10 process-bg">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6">
-                <div>
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="w-16 h-[1px] bg-black"></div>
-                        <span class="text-black uppercase text-sm tracking-widest font-bold">The Process</span>
-                    </div>
-                    <h2 class="text-3xl md:text-6xl font-serif font-bold max-w-2xl">
-                        Merging the Law of Form with the <span class="text-gold-600 gradient-text">Freedom of Art.</span>
-                    </h2>
-                </div>
-                <button id="explore-btn" class="px-8 py-4 bg-black text-white rounded-full font-bold hover:bg-gold-600 transition-colors">
-                    Explore Projects
-                </button>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    The <span class="text-gradient">Process</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Merging the Law of Form with the Freedom of Art
+                </p>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-8 md:gap-10">
-                <!-- Card 1 -->
-                <div class="space-y-4 group p-6 rounded-2xl hover:bg-black/5 transition-colors">
-                    <div class="h-1 w-12 bg-gold-500 group-hover:w-16 transition-all duration-300"></div>
-                    <h4 class="text-xl font-bold italic font-serif">Structure</h4>
-                    <p class="text-gray-600">Harnessing the discipline of Law to give art a solid foundation and clear direction.</p>
-                    <div class="pt-4">
-                        <span class="text-xs text-gray-400 uppercase tracking-widest">Precision • Framework • Strategy</span>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Structure -->
+                <div class="futuristic-card p-8 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 italic font-serif">Structure</h3>
+                    <p class="text-gray-400 mb-6">
+                        Harnessing the discipline of Law to give art a solid foundation and clear direction. 
+                        Every creative work begins with intentional structure.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-white/10">
+                        <div class="text-xs text-gold-500 uppercase tracking-widest">Precision • Framework • Strategy</div>
                     </div>
                 </div>
-                <!-- Card 2 -->
-                <div class="space-y-4 group p-6 rounded-2xl hover:bg-black/5 transition-colors">
-                    <div class="h-1 w-12 bg-gold-500 group-hover:w-16 transition-all duration-300"></div>
-                    <h4 class="text-xl font-bold italic font-serif">Spirit</h4>
-                    <p class="text-gray-600">Injecting every spoken word and musical note with purpose-driven humanitarian energy.</p>
-                    <div class="pt-4">
-                        <span class="text-xs text-gray-400 uppercase tracking-widest">Passion • Purpose • Energy</span>
+                
+                <!-- Spirit -->
+                <div class="futuristic-card p-8 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 italic font-serif">Spirit</h3>
+                    <p class="text-gray-400 mb-6">
+                        Injecting every spoken word and musical note with purpose-driven humanitarian energy. 
+                        The soul that brings structure to life.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-white/10">
+                        <div class="text-xs text-gold-500 uppercase tracking-widest">Passion • Purpose • Energy</div>
                     </div>
                 </div>
-                <!-- Card 3 -->
-                <div class="space-y-4 group p-6 rounded-2xl hover:bg-black/5 transition-colors">
-                    <div class="h-1 w-12 bg-gold-500 group-hover:w-16 transition-all duration-300"></div>
-                    <h4 class="text-xl font-bold italic font-serif">Impact</h4>
-                    <p class="text-gray-600">The final result: a transformative experience that lingers long after the performance ends.</p>
-                    <div class="pt-4">
-                        <span class="text-xs text-gray-400 uppercase tracking-widest">Transformation • Legacy • Memory</span>
+                
+                <!-- Impact -->
+                <div class="futuristic-card p-8 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 italic font-serif">Impact</h3>
+                    <p class="text-gray-400 mb-6">
+                        The final result: a transformative experience that lingers long after the performance ends. 
+                        Creating lasting change through art.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-white/10">
+                        <div class="text-xs text-gold-500 uppercase tracking-widest">Transformation • Legacy • Memory</div>
                     </div>
                 </div>
             </div>
-
-            <!-- Creative Manifesto -->
-            <div class="mt-20 pt-10 border-t border-black/10">
-                <div class="max-w-3xl mx-auto text-center">
-                    <h3 class="text-2xl md:text-3xl font-serif italic mb-6 text-black/70">The Upphilan Manifesto</h3>
-                    <p class="text-lg text-gray-700 leading-relaxed">
+            
+            <!-- Manifesto -->
+            <div class="mt-20 pt-12 border-t border-white/10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-gold-500">The Upphilan Manifesto</h3>
+                    <p class="text-xl text-gray-300 leading-relaxed italic">
                         We believe in the power of structured creativity. Where legal precision meets artistic freedom, 
                         where every word is chosen with intention, and every note resonates with purpose. This is where 
                         transformation begins.
@@ -357,279 +636,300 @@
     </section>
 
     <!-- Projects Preview -->
-    <section id="projects" class="py-20 px-6 md:px-10 bg-white text-black">
+    <section id="projects" class="py-20 md:py-32 px-6 md:px-10">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-10 text-center">Featured Projects</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Featured <span class="text-gradient">Projects</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    A glimpse into our creative laboratory
+                </p>
+            </div>
             
-            <div id="featured-projects-container" class="grid md:grid-cols-3 gap-6">
-                <!-- Projects will be loaded dynamically from portfolio.html -->
-                <div class="project-card-skeleton h-64 rounded-2xl"></div>
-                <div class="project-card-skeleton h-64 rounded-2xl"></div>
-                <div class="project-card-skeleton h-64 rounded-2xl"></div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <div class="futuristic-card overflow-hidden group cursor-pointer" onclick="window.location.href='portfolio.html'">
+                    <div class="h-48 bg-gradient-to-br from-gold-500/20 to-black relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-xs uppercase tracking-widest text-gold-400 bg-black/50 px-3 py-1 rounded-full">Poetry</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Silent Echoes</h4>
+                        <p class="text-gray-400 mb-4">A spoken word album exploring the spaces between words and meaning.</p>
+                        <div class="flex items-center text-gold-500 text-sm">
+                            <span>View Project</span>
+                            <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="futuristic-card overflow-hidden group cursor-pointer" onclick="window.location.href='portfolio.html'">
+                    <div class="h-48 bg-gradient-to-br from-gold-500/20 to-black relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-xs uppercase tracking-widest text-gold-400 bg-black/50 px-3 py-1 rounded-full">Music</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Sound of Awakening</h4>
+                        <p class="text-gray-400 mb-4">Musical compositions paired with transformative spoken word pieces.</p>
+                        <div class="flex items-center text-gold-500 text-sm">
+                            <span>View Project</span>
+                            <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="futuristic-card overflow-hidden group cursor-pointer" onclick="window.location.href='portfolio.html'">
+                    <div class="h-48 bg-gradient-to-br from-gold-500/20 to-black relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-xs uppercase tracking-widest text-gold-400 bg-black/50 px-3 py-1 rounded-full">Performance</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Live at The Temple</h4>
+                        <p class="text-gray-400 mb-4">A recorded live performance merging poetry, music, and visual art.</p>
+                        <div class="flex items-center text-gold-500 text-sm">
+                            <span>View Project</span>
+                            <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="text-center mt-12">
-                <a href="portfolio.html" class="px-8 py-3 border border-black rounded-full font-bold hover:bg-black hover:text-white transition-colors inline-block">
-                    View All Projects
+                <a href="portfolio.html" class="px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full hover:bg-gold-500/10 transition-all duration-300 inline-flex items-center space-x-3">
+                    <i class="fas fa-briefcase"></i>
+                    <span>View All Projects</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <section class="py-12 md:py-20 text-center bg-white text-black border-t border-black/10">
-        <div class="max-w-4xl mx-auto px-6">
-            <h3 class="text-2xl font-serif italic mb-4">Upphilan Creative Lab</h3>
-            <p class="text-gray-600 mb-8">Where legal precision meets artistic soul. Where structure dances with freedom.</p>
-            
-            <div class="flex flex-wrap justify-center gap-6 mb-8">
-                <a href="https://www.instagram.com/p.paulthegreat?igsh=dDVsempnMnBrZGw2" target="_blank" class="text-gray-500 hover:text-gold-500 transition-colors">Instagram</a>
-                <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-500 hover:text-gold-500 transition-colors">LinkedIn</a>
-                <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="text-gray-500 hover:text-gold-500 transition-colors">YouTube</a>
-                <a href="inquiry.html" class="text-gray-500 hover:text-gold-500 transition-colors">Contact</a>
-            </div>
-            
-            <p class="text-xs font-mono tracking-widest uppercase opacity-40 italic">Designed for 2039 — P. Paul (The Great)</p>
-            <div class="mt-6">
-                <a href="index.html" class="text-sm text-gray-500 hover:text-black transition-colors">← Back to Main Site</a>
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="futuristic-card p-12 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 to-transparent"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 relative z-10">
+                    Ready to Create Something Extraordinary?
+                </h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">
+                    Partner with Upphilan Creative Lab to transform your ideas into powerful artistic expressions.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                    <a href="inquiry.html" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-handshake mr-2"></i> Start a Project
+                    </a>
+                    <a href="mailto:contact@ppaulthegreat.com" class="px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full hover:bg-gold-500/10 transition-all duration-300">
+                        <i class="fas fa-envelope mr-2"></i> Contact Studio
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- JavaScript -->
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                            <span class="font-bold text-black">U</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">UPHILAN</h3>
+                            <p class="text-sm text-gray-500">Creative Lab</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Where thoughts breathe, words ignite, and sounds find their soul.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Home</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Portfolio</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Blog</a></li>
+                        <li><a href="young.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Vision for Young</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Creative Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Spoken Word</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Music Composition</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Creative Writing</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Art Direction</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="mailto:contact@ppaulthegreat.com" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Studio inquiries and creative collaborations.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/10 text-center">
+                <p class="text-gray-500 text-sm">
+                    © 2026 Upphilan Creative Lab. All rights reserved. | A P. Paul (The Great) Initiative
+                </p>
+                <p class="text-gray-600 text-xs mt-2">
+                    "Art is the sound of a waking soul." - P. Paul
+                </p>
+            </div>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu functionality (45% width with X button)
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-            const closeMenuBtn = document.getElementById('close-menu-btn');
+            // Mobile Menu Functionality
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
             
-            // Open mobile menu
-            mobileMenuBtn.addEventListener('click', () => {
+            function openMobileMenu() {
                 mobileMenu.classList.add('active');
-                mobileMenuOverlay.classList.add('active');
+                mobileMenuBackdrop.classList.add('active');
                 document.body.style.overflow = 'hidden';
-            });
+            }
             
-            // Close mobile menu
             function closeMobileMenu() {
                 mobileMenu.classList.remove('active');
-                mobileMenuOverlay.classList.remove('active');
+                mobileMenuBackdrop.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
             
-            // Close menu with X button
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
             closeMenuBtn.addEventListener('click', closeMobileMenu);
+            mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
             
-            // Close menu when clicking overlay
-            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-            
-            // Close mobile menu when clicking a link
+            // Close menu when clicking links
             mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    setTimeout(closeMobileMenu, 300);
-                });
+                link.addEventListener('click', closeMobileMenu);
             });
             
-            // Magic blob follows mouse
-            const magicBlob = document.getElementById('magic-blob');
+            // Magic Blob Animation
+            const magicBlob = document.getElementById('magicBlob');
             
-            document.addEventListener('mousemove', (e) => {
-                const { clientX, clientY } = e;
-                
-                gsap.to(magicBlob, {
-                    x: clientX - 150,
-                    y: clientY - 150,
-                    duration: 1.5,
-                    ease: "power2.out"
-                });
-            });
-            
-            // Button interactions
-            document.getElementById('explore-btn')?.addEventListener('click', () => {
-                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-            });
-            
-            // Animate the header text on load
-            gsap.from('h1', {
-                opacity: 0.05,
-                scale: 0.8,
-                duration: 2,
-                ease: "power2.out"
-            });
-            
-            // Function to load featured projects from portfolio.html
-            async function loadFeaturedProjects() {
-                const container = document.getElementById('featured-projects-container');
-                if (!container) return;
-                
-                try {
-                    // First, try to load portfolio.html
-                    const response = await fetch('portfolio.html');
-                    const html = await response.text();
+            if (magicBlob) {
+                // Move blob with mouse
+                document.addEventListener('mousemove', (e) => {
+                    const x = e.clientX - 150;
+                    const y = e.clientY - 150;
                     
-                    // Create a temporary DOM element to parse the HTML
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    
-                    // Look for featured projects in portfolio.html
-                    // Adjust the selector based on your portfolio.html structure
-                    const portfolioProjects = doc.querySelectorAll('.portfolio-item, .project-item, .featured-work');
-                    
-                    // Clear skeleton loaders
-                    container.innerHTML = '';
-                    
-                    if (portfolioProjects.length > 0) {
-                        // Take up to 3 featured projects
-                        const featuredProjects = Array.from(portfolioProjects).slice(0, 3);
-                        
-                        featuredProjects.forEach((project, index) => {
-                            // Create project card based on portfolio.html structure
-                            const projectCard = document.createElement('div');
-                            projectCard.className = 'group overflow-hidden rounded-2xl bg-black text-white h-64';
-                            
-                            // Try to extract project data
-                            const title = project.querySelector('h3, h4, .project-title')?.textContent || `Project ${index + 1}`;
-                            const description = project.querySelector('p, .project-desc')?.textContent || 'Creative work from portfolio';
-                            const image = project.querySelector('img')?.src || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80';
-                            const category = project.querySelector('.category, .tag')?.textContent || 'Creative';
-                            
-                            projectCard.innerHTML = `
-                                <div class="h-48 bg-gradient-to-br from-gold-500 to-black relative" style="background-image: url('${image}'); background-size: cover; background-position: center;">
-                                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
-                                    <div class="absolute bottom-4 left-4">
-                                        <span class="text-xs uppercase tracking-widest text-gold-400">${category}</span>
-                                    </div>
-                                </div>
-                                <div class="p-6">
-                                    <h4 class="text-xl font-bold mb-2">${title}</h4>
-                                    <p class="text-gray-400 text-sm">${description.substring(0, 100)}${description.length > 100 ? '...' : ''}</p>
-                                </div>
-                            `;
-                            
-                            // Add click event to view project
-                            projectCard.addEventListener('click', () => {
-                                window.location.href = 'portfolio.html';
-                            });
-                            
-                            container.appendChild(projectCard);
-                        });
-                    } else {
-                        // Fallback to default projects if no projects found
-                        loadDefaultProjects();
-                    }
-                } catch (error) {
-                    console.error('Error loading portfolio projects:', error);
-                    // Fallback to default projects
-                    loadDefaultProjects();
-                }
-            }
-            
-            // Function to load default projects (fallback)
-            function loadDefaultProjects() {
-                const container = document.getElementById('featured-projects-container');
-                if (!container) return;
-                
-                container.innerHTML = '';
-                
-                const defaultProjects = [
-                    {
-                        title: "Silent Echoes",
-                        description: "A spoken word album exploring the spaces between words and meaning.",
-                        category: "Poetry",
-                        image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
-                    },
-                    {
-                        title: "Sound of Awakening",
-                        description: "Musical compositions paired with transformative spoken word pieces.",
-                        category: "Music",
-                        image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
-                    },
-                    {
-                        title: "Live at The Temple",
-                        description: "A recorded live performance merging poetry, music, and visual art.",
-                        category: "Performance",
-                        image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
-                    }
-                ];
-                
-                defaultProjects.forEach(project => {
-                    const projectCard = document.createElement('div');
-                    projectCard.className = 'group overflow-hidden rounded-2xl bg-black text-white h-64 cursor-pointer';
-                    
-                    projectCard.innerHTML = `
-                        <div class="h-48 bg-gradient-to-br from-gold-500 to-black relative" style="background-image: url('${project.image}'); background-size: cover; background-position: center;">
-                            <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
-                            <div class="absolute bottom-4 left-4">
-                                <span class="text-xs uppercase tracking-widest text-gold-400">${project.category}</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h4 class="text-xl font-bold mb-2">${project.title}</h4>
-                            <p class="text-gray-400 text-sm">${project.description}</p>
-                        </div>
-                    `;
-                    
-                    projectCard.addEventListener('click', () => {
-                        window.location.href = 'portfolio.html';
+                    gsap.to(magicBlob, {
+                        x: x,
+                        y: y,
+                        duration: 1.5,
+                        ease: "power2.out"
                     });
-                    
-                    container.appendChild(projectCard);
+                });
+                
+                // Pulsing animation
+                gsap.to(magicBlob, {
+                    scale: 1.2,
+                    duration: 2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
                 });
             }
             
-            // Load featured projects
-            loadFeaturedProjects();
-            
-            // Animate sections on scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        gsap.from(entry.target, {
-                            opacity: 0,
-                            y: 50,
-                            duration: 1,
-                            ease: "power2.out"
-                        });
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe all sections
-            document.querySelectorAll('section > div').forEach((section) => {
-                observer.observe(section);
-            });
-            
-            // Smooth scrolling for all anchor links
+            // Smooth scroll for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        // Account for fixed header
-                        const headerHeight = document.querySelector('nav').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        
+                        e.preventDefault();
                         window.scrollTo({
-                            top: targetPosition,
+                            top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
             
-            // Add hover effect to cards
-            document.querySelectorAll('.group').forEach(card => {
+            // GSAP Animations
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate cards on scroll
+            gsap.utils.toArray('.futuristic-card').forEach(card => {
+                gsap.from(card, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+            
+            // Animate sections on scroll
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                gsap.from(section, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+            
+            // Background image parallax effect
+            const heroBg = document.querySelector('.hero-bg-image');
+            if (heroBg) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.5;
+                    heroBg.style.transform = `translateY(${rate}px)`;
+                });
+            }
+            
+            // Logo click to go home
+            document.querySelector('nav a[href="index.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            });
+            
+            // Project card hover effects
+            document.querySelectorAll('.futuristic-card').forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     gsap.to(this, {
                         y: -5,
@@ -645,6 +945,15 @@
                         ease: "power2.out"
                     });
                 });
+            });
+            
+            // Hero title animation
+            gsap.from('.hero-title', {
+                opacity: 0,
+                y: 50,
+                duration: 1.5,
+                delay: 0.5,
+                ease: "power3.out"
             });
         });
     </script>
