@@ -3,178 +3,970 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Architect | P. Paul (The Great)</title>
+    <title>About — P. Paul (The Great) | Poet & Humanitarian Advocate</title>
+    <meta name="description" content="Learn more about P. Paul (The Great) — poet, spoken word artist, public speaker, and humanitarian advocate dedicated to peace, youth empowerment, and human transformation.">
     
-    <meta property="og:title" content="About P. Paul (The Great) | The Architect of Transformation">
-    <meta property="og:description" content="Poet, Law Scholar, and Humanitarian Advocate speaking the language of peace.">
-    <meta property="og:image" content="https://yourwebsite.com/about-preview.jpg">
-
+    <!-- Enhanced Tailwind for 2030 design -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom scroll animation library -->
     <style>
-        :root { --gold: #d4af37; --onyx: #050505; }
-        body { background: var(--onyx); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .gold-gradient { background: linear-gradient(to right, #d4af37, #f2d06b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        /* 2030 Design System Variables */
+        :root {
+            --gold-400: #f0c674;
+            --gold-500: #d4af37;
+            --gold-600: #b8941f;
+            --onyx: #050505;
+            --neon-glow: 0 0 30px rgba(212, 175, 55, 0.6);
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --glass-bg: rgba(10, 10, 10, 0.85);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f0c674 100%);
+        }
         
-        /* Kinetic Text Effect */
-        .reveal-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
         
-        .bento-item { transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
-        .bento-item:hover { background: rgba(255, 255, 255, 0.05); transform: translateY(-5px); border-color: var(--gold); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--gold-500), var(--gold-600));
+            border-radius: 5px;
+        }
+        
+        /* Selection Styling */
+        ::selection {
+            background: var(--gold-500);
+            color: #000;
+        }
+        
+        /* Utility Classes */
+        .bg-onyx { background-color: var(--onyx); }
+        .text-gold-500 { color: var(--gold-500); }
+        .bg-gold-500 { background-color: var(--gold-500); }
+        .border-gold-500 { border-color: var(--gold-500); }
+        
+        /* Glass Morphism Effect */
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        
+        /* Futuristic Card */
+        .futuristic-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .futuristic-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(212, 175, 55, 0.05) 0%,
+                transparent 50%,
+                rgba(212, 175, 55, 0.05) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .futuristic-card:hover::before {
+            opacity: 1;
+        }
+        
+        .futuristic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--neon-glow);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Text Animations */
+        .text-gradient {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(212, 175, 55, 0.5);
+            color: transparent;
+        }
+        
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Pulse Animation */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        /* Mobile Menu - Sidebar 50% */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%;
+            min-width: 300px;
+            max-width: 400px;
+            height: 100vh;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu-container.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Menu Close Button */
+        .menu-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .menu-close-btn:hover {
+            background: var(--gold-500);
+            transform: rotate(90deg);
+        }
+        
+        .menu-close-btn:hover i {
+            color: #000;
+        }
+        
+        /* Admin Link Styling */
+        .admin-link {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-link:hover {
+            color: var(--gold-500);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+        }
+        
+        .admin-link::after {
+            content: '✦';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: var(--gold-500);
+            font-size: 0.8rem;
+        }
+        
+        .admin-link:hover::after {
+            opacity: 1;
+        }
+        
+        /* Responsive Typography */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 3.5rem;
+                line-height: 1;
+            }
+            
+            .mobile-menu-container {
+                width: 85%;
+                min-width: 280px;
+            }
+        }
+        
+        /* Section Spacing */
+        section {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Gradient Underline */
+        .gradient-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gradient-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+        
+        /* Loading Animation */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        .shimmer-text {
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(212, 175, 55, 0.5) 50%, 
+                transparent 100%);
+            background-size: 200% auto;
+            animation: shimmer 3s infinite linear;
+        }
+        
+        /* Timeline Style */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.8rem;
+            width: 2px;
+            height: calc(100% + 0.7rem);
+            background: rgba(212, 175, 55, 0.3);
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        /* Mission Highlight */
+        .mission-highlight {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mission-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .mission-highlight:hover::before {
+            left: 100%;
+        }
     </style>
 </head>
-<body>
+<body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 py-4 px-6 md:px-10 glass-effect border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                    <span class="font-bold text-black text-lg">P</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight group-hover:text-gold-500 transition-colors">P. PAUL</span>
+                    <span class="text-xs text-gray-400">The Great</span>
+                </div>
+            </a>
 
-    <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center bg-black/50 backdrop-blur-lg border-b border-white/5">
-        <a href="index.html" class="text-xl font-serif italic font-bold">P. Paul <span class="text-gold-500">.</span></a>
-        <div class="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[0.4em]">
-            <a href="index.html" class="hover:text-gold-500 transition-all">Home</a>
-            <a href="about.html" class="text-gold-500">The Architect</a>
-            <a href="portfolio.html" class="hover:text-gold-500 transition-all">Works</a>
-            <a href="blog.html" class="hover:text-gold-500 transition-all">Journal</a>
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="index.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Home
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="about.html" class="text-sm font-medium text-gold-500 relative group">
+                    About
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gold-500"></span>
+                </a>
+                <a href="inquiry.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Inquiry
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="blog.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Blog
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="young.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Young
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="upphilan.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Upphilan
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="portfolio.html" class="text-sm font-medium hover:text-gold-500 transition-colors relative group">
+                    Portfolio
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                
+                <!-- CTA Button -->
+                <a href="inquiry.html" class="ml-4 px-6 py-2 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    Book Now
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="lg:hidden flex flex-col space-y-1.5 p-2">
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-4 h-0.5 bg-white ml-auto"></span>
+            </button>
         </div>
-        <a href="admin.html" class="text-[9px] border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all">ENGINE ROOM</a>
     </nav>
 
-    <section class="min-h-screen pt-40 px-6 md:px-12 flex flex-col justify-center">
-        <div class="max-w-7xl mx-auto w-full">
-            <h1 class="reveal-text text-6xl md:text-[10vw] font-black uppercase leading-[0.85] tracking-tighter">
-                The <span class="gold-gradient italic font-serif capitalize">Architect</span><br>of Purpose.
+    <!-- Mobile Menu Backdrop -->
+    <div id="mobileMenuBackdrop" class="mobile-menu-backdrop"></div>
+
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobileMenu" class="mobile-menu-container glass-effect">
+        <button id="closeMenuBtn" class="menu-close-btn">
+            <i class="fas fa-times text-lg"></i>
+        </button>
+        
+        <div class="h-full flex flex-col pt-20 px-8">
+            <div class="mb-10">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                        <span class="font-bold text-black text-xl">P</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl">P. PAUL</h3>
+                        <p class="text-gray-400 text-sm">The Great</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <a href="index.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-home w-6 mr-3"></i> Home
+                    </a>
+                    <a href="about.html" class="block text-lg font-medium text-gold-500 py-2 border-b border-white/5">
+                        <i class="fas fa-user w-6 mr-3"></i> About
+                    </a>
+                    <a href="inquiry.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-envelope w-6 mr-3"></i> Inquiry
+                    </a>
+                    <a href="blog.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-blog w-6 mr-3"></i> Blog
+                    </a>
+                    <a href="young.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-users w-6 mr-3"></i> Young
+                    </a>
+                    <a href="upphilan.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-hands-helping w-6 mr-3"></i> Upphilan
+                    </a>
+                    <a href="portfolio.html" class="block text-lg font-medium hover:text-gold-500 transition-colors py-2 border-b border-white/5">
+                        <i class="fas fa-briefcase w-6 mr-3"></i> Portfolio
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-auto pb-10">
+                <a href="inquiry.html" class="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-lg flex items-center justify-center space-x-2 hover:shadow-lg transition-all">
+                    <i class="fas fa-microphone"></i>
+                    <span>Invite to Speak</span>
+                </a>
+                
+                <div class="flex justify-center space-x-6 mt-8">
+                    <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[70vh] flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Hero Background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80 z-0"></div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+            <div class="inline-block mb-8">
+                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide animate-float">
+                    <i class="fas fa-star mr-2"></i> The Journey & Mission
+                </span>
+            </div>
+            
+            <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-bold mb-6">
+                <span class="text-gradient block">About</span>
+                <span class="text-white block italic text-4xl md:text-6xl lg:text-7xl mt-2">P. Paul (The Great)</span>
             </h1>
-            <div class="mt-12 flex flex-col md:flex-row justify-between items-end gap-8">
-                <p class="max-w-xl text-gray-400 text-lg md:text-xl leading-relaxed">
-                    My name is <span class="text-white font-bold">Paul Okewunmi</span>. professionally known as P. Paul (The Great). 
-                    I bridge the discipline of Law with the soul of Spoken Word to ignite a generation.
+            
+            <div class="futuristic-card inline-block px-8 py-6 md:px-12 md:py-8 max-w-4xl mx-auto mb-10">
+                <p class="hero-subtitle text-xl md:text-2xl font-semibold text-gray-100 mb-3">
+                    Poet • Spoken Word Artist • Public Speaker • Humanitarian Advocate
                 </p>
-                <div class="flex gap-4">
-                    <div class="w-12 h-12 rounded-full border border-gold-500 flex items-center justify-center animate-bounce">
-                        <span class="text-gold-500">↓</span>
+                <p class="text-lg md:text-xl text-gray-300 italic">
+                    A voice committed to peace, healing, and human transformation
+                </p>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#journey" class="group px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full flex items-center space-x-3 hover:shadow-2xl hover:scale-105 transition-all duration-300 pulse-glow">
+                    <i class="fas fa-book-open"></i>
+                    <span>Explore Journey</span>
+                    <i class="fas fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                </a>
+                
+                <a href="inquiry.html" class="group px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full flex items-center space-x-3 hover:bg-gold-500/10 transition-all duration-300">
+                    <i class="fas fa-handshake"></i>
+                    <span>Collaborate</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+            <a href="#journey" class="flex flex-col items-center text-gray-400 hover:text-gold-500 transition-colors animate-bounce">
+                <span class="text-sm mb-2">Discover</span>
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="py-20 md:py-32 px-6 md:px-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    The <span class="text-gradient">Journey</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    From passion to purpose, shaping lives through creativity and advocacy
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Text Content -->
+                <div class="space-y-8">
+                    <div class="futuristic-card p-8 mission-highlight">
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            My name is <span class="font-semibold text-white">Paul Okewunmi</span>, professionally known as 
+                            <span class="text-gold-500 font-bold">P. Paul (The Great)</span>. I am a poet, spoken word artist, 
+                            music composer, public speaker, and humanitarian advocate deeply committed to human development 
+                            and youth empowerment.
+                        </p>
+                    </div>
+                    
+                    <div class="futuristic-card p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-gradient">Founder & Visionary</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            I am the Founder of <span class="font-semibold text-white">Young Generation of Exploits</span>, 
+                            a purpose-driven initiative established to build confident, value-conscious, and impact-oriented 
+                            young people. Through this platform, I help young individuals develop clarity of purpose, 
+                            self-belief, and the courage to contribute meaningfully to society.
+                        </p>
+                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-500 text-sm">
+                            <i class="fas fa-bullseye mr-2"></i> Building the next generation of leaders
+                        </div>
+                    </div>
+                    
+                    <div class="futuristic-card p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-gradient">The Legal Mind</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            As an undergraduate of <span class="font-semibold text-white">Law</span>, I bring structure, 
+                            advocacy, and ethical awareness into my work—bridging creativity with responsibility, and 
+                            inspiration with action.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Timeline -->
+                <div class="space-y-8">
+                    <div class="futuristic-card p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gradient">Core Beliefs</h3>
+                        <div class="space-y-6">
+                            <div class="timeline-item">
+                                <h4 class="text-xl font-semibold mb-2">Unlimited Potential</h4>
+                                <p class="text-gray-300">
+                                    Young people can become whoever they dare to dream of—regardless of age, color, or background.
+                                </p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <h4 class="text-xl font-semibold mb-2">Transformative Power of Words</h4>
+                                <p class="text-gray-300">
+                                    Words have the power to heal, build, and transform lives when used responsibly.
+                                </p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <h4 class="text-xl font-semibold mb-2">Creativity as Service</h4>
+                                <p class="text-gray-300">
+                                    Creativity is not just expression—it is responsibility toward healing and unity.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="futuristic-card p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-gradient">The Mission</h3>
+                        <p class="text-gray-300 mb-4">
+                            Through poetry, spoken word performances, public speaking engagements, music, and community 
+                            initiatives, I contribute to lives and destinies. My work is grounded in lived experiences, 
+                            measurable impact, and verifiable testimonies of transformation.
+                        </p>
+                        <p class="text-gray-300 italic border-l-4 border-gold-500 pl-4">
+                            I speak the language of <span class="font-semibold text-gold-500">peace, healing, and human transformation</span>, 
+                            using creativity as a tool to restore hope, ignite purpose, and inspire a generation to rise 
+                            beyond limitations.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-20 px-6 md:px-12">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="md:col-span-2 glass p-10 rounded-[3rem] bento-item">
-                <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gold-500 mb-6">The Mission</h3>
-                <p class="text-2xl md:text-3xl font-serif italic leading-snug">
-                    "I am the Founder of Young Generation of Exploits, established to build confident, value-conscious, and impact-oriented young people."
-                </p>
-                <div class="mt-10 h-[1px] w-full bg-white/10"></div>
-                <p class="mt-10 text-gray-400 leading-relaxed">
-                    As an undergraduate of Law, I bring structure, advocacy, and ethical awareness into my work—bridging creativity with responsibility, and inspiration with action. At the core of everything I do is a defining belief: young people can become whoever they dare to dream of.
+    <!-- Values Section -->
+    <section class="py-20 md:py-32 px-6 md:px-10 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    What I <span class="text-gradient">Stand For</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    The pillars that guide my work and define my impact
                 </p>
             </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Purpose Card -->
+                <div class="futuristic-card p-8 group">
+                    <div class="text-5xl mb-6 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Purpose</h3>
+                    <p class="text-gray-400 mb-6">
+                        Helping individuals discover meaning, direction, and clarity in life. 
+                        Every life has a unique calling, and my mission is to help uncover it.
+                    </p>
+                    <div class="inline-flex items-center text-gold-500 font-semibold text-sm">
+                        <i class="fas fa-quote-left mr-2"></i> Find your why, live your purpose
+                    </div>
+                </div>
+                
+                <!-- Peace Card -->
+                <div class="futuristic-card p-8 group">
+                    <div class="text-5xl mb-6 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Peace</h3>
+                    <p class="text-gray-400 mb-6">
+                        Using words and creativity as instruments of healing and unity. 
+                        Building bridges where walls once stood through art and dialogue.
+                    </p>
+                    <div class="inline-flex items-center text-gold-500 font-semibold text-sm">
+                        <i class="fas fa-quote-left mr-2"></i> Words that heal, voices that unite
+                    </div>
+                </div>
+                
+                <!-- Impact Card -->
+                <div class="futuristic-card p-8 group">
+                    <div class="text-5xl mb-6 text-gold-500 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Impact</h3>
+                    <p class="text-gray-400 mb-6">
+                        Creating real, lasting change in lives, communities, and futures. 
+                        Measurable transformation that echoes through generations.
+                    </p>
+                    <div class="inline-flex items-center text-gold-500 font-semibold text-sm">
+                        <i class="fas fa-quote-left mr-2"></i> Change that lasts, impact that matters
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="glass p-10 rounded-[3rem] bento-item flex flex-col justify-between">
+    <!-- Quote Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="futuristic-card p-12 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 to-transparent"></div>
+                <div class="relative z-10">
+                    <div class="text-6xl text-gold-500/30 mb-4">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <blockquote class="text-2xl md:text-3xl font-semibold text-gray-100 mb-8 italic">
+                        "Creativity is not just expression—it is responsibility.  
+                        When words are used rightly, they heal, build, and transform lives."
+                    </blockquote>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                            <span class="font-bold text-black">P</span>
+                        </div>
+                        <div>
+                            <p class="font-bold">P. Paul (The Great)</p>
+                            <p class="text-sm text-gray-400">Poet & Humanitarian Advocate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="futuristic-card p-12 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 to-transparent"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 relative z-10">
+                    Let's Create Meaningful Impact Together
+                </h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">
+                    If my journey, message, or mission resonates with you, 
+                    I would be honored to collaborate on creating transformative experiences.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                    <a href="inquiry.html" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-microphone mr-2"></i> Invite Me to Speak or Perform
+                    </a>
+                    <a href="mailto:contact@ppaulthegreat.com" class="px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full hover:bg-gold-500/10 transition-all duration-300">
+                        <i class="fas fa-envelope mr-2"></i> Start a Conversation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gold-500 mb-10">Pillars</h3>
-                    <ul class="space-y-6">
-                        <li class="flex items-center gap-4">
-                            <span class="text-gold-500 font-bold">01.</span>
-                            <span class="text-xl font-bold">Law & Ethics</span>
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <span class="text-gold-500 font-bold">02.</span>
-                            <span class="text-xl font-bold">Poetic Advocacy</span>
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <span class="text-gold-500 font-bold">03.</span>
-                            <span class="text-xl font-bold">Youth Empowerment</span>
-                        </li>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                            <span class="font-bold text-black">P</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">P. PAUL</h3>
+                            <p class="text-sm text-gray-500">The Great</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Speaking the language of peace, healing, and human transformation.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Home</a></li>
+                        <li><a href="about.html" class="text-gold-500 text-sm">About</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Portfolio</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Blog</a></li>
                     </ul>
                 </div>
-                <div class="mt-10">
-                    <p class="text-[10px] uppercase tracking-widest text-gray-500">Active Since</p>
-                    <p class="text-4xl font-black italic">2026</p>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="inquiry.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Public Speaking</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Poetry Performances</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Workshops</a></li>
+                        <li><a href="upphilan.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Advocacy Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="mailto:contact@ppaulthegreat.com" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Available for global engagements and collaborations.
+                    </p>
                 </div>
             </div>
-
-        </div>
-    </section>
-
-    <section class="py-32 px-6 md:px-12 bg-white text-black rounded-[4rem]">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-20">The <span class="italic font-serif">Philosophy</span></h2>
             
-            <div class="grid md:grid-cols-3 gap-16">
-                <div>
-                    <h4 class="text-3xl font-serif italic mb-4">Purpose</h4>
-                    <p class="text-gray-600">Helping individuals discover meaning, direction, and clarity beyond the noise of the world.</p>
-                </div>
-                <div>
-                    <h4 class="text-3xl font-serif italic mb-4">Peace</h4>
-                    <p class="text-gray-600">Using words and creativity as surgical instruments of healing and communal unity.</p>
-                </div>
-                <div>
-                    <h4 class="text-3xl font-serif italic mb-4">Impact</h4>
-                    <p class="text-gray-600">Creating real, measurable change in lives, communities, and global futures.</p>
-                </div>
+            <div class="pt-8 border-t border-white/10 text-center">
+                <p class="text-gray-500 text-sm">
+                    © 2026 P. Paul (The Great). All rights reserved. | Designed for impact and inspiration.
+                </p>
+                <p class="text-gray-600 text-xs mt-2">
+                    "Creativity is not just expression—it is responsibility." - P. Paul
+                </p>
             </div>
         </div>
-    </section>
-
-    <section class="py-40 px-6 md:px-12 text-center">
-        <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-8">Ready to <span class="gold-gradient italic font-serif capitalize">Transform?</span></h2>
-        <p class="text-gray-500 max-w-2xl mx-auto mb-12">Collaborate with P. Paul (The Great) for speaking engagements, spoken word performances, or humanitarian initiatives.</p>
-        <div class="flex flex-col md:flex-row gap-6 justify-center">
-            <a href="mailto:hello@websiteppaul.com" class="bg-[#d4af37] text-black font-black px-12 py-5 rounded-full hover:scale-105 transition-all">INVITE TO SPEAK</a>
-            <a href="portfolio.html" class="border border-white/20 text-white font-black px-12 py-5 rounded-full hover:bg-white hover:text-black transition-all">VIEW RECENT WORKS</a>
-        </div>
-    </section>
-
-    <footer class="py-20 px-6 border-t border-white/5 text-center">
-        <p class="text-xs font-black uppercase tracking-[0.5em] text-gray-600">P. Paul (The Great)</p>
-        <p class="mt-4 font-serif italic text-gray-400">"Creativity is not just expression—it is responsibility."</p>
-        <div class="mt-10 flex justify-center gap-8 text-[10px] font-bold text-gray-500">
-            <a href="#">INSTAGRAM</a>
-            <a href="#">LINKEDIN</a>
-            <a href="#">WHATSAPP</a>
-        </div>
-        <p class="mt-10 text-[9px] text-gray-800 uppercase tracking-widest">© 2026 All Rights Reserved.</p>
     </footer>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Hero Animation
-        gsap.from(".reveal-text", {
-            y: 100,
-            opacity: 0,
-            duration: 1.5,
-            ease: "power4.out"
-        });
-
-        // Bento Cards staggered reveal
-        gsap.from(".bento-item", {
-            scrollTrigger: {
-                trigger: ".bento-item",
-                start: "top 80%"
-            },
-            y: 50,
-            opacity: 0,
-            stagger: 0.2,
-            duration: 1
-        });
-
-        // Section Color Change on Scroll
-        gsap.to("body", {
-            scrollTrigger: {
-                trigger: ".bg-white",
-                start: "top center",
-                end: "bottom center",
-                toggleActions: "play reverse play reverse"
-            },
-            backgroundColor: "#ffffff",
-            duration: 0.5
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register GSAP plugins
+            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+            
+            // Mobile Menu Functionality
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+            
+            function openMobileMenu() {
+                mobileMenu.classList.add('active');
+                mobileMenuBackdrop.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                mobileMenuBackdrop.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+            closeMenuBtn.addEventListener('click', closeMobileMenu);
+            mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+            
+            // Close menu when clicking links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Animations with GSAP
+            // Hero text animation
+            gsap.from('.hero-title span', {
+                y: 100,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.3,
+                ease: "power4.out"
+            });
+            
+            // Hero card animation
+            gsap.from('.hero-subtitle', {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.5,
+                ease: "power3.out"
+            });
+            
+            // Card animations on scroll
+            gsap.utils.toArray('.futuristic-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: i * 0.1,
+                    ease: "power3.out"
+                });
+            });
+            
+            // Timeline items animation
+            gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+                gsap.from(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    x: -30,
+                    opacity: 0,
+                    duration: 0.7,
+                    delay: i * 0.2,
+                    ease: "power3.out"
+                });
+            });
+            
+            // Navigation scroll effect
+            gsap.to('nav', {
+                scrollTrigger: {
+                    trigger: '#journey',
+                    start: "top top",
+                    end: "+=100",
+                    scrub: true
+                },
+                backgroundColor: "rgba(5,5,5,0.95)",
+                backdropFilter: "blur(20px)",
+                ease: "none"
+            });
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        gsap.to(window, {
+                            duration: 1,
+                            scrollTo: {
+                                y: targetElement,
+                                offsetY: 80
+                            },
+                            ease: "power3.inOut"
+                        });
+                    }
+                });
+            });
+            
+            // Logo click to scroll to top
+            document.querySelector('nav a[href="index.html"]').addEventListener('click', function(e) {
+                if (window.location.pathname.endsWith('index.html')) {
+                    e.preventDefault();
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: 0,
+                        ease: "power3.inOut"
+                    });
+                }
+            });
+            
+            // Quote animation
+            gsap.from('blockquote', {
+                scrollTrigger: {
+                    trigger: 'blockquote',
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                scale: 0.9,
+                opacity: 0,
+                duration: 1,
+                ease: "back.out(1.7)"
+            });
+            
+            // Mission highlight animation
+            gsap.from('.mission-highlight', {
+                scrollTrigger: {
+                    trigger: '.mission-highlight',
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                scale: 0.95,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+            
+            // Add loading animation to images
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('load', function() {
+                    this.classList.add('loaded');
+                });
+                
+                if (img.complete) {
+                    img.classList.add('loaded');
+                }
+            });
+            
+            // Parallax effect for hero section
+            gsap.to('.hero-title', {
+                scrollTrigger: {
+                    trigger: '.hero-title',
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                },
+                y: -100,
+                ease: "none"
+            });
         });
     </script>
 </body>
-</html>
+    </html>
