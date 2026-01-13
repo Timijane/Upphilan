@@ -20,10 +20,10 @@
     
     <!-- DYNAMIC SOCIAL META TAGS -->
     <meta property="og:site_name" content="The Inkwell by P. Paul (The Great)">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="The Inkwell | P. Paul (The Great)" id="og-title">
     <meta property="og:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian" id="og-description">
-    <meta property="og:image" content="" id="og-image">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" id="og-image">
     <meta property="og:url" content="https://ppaulthegreat.com/blog.html" id="og-url">
     
     <meta name="twitter:card" content="summary_large_image" id="twitter-card">
@@ -31,7 +31,7 @@
     <meta name="twitter:creator" content="@ppaulthegreat">
     <meta name="twitter:title" content="The Inkwell | P. Paul (The Great)" id="twitter-title">
     <meta name="twitter:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian" id="twitter-description">
-    <meta name="twitter:image" content="" id="twitter-image">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" id="twitter-image">
     
     <style>
         :root {
@@ -210,59 +210,40 @@
             background: linear-gradient(135deg, #26A5E4 0%, #1E8BC3 100%);
         }
         
-        /* Read More Button Styles */
-        .read-more-btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--primary-gold);
-            color: #000;
-            font-weight: 700;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .read-more-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-            background: var(--light-gold);
-        }
-        
-        /* Droplets for truncated content */
-        .content-droplet {
+        .droplet {
             position: relative;
-            max-height: 300px;
-            overflow: hidden;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 1.5rem;
+            border-left: 4px solid var(--primary-gold);
         }
         
-        .content-droplet::after {
-            content: '';
+        .droplet::before {
+            content: '💧';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to bottom, transparent, var(--bg-dark));
+            top: -15px;
+            left: -15px;
+            font-size: 1.5rem;
+            background: var(--bg-dark);
+            padding: 5px;
         }
         
-        .content-full {
-            max-height: none;
-            overflow: visible;
+        .read-more-toggle {
+            color: var(--primary-gold);
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            margin: 1rem 0;
         }
         
-        .content-full::after {
+        .read-more-toggle:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden-content {
             display: none;
-        }
-        
-        /* Article preview styles */
-        .article-preview {
-            transition: all 0.3s ease;
-        }
-        
-        .article-preview:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -285,8 +266,8 @@
                 <a href="about.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">About</a>
                 <a href="portfolio.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">Portfolio</a>
                 <a href="inquiry.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">Contact</a>
-                <a href="inquiry.html" class="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-sm hover:shadow-lg hover:scale-105 transition-all">
-                    Join the Journey
+                <a href="#subscribe" class="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-sm hover:shadow-lg hover:scale-105 transition-all">
+                    Subscribe
                 </a>
             </div>
             
@@ -307,8 +288,8 @@
             <a href="about.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">About</a>
             <a href="portfolio.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">Portfolio</a>
             <a href="inquiry.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">Contact</a>
-            <a href="inquiry.html" class="inline-block mt-8 px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-lg">
-                Join the Journey
+            <a href="#subscribe" class="inline-block mt-8 px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-lg">
+                Subscribe
             </a>
         </div>
     </div>
@@ -410,8 +391,11 @@
                             <i class="fas fa-feather-alt text-6xl text-gray-600 mb-6"></i>
                             <h3 class="text-2xl font-bold mb-4">Coming Soon</h3>
                             <p class="text-gray-400 mb-8">
-                                New articles are being crafted. Check back soon for inspiring content.
+                                New articles are being crafted. Subscribe to be the first to know when new content is published.
                             </p>
+                            <a href="#subscribe" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full">
+                                <i class="fas fa-bell mr-2"></i> Get Notified
+                            </a>
                         </div>
                     </div>
                     
@@ -424,7 +408,6 @@
                 
                 <!-- Sidebar -->
                 <div class="lg:col-span-1">
-                    <!-- About Author -->
                     <div class="gold-border rounded-3xl p-6 mb-8">
                         <div class="flex items-center space-x-4 mb-6">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center">
@@ -444,17 +427,36 @@
                         </a>
                     </div>
                     
-                    <!-- Join the Journey -->
                     <div class="gold-border rounded-3xl p-6">
                         <h4 class="font-bold text-lg mb-4">Join the Journey</h4>
                         <p class="text-sm text-gray-300 mb-6">
-                            Connect with P. Paul for speaking engagements, collaborations, or to share your thoughts.
+                            For speaking engagements, collaborations, or to invite me to your event, please get in touch.
                         </p>
-                        <a href="inquiry.html" class="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-xl hover:shadow-lg transition-all flex items-center justify-center">
-                            <i class="fas fa-handshake mr-2"></i> Get In Touch
+                        <a href="inquiry.html" class="block w-full py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-xl hover:shadow-lg transition-all text-center">
+                            Contact Me
                         </a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Subscribe Section -->
+        <section id="subscribe" class="mb-20">
+            <div class="gold-border rounded-3xl p-8 md:p-12 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    Never Miss an <span class="text-[#D4AF37]">Insight</span>
+                </h2>
+                
+                <p class="text-xl text-gray-300 mb-8">
+                    Join 1,000+ readers who receive exclusive poetry, behind-the-scenes content, 
+                    and invitations to live spoken word sessions.
+                </p>
+                
+                <a href="inquiry.html" 
+                   class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full hover:shadow-xl hover:scale-105 transition-all">
+                    <span>Get in Touch</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
             </div>
         </section>
     </main>
@@ -600,8 +602,7 @@
             featuredCount: 3,
             sortOrder: 'newest',
             currentPage: 0,
-            hasMorePosts: true,
-            wordsPerDroplet: 500
+            hasMorePosts: true
         };
 
         // ==================== STATE MANAGEMENT ====================
@@ -725,7 +726,6 @@
                 // Get all published blog posts
                 const snapshot = await db.collection('blogs')
                     .where('published', '==', true)
-                    .orderBy('createdAt', 'desc')
                     .get();
                 
                 allPosts = [];
@@ -759,6 +759,10 @@
                 featuredLoading.classList.add('hidden');
                 emptyState.classList.remove('hidden');
                 showNotification('Could not load blog posts. Please try again later.', 'error');
+                
+                // Show detailed error for debugging
+                const errorMsg = error.code ? `Error: ${error.code}` : 'Connection error';
+                console.log('Detailed error:', errorMsg);
             }
         }
 
@@ -787,12 +791,13 @@
             const featuredPosts = sortedPosts.slice(0, BLOG_CONFIG.featuredCount);
             if (featuredPosts.length > 0) {
                 featuredContainer.innerHTML = featuredPosts.map((post, index) => `
-                    <div class="gold-border rounded-3xl overflow-hidden gold-hover article-preview fade-in stagger-delay-${index}">
+                    <div class="gold-border rounded-3xl overflow-hidden gold-hover fade-in stagger-delay-${index}">
                         <div class="relative h-64 overflow-hidden">
                             ${post.image ? `
                                 <img src="${post.image}" 
                                      alt="${post.title}"
-                                     class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                                     class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
                             ` : `
                                 <div class="w-full h-full img-fallback">
                                     <i class="fas fa-feather-alt"></i>
@@ -811,12 +816,13 @@
                                 <span class="read-time ml-3">${calculateReadTime(post.content)} min read</span>
                             </div>
                             <h3 class="text-xl font-bold mb-3 line-clamp-2">${post.title || 'Untitled'}</h3>
-                            <p class="text-gray-300 text-sm mb-6 line-clamp-3">${post.content ? truncateContent(post.content, 150) + '...' : 'Read more...'}</p>
+                            <p class="text-gray-300 text-sm mb-6 line-clamp-3">${post.content ? post.content.substring(0, 150) + '...' : 'Read more...'}</p>
                             <div class="flex items-center justify-between">
-                                <a href="blog-single.html?post=${post.id}" 
-                                   class="read-more-btn text-sm">
-                                    <i class="fas fa-book-open mr-2"></i>Read Full Article
-                                </a>
+                                <button onclick="openArticleInDroplets('${post.id}')" 
+                                        class="text-[#D4AF37] font-medium text-sm hover:underline flex items-center">
+                                    Read Full Article
+                                    <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                                </button>
                                 <button onclick="openShareModal('${post.id}')" 
                                         class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
                                     <i class="fas fa-share-alt text-xs"></i>
@@ -827,9 +833,14 @@
                 `).join('');
             }
             
-            // Render main posts
+            // Render main posts with droplets
             const postsToShow = sortedPosts.slice(0, BLOG_CONFIG.postsPerPage);
             blogContainer.innerHTML = postsToShow.map((post, index) => createPostElement(post, index)).join('');
+            
+            // Initialize droplets for each post
+            postsToShow.forEach((post, index) => {
+                initializeDroplets(post.id);
+            });
             
             // Show load more if needed
             if (sortedPosts.length > BLOG_CONFIG.postsPerPage) {
@@ -842,10 +853,6 @@
         function createPostElement(post, index) {
             const dateString = formatDate(post.createdAt);
             const updatedString = post.updatedAt ? formatDate(post.updatedAt, true) : '';
-            const wordCount = countWords(post.content || '');
-            const shouldTruncate = wordCount > BLOG_CONFIG.wordsPerDroplet;
-            const truncatedContent = shouldTruncate ? 
-                truncateContent(post.content, BLOG_CONFIG.wordsPerDroplet) : post.content;
             
             return `
                 <div id="post-${post.id}" class="blog-post pb-16 fade-in stagger-delay-${index % 3}">
@@ -878,17 +885,9 @@
                         
                         <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8 leading-tight">${post.title || 'Untitled'}</h2>
                         
-                        <div class="article-body text-gray-300 mb-6 ${shouldTruncate ? 'content-droplet' : 'content-full'}" id="content-${post.id}">
-                            ${formatContent(truncatedContent || '')}
+                        <div id="droplets-${post.id}" class="article-body text-gray-300 mb-10">
+                            ${formatContentWithDroplets(post.content || '', post.id)}
                         </div>
-                        
-                        ${shouldTruncate ? `
-                            <div class="text-center mb-10">
-                                <button onclick="expandContent('${post.id}')" class="read-more-btn">
-                                    <i class="fas fa-book-reader mr-2"></i>Read More (${wordCount - BLOG_CONFIG.wordsPerDroplet} more words)
-                                </button>
-                            </div>
-                        ` : ''}
                     </div>
                     
                     <div class="border-t border-white/10 pt-8">
@@ -920,21 +919,216 @@
             `;
         }
 
-        function expandContent(postId) {
-            const contentElement = document.getElementById(`content-${postId}`);
-            const post = allPosts.find(p => p.id === postId);
+        function formatContentWithDroplets(content, postId) {
+            if (!content) return '<p>Content coming soon...</p>';
             
-            if (contentElement && post) {
-                contentElement.innerHTML = formatContent(post.content || '');
-                contentElement.classList.remove('content-droplet');
-                contentElement.classList.add('content-full');
+            const words = content.split(' ');
+            const droplets = [];
+            const wordsPerDroplet = 500;
+            
+            // Split content into droplets of 500 words each
+            for (let i = 0; i < words.length; i += wordsPerDroplet) {
+                const dropletWords = words.slice(i, i + wordsPerDroplet);
+                droplets.push(dropletWords.join(' '));
+            }
+            
+            let html = '';
+            
+            if (droplets.length === 1) {
+                // If content is less than 500 words, show it all
+                html = `<div class="droplet">
+                    <p>${droplets[0]}</p>
+                </div>`;
+            } else {
+                // Show first droplet with "Read more" toggle
+                html = `<div class="droplet" id="droplet-${postId}-1">
+                    <p>${droplets[0]}</p>
+                </div>`;
                 
-                // Remove the Read More button
-                const button = contentElement.nextElementSibling?.querySelector('button');
-                if (button) {
-                    button.parentElement.remove();
+                // Add remaining droplets as hidden
+                for (let i = 1; i < droplets.length; i++) {
+                    html += `<div class="droplet hidden-content" id="droplet-${postId}-${i + 1}">
+                        <p>${droplets[i]}</p>
+                    </div>`;
+                    
+                    // Add "Read more" button after each 500 words except the last
+                    if (i < droplets.length - 1) {
+                        html += `<div class="text-center my-8">
+                            <button onclick="showNextDroplet('${postId}', ${i + 1})" 
+                                    class="read-more-toggle">
+                                Continue Reading
+                                <i class="fas fa-chevron-down ml-2"></i>
+                            </button>
+                        </div>`;
+                    }
                 }
             }
+            
+            return html;
+        }
+
+        function initializeDroplets(postId) {
+            const dropletsContainer = document.getElementById(`droplets-${postId}`);
+            if (!dropletsContainer) return;
+            
+            const droplets = dropletsContainer.querySelectorAll('.droplet');
+            if (droplets.length > 1) {
+                // Show first droplet only
+                droplets.forEach((droplet, index) => {
+                    if (index > 0) {
+                        droplet.classList.add('hidden-content');
+                    }
+                });
+                
+                // Add "Read more" button after first droplet
+                const readMoreBtn = document.createElement('div');
+                readMoreBtn.className = 'text-center my-8';
+                readMoreBtn.innerHTML = `
+                    <button onclick="showNextDroplet('${postId}', 1)" 
+                            class="read-more-toggle">
+                        Read More
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                `;
+                
+                if (droplets.length > 1) {
+                    droplets[0].parentNode.insertBefore(readMoreBtn, droplets[1]);
+                }
+            }
+        }
+
+        function showNextDroplet(postId, currentIndex) {
+            const nextDroplet = document.getElementById(`droplet-${postId}-${currentIndex + 1}`);
+            if (nextDroplet) {
+                nextDroplet.classList.remove('hidden-content');
+                
+                // Scroll to the newly revealed droplet
+                nextDroplet.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Remove the "Read more" button that was just clicked
+                const buttons = document.querySelectorAll(`[onclick="showNextDroplet('${postId}', ${currentIndex})"]`);
+                buttons.forEach(btn => {
+                    btn.parentElement.remove();
+                });
+            }
+        }
+
+        function openArticleInDroplets(postId) {
+            // Create a new window with the full article in droplets
+            const post = allPosts.find(p => p.id === postId);
+            if (!post) return;
+            
+            const dropletWindow = window.open('', '_blank', 'width=800,height=900,scrollbars=yes');
+            const words = post.content.split(' ');
+            const droplets = [];
+            const wordsPerDroplet = 500;
+            
+            for (let i = 0; i < words.length; i += wordsPerDroplet) {
+                const dropletWords = words.slice(i, i + wordsPerDroplet);
+                droplets.push(dropletWords.join(' '));
+            }
+            
+            dropletWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${post.title} | The Inkwell by P. Paul</title>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;800;900&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+                    <style>
+                        body {
+                            font-family: 'Inter', sans-serif;
+                            background: #0A0A0A;
+                            color: #FFFFFF;
+                            line-height: 1.8;
+                            margin: 0;
+                            padding: 2rem;
+                        }
+                        .container {
+                            max-width: 800px;
+                            margin: 0 auto;
+                        }
+                        .article-header {
+                            margin-bottom: 3rem;
+                            text-align: center;
+                        }
+                        .article-title {
+                            font-family: 'Playfair Display', serif;
+                            font-size: 3rem;
+                            color: #D4AF37;
+                            margin-bottom: 1rem;
+                        }
+                        .article-meta {
+                            color: #B0B0B0;
+                            font-size: 0.9rem;
+                        }
+                        .droplet {
+                            margin: 3rem 0;
+                            padding: 2rem;
+                            background: rgba(212, 175, 55, 0.05);
+                            border-radius: 1.5rem;
+                            border-left: 4px solid #D4AF37;
+                            position: relative;
+                        }
+                        .droplet::before {
+                            content: '💧';
+                            position: absolute;
+                            top: -15px;
+                            left: -15px;
+                            font-size: 1.5rem;
+                            background: #0A0A0A;
+                            padding: 5px;
+                        }
+                        .read-more-btn {
+                            display: block;
+                            margin: 2rem auto;
+                            padding: 1rem 2rem;
+                            background: #D4AF37;
+                            color: #000;
+                            border: none;
+                            border-radius: 2rem;
+                            font-weight: bold;
+                            cursor: pointer;
+                            font-size: 1.1rem;
+                        }
+                        .read-more-btn:hover {
+                            background: #B8941F;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="article-header">
+                            <h1 class="article-title">${post.title}</h1>
+                            <div class="article-meta">
+                                By P. Paul (The Great) | ${formatDate(post.createdAt)} | ${calculateReadTime(post.content)} min read
+                            </div>
+                        </div>
+                        
+                        ${post.image ? `<img src="${post.image}" alt="${post.title}" style="width:100%; border-radius: 2rem; margin-bottom: 3rem;">` : ''}
+                        
+                        ${droplets.map((droplet, index) => `
+                            <div class="droplet" id="droplet-${index}">
+                                ${droplet}
+                            </div>
+                            ${index < droplets.length - 1 ? `<button class="read-more-btn" onclick="document.getElementById('droplet-${index + 1}').scrollIntoView({behavior: 'smooth'}); this.remove();">
+                                Continue Reading (${index + 1}/${droplets.length})
+                            </button>` : ''}
+                        `).join('')}
+                    </div>
+                    <script>
+                        // Auto-scroll to first droplet
+                        setTimeout(() => {
+                            document.getElementById('droplet-0')?.scrollIntoView({behavior: 'smooth'});
+                        }, 500);
+                    <\/script>
+                </body>
+                </html>
+            `);
+            
+            dropletWindow.document.close();
         }
 
         function loadMorePosts() {
@@ -960,6 +1154,9 @@
                     const postElement = document.createElement('div');
                     postElement.innerHTML = createPostElement(post, (currentCount + index) % 3);
                     blogContainer.appendChild(postElement.firstElementChild);
+                    
+                    // Initialize droplets for new post
+                    initializeDroplets(post.id);
                 });
                 
                 if (currentCount + nextPosts.length >= sortedPosts.length) {
@@ -983,7 +1180,7 @@
                 updateMetaTagsForPost(post);
                 
                 // Generate share URL
-                currentShareUrl = `${window.location.origin}${window.location.pathname}#post-${postId}`;
+                currentShareUrl = `${window.location.origin}${window.location.pathname}?post=${postId}`;
                 shareUrlInput.value = currentShareUrl;
                 shareModal.classList.remove('hidden');
             }
@@ -996,9 +1193,10 @@
             // Update meta tags first
             updateMetaTagsForPost(post);
             
-            const url = `${window.location.origin}${window.location.pathname}#post-${postId}`;
+            const url = `${window.location.origin}${window.location.pathname}?post=${postId}`;
             const text = `Check out "${post.title || 'this article'}" by P. Paul (The Great)`;
-            const imageUrl = post.image || '';
+            // Use the actual post image for sharing
+            const imageUrl = post.image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
             
             let shareUrl = '';
             
@@ -1007,7 +1205,7 @@
                     shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + url)}`;
                     break;
                 case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}&picture=${encodeURIComponent(imageUrl)}`;
                     break;
                 case 'twitter':
                     shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
@@ -1036,18 +1234,19 @@
         function updateMetaTagsForPost(post) {
             if (!post) return;
             
-            const url = `${window.location.origin}${window.location.pathname}#post-${post.id}`;
-            const description = post.content ? truncateContent(post.content, 200) + '...' : 'Read this article on The Inkwell';
-            const imageUrl = post.image || '';
+            const url = `${window.location.origin}${window.location.pathname}?post=${post.id}`;
+            const description = post.content ? post.content.substring(0, 200) + '...' : 'Read this article on The Inkwell';
+            // Use the actual post image for meta tags
+            const imageUrl = post.image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
             
             // Update Open Graph
-            document.getElementById('og-title').content = `${post.title} | The Inkwell by P. Paul`;
+            document.getElementById('og-title').content = `${post.title} | The Inkwell`;
             document.getElementById('og-description').content = description;
             document.getElementById('og-image').content = imageUrl;
             document.getElementById('og-url').content = url;
             
             // Update Twitter
-            document.getElementById('twitter-title').content = `${post.title} | The Inkwell by P. Paul`;
+            document.getElementById('twitter-title').content = `${post.title} | The Inkwell`;
             document.getElementById('twitter-description').content = description;
             document.getElementById('twitter-image').content = imageUrl;
             
@@ -1055,7 +1254,6 @@
             document.title = `${post.title} | The Inkwell by P. Paul`;
             
             console.log('✅ Meta tags updated for:', post.title);
-            console.log('✅ Image URL:', imageUrl);
         }
 
         // ==================== HELPER FUNCTIONS ====================
@@ -1087,24 +1285,6 @@
             return Math.max(1, Math.ceil(words / 200));
         }
 
-        function countWords(content) {
-            if (!content) return 0;
-            return content.trim().split(/\s+/).length;
-        }
-
-        function truncateContent(content, wordLimit) {
-            if (!content) return '';
-            const words = content.trim().split(/\s+/);
-            if (words.length <= wordLimit) return content;
-            return words.slice(0, wordLimit).join(' ') + '...';
-        }
-
-        function formatContent(content) {
-            if (!content) return '<p>Content coming soon...</p>';
-            const paragraphs = content.split('\n\n').filter(p => p.trim());
-            return paragraphs.map(p => `<p>${p}</p>`).join('');
-        }
-
         function updateRecentPosts() {
             const recentPostsList = document.getElementById('recent-posts-list');
             const recentPosts = allPosts.slice(0, 4);
@@ -1113,8 +1293,8 @@
                 recentPostsList.innerHTML = recentPosts.map(post => `
                     <li>
                         <a href="#post-${post.id}" 
-                           onclick="event.preventDefault(); document.getElementById('post-${post.id}').scrollIntoView({behavior: 'smooth'}); updateMetaTagsForPost(${JSON.stringify(post).replace(/"/g, '&quot;')});"
-                           class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors flex items-start">
+                           class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors flex items-start"
+                           onclick="document.getElementById('post-${post.id}').scrollIntoView({behavior: 'smooth'}); return false;">
                             <i class="fas fa-feather-alt text-[#D4AF37] text-xs mt-1 mr-2"></i>
                             <span class="line-clamp-2">${post.title || 'Untitled'}</span>
                         </a>
@@ -1126,17 +1306,16 @@
         }
 
         function checkUrlForPost() {
-            const hash = window.location.hash;
-            if (hash) {
-                const postId = hash.replace('#post-', '');
-                if (postId && allPosts.length > 0) {
-                    const post = allPosts.find(p => p.id === postId);
-                    if (post) {
-                        updateMetaTagsForPost(post);
-                        const element = document.getElementById(`post-${postId}`);
-                        if (element) {
-                            setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 500);
-                        }
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('post');
+            
+            if (postId && allPosts.length > 0) {
+                const post = allPosts.find(p => p.id === postId);
+                if (post) {
+                    updateMetaTagsForPost(post);
+                    const element = document.getElementById(`post-${postId}`);
+                    if (element) {
+                        setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 500);
                     }
                 }
             }
@@ -1164,10 +1343,8 @@
             @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
             @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
             .animate-fade-in { animation: fadeIn 0.3s ease-out; }
-            .line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-            .line-clamp-3 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
         `;
         document.head.appendChild(style);
     </script>
 </body>
-    </html>
+</html>
