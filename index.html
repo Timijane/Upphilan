@@ -329,6 +329,7 @@
             margin-bottom: 2rem;
             border: 1px solid rgba(212, 175, 55, 0.2);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin-top: -40px; /* UPDATED: Negative margin to move title higher */
         }
         
         /* Adjust for mobile */
@@ -336,6 +337,7 @@
             .hero-text-container {
                 padding: 1.5rem 2rem;
                 border-radius: 20px;
+                margin-top: -20px; /* Smaller adjustment for mobile */
             }
         }
         
@@ -344,6 +346,7 @@
                 padding: 1.25rem 1.5rem;
                 border-radius: 16px;
                 margin-bottom: 1.5rem;
+                margin-top: -10px; /* Even smaller adjustment for mobile */
             }
         }
         
@@ -495,7 +498,7 @@
     </div>
 
     <!-- Hero Section - Now Brighter -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
         <!-- Hero Slider -->
         <div class="hero-slider">
             <!-- Slides will be populated by JavaScript -->
@@ -518,7 +521,7 @@
             </div>
             
             <!-- "A Voice for the Voiceless" Moved Down -->
-            <div class="inline-block mb-8 mt-4">
+            <div class="inline-block mb-8 mt-2">
                 <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide">
                     <i class="fas fa-volume-up mr-2"></i> A Voice for the Voiceless
                 </span>
@@ -627,6 +630,14 @@
                         I am a poet, spoken word artist, and public speaker with a deep passion for youth development 
                         and human transformation.
                     </p>
+                    
+                    <!-- UPDATED: Added Read More button here -->
+                    <div>
+                        <a href="about.html" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
+                            <span>Read More</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
                     
                     <div class="futuristic-card p-6 border-l-4 border-gold-500">
                         <p class="text-xl italic text-gray-200">
@@ -1071,4 +1082,4 @@
         });
     </script>
 </body>
-    </html>
+                    </html>
