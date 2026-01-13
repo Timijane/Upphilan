@@ -18,12 +18,29 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;800;900&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Open Graph Meta Tags for Better Sharing -->
-    <meta property="og:title" content="The Inkwell | P. Paul (The Great)">
-    <meta property="og:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian">
-    <meta property="og:image" content="https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg">
-    <meta property="og:url" content="https://ppaulthegreat.com/blog.html">
-    <meta name="twitter:card" content="summary_large_image">
+    <!-- DYNAMIC OPEN GRAPH & TWITTER CARD META TAGS -->
+    <!-- These will be updated by JavaScript for each specific post -->
+    <meta property="og:site_name" content="The Inkwell by P. Paul (The Great)">
+    <meta property="og:type" content="article">
+    
+    <!-- Default values (when no specific post is shared) -->
+    <meta property="og:title" content="The Inkwell | P. Paul (The Great)" id="og-title">
+    <meta property="og:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian" id="og-description">
+    <meta property="og:image" content="https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg" id="og-image">
+    <meta property="og:url" content="https://ppaulthegreat.com/blog.html" id="og-url">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" id="twitter-card">
+    <meta name="twitter:site" content="@ppaulthegreat">
+    <meta name="twitter:creator" content="@ppaulthegreat">
+    <meta name="twitter:title" content="The Inkwell | P. Paul (The Great)" id="twitter-title">
+    <meta name="twitter:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian" id="twitter-description">
+    <meta name="twitter:image" content="https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg" id="twitter-image">
+    <meta name="twitter:image:alt" content="The Inkwell Blog Cover" id="twitter-image-alt">
+    
+    <!-- Additional Important Meta Tags -->
+    <meta name="description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian">
+    <meta property="article:author" content="P. Paul (The Great)">
     
     <style>
         :root {
@@ -184,10 +201,41 @@
             color: var(--primary-gold);
             font-size: 3rem;
         }
+        
+        /* WhatsApp share specific styling */
+        .whatsapp-share {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+        
+        /* Facebook share specific styling */
+        .facebook-share {
+            background: linear-gradient(135deg, #1877F2 0%, #0D5FD6 100%);
+        }
+        
+        /* Twitter share specific styling */
+        .twitter-share {
+            background: linear-gradient(135deg, #1DA1F2 0%, #0D8BD9 100%);
+        }
     </style>
+    
+    <!-- IMPORTANT: Script for Social Media Crawlers (Non-JS fallback) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "The Inkwell",
+        "description": "Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian",
+        "url": "https://ppaulthegreat.com/blog.html",
+        "publisher": {
+            "@type": "Person",
+            "name": "P. Paul (The Great)"
+        },
+        "image": "https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg"
+    }
+    </script>
 </head>
 <body class="antialiased">
-    <!-- Navigation -->
+    <!-- Navigation (Same as before) -->
     <nav class="fixed top-0 w-full z-50 py-4 px-6 bg-black/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- Logo -->
@@ -227,7 +275,7 @@
         </div>
     </nav>
 
-    <!-- Mobile Navigation Overlay -->
+    <!-- Mobile Navigation Overlay (Same as before) -->
     <div id="mobileNav" class="mobile-nav fixed inset-0 z-40 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center">
         <button id="closeMobileMenu" class="absolute top-6 right-6 text-2xl">
             <i class="fas fa-times"></i>
@@ -556,17 +604,17 @@
                 </div>
                 
                 <div class="grid grid-cols-4 gap-4 mb-8">
-                    <button data-platform="whatsapp" class="share-btn bg-green-500/10 text-green-400 p-4 rounded-xl flex flex-col items-center justify-center">
+                    <button data-platform="whatsapp" class="share-btn whatsapp-share p-4 rounded-xl flex flex-col items-center justify-center text-white">
                         <i class="fab fa-whatsapp text-2xl mb-2"></i>
                         <span class="text-xs">WhatsApp</span>
                     </button>
                     
-                    <button data-platform="facebook" class="share-btn bg-blue-500/10 text-blue-400 p-4 rounded-xl flex flex-col items-center justify-center">
+                    <button data-platform="facebook" class="share-btn facebook-share p-4 rounded-xl flex flex-col items-center justify-center text-white">
                         <i class="fab fa-facebook text-2xl mb-2"></i>
                         <span class="text-xs">Facebook</span>
                     </button>
                     
-                    <button data-platform="twitter" class="share-btn bg-blue-400/10 text-blue-300 p-4 rounded-xl flex flex-col items-center justify-center">
+                    <button data-platform="twitter" class="share-btn twitter-share p-4 rounded-xl flex flex-col items-center justify-center text-white">
                         <i class="fab fa-twitter text-2xl mb-2"></i>
                         <span class="text-xs">Twitter</span>
                     </button>
@@ -652,6 +700,114 @@
         let allPosts = [];
         let unsubscribeBlogs = null;
 
+        // ==================== DYNAMIC META TAG FUNCTIONS ====================
+        
+        // Function to update meta tags for social sharing
+        function updateMetaTagsForPost(post) {
+            if (!post) return;
+            
+            const baseUrl = window.location.origin + window.location.pathname;
+            const postUrl = `${baseUrl}?post=${post.id}`;
+            const description = post.content ? post.content.substring(0, 200) + '...' : 'Read this article on The Inkwell';
+            
+            // Update Open Graph tags
+            document.getElementById('og-title').content = `${post.title} | The Inkwell by P. Paul`;
+            document.getElementById('og-description').content = description;
+            document.getElementById('og-image').content = post.image || 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg';
+            document.getElementById('og-url').content = postUrl;
+            
+            // Update Twitter Card tags
+            document.getElementById('twitter-title').content = `${post.title} | The Inkwell by P. Paul`;
+            document.getElementById('twitter-description').content = description;
+            document.getElementById('twitter-image').content = post.image || 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg';
+            document.getElementById('twitter-image-alt').content = post.title || 'Blog post image';
+            
+            // Update page title
+            document.title = `${post.title} | The Inkwell by P. Paul`;
+            
+            // Update canonical URL for SEO
+            updateCanonicalUrl(postUrl);
+            
+            // Update structured data for SEO
+            updateStructuredData(post);
+        }
+
+        // Function to reset meta tags to default
+        function resetMetaTags() {
+            const baseUrl = window.location.origin + window.location.pathname;
+            
+            document.getElementById('og-title').content = 'The Inkwell | P. Paul (The Great)';
+            document.getElementById('og-description').content = 'Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian';
+            document.getElementById('og-image').content = 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg';
+            document.getElementById('og-url').content = baseUrl;
+            
+            document.getElementById('twitter-title').content = 'The Inkwell | P. Paul (The Great)';
+            document.getElementById('twitter-description').content = 'Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian';
+            document.getElementById('twitter-image').content = 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg';
+            
+            document.title = 'The Inkwell | P. Paul (The Great) - Official Blog';
+            updateCanonicalUrl(baseUrl);
+        }
+
+        // Update canonical URL for SEO
+        function updateCanonicalUrl(url) {
+            let canonical = document.querySelector('link[rel="canonical"]');
+            if (!canonical) {
+                canonical = document.createElement('link');
+                canonical.rel = 'canonical';
+                document.head.appendChild(canonical);
+            }
+            canonical.href = url;
+        }
+
+        // Update structured data for SEO
+        function updateStructuredData(post) {
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": post.title,
+                "description": post.content ? post.content.substring(0, 200) + '...' : 'Blog article',
+                "image": post.image || 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg',
+                "datePublished": post.createdAt ? post.createdAt.toDate().toISOString() : new Date().toISOString(),
+                "dateModified": post.updatedAt ? post.updatedAt.toDate().toISOString() : new Date().toISOString(),
+                "author": {
+                    "@type": "Person",
+                    "name": "P. Paul (The Great)"
+                },
+                "publisher": {
+                    "@type": "Person",
+                    "name": "P. Paul (The Great)"
+                }
+            };
+
+            // Update or create script tag
+            let script = document.querySelector('script[type="application/ld+json"]');
+            if (!script) {
+                script = document.createElement('script');
+                script.type = 'application/ld+json';
+                document.head.appendChild(script);
+            }
+            script.textContent = JSON.stringify(structuredData);
+        }
+
+        // Check URL for post parameter on page load
+        function checkUrlForPost() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('post');
+            
+            if (postId && allPosts.length > 0) {
+                const post = allPosts.find(p => p.id === postId);
+                if (post) {
+                    updateMetaTagsForPost(post);
+                    scrollToPost(postId);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // ==================== MAIN FUNCTIONS ====================
+        
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             // Mobile Navigation
@@ -775,6 +931,11 @@
                     e.target.reset();
                 });
             }
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', () => {
+                checkUrlForPost();
+            });
         });
 
         // Load Blog Posts from Firebase
@@ -818,6 +979,9 @@
                             renderBlogPosts();
                             updateCategories();
                             updateRecentPosts();
+                            
+                            // Check URL for post parameter
+                            checkUrlForPost();
                         }
                     }, (error) => {
                         console.error('Error loading blog posts:', error);
@@ -892,8 +1056,8 @@
                             <h3 class="text-xl font-bold mb-3 line-clamp-2">${post.title || 'Untitled'}</h3>
                             <p class="text-gray-300 text-sm mb-6 line-clamp-3">${post.content ? post.content.substring(0, 150) + '...' : 'Read more...'}</p>
                             <div class="flex items-center justify-between">
-                                <a href="#post-${post.id}" 
-                                   onclick="scrollToPost('${post.id}')"
+                                <a href="?post=${post.id}" 
+                                   onclick="event.preventDefault(); scrollToPost('${post.id}'); updateMetaTagsForPost(${JSON.stringify(post).replace(/"/g, '&quot;')});"
                                    class="text-[#D4AF37] font-medium text-sm hover:underline">
                                     Read Full Article
                                 </a>
@@ -977,15 +1141,15 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <button onclick="shareArticle('whatsapp', '${post.id}')" 
-                                    class="share-btn w-12 h-12 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all">
+                                    class="share-btn w-12 h-12 rounded-full whatsapp-share flex items-center justify-center text-white">
                                 <i class="fab fa-whatsapp"></i>
                             </button>
                             <button onclick="shareArticle('facebook', '${post.id}')" 
-                                    class="share-btn w-12 h-12 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
+                                    class="share-btn w-12 h-12 rounded-full facebook-share flex items-center justify-center text-white">
                                 <i class="fab fa-facebook-f"></i>
                             </button>
                             <button onclick="shareArticle('twitter', '${post.id}')" 
-                                    class="share-btn w-12 h-12 rounded-full bg-blue-400/10 text-blue-300 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all">
+                                    class="share-btn w-12 h-12 rounded-full twitter-share flex items-center justify-center text-white">
                                 <i class="fab fa-twitter"></i>
                             </button>
                             <button onclick="shareArticle('linkedin', '${post.id}')" 
@@ -1010,6 +1174,190 @@
             `;
             
             return div;
+        }
+
+        // Scroll to Post and update URL
+        function scrollToPost(postId) {
+            const post = allPosts.find(p => p.id === postId);
+            if (post) {
+                // Update URL without page reload
+                const newUrl = `${window.location.pathname}?post=${postId}`;
+                window.history.pushState({ postId }, '', newUrl);
+                
+                // Update meta tags for social sharing
+                updateMetaTagsForPost(post);
+                
+                const element = document.getElementById(`post-${postId}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Add highlight effect
+                    element.classList.add('bg-[#D4AF37]/5');
+                    setTimeout(() => {
+                        element.classList.remove('bg-[#D4AF37]/5');
+                    }, 2000);
+                }
+            }
+        }
+
+        // Share Article with proper social media URLs
+        function shareArticle(platform, postId) {
+            const post = allPosts.find(p => p.id === postId);
+            if (!post) return;
+            
+            const baseUrl = window.location.origin + window.location.pathname;
+            const postUrl = `${baseUrl}?post=${postId}`;
+            const text = `Check out "${post.title || 'This article'}" by P. Paul (The Great)`;
+            const imageUrl = post.image || 'https://res.cloudinary.com/djaucqaxs/image/upload/v1690900000/blog-cover.jpg';
+            
+            let shareUrl = '';
+            
+            switch(platform) {
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + postUrl)}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}&quote=${encodeURIComponent(text)}&picture=${encodeURIComponent(imageUrl)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(text)}&hashtags=TheInkwell,PPaul`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(text)}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${encodeURIComponent(post.title || 'Article from P. Paul')}&body=${encodeURIComponent(text + '\n\n' + postUrl)}`;
+                    break;
+                case 'copy':
+                    navigator.clipboard.writeText(postUrl).then(() => {
+                        showNotification('Link copied to clipboard!', 'success');
+                    });
+                    return;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
+            }
+        }
+
+        // Open Share Modal
+        function openShareModal(postId) {
+            currentPostId = postId;
+            const post = allPosts.find(p => p.id === postId);
+            const shareModal = document.getElementById('shareModal');
+            const shareUrlInput = document.getElementById('share-url');
+            
+            if (post) {
+                const baseUrl = window.location.origin + window.location.pathname;
+                const postUrl = `${baseUrl}?post=${postId}`;
+                shareUrlInput.value = postUrl;
+                shareModal.classList.remove('hidden');
+                
+                // Update meta tags when opening share modal
+                updateMetaTagsForPost(post);
+            }
+        }
+
+        // Other helper functions (formatDate, calculateReadTime, formatContent, etc.)
+        // ... [Keep all your existing helper functions here] ...
+
+        // Format Date
+        function formatDate(firebaseTimestamp, showTime = false) {
+            if (!firebaseTimestamp) return 'Recent';
+            
+            try {
+                const date = firebaseTimestamp.toDate();
+                if (showTime) {
+                    return date.toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                }
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } catch (error) {
+                return 'Recent';
+            }
+        }
+
+        // Calculate Read Time
+        function calculateReadTime(content) {
+            if (!content) return 3;
+            const wordsPerMinute = 200;
+            const words = content.trim().split(/\s+/).length;
+            return Math.max(1, Math.ceil(words / wordsPerMinute));
+        }
+
+        // Format Content (add paragraphs, etc.)
+        function formatContent(content) {
+            if (!content) return '<p>Content coming soon...</p>';
+            
+            // Split by double newlines for paragraphs
+            const paragraphs = content.split('\n\n').filter(p => p.trim());
+            
+            return paragraphs.map(paragraph => {
+                // Check if it's a heading
+                if (paragraph.length < 100 && !paragraph.includes('. ')) {
+                    return `<h3 class="text-2xl font-serif font-bold my-8 text-[#D4AF37]">${paragraph}</h3>`;
+                }
+                return `<p>${paragraph}</p>`;
+            }).join('');
+        }
+
+        // Update Categories in Sidebar
+        function updateCategories() {
+            const categoriesList = document.getElementById('categories-list');
+            
+            // For now, we'll show static categories with counts
+            categoriesList.innerHTML = `
+                <div class="flex items-center justify-between text-gray-300">
+                    <span>Poetry & Spoken Word</span>
+                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.4)}</span>
+                </div>
+                <div class="flex items-center justify-between text-gray-300">
+                    <span>Youth Development</span>
+                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.3)}</span>
+                </div>
+                <div class="flex items-center justify-between text-gray-300">
+                    <span>Creative Process</span>
+                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.2)}</span>
+                </div>
+                <div class="flex items-center justify-between text-gray-300">
+                    <span>Social Impact</span>
+                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.1)}</span>
+                </div>
+            `;
+        }
+
+        // Update Recent Posts in Footer
+        function updateRecentPosts() {
+            const recentPostsList = document.getElementById('recent-posts-list');
+            
+            // Get first 4 posts
+            const recentPosts = allPosts.slice(0, 4);
+            
+            if (recentPosts.length > 0) {
+                recentPostsList.innerHTML = recentPosts.map(post => `
+                    <li>
+                        <a href="?post=${post.id}" 
+                           onclick="event.preventDefault(); scrollToPost('${post.id}'); updateMetaTagsForPost(${JSON.stringify(post).replace(/"/g, '&quot;')});"
+                           class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors flex items-start">
+                            <i class="fas fa-feather-alt text-[#D4AF37] text-xs mt-1 mr-2"></i>
+                            <span class="line-clamp-2">${post.title || 'Untitled'}</span>
+                        </a>
+                    </li>
+                `).join('');
+            } else {
+                recentPostsList.innerHTML = '<li class="text-sm text-gray-400">No posts yet</li>';
+            }
         }
 
         // Load More Posts
@@ -1066,175 +1414,6 @@
             }
         }
 
-        // Update Categories in Sidebar
-        function updateCategories() {
-            const categoriesList = document.getElementById('categories-list');
-            
-            // For now, we'll show static categories with counts
-            // In a real app, you might want to extract categories from your posts
-            categoriesList.innerHTML = `
-                <div class="flex items-center justify-between text-gray-300">
-                    <span>Poetry & Spoken Word</span>
-                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.4)}</span>
-                </div>
-                <div class="flex items-center justify-between text-gray-300">
-                    <span>Youth Development</span>
-                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.3)}</span>
-                </div>
-                <div class="flex items-center justify-between text-gray-300">
-                    <span>Creative Process</span>
-                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.2)}</span>
-                </div>
-                <div class="flex items-center justify-between text-gray-300">
-                    <span>Social Impact</span>
-                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.1)}</span>
-                </div>
-            `;
-        }
-
-        // Update Recent Posts in Footer
-        function updateRecentPosts() {
-            const recentPostsList = document.getElementById('recent-posts-list');
-            
-            // Get first 4 posts
-            const recentPosts = allPosts.slice(0, 4);
-            
-            if (recentPosts.length > 0) {
-                recentPostsList.innerHTML = recentPosts.map(post => `
-                    <li>
-                        <a href="#post-${post.id}" 
-                           onclick="scrollToPost('${post.id}')"
-                           class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors flex items-start">
-                            <i class="fas fa-feather-alt text-[#D4AF37] text-xs mt-1 mr-2"></i>
-                            <span class="line-clamp-2">${post.title || 'Untitled'}</span>
-                        </a>
-                    </li>
-                `).join('');
-            } else {
-                recentPostsList.innerHTML = '<li class="text-sm text-gray-400">No posts yet</li>';
-            }
-        }
-
-        // Format Date
-        function formatDate(firebaseTimestamp, showTime = false) {
-            if (!firebaseTimestamp) return 'Recent';
-            
-            try {
-                const date = firebaseTimestamp.toDate();
-                if (showTime) {
-                    return date.toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
-                }
-                return date.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-            } catch (error) {
-                return 'Recent';
-            }
-        }
-
-        // Calculate Read Time
-        function calculateReadTime(content) {
-            if (!content) return 3;
-            const wordsPerMinute = 200;
-            const words = content.trim().split(/\s+/).length;
-            return Math.max(1, Math.ceil(words / wordsPerMinute));
-        }
-
-        // Format Content (add paragraphs, etc.)
-        function formatContent(content) {
-            if (!content) return '<p>Content coming soon...</p>';
-            
-            // Split by double newlines for paragraphs
-            const paragraphs = content.split('\n\n').filter(p => p.trim());
-            
-            return paragraphs.map(paragraph => {
-                // Check if it's a heading
-                if (paragraph.length < 100 && !paragraph.includes('. ')) {
-                    return `<h3 class="text-2xl font-serif font-bold my-8 text-[#D4AF37]">${paragraph}</h3>`;
-                }
-                return `<p>${paragraph}</p>`;
-            }).join('');
-        }
-
-        // Scroll to Post
-        function scrollToPost(postId) {
-            const element = document.getElementById(`post-${postId}`);
-            if (element) {
-                // Update URL without page reload
-                window.history.pushState(null, null, `#post-${postId}`);
-                
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // Add highlight effect
-                element.classList.add('bg-[#D4AF37]/5');
-                setTimeout(() => {
-                    element.classList.remove('bg-[#D4AF37]/5');
-                }, 2000);
-            }
-        }
-
-        // Share Article
-        function shareArticle(platform, postId) {
-            const post = allPosts.find(p => p.id === postId);
-            if (!post) return;
-            
-            const url = `${window.location.origin}${window.location.pathname}#post-${postId}`;
-            const text = `Check out "${post.title || 'This article'}" by P. Paul (The Great)\n\n`;
-            
-            let shareUrl = '';
-            
-            switch(platform) {
-                case 'whatsapp':
-                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + url)}`;
-                    break;
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-                    break;
-                case 'linkedin':
-                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-                    break;
-                case 'telegram':
-                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-                    break;
-                case 'email':
-                    shareUrl = `mailto:?subject=${encodeURIComponent(post.title || 'Article from P. Paul')}&body=${encodeURIComponent(text + url)}`;
-                    break;
-                case 'copy':
-                    navigator.clipboard.writeText(url).then(() => {
-                        showNotification('Link copied to clipboard!', 'success');
-                    });
-                    return;
-            }
-            
-            if (shareUrl) {
-                window.open(shareUrl, '_blank', 'width=600,height=400');
-            }
-        }
-
-        // Open Share Modal
-        function openShareModal(postId) {
-            currentPostId = postId;
-            const post = allPosts.find(p => p.id === postId);
-            const shareModal = document.getElementById('shareModal');
-            const shareUrlInput = document.getElementById('share-url');
-            
-            if (post) {
-                const url = `${window.location.origin}${window.location.pathname}#post-${postId}`;
-                shareUrlInput.value = url;
-                shareModal.classList.remove('hidden');
-            }
-        }
-
         // Show Notification
         function showNotification(message, type = 'info') {
             // Create notification element
@@ -1258,18 +1437,6 @@
             }, 3000);
         }
 
-        // Check URL hash on load
-        window.addEventListener('load', () => {
-            const hash = window.location.hash;
-            if (hash) {
-                const postId = hash.replace('#post-', '');
-                if (postId) {
-                    // Wait for posts to load
-                    setTimeout(() => scrollToPost(postId), 1000);
-                }
-            }
-        });
-
         // Add CSS for fade animations
         const style = document.createElement('style');
         style.textContent = `
@@ -1288,4 +1455,4 @@
         document.head.appendChild(style);
     </script>
 </body>
-                </html>
+                                                                          </html>
