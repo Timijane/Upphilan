@@ -317,6 +317,40 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        
+        /* ADDED: Transparent grey background for hero text */
+        .hero-text-container {
+            padding: 2rem 3rem;
+            background: rgba(30, 30, 30, 0.7); /* Transparent dark grey */
+            backdrop-filter: blur(10px); /* Adds blur effect for better readability */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border-radius: 24px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Adjust for mobile */
+        @media (max-width: 768px) {
+            .hero-text-container {
+                padding: 1.5rem 2rem;
+                border-radius: 20px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-text-container {
+                padding: 1.25rem 1.5rem;
+                border-radius: 16px;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        /* Optional: Add slight shadow to enhance readability */
+        .hero-title span {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
@@ -461,10 +495,13 @@
                 </span>
             </div>
             
-            <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-bold mb-2">
-                <span class="text-gradient block title-line-break">P. PAUL</span>
-                <span id="secretAdminLink" class="text-white block italic text-4xl md:text-6xl lg:text-7xl mt-2 secret-admin-link">(THE GREAT)</span>
-            </h1>
+            <!-- ADDED: Transparent grey background container for hero text -->
+            <div class="hero-text-container">
+                <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-bold mb-2">
+                    <span class="text-gradient block title-line-break">P. PAUL</span>
+                    <span id="secretAdminLink" class="text-white block italic text-4xl md:text-6xl lg:text-7xl mt-2 secret-admin-link">(THE GREAT)</span>
+                </h1>
+            </div>
             
             <!-- Slider Dots -->
             <div class="slider-dots flex justify-center space-x-3 mb-10">
@@ -1012,4 +1049,4 @@
         });
     </script>
 </body>
-    </html>
+                    </html>
