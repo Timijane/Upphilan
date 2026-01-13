@@ -645,9 +645,9 @@
         try {
             firebaseApp = firebase.initializeApp(firebaseConfig);
             db = firebase.firestore();
-            console.log("Firebase initialized successfully");
+            console.log("✅ Firebase initialized successfully");
         } catch (error) {
-            console.error("Firebase initialization error:", error);
+            console.error("❌ Firebase initialization error:", error);
             showNotification("Portfolio could not load. Please check your connection.", "error");
         }
 
@@ -659,7 +659,6 @@
         // State
         let allProjects = [];
         let currentProject = null;
-        let unsubscribePortfolio = null;
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -742,42 +741,51 @@
                 emptyState.classList.add('hidden');
                 portfolioList.innerHTML = '';
                 
-                // Listen to portfolio collection (only published items)
-                unsubscribePortfolio = db.collection('portfolio')
+                // Get portfolio items (using get() instead of onSnapshot for simplicity)
+                const snapshot = await db.collection('portfolio')
                     .where('published', '==', true)
-                    .orderBy('createdAt', 'desc')
-                    .onSnapshot((snapshot) => {
-                        allProjects = [];
-                        snapshot.forEach((doc) => {
-                            allProjects.push({
-                                id: doc.id,
-                                ...doc.data()
-                            });
-                        });
-                        
-                        // Hide loading
-                        loadingState.classList.add('hidden');
-                        
-                        if (allProjects.length === 0) {
-                            emptyState.classList.remove('hidden');
-                        } else {
-                            emptyState.classList.add('hidden');
-                            updatePortfolioStats();
-                            renderPortfolioItems(PORTFOLIO_CONFIG.currentFilter);
-                            updateRecentWorks();
-                        }
-                    }, (error) => {
-                        console.error('Error loading portfolio:', error);
-                        loadingState.classList.add('hidden');
-                        emptyState.classList.remove('hidden');
-                        showNotification('Could not load portfolio. Please try again later.', 'error');
+                    .get();
+                
+                allProjects = [];
+                snapshot.forEach((doc) => {
+                    allProjects.push({
+                        id: doc.id,
+                        ...doc.data()
                     });
-                    
+                });
+                
+                // Sort by date (newest first)
+                allProjects.sort((a, b) => {
+                    const dateA = a.createdAt ? a.createdAt.toDate().getTime() : 0;
+                    const dateB = b.createdAt ? b.createdAt.toDate().getTime() : 0;
+                    return dateB - dateA;
+                });
+                
+                // Hide loading
+                loadingState.classList.add('hidden');
+                
+                if (allProjects.length === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    updatePortfolioStats();
+                    renderPortfolioItems(PORTFOLIO_CONFIG.currentFilter);
+                    updateRecentWorks();
+                }
+                
             } catch (error) {
-                console.error('Error initializing Firebase:', error);
+                console.error('❌ Error loading portfolio:', error);
                 loadingState.classList.add('hidden');
                 emptyState.classList.remove('hidden');
-                showNotification('Could not connect to the portfolio. Please check your internet connection.', 'error');
+                
+                // Show more specific error message
+                if (error.code === 'failed-precondition') {
+                    showNotification('Database query requires an index. Please check Firebase console.', 'error');
+                } else if (error.code === 'permission-denied') {
+                    showNotification('Permission denied. Please check database rules.', 'error');
+                } else {
+                    showNotification('Could not load portfolio. Please try again later.', 'error');
+                }
             }
         }
 
@@ -785,17 +793,19 @@
         function updatePortfolioStats() {
             const totalProjects = allProjects.length;
             
-            // Count by category (assuming projects have a 'category' or 'type' field)
+            // Count by category
             const poetryCount = allProjects.filter(p => 
                 (p.category === 'poetry' || p.type === 'poetry')
             ).length;
             
             const spokenWordCount = allProjects.filter(p => 
-                (p.category === 'spoken-word' || p.type === 'spoken-word')
+                (p.category === 'spoken-word' || p.type === 'spoken-word' || 
+                 (p.tags && p.tags.includes('spoken-word')))
             ).length;
             
             const musicCount = allProjects.filter(p => 
-                (p.category === 'music' || p.type === 'music')
+                (p.category === 'music' || p.type === 'music' ||
+                 (p.tags && p.tags.includes('music')))
             ).length;
             
             document.getElementById('total-projects').textContent = totalProjects;
@@ -817,17 +827,12 @@
             // Filter projects
             let filteredProjects = allProjects;
             if (filter !== 'all') {
-                filteredProjects = allProjects.filter(project => 
-                    (project.category === filter || project.type === filter)
-                );
+                filteredProjects = allProjects.filter(project => {
+                    const category = project.category || project.type || '';
+                    const tags = project.tags || [];
+                    return category === filter || tags.includes(filter);
+                });
             }
-            
-            // Sort by date (newest first)
-            filteredProjects.sort((a, b) => {
-                const dateA = a.createdAt ? a.createdAt.toDate().getTime() : 0;
-                const dateB = b.createdAt ? b.createdAt.toDate().getTime() : 0;
-                return dateB - dateA;
-            });
             
             // Render items
             if (filteredProjects.length === 0) {
@@ -835,6 +840,9 @@
                     <div class="col-span-3 text-center py-12">
                         <i class="fas fa-search text-4xl text-gray-600 mb-4"></i>
                         <p class="text-gray-400">No projects found in this category.</p>
+                        <button onclick="filterProjects('all')" class="mt-4 px-4 py-2 bg-[#D4AF37]/10 text-[#D4AF37] rounded-full text-sm">
+                            Show All Projects
+                        </button>
                     </div>
                 `;
             } else {
@@ -842,6 +850,7 @@
                     const delayClass = `stagger-delay-${(index % 4) + 1}`;
                     const category = project.category || project.type || 'general';
                     const dateString = formatDate(project.createdAt);
+                    const description = project.description || project.content || 'No description available';
                     
                     return `
                         <div class="portfolio-card gold-border rounded-3xl overflow-hidden fade-in ${delayClass}"
@@ -875,20 +884,13 @@
                                 
                                 <h3 class="text-2xl font-serif font-bold mb-4 leading-tight">${project.title || 'Untitled Project'}</h3>
                                 
-                                <p class="text-gray-300 text-sm mb-6 line-clamp-3">${project.content ? project.content.substring(0, 150) + '...' : 'No description available'}</p>
+                                <p class="text-gray-300 text-sm mb-6 line-clamp-3">${description.substring(0, 150)}${description.length > 150 ? '...' : ''}</p>
                                 
                                 <div class="flex items-center justify-between pt-4 border-t border-white/10">
                                     <button class="text-[#D4AF37] font-medium text-sm hover:underline">
                                         View Details
                                         <i class="fas fa-arrow-right ml-2"></i>
                                     </button>
-                                    
-                                    <div class="flex items-center space-x-2">
-                                        <button onclick="event.stopPropagation(); shareProject('${project.id}')" 
-                                                class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
-                                            <i class="fas fa-share-alt text-xs"></i>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -919,7 +921,7 @@
                 'poetry': 'Poetry',
                 'spoken-word': 'Spoken Word',
                 'music': 'Music',
-                'community': 'Community',
+                'community': 'Community Work',
                 'general': 'Project'
             };
             return labels[category] || 'Project';
@@ -971,7 +973,8 @@
             
             // Format dates
             const dateString = formatDate(project.createdAt);
-            const updatedString = project.updatedAt ? formatDate(project.updatedAt) : '';
+            const category = project.category || project.type || 'general';
+            const description = project.description || project.content || 'No detailed description available.';
             
             modalContent.innerHTML = `
                 <div class="space-y-8">
@@ -990,13 +993,12 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                         <div class="absolute bottom-8 left-8 right-8">
                             <span class="inline-block px-4 py-2 bg-[#D4AF37] text-black text-sm font-bold rounded-full mb-4">
-                                ${getCategoryLabel(project.category || project.type || 'general')}
+                                ${getCategoryLabel(category)}
                             </span>
                             <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">${project.title || 'Untitled Project'}</h2>
                             <div class="flex items-center text-gray-300">
                                 <i class="fas fa-calendar mr-2"></i>
                                 <span>${dateString}</span>
-                                ${updatedString ? `<span class="ml-4"><i class="fas fa-sync mr-2"></i>Updated: ${updatedString}</span>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1004,7 +1006,7 @@
                     <!-- Project Content -->
                     <div class="prose prose-invert max-w-none">
                         <div class="text-lg leading-relaxed text-gray-300 whitespace-pre-line">
-                            ${project.content || 'No detailed description available.'}
+                            ${description}
                         </div>
                         
                         <!-- Project Details -->
@@ -1015,8 +1017,8 @@
                                     <div>
                                         <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2">Type</h4>
                                         <p class="flex items-center">
-                                            ${getProjectTypeIcon(project.category || project.type)}
-                                            ${getCategoryLabel(project.category || project.type)}
+                                            ${getProjectTypeIcon(category)}
+                                            ${getCategoryLabel(category)}
                                         </p>
                                     </div>
                                     <div>
@@ -1039,75 +1041,12 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Share Section -->
-                        <div class="mt-12 pt-8 border-t border-white/10">
-                            <h3 class="text-2xl font-bold mb-6 text-[#D4AF37]">Share This Work</h3>
-                            <div class="flex flex-wrap gap-3">
-                                <button onclick="shareProject('${project.id}', 'whatsapp')" 
-                                        class="px-6 py-3 rounded-full bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white transition-all flex items-center">
-                                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp
-                                </button>
-                                <button onclick="shareProject('${project.id}', 'facebook')" 
-                                        class="px-6 py-3 rounded-full bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition-all flex items-center">
-                                    <i class="fab fa-facebook mr-2"></i> Facebook
-                                </button>
-                                <button onclick="shareProject('${project.id}', 'twitter')" 
-                                        class="px-6 py-3 rounded-full bg-blue-400/10 text-blue-300 hover:bg-blue-400 hover:text-white transition-all flex items-center">
-                                    <i class="fab fa-twitter mr-2"></i> Twitter
-                                </button>
-                                <button onclick="shareProject('${project.id}', 'linkedin')" 
-                                        class="px-6 py-3 rounded-full bg-blue-600/10 text-blue-500 hover:bg-blue-600 hover:text-white transition-all flex items-center">
-                                    <i class="fab fa-linkedin mr-2"></i> LinkedIn
-                                </button>
-                                <button onclick="shareProject('${project.id}', 'copy')" 
-                                        class="px-6 py-3 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all flex items-center">
-                                    <i class="fas fa-copy mr-2"></i> Copy Link
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             `;
             
             projectModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-        }
-
-        // Share Project
-        function shareProject(projectId, platform = 'copy') {
-            const project = allProjects.find(p => p.id === projectId);
-            if (!project) return;
-
-            const url = `${window.location.origin}${window.location.pathname}#project-${projectId}`;
-            const text = `Check out "${project.title || 'this project'}" by P. Paul (The Great)\n\n`;
-            
-            let shareUrl = '';
-            
-            switch(platform) {
-                case 'whatsapp':
-                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + url)}`;
-                    break;
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-                    break;
-                case 'linkedin':
-                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-                    break;
-                default:
-                    // Copy to clipboard
-                    navigator.clipboard.writeText(url).then(() => {
-                        showNotification('Link copied to clipboard!', 'success');
-                    });
-                    return;
-            }
-            
-            if (shareUrl) {
-                window.open(shareUrl, '_blank', 'width=600,height=400');
-            }
         }
 
         // Show Notification
@@ -1133,20 +1072,6 @@
             }, 3000);
         }
 
-        // Check URL for project anchor
-        window.addEventListener('load', () => {
-            const hash = window.location.hash;
-            if (hash) {
-                const projectId = hash.replace('#project-', '');
-                if (projectId) {
-                    // Wait for projects to load
-                    setTimeout(() => {
-                        openProjectDetail(projectId);
-                    }, 1500);
-                }
-            }
-        });
-
         // Add CSS for fade animations
         const style = document.createElement('style');
         style.textContent = `
@@ -1161,8 +1086,20 @@
             .animate-fade-in {
                 animation: fadeIn 0.3s ease-out;
             }
+            .line-clamp-3 {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .line-clamp-2 {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
         `;
         document.head.appendChild(style);
     </script>
 </body>
-            </html>
+                </html>
