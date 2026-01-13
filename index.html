@@ -351,6 +351,26 @@
         .hero-title span {
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
+        
+        /* ADDED: Enhanced image styling for sharper quality */
+        .enhanced-image {
+            filter: brightness(1.15) contrast(1.1) saturate(1.05);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            transition: filter 0.3s ease;
+        }
+        
+        .enhanced-image:hover {
+            filter: brightness(1.2) contrast(1.15) saturate(1.1);
+        }
+        
+        /* ADDED: Reduced opacity for gradient overlay */
+        .lighter-gradient-overlay {
+            background: linear-gradient(to top, 
+                rgba(0, 0, 0, 0.3) 0%, 
+                rgba(0, 0, 0, 0.15) 50%, 
+                transparent 100%);
+        }
     </style>
 </head>
 <body class="bg-onyx text-white overflow-x-hidden font-sans antialiased">
@@ -487,20 +507,21 @@
         <!-- Additional Brightness Layer -->
         <div class="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/5 z-0 opacity-40"></div>
         
-        <!-- Hero Content -->
+        <!-- Hero Content - UPDATED: Reordered elements -->
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <div class="inline-block mb-8">
-                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide">
-                    <i class="fas fa-volume-up mr-2"></i> A Voice for the Voiceless
-                </span>
-            </div>
-            
-            <!-- ADDED: Transparent grey background container for hero text -->
+            <!-- Main Title Moved to Top -->
             <div class="hero-text-container">
                 <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-bold mb-2">
                     <span class="text-gradient block title-line-break">P. PAUL</span>
                     <span id="secretAdminLink" class="text-white block italic text-4xl md:text-6xl lg:text-7xl mt-2 secret-admin-link">(THE GREAT)</span>
                 </h1>
+            </div>
+            
+            <!-- "A Voice for the Voiceless" Moved Down -->
+            <div class="inline-block mb-8 mt-4">
+                <span class="inline-flex items-center px-4 py-2 rounded-full glass-effect text-gold-500 text-sm font-semibold tracking-wide">
+                    <i class="fas fa-volume-up mr-2"></i> A Voice for the Voiceless
+                </span>
             </div>
             
             <!-- Slider Dots -->
@@ -623,19 +644,20 @@
                     </div>
                 </div>
                 
-                <!-- Image -->
+                <!-- Image - UPDATED: Added enhanced-image class and lighter gradient overlay -->
                 <div class="relative group">
                     <div class="absolute -inset-4 bg-gradient-to-r from-gold-500/20 to-transparent rounded-3xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                     <div class="relative rounded-2xl overflow-hidden">
-                        <img src="paul.jpg" alt="P. Paul - Poet & Speaker" class="w-full h-[500px] object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <img src="paul.jpg" alt="P. Paul - Poet & Speaker" class="w-full h-[500px] object-cover enhanced-image">
+                        <!-- UPDATED: Lighter gradient overlay -->
+                        <div class="absolute inset-0 lighter-gradient-overlay"></div>
                         <div class="absolute bottom-6 left-6 right-6">
                             <div class="flex items-center space-x-4">
                                 <div class="w-12 h-12 rounded-full bg-gold-500 flex items-center justify-center">
                                     <i class="fas fa-quote-left text-black"></i>
                                 </div>
                                 <div>
-                                    <p class="font-semibold">Words have power. Use them wisely.</p>
+                                    <p class="font-semibold text-lg">Words have power. Use them wisely.</p>
                                     <p class="text-sm text-gray-300">- P. Paul</p>
                                 </div>
                             </div>
@@ -1049,4 +1071,4 @@
         });
     </script>
 </body>
-                    </html>
+    </html>
