@@ -20,10 +20,10 @@
     
     <!-- DYNAMIC SOCIAL META TAGS -->
     <meta property="og:site_name" content="The Inkwell by P. Paul (The Great)">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:title" content="The Inkwell | P. Paul (The Great)" id="og-title">
     <meta property="og:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian" id="og-description">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" id="og-image">
+    <meta property="og:image" content="" id="og-image">
     <meta property="og:url" content="https://ppaulthegreat.com/blog.html" id="og-url">
     
     <meta name="twitter:card" content="summary_large_image" id="twitter-card">
@@ -31,7 +31,7 @@
     <meta name="twitter:creator" content="@ppaulthegreat">
     <meta name="twitter:title" content="The Inkwell | P. Paul (The Great)" id="twitter-title">
     <meta name="twitter:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian" id="twitter-description">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" id="twitter-image">
+    <meta name="twitter:image" content="" id="twitter-image">
     
     <style>
         :root {
@@ -209,6 +209,61 @@
         .telegram-share {
             background: linear-gradient(135deg, #26A5E4 0%, #1E8BC3 100%);
         }
+        
+        /* Read More Button Styles */
+        .read-more-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-gold);
+            color: #000;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+            background: var(--light-gold);
+        }
+        
+        /* Droplets for truncated content */
+        .content-droplet {
+            position: relative;
+            max-height: 300px;
+            overflow: hidden;
+        }
+        
+        .content-droplet::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--bg-dark));
+        }
+        
+        .content-full {
+            max-height: none;
+            overflow: visible;
+        }
+        
+        .content-full::after {
+            display: none;
+        }
+        
+        /* Article preview styles */
+        .article-preview {
+            transition: all 0.3s ease;
+        }
+        
+        .article-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -230,8 +285,8 @@
                 <a href="about.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">About</a>
                 <a href="portfolio.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">Portfolio</a>
                 <a href="inquiry.html" class="text-sm font-medium hover:text-[#D4AF37] transition-colors">Contact</a>
-                <a href="#subscribe" class="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-sm hover:shadow-lg hover:scale-105 transition-all">
-                    Subscribe
+                <a href="inquiry.html" class="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-sm hover:shadow-lg hover:scale-105 transition-all">
+                    Join the Journey
                 </a>
             </div>
             
@@ -252,8 +307,8 @@
             <a href="about.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">About</a>
             <a href="portfolio.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">Portfolio</a>
             <a href="inquiry.html" class="block text-2xl font-medium hover:text-[#D4AF37] transition-colors">Contact</a>
-            <a href="#subscribe" class="inline-block mt-8 px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-lg">
-                Subscribe
+            <a href="inquiry.html" class="inline-block mt-8 px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full text-lg">
+                Join the Journey
             </a>
         </div>
     </div>
@@ -355,11 +410,8 @@
                             <i class="fas fa-feather-alt text-6xl text-gray-600 mb-6"></i>
                             <h3 class="text-2xl font-bold mb-4">Coming Soon</h3>
                             <p class="text-gray-400 mb-8">
-                                New articles are being crafted. Subscribe to be the first to know when new content is published.
+                                New articles are being crafted. Check back soon for inspiring content.
                             </p>
-                            <a href="#subscribe" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full">
-                                <i class="fas fa-bell mr-2"></i> Get Notified
-                            </a>
                         </div>
                     </div>
                     
@@ -372,6 +424,7 @@
                 
                 <!-- Sidebar -->
                 <div class="lg:col-span-1">
+                    <!-- About Author -->
                     <div class="gold-border rounded-3xl p-6 mb-8">
                         <div class="flex items-center space-x-4 mb-6">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F0C674] flex items-center justify-center">
@@ -391,58 +444,16 @@
                         </a>
                     </div>
                     
-                    <div class="gold-border rounded-3xl p-6 mb-8">
-                        <h4 class="font-bold text-lg mb-6">Categories</h4>
-                        <div id="categories-list" class="space-y-3">
-                            <!-- Categories will load here -->
-                        </div>
-                    </div>
-                    
+                    <!-- Join the Journey -->
                     <div class="gold-border rounded-3xl p-6">
                         <h4 class="font-bold text-lg mb-4">Join the Journey</h4>
                         <p class="text-sm text-gray-300 mb-6">
-                            Get exclusive content, early access to new articles, and invitations to virtual events.
+                            Connect with P. Paul for speaking engagements, collaborations, or to share your thoughts.
                         </p>
-                        <form id="subscribe-form" class="space-y-3">
-                            <input type="email" placeholder="Your email address" 
-                                   class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[#D4AF37] focus:outline-none">
-                            <button type="submit" class="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-xl hover:shadow-lg transition-all">
-                                Subscribe Now
-                            </button>
-                        </form>
+                        <a href="inquiry.html" class="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-xl hover:shadow-lg transition-all flex items-center justify-center">
+                            <i class="fas fa-handshake mr-2"></i> Get In Touch
+                        </a>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Subscribe Section -->
-        <section id="subscribe" class="mb-20">
-            <div class="gold-border rounded-3xl p-8 md:p-12 text-center">
-                <div class="max-w-2xl mx-auto">
-                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] text-sm font-medium mb-6">
-                        <i class="fas fa-gem mr-2"></i> Premium Content
-                    </div>
-                    
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                        Never Miss an <span class="text-[#D4AF37]">Insight</span>
-                    </h2>
-                    
-                    <p class="text-xl text-gray-300 mb-8">
-                        Join 1,000+ readers who receive exclusive poetry, behind-the-scenes content, 
-                        and invitations to live spoken word sessions.
-                    </p>
-                    
-                    <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-                        <input type="email" placeholder="Enter your email" 
-                               class="flex-1 px-6 py-4 rounded-full bg-white/5 border border-white/10 focus:border-[#D4AF37] focus:outline-none">
-                        <button type="submit" class="px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-black font-bold rounded-full hover:shadow-xl hover:scale-105 transition-all">
-                            Subscribe
-                        </button>
-                    </form>
-                    
-                    <p class="text-sm text-gray-500 mt-6">
-                        No spam. Unsubscribe anytime.
-                    </p>
                 </div>
             </div>
         </section>
@@ -589,7 +600,8 @@
             featuredCount: 3,
             sortOrder: 'newest',
             currentPage: 0,
-            hasMorePosts: true
+            hasMorePosts: true,
+            wordsPerDroplet: 500
         };
 
         // ==================== STATE MANAGEMENT ====================
@@ -698,27 +710,6 @@
                     }
                 });
             });
-
-            // Subscribe Form
-            document.getElementById('subscribe-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = e.target.querySelector('input[type="email"]').value;
-                localStorage.setItem('subscribed_email', email);
-                showNotification('Thank you for subscribing!', 'success');
-                e.target.reset();
-            });
-
-            // Newsletter form
-            const newsletterForm = document.querySelector('form');
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const email = e.target.querySelector('input[type="email"]').value;
-                    localStorage.setItem('newsletter_email', email);
-                    showNotification('Thank you for joining!', 'success');
-                    e.target.reset();
-                });
-            }
         }
 
         // ==================== BLOG POSTS FUNCTIONS ====================
@@ -734,6 +725,7 @@
                 // Get all published blog posts
                 const snapshot = await db.collection('blogs')
                     .where('published', '==', true)
+                    .orderBy('createdAt', 'desc')
                     .get();
                 
                 allPosts = [];
@@ -758,7 +750,6 @@
                 } else {
                     emptyState.classList.add('hidden');
                     renderBlogPosts();
-                    updateCategories();
                     updateRecentPosts();
                 }
                 
@@ -768,10 +759,6 @@
                 featuredLoading.classList.add('hidden');
                 emptyState.classList.remove('hidden');
                 showNotification('Could not load blog posts. Please try again later.', 'error');
-                
-                // Show detailed error for debugging
-                const errorMsg = error.code ? `Error: ${error.code}` : 'Connection error';
-                console.log('Detailed error:', errorMsg);
             }
         }
 
@@ -800,13 +787,12 @@
             const featuredPosts = sortedPosts.slice(0, BLOG_CONFIG.featuredCount);
             if (featuredPosts.length > 0) {
                 featuredContainer.innerHTML = featuredPosts.map((post, index) => `
-                    <div class="gold-border rounded-3xl overflow-hidden gold-hover fade-in stagger-delay-${index}">
+                    <div class="gold-border rounded-3xl overflow-hidden gold-hover article-preview fade-in stagger-delay-${index}">
                         <div class="relative h-64 overflow-hidden">
                             ${post.image ? `
                                 <img src="${post.image}" 
                                      alt="${post.title}"
-                                     class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                                     class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
                             ` : `
                                 <div class="w-full h-full img-fallback">
                                     <i class="fas fa-feather-alt"></i>
@@ -825,11 +811,11 @@
                                 <span class="read-time ml-3">${calculateReadTime(post.content)} min read</span>
                             </div>
                             <h3 class="text-xl font-bold mb-3 line-clamp-2">${post.title || 'Untitled'}</h3>
-                            <p class="text-gray-300 text-sm mb-6 line-clamp-3">${post.content ? post.content.substring(0, 150) + '...' : 'Read more...'}</p>
+                            <p class="text-gray-300 text-sm mb-6 line-clamp-3">${post.content ? truncateContent(post.content, 150) + '...' : 'Read more...'}</p>
                             <div class="flex items-center justify-between">
                                 <a href="blog-single.html?post=${post.id}" 
-                                   class="text-[#D4AF37] font-medium text-sm hover:underline">
-                                    Read Full Article
+                                   class="read-more-btn text-sm">
+                                    <i class="fas fa-book-open mr-2"></i>Read Full Article
                                 </a>
                                 <button onclick="openShareModal('${post.id}')" 
                                         class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all">
@@ -856,6 +842,10 @@
         function createPostElement(post, index) {
             const dateString = formatDate(post.createdAt);
             const updatedString = post.updatedAt ? formatDate(post.updatedAt, true) : '';
+            const wordCount = countWords(post.content || '');
+            const shouldTruncate = wordCount > BLOG_CONFIG.wordsPerDroplet;
+            const truncatedContent = shouldTruncate ? 
+                truncateContent(post.content, BLOG_CONFIG.wordsPerDroplet) : post.content;
             
             return `
                 <div id="post-${post.id}" class="blog-post pb-16 fade-in stagger-delay-${index % 3}">
@@ -888,9 +878,17 @@
                         
                         <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8 leading-tight">${post.title || 'Untitled'}</h2>
                         
-                        <div class="article-body text-gray-300 mb-10">
-                            ${formatContent(post.content || '')}
+                        <div class="article-body text-gray-300 mb-6 ${shouldTruncate ? 'content-droplet' : 'content-full'}" id="content-${post.id}">
+                            ${formatContent(truncatedContent || '')}
                         </div>
+                        
+                        ${shouldTruncate ? `
+                            <div class="text-center mb-10">
+                                <button onclick="expandContent('${post.id}')" class="read-more-btn">
+                                    <i class="fas fa-book-reader mr-2"></i>Read More (${wordCount - BLOG_CONFIG.wordsPerDroplet} more words)
+                                </button>
+                            </div>
+                        ` : ''}
                     </div>
                     
                     <div class="border-t border-white/10 pt-8">
@@ -920,6 +918,23 @@
                     </div>
                 </div>
             `;
+        }
+
+        function expandContent(postId) {
+            const contentElement = document.getElementById(`content-${postId}`);
+            const post = allPosts.find(p => p.id === postId);
+            
+            if (contentElement && post) {
+                contentElement.innerHTML = formatContent(post.content || '');
+                contentElement.classList.remove('content-droplet');
+                contentElement.classList.add('content-full');
+                
+                // Remove the Read More button
+                const button = contentElement.nextElementSibling?.querySelector('button');
+                if (button) {
+                    button.parentElement.remove();
+                }
+            }
         }
 
         function loadMorePosts() {
@@ -968,7 +983,7 @@
                 updateMetaTagsForPost(post);
                 
                 // Generate share URL
-                currentShareUrl = `${window.location.origin}${window.location.pathname}?post=${postId}`;
+                currentShareUrl = `${window.location.origin}${window.location.pathname}#post-${postId}`;
                 shareUrlInput.value = currentShareUrl;
                 shareModal.classList.remove('hidden');
             }
@@ -981,9 +996,9 @@
             // Update meta tags first
             updateMetaTagsForPost(post);
             
-            const url = `${window.location.origin}${window.location.pathname}?post=${postId}`;
+            const url = `${window.location.origin}${window.location.pathname}#post-${postId}`;
             const text = `Check out "${post.title || 'this article'}" by P. Paul (The Great)`;
-            const imageUrl = post.image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+            const imageUrl = post.image || '';
             
             let shareUrl = '';
             
@@ -1021,18 +1036,18 @@
         function updateMetaTagsForPost(post) {
             if (!post) return;
             
-            const url = `${window.location.origin}${window.location.pathname}?post=${post.id}`;
-            const description = post.content ? post.content.substring(0, 200) + '...' : 'Read this article on The Inkwell';
-            const imageUrl = post.image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+            const url = `${window.location.origin}${window.location.pathname}#post-${post.id}`;
+            const description = post.content ? truncateContent(post.content, 200) + '...' : 'Read this article on The Inkwell';
+            const imageUrl = post.image || '';
             
             // Update Open Graph
-            document.getElementById('og-title').content = `${post.title} | The Inkwell`;
+            document.getElementById('og-title').content = `${post.title} | The Inkwell by P. Paul`;
             document.getElementById('og-description').content = description;
             document.getElementById('og-image').content = imageUrl;
             document.getElementById('og-url').content = url;
             
             // Update Twitter
-            document.getElementById('twitter-title').content = `${post.title} | The Inkwell`;
+            document.getElementById('twitter-title').content = `${post.title} | The Inkwell by P. Paul`;
             document.getElementById('twitter-description').content = description;
             document.getElementById('twitter-image').content = imageUrl;
             
@@ -1040,6 +1055,7 @@
             document.title = `${post.title} | The Inkwell by P. Paul`;
             
             console.log('✅ Meta tags updated for:', post.title);
+            console.log('✅ Image URL:', imageUrl);
         }
 
         // ==================== HELPER FUNCTIONS ====================
@@ -1071,32 +1087,22 @@
             return Math.max(1, Math.ceil(words / 200));
         }
 
+        function countWords(content) {
+            if (!content) return 0;
+            return content.trim().split(/\s+/).length;
+        }
+
+        function truncateContent(content, wordLimit) {
+            if (!content) return '';
+            const words = content.trim().split(/\s+/);
+            if (words.length <= wordLimit) return content;
+            return words.slice(0, wordLimit).join(' ') + '...';
+        }
+
         function formatContent(content) {
             if (!content) return '<p>Content coming soon...</p>';
             const paragraphs = content.split('\n\n').filter(p => p.trim());
             return paragraphs.map(p => `<p>${p}</p>`).join('');
-        }
-
-        function updateCategories() {
-            const categoriesList = document.getElementById('categories-list');
-            categoriesList.innerHTML = `
-                <div class="flex items-center justify-between text-gray-300">
-                    <span>Poetry & Spoken Word</span>
-                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.4)}</span>
-                </div>
-                <div class="flex items-center justify-between text-gray-300">
-                    <span>Youth Development</span>
-                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.3)}</span>
-                </div>
-                <div class="flex items-center justify-between text-gray-300">
-                    <span>Creative Process</span>
-                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.2)}</span>
-                </div>
-                <div class="flex items-center justify-between text-gray-300">
-                    <span>Social Impact</span>
-                    <span class="text-sm text-[#D4AF37]">${Math.floor(allPosts.length * 0.1)}</span>
-                </div>
-            `;
         }
 
         function updateRecentPosts() {
@@ -1106,7 +1112,8 @@
             if (recentPosts.length > 0) {
                 recentPostsList.innerHTML = recentPosts.map(post => `
                     <li>
-                        <a href="blog-single.html?post=${post.id}" 
+                        <a href="#post-${post.id}" 
+                           onclick="event.preventDefault(); document.getElementById('post-${post.id}').scrollIntoView({behavior: 'smooth'}); updateMetaTagsForPost(${JSON.stringify(post).replace(/"/g, '&quot;')});"
                            class="text-sm text-gray-400 hover:text-[#D4AF37] transition-colors flex items-start">
                             <i class="fas fa-feather-alt text-[#D4AF37] text-xs mt-1 mr-2"></i>
                             <span class="line-clamp-2">${post.title || 'Untitled'}</span>
@@ -1119,16 +1126,17 @@
         }
 
         function checkUrlForPost() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const postId = urlParams.get('post');
-            
-            if (postId && allPosts.length > 0) {
-                const post = allPosts.find(p => p.id === postId);
-                if (post) {
-                    updateMetaTagsForPost(post);
-                    const element = document.getElementById(`post-${postId}`);
-                    if (element) {
-                        setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 500);
+            const hash = window.location.hash;
+            if (hash) {
+                const postId = hash.replace('#post-', '');
+                if (postId && allPosts.length > 0) {
+                    const post = allPosts.find(p => p.id === postId);
+                    if (post) {
+                        updateMetaTagsForPost(post);
+                        const element = document.getElementById(`post-${postId}`);
+                        if (element) {
+                            setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 500);
+                        }
                     }
                 }
             }
@@ -1156,6 +1164,8 @@
             @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
             @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
             .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+            .line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+            .line-clamp-3 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
         `;
         document.head.appendChild(style);
     </script>
