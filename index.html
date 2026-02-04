@@ -115,9 +115,9 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
             background-size: cover;
-            background-position: center;
+            background-position: center 30%; /* Adjusted to show more image */
             background-repeat: no-repeat;
-            filter: brightness(1.1); /* Increased brightness */
+            filter: brightness(1.1);
         }
         
         .slide.active {
@@ -284,12 +284,12 @@
             z-index: 20;
         }
         
-        /* Brighter Overlay for Hero Section */
+        /* Brighter Overlay for Hero Section - LIGHTENED FOR MORE IMAGE VISIBILITY */
         .hero-overlay {
             background: linear-gradient(to bottom, 
-                rgba(0, 0, 0, 0.4) 0%, 
-                rgba(0, 0, 0, 0.2) 50%, 
-                rgba(0, 0, 0, 0.4) 100%);
+                rgba(0, 0, 0, 0.2) 0%, 
+                rgba(0, 0, 0, 0.1) 50%, 
+                rgba(0, 0, 0, 0.2) 100%);
         }
         
         /* Brightness enhancement for hero images */
@@ -300,7 +300,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255, 255, 255, 0.05); /* White overlay for brightness */
+            background: rgba(255, 255, 255, 0.05);
             pointer-events: none;
         }
         
@@ -315,32 +315,33 @@
             100% { transform: scale(1); }
         }
         
-        /* Transparent grey background for hero text */
+        /* Transparent grey background for hero text - REDUCED PADDING TO MOVE CONTENT UP */
         .hero-text-container {
-            padding: 2rem 3rem;
-            background: rgba(30, 30, 30, 0.7); /* Transparent dark grey */
-            backdrop-filter: blur(10px); /* Adds blur effect for better readability */
-            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            padding: 1.5rem 2.5rem;
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 24px;
             display: inline-block;
-            /* Removed bottom margin to allow tighter control */
             border: 1px solid rgba(212, 175, 55, 0.2);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin-bottom: 1rem; /* Reduced bottom margin */
         }
         
         /* Adjust for mobile */
         @media (max-width: 768px) {
             .hero-text-container {
-                padding: 1.5rem 2rem;
+                padding: 1.25rem 1.75rem;
                 border-radius: 20px;
+                margin-bottom: 1rem; /* Reduced */
             }
         }
         
         @media (max-width: 640px) {
             .hero-text-container {
-                padding: 1.25rem 1.5rem;
+                padding: 1rem 1.25rem;
                 border-radius: 16px;
-                margin-bottom: 1.5rem;
+                margin-bottom: 0.75rem; /* Reduced */
             }
         }
         
@@ -349,23 +350,17 @@
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
         
-        /* NEW: Premium "Quality" Image Styling 
-           Replaces the harsh "tool sharp" effect with a polished, high-def look
-        */
+        /* Premium "Quality" Image Styling */
         .premium-quality-image {
-            /* Balanced adjustment: slight contrast for pop, very slight brightness */
             filter: contrast(1.05) brightness(1.05);
-            /* Soft box shadow for depth, not harshness */
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            /* Ensure smooth edges */
             transition: all 0.4s ease-out;
         }
         
         .premium-quality-image:hover {
-            /* Subtle zoom and brightness lift on hover */
             transform: scale(1.02);
             filter: contrast(1.08) brightness(1.08);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2); /* Gold glow on hover */
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
         }
         
         /* Soft overlay for the image container */
@@ -374,6 +369,39 @@
                 rgba(0, 0, 0, 0.6) 0%, 
                 rgba(0, 0, 0, 0.2) 40%, 
                 transparent 100%);
+        }
+        
+        /* Double-click instruction styling */
+        .double-click-hint {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            margin-top: 0.25rem;
+            display: block;
+        }
+        
+        /* New: Double-click counter styling */
+        .click-counter {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--gold-500);
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+        
+        .click-counter.active {
+            opacity: 1;
+            transform: scale(1);
         }
     </style>
 </head>
@@ -491,7 +519,8 @@
         </div>
     </div>
 
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <!-- CHANGED: Reduced min-h-screen to min-h-[90vh] and pt-20 to pt-16 to move content up -->
+    <section class="relative min-h-[90vh] flex items-center justify-center pt-16 overflow-hidden">
         <div class="hero-slider">
             </div>
         
@@ -501,20 +530,25 @@
         
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-center flex flex-col items-center">
             
-            <div class="hero-text-container mb-6">
+            <div class="hero-text-container mb-3"> <!-- Reduced margin -->
                 <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-bold">
                     <span class="text-gradient block title-line-break">P. PAUL</span>
-                    <span id="secretAdminLink" class="text-white block italic text-4xl md:text-6xl lg:text-7xl mt-2 secret-admin-link">(THE GREAT)</span>
+                    <div class="relative inline-block">
+                        <span id="secretAdminLink" class="text-white block italic text-4xl md:text-6xl lg:text-7xl mt-2 secret-admin-link">(THE GREAT)</span>
+                        <span class="click-counter" id="clickCounter">0</span>
+                    </div>
                 </h1>
+                <!-- Added subtle hint for double-click -->
+                <span class="double-click-hint">Double-click for admin access</span>
             </div>
             
-            <div class="inline-block mb-10 mt-2">
+            <div class="inline-block mb-8 mt-1"> <!-- Reduced margins -->
                 <span class="inline-flex items-center px-6 py-2 rounded-full glass-effect text-gold-500 text-base font-semibold tracking-wide border border-gold-500/20">
                     <i class="fas fa-volume-up mr-3"></i> A Voice for the Voiceless
                 </span>
             </div>
             
-            <div class="slider-dots flex justify-center space-x-3 mb-10">
+            <div class="slider-dots flex justify-center space-x-3 mb-8"> <!-- Reduced margin -->
                 </div>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -913,7 +947,7 @@
                 const slide = document.createElement('div');
                 slide.className = `slide ${i === 1 ? 'active' : ''}`;
                 slide.style.backgroundImage = `url('p${i}.jpg')`;
-                slide.style.backgroundPosition = 'center';
+                slide.style.backgroundPosition = 'center 30%'; // Show more of the image
                 slide.style.backgroundSize = 'cover';
                 heroSlider.appendChild(slide);
                 
@@ -977,22 +1011,40 @@
                 startTimer();
             });
             
-            // Secret Admin Link Functionality
+            // UPDATED: Secret Admin Link - Double-click to login without warning
             const secretAdminLink = document.getElementById('secretAdminLink');
+            const clickCounter = document.getElementById('clickCounter');
+            let clickCount = 0;
+            let clickTimer;
             
             secretAdminLink.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Add visual feedback
+                // Increment click count
+                clickCount++;
+                
+                // Update counter display
+                clickCounter.textContent = clickCount;
+                clickCounter.classList.add('active');
+                
+                // Visual feedback for click
                 this.classList.add('secret-clicked');
                 
-                // Show confirmation dialog
-                const confirmed = confirm("Access admin panel? This area is restricted.");
+                // Clear any existing timer
+                clearTimeout(clickTimer);
                 
-                if (confirmed) {
-                    // Redirect immediately to admin page
-                    window.location.href = 'admin.html';
+                // If double-click detected (within 500ms)
+                if (clickCount === 2) {
+                    // Redirect immediately to admin page without warning
+                    window.location.href = 'admin.html'; // or 'login.html' if that's the login page
+                    return;
                 }
+                
+                // Set timer to reset click count after 500ms
+                clickTimer = setTimeout(() => {
+                    clickCount = 0;
+                    clickCounter.classList.remove('active');
+                }, 500);
                 
                 // Remove animation class after animation completes
                 setTimeout(() => {
