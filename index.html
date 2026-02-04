@@ -376,51 +376,31 @@
                 transparent 100%);
         }
         
-        /* NEW: Hero bottom section styling */
+        /* Hero bottom section styling */
         .hero-bottom-section {
             position: absolute;
-            bottom: 40px;
+            bottom: 120px;
             left: 0;
-            width: 100%;
+            right: 0;
             z-index: 20;
         }
         
-        /* Logo container styling */
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .main-logo {
-            width: 120px;
-            height: 120px;
+        /* Logo styling for navbar */
+        .navbar-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
             border-radius: 50%;
-            border: 3px solid var(--gold-500);
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
+            border: 2px solid rgba(212, 175, 55, 0.3);
         }
         
-        .main-logo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-        }
-        
-        /* Bottom title styling */
-        .bottom-title {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            padding: 15px 30px;
-            display: inline-block;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        /* Mobile menu logo */
+        .mobile-menu-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid rgba(212, 175, 55, 0.5);
         }
     </style>
 </head>
@@ -428,9 +408,8 @@
     <nav class="fixed top-0 w-full z-50 py-4 px-6 md:px-10 glass-effect border-b border-white/5">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2 group">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
-                    <span class="font-bold text-black text-lg">P</span>
-                </div>
+                <!-- Updated: Logo image added -->
+                <img src="pp.jpg" alt="P. Paul Logo" class="navbar-logo">
                 <div class="flex flex-col">
                     <span class="font-bold text-lg tracking-tight group-hover:text-gold-500 transition-colors">P. PAUL</span>
                     <span class="text-xs text-gray-400">The Great</span>
@@ -486,9 +465,8 @@
         <div class="h-full flex flex-col pt-20 px-8">
             <div class="mb-10">
                 <div class="flex items-center space-x-3 mb-8">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
-                        <span class="font-bold text-black text-xl">P</span>
-                    </div>
+                    <!-- Updated: Mobile menu logo added -->
+                    <img src="pp.jpg" alt="P. Paul Logo" class="mobile-menu-logo">
                     <div>
                         <h3 class="font-bold text-xl">P. PAUL</h3>
                         <p class="text-gray-400 text-sm">The Great</p>
@@ -540,74 +518,60 @@
 
     <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         <div class="hero-slider">
-            <!-- Slides will be inserted by JavaScript -->
-        </div>
+            </div>
         
         <div class="absolute inset-0 hero-overlay z-0"></div>
         
         <div class="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/5 z-0 opacity-40"></div>
         
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center flex flex-col items-center">
-            <!-- Center Content -->
-            <div class="mb-10 mt-2">
-                <span class="inline-flex items-center px-6 py-2 rounded-full glass-effect text-gold-500 text-base font-semibold tracking-wide border border-gold-500/20">
-                    <i class="fas fa-volume-up mr-3"></i> A Voice for the Voiceless
-                </span>
-            </div>
-            
-            <div class="slider-dots flex justify-center space-x-3 mb-10">
-                <!-- Dots will be inserted by JavaScript -->
-            </div>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-                <a href="inquiry.html" class="group px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full flex items-center space-x-3 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                    <i class="fas fa-microphone"></i>
-                    <span>Invite Me to Speak</span>
-                    <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
-                </a>
-                
-                <a href="blog.html" class="group px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full flex items-center space-x-3 hover:bg-gold-500/10 transition-all duration-300">
-                    <i class="fas fa-book-open"></i>
-                    <span>Read The Blog</span>
-                </a>
-                
-                <a href="https://www.instagram.com/reel/DSaZw-oDUch/?igsh=MjYwb3B4bWtzazBn" target="_blank" class="group px-6 py-3 border border-white/20 hover:border-gold-500 rounded-full flex items-center space-x-2 transition-all duration-300">
-                    <div class="w-8 h-8 rounded-full bg-gold-500/20 flex items-center justify-center group-hover:bg-gold-500 transition-colors">
-                        <i class="fas fa-play text-gold-500 group-hover:text-black"></i>
-                    </div>
-                    <span>Watch Inspiration</span>
-                </a>
-                
-                <!-- NEW: "Read more about P. Paul" button -->
-                <a href="about.html" class="group px-6 py-3 glass-effect border border-gold-500/30 font-bold rounded-full flex items-center space-x-2 hover:bg-gold-500/10 transition-all duration-300">
-                    <div class="w-8 h-8 rounded-full bg-gold-500/20 flex items-center justify-center group-hover:bg-gold-500 transition-colors">
-                        <i class="fas fa-user text-gold-500 group-hover:text-black"></i>
-                    </div>
-                    <span>Read More About P. Paul</span>
-                </a>
-            </div>
-        </div>
-        
-        <!-- NEW: Bottom Section with Logo and P. Paul the Great -->
+        <!-- Updated: Hero bottom section -->
         <div class="hero-bottom-section">
-            <div class="max-w-7xl mx-auto px-6 text-center">
-                <div class="logo-container">
-                    <!-- Logo saved as pp -->
-                    <img src="pp.png" alt="P. Paul Logo" class="main-logo">
-                    
-                    <!-- P. Paul the Great moved to bottom -->
-                    <div class="bottom-title">
-                        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold">
-                            <span class="text-gradient">P. PAUL</span>
-                            <span id="secretAdminLink" class="text-white italic text-xl md:text-2xl lg:text-3xl ml-2 secret-admin-link">(THE GREAT)</span>
-                        </h1>
+            <div class="relative z-10 max-w-7xl mx-auto px-6 text-center flex flex-col items-center">
+                <div class="hero-text-container mb-4">
+                    <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-bold">
+                        <span class="text-gradient block title-line-break">P. PAUL</span>
+                        <span id="secretAdminLink" class="text-white block italic text-3xl md:text-5xl lg:text-6xl mt-2 secret-admin-link">(THE GREAT)</span>
+                    </h1>
+                </div>
+                
+                <div class="inline-block mb-6">
+                    <span class="inline-flex items-center px-6 py-2 rounded-full glass-effect text-gold-500 text-base font-semibold tracking-wide border border-gold-500/20">
+                        <i class="fas fa-volume-up mr-3"></i> A Voice for the Voiceless
+                    </span>
+                </div>
+                
+                <div class="slider-dots flex justify-center space-x-3 mb-8">
                     </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="inquiry.html" class="group px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full flex items-center space-x-3 hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-microphone"></i>
+                        <span>Invite Me to Speak</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                    </a>
+                    
+                    <a href="blog.html" class="group px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full flex items-center space-x-3 hover:bg-gold-500/10 transition-all duration-300">
+                        <i class="fas fa-book-open"></i>
+                        <span>Read The Blog</span>
+                    </a>
+                    
+                    <!-- Updated: Added "Read More About P. Paul" button -->
+                    <a href="about.html" class="group px-6 py-4 glass-effect border border-gold-500/30 font-bold rounded-full flex items-center space-x-3 hover:bg-gold-500/10 transition-all duration-300">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Read More About P. Paul</span>
+                    </a>
+                    
+                    <a href="https://www.instagram.com/reel/DSaZw-oDUch/?igsh=MjYwb3B4bWtzazBn" target="_blank" class="group px-6 py-3 border border-white/20 hover:border-gold-500 rounded-full flex items-center space-x-2 transition-all duration-300">
+                        <div class="w-8 h-8 rounded-full bg-gold-500/20 flex items-center justify-center group-hover:bg-gold-500 transition-colors">
+                            <i class="fas fa-play text-gold-500 group-hover:text-black"></i>
+                        </div>
+                        <span>Watch Inspiration</span>
+                    </a>
                 </div>
             </div>
         </div>
         
-        <!-- Explore Arrow (kept but moved up slightly) -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
             <a href="#subtitle-section" class="flex flex-col items-center text-gray-400 hover:text-gold-500 transition-colors">
                 <span class="text-sm mb-2">Explore</span>
                 <i class="fas fa-chevron-down"></i>
@@ -615,7 +579,6 @@
         </div>
     </section>
 
-    <!-- The rest of your HTML remains the same -->
     <section id="subtitle-section" class="subtitle-section py-12 px-6 relative z-30">
         <div class="max-w-4xl mx-auto">
             <div class="futuristic-card p-8 md:p-12 relative overflow-hidden">
@@ -661,8 +624,291 @@
         </div>
     </section>
 
-    <!-- The rest of your existing HTML continues here... -->
-    <!-- I've kept everything the same from the subtitle-section onward -->
+    <section id="about" class="py-20 md:py-32 px-6 md:px-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                            About <span class="text-gradient">P. Paul</span>
+                        </h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-500 to-gold-600 rounded-full"></div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        My name is <span class="font-semibold text-white">Paul Okewunmi</span>, professionally known as P. Paul (The Great). 
+                        I am a poet, spoken word artist, and public speaker with a deep passion for youth development 
+                        and human transformation.
+                    </p>
+                    
+                    <div class="futuristic-card p-6 border-l-4 border-gold-500">
+                        <p class="text-xl italic text-gray-200">
+                            "Helping young people believe they can become whoever they dream to be."
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="about.html" class="px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
+                            Read Full Bio
+                        </a>
+                        <a href="portfolio.html" class="px-6 py-3 glass-effect border border-gold-500/30 font-semibold rounded-full hover:bg-gold-500/10 transition-all duration-300">
+                            View Portfolio
+                        </a>
+                        <!-- Updated: Added "Read More About P. Paul" button -->
+                        <a href="about.html" class="px-6 py-3 glass-effect border border-gold-500/30 font-semibold rounded-full hover:bg-gold-500/10 transition-all duration-300">
+                            Read More About P. Paul
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-gold-500/20 to-transparent rounded-3xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="paul.jpg" alt="P. Paul - Poet & Speaker" class="w-full h-[500px] object-cover premium-quality-image">
+                        <div class="absolute inset-0 soft-gradient-overlay"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-full bg-gold-500 flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-quote-left text-black"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-lg text-white drop-shadow-md">Words have power. Use them wisely.</p>
+                                    <p class="text-sm text-gray-200">- P. Paul</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 md:py-32 px-6 md:px-10 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    What I <span class="text-gradient">Do</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Transforming ideas into impactful experiences through art and advocacy
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-feather-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Poetry & Spoken Word</h3>
+                    <p class="text-gray-400 mb-6">
+                        Giving voice to emotions that inspire reflection, healing, and transformation through powerful verse.
+                    </p>
+                    <a href="portfolio.html#poetry" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
+                        Explore Works
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Public Speaking</h3>
+                    <p class="text-gray-400 mb-6">
+                        Engaging audiences with compelling narratives on leadership, purpose, and personal growth.
+                    </p>
+                    <a href="inquiry.html" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
+                        Book a Session
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Music Composition</h3>
+                    <p class="text-gray-400 mb-6">
+                        Creating emotional soundscapes that amplify storytelling and deepen audience connection.
+                    </p>
+                    <a href="portfolio.html#music" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
+                        Listen Now
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="futuristic-card p-6 group">
+                    <div class="text-4xl mb-4 text-gold-500">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Humanitarian Advocacy</h3>
+                    <p class="text-gray-400 mb-6">
+                        Mobilizing communities toward positive social change and compassionate action.
+                    </p>
+                    <a href="upphilan.html" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
+                        Join Movement
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 md:py-32 px-6 md:px-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Voices of <span class="text-gradient">Impact</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    What people say about P. Paul's transformative work
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="futuristic-card p-8">
+                    <div class="text-gold-500 text-2xl mb-4">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        P. Paul's words don't just speak—they resonate in your soul and inspire action.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-gold-500"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Alex Johnson</p>
+                            <p class="text-sm text-gray-500">Event Organizer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="futuristic-card p-8">
+                    <div class="text-gold-500 text-2xl mb-4">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        A transformative experience that left our students inspired and empowered.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-gold-500"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Dr. Sarah Miller</p>
+                            <p class="text-sm text-gray-500">University Director</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="futuristic-card p-8">
+                    <div class="text-gold-500 text-2xl mb-4">"</div>
+                    <p class="text-gray-300 mb-6 italic">
+                        His poetry bridges generations and speaks universal truths with eloquence.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-gold-500"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Michael Chen</p>
+                            <p class="text-sm text-gray-500">Literary Critic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="futuristic-card p-12 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 to-transparent"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 relative z-10">
+                    Ready to Create an Unforgettable Experience?
+                </h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">
+                    Invite P. Paul to speak at your next event and inspire your audience with transformative storytelling.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                    <a href="inquiry.html" class="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-calendar-check mr-2"></i> Book a Speaking Engagement
+                    </a>
+                    <a href="mailto:contact@ppaulthegreat.com" class="px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full hover:bg-gold-500/10 transition-all duration-300">
+                        <i class="fas fa-envelope mr-2"></i> Send Inquiry
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                            <span class="font-bold text-black">P</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">P. PAUL</h3>
+                            <p class="text-sm text-gray-500">The Great</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Speaking the language of peace, healing, and human transformation.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">About</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Portfolio</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Blog</a></li>
+                        <li><a href="young.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Young Leaders</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="inquiry.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Public Speaking</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Poetry Performances</a></li>
+                        <li><a href="portfolio.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Workshops</a></li>
+                        <li><a href="upphilan.html" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Advocacy Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.instagram.com/p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/paul-okewunmi-5a4659291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@p.paulthegreat" target="_blank" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="mailto:contact@ppaulthegreat.com" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-gold-500 hover:text-black transition-all">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Available for global engagements and collaborations.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/10 text-center">
+                <p class="text-gray-500 text-sm">
+                    © 2026 P. Paul (The Great). All rights reserved. | Designed for impact and inspiration.
+                </p>
+                <p class="text-gray-600 text-xs mt-2">
+                    "Words have power. Use them wisely." - P. Paul
+                </p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -768,7 +1014,7 @@
                 startTimer();
             });
             
-            // Secret Admin Link Functionality
+            // Secret Admin Link Functionality (without warning)
             const secretAdminLink = document.getElementById('secretAdminLink');
             
             secretAdminLink.addEventListener('click', function(e) {
@@ -777,13 +1023,8 @@
                 // Add visual feedback
                 this.classList.add('secret-clicked');
                 
-                // Show confirmation dialog
-                const confirmed = confirm("Access admin panel? This area is restricted.");
-                
-                if (confirmed) {
-                    // Redirect immediately to admin page
-                    window.location.href = 'admin.html';
-                }
+                // Redirect immediately to admin page without confirmation
+                window.location.href = 'admin.html';
                 
                 // Remove animation class after animation completes
                 setTimeout(() => {
