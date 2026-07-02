@@ -518,7 +518,19 @@
 
     <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         <div class="hero-slider">
-            </div>
+            <!-- UPDATED: pp1.jpg is first (number one of two) -->
+            <div class="slide active" style="background-image: url('pp1.jpg');"></div>
+            <!-- UPDATED: pp2.jpg is second -->
+            <div class="slide" style="background-image: url('pp2.jpg');"></div>
+            <!-- Existing slides (p6.jpg REMOVED) -->
+            <div class="slide" style="background-image: url('p1.jpg');"></div>
+            <div class="slide" style="background-image: url('p2.jpg');"></div>
+            <div class="slide" style="background-image: url('p3.jpg');"></div>
+            <div class="slide" style="background-image: url('p4.jpg');"></div>
+            <div class="slide" style="background-image: url('p5.jpg');"></div>
+            <div class="slide" style="background-image: url('p7.jpg');"></div>
+            <div class="slide" style="background-image: url('p8.jpg');"></div>
+        </div>
         
         <div class="absolute inset-0 hero-overlay z-0"></div>
         
@@ -664,7 +676,8 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                 <div class="relative group">
                     <div class="absolute -inset-4 bg-gradient-to-r from-gold-500/20 to-transparent rounded-3xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                     <div class="relative rounded-2xl overflow-hidden">
-                        <img src="paul.jpg" alt="P. Paul - Poet & Speaker" class="w-full h-[500px] object-cover premium-quality-image">
+                        <!-- UPDATED: Changed from paul.jpg to pp1.jpg -->
+                        <img src="pp1.jpg" alt="P. Paul - Poet & Speaker" class="w-full h-[500px] object-cover premium-quality-image">
                         <div class="absolute inset-0 soft-gradient-overlay"></div>
                         <div class="absolute bottom-6 left-6 right-6">
                             <div class="flex items-center space-x-4">
@@ -956,14 +969,27 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
             // Hero Image Slider
             const heroSlider = document.querySelector('.hero-slider');
             const sliderDots = document.querySelector('.slider-dots');
-            const imageCount = 8; // p1.jpg to p8.jpg
+            const imageCount = 9; // UPDATED: 9 slides (pp1, pp2, p1-p5, p7-p8) - p6 removed
             
             // Create slides and dots
             for (let i = 1; i <= imageCount; i++) {
                 // Create slide
                 const slide = document.createElement('div');
                 slide.className = `slide ${i === 1 ? 'active' : ''}`;
-                slide.style.backgroundImage = `url('p${i}.jpg')`;
+                
+                // Set background based on slide number
+                if (i === 1) {
+                    slide.style.backgroundImage = "url('pp1.jpg')";
+                } else if (i === 2) {
+                    slide.style.backgroundImage = "url('pp2.jpg')";
+                } else if (i <= 7) {
+                    // p1.jpg through p5.jpg (indices 3-7)
+                    slide.style.backgroundImage = `url('p${i-2}.jpg')`;
+                } else {
+                    // p7.jpg and p8.jpg (indices 8-9)
+                    slide.style.backgroundImage = `url('p${i-1}.jpg')`;
+                }
+                
                 slide.style.backgroundPosition = 'center';
                 slide.style.backgroundSize = 'cover';
                 heroSlider.appendChild(slide);
