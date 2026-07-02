@@ -117,7 +117,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            filter: brightness(1.1); /* Increased brightness */
+            filter: brightness(1.1);
         }
         
         .slide.active {
@@ -300,7 +300,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255, 255, 255, 0.05); /* White overlay for brightness */
+            background: rgba(255, 255, 255, 0.05);
             pointer-events: none;
         }
         
@@ -318,17 +318,15 @@
         /* Transparent grey background for hero text */
         .hero-text-container {
             padding: 2rem 3rem;
-            background: rgba(30, 30, 30, 0.7); /* Transparent dark grey */
-            backdrop-filter: blur(10px); /* Adds blur effect for better readability */
-            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 24px;
             display: inline-block;
-            /* Removed bottom margin to allow tighter control */
             border: 1px solid rgba(212, 175, 55, 0.2);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         
-        /* Adjust for mobile */
         @media (max-width: 768px) {
             .hero-text-container {
                 padding: 1.5rem 2rem;
@@ -344,31 +342,22 @@
             }
         }
         
-        /* Optional: Add slight shadow to enhance readability */
         .hero-title span {
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
         
-        /* NEW: Premium "Quality" Image Styling 
-           Replaces the harsh "tool sharp" effect with a polished, high-def look
-        */
         .premium-quality-image {
-            /* Balanced adjustment: slight contrast for pop, very slight brightness */
             filter: contrast(1.05) brightness(1.05);
-            /* Soft box shadow for depth, not harshness */
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            /* Ensure smooth edges */
             transition: all 0.4s ease-out;
         }
         
         .premium-quality-image:hover {
-            /* Subtle zoom and brightness lift on hover */
             transform: scale(1.02);
             filter: contrast(1.08) brightness(1.08);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2); /* Gold glow on hover */
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
         }
         
-        /* Soft overlay for the image container */
         .soft-gradient-overlay {
             background: linear-gradient(to top, 
                 rgba(0, 0, 0, 0.6) 0%, 
@@ -376,7 +365,6 @@
                 transparent 100%);
         }
         
-        /* Hero bottom section styling */
         .hero-bottom-section {
             position: absolute;
             bottom: 120px;
@@ -385,7 +373,6 @@
             z-index: 20;
         }
         
-        /* Logo styling for navbar */
         .navbar-logo {
             width: 40px;
             height: 40px;
@@ -394,7 +381,6 @@
             border: 2px solid rgba(212, 175, 55, 0.3);
         }
         
-        /* Mobile menu logo */
         .mobile-menu-logo {
             width: 48px;
             height: 48px;
@@ -408,7 +394,6 @@
     <nav class="fixed top-0 w-full z-50 py-4 px-6 md:px-10 glass-effect border-b border-white/5">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2 group">
-                <!-- Updated: Logo image added -->
                 <img src="pp.jpg" alt="P. Paul Logo" class="navbar-logo">
                 <div class="flex flex-col">
                     <span class="font-bold text-lg tracking-tight group-hover:text-gold-500 transition-colors">P. PAUL</span>
@@ -465,7 +450,6 @@
         <div class="h-full flex flex-col pt-20 px-8">
             <div class="mb-10">
                 <div class="flex items-center space-x-3 mb-8">
-                    <!-- Updated: Mobile menu logo added -->
                     <img src="pp.jpg" alt="P. Paul Logo" class="mobile-menu-logo">
                     <div>
                         <h3 class="font-bold text-xl">P. PAUL</h3>
@@ -516,13 +500,13 @@
         </div>
     </div>
 
+    <!-- HERO SECTION - ALL IMAGES INTACT -->
     <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         <div class="hero-slider">
-            <!-- UPDATED: pp1.jpg is first (number one of two) -->
+            <!-- pp1.jpg and pp2.jpg are FIRST (number one of two) -->
             <div class="slide active" style="background-image: url('pp1.jpg');"></div>
-            <!-- UPDATED: pp2.jpg is second -->
             <div class="slide" style="background-image: url('pp2.jpg');"></div>
-            <!-- Existing slides (p6.jpg REMOVED) -->
+            <!-- p1.jpg through p8.jpg (p6 REMOVED) -->
             <div class="slide" style="background-image: url('p1.jpg');"></div>
             <div class="slide" style="background-image: url('p2.jpg');"></div>
             <div class="slide" style="background-image: url('p3.jpg');"></div>
@@ -533,10 +517,8 @@
         </div>
         
         <div class="absolute inset-0 hero-overlay z-0"></div>
-        
         <div class="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/5 z-0 opacity-40"></div>
         
-        <!-- Updated: Hero bottom section -->
         <div class="hero-bottom-section">
             <div class="relative z-10 max-w-7xl mx-auto px-6 text-center flex flex-col items-center">
                 <div class="hero-text-container mb-4">
@@ -552,8 +534,7 @@
                     </span>
                 </div>
                 
-                <div class="slider-dots flex justify-center space-x-3 mb-8">
-                    </div>
+                <div class="slider-dots flex justify-center space-x-3 mb-8"></div>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <a href="inquiry.html" class="group px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-full flex items-center space-x-3 hover:shadow-2xl hover:scale-105 transition-all duration-300">
@@ -561,18 +542,14 @@
                         <span>Invite Me to Speak</span>
                         <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
                     </a>
-                    
                     <a href="blog.html" class="group px-8 py-4 glass-effect border border-gold-500/30 font-bold rounded-full flex items-center space-x-3 hover:bg-gold-500/10 transition-all duration-300">
                         <i class="fas fa-book-open"></i>
                         <span>Read The Blog</span>
                     </a>
-                    
-                    <!-- Updated: Added "Read More About P. Paul" button -->
                     <a href="about.html" class="group px-6 py-4 glass-effect border border-gold-500/30 font-bold rounded-full flex items-center space-x-3 hover:bg-gold-500/10 transition-all duration-300">
                         <i class="fas fa-info-circle"></i>
                         <span>Read More About P. Paul</span>
                     </a>
-                    
                     <a href="https://www.instagram.com/reel/DSaZw-oDUch/?igsh=MjYwb3B4bWtzazBn" target="_blank" class="group px-6 py-3 border border-white/20 hover:border-gold-500 rounded-full flex items-center space-x-2 transition-all duration-300">
                         <div class="w-8 h-8 rounded-full bg-gold-500/20 flex items-center justify-center group-hover:bg-gold-500 transition-colors">
                             <i class="fas fa-play text-gold-500 group-hover:text-black"></i>
@@ -606,18 +583,14 @@
                             <div class="w-3 h-3 bg-gold-500 rounded-full mr-2"></div>
                             <div class="w-3 h-3 bg-gold-500 rounded-full"></div>
                         </div>
-                        
                         <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gradient">
                             Poet • Spoken Word Artist • Public Speaker
                         </h2>
-                        
                         <div class="w-24 h-1 bg-gradient-to-r from-gold-500 to-gold-600 mx-auto my-4 rounded-full"></div>
-                        
                         <p class="text-lg md:text-xl text-gray-300 italic max-w-2xl mx-auto leading-relaxed">
                             Speaking the language of peace, healing, and human transformation
                         </p>
                     </div>
-                    
                     <div class="flex justify-center mt-8">
                         <div class="flex space-x-6">
                             <div class="w-10 h-10 rounded-full border border-gold-500/30 flex items-center justify-center">
@@ -636,6 +609,7 @@
         </div>
     </section>
 
+    <!-- ABOUT SECTION - paul.jpg CHANGED TO pp1.jpg -->
     <section id="about" class="py-20 md:py-32 px-6 md:px-10">
         <div class="max-w-7xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -650,7 +624,6 @@
                     <p class="text-lg text-gray-300 leading-relaxed">
                         My name is <span class="font-semibold text-white">Paul Okewunmi</span>, 
 affectionately known as P. Paul (The Great), is a poet, spoken word artist, and public speaker recognized for his powerful voice and inspiring presence. He is deeply passionate about youth development and human transformation, using his words, creativity, and platform to motivate individuals—especially young people—to discover purpose, build confidence, and pursue meaningful impact in their lives and communities.
-
                     </p>
                     
                     <div class="futuristic-card p-6 border-l-4 border-gold-500">
@@ -666,7 +639,6 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                         <a href="portfolio.html" class="px-6 py-3 glass-effect border border-gold-500/30 font-semibold rounded-full hover:bg-gold-500/10 transition-all duration-300">
                             View Portfolio
                         </a>
-                        <!-- Updated: Added "Read More About P. Paul" button -->
                         <a href="about.html" class="px-6 py-3 glass-effect border border-gold-500/30 font-semibold rounded-full hover:bg-gold-500/10 transition-all duration-300">
                             Read More About P. Paul
                         </a>
@@ -676,7 +648,7 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                 <div class="relative group">
                     <div class="absolute -inset-4 bg-gradient-to-r from-gold-500/20 to-transparent rounded-3xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                     <div class="relative rounded-2xl overflow-hidden">
-                        <!-- UPDATED: Changed from paul.jpg to pp1.jpg -->
+                        <!-- UPDATED: pp1.jpg instead of paul.jpg -->
                         <img src="pp1.jpg" alt="P. Paul - Poet & Speaker" class="w-full h-[500px] object-cover premium-quality-image">
                         <div class="absolute inset-0 soft-gradient-overlay"></div>
                         <div class="absolute bottom-6 left-6 right-6">
@@ -716,7 +688,6 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                     <p class="text-gray-400 mb-6">
                         Giving voice to emotions that inspire reflection, healing, and transformation through powerful verse.
                     </p>
-                    <!-- EDITED: Changed link from portfolio.html#poetry to portfolio.html -->
                     <a href="portfolio.html" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
                         Explore Works
                         <i class="fas fa-arrow-right ml-2"></i>
@@ -731,7 +702,6 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                     <p class="text-gray-400 mb-6">
                         Engaging audiences with compelling narratives on leadership, purpose, and personal growth.
                     </p>
-                    <!-- EDITED: Changed link from inquiry.html to inquiry.html (already correct) -->
                     <a href="inquiry.html" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
                         Book a Session
                         <i class="fas fa-arrow-right ml-2"></i>
@@ -760,7 +730,6 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                     <p class="text-gray-400 mb-6">
                         Mobilizing communities toward positive social change and compassionate action.
                     </p>
-                    <!-- EDITED: Changed link from upphilan.html to inquiry.html -->
                     <a href="inquiry.html" class="inline-flex items-center text-gold-500 font-semibold text-sm hover:text-gold-400 transition-colors">
                         Join Movement
                         <i class="fas fa-arrow-right ml-2"></i>
@@ -770,11 +739,9 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
         </div>
     </section>
 
-    <!-- NEW: Added image section before Voices of Impact -->
     <section class="py-10 px-6 md:px-10">
         <div class="max-w-6xl mx-auto">
             <div class="futuristic-card overflow-hidden">
-                <!-- EDITED: Added p3.jpg image -->
                 <img src="p3.jpg" alt="P. Paul Impact Image" class="w-full h-auto object-cover premium-quality-image">
                 <div class="absolute inset-0 soft-gradient-overlay"></div>
             </div>
@@ -961,32 +928,26 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
             closeMenuBtn.addEventListener('click', closeMobileMenu);
             mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
             
-            // Close menu when clicking links
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', closeMobileMenu);
             });
             
-            // Hero Image Slider
+            // Hero Image Slider - 9 slides: pp1, pp2, p1-p5, p7-p8
             const heroSlider = document.querySelector('.hero-slider');
             const sliderDots = document.querySelector('.slider-dots');
-            const imageCount = 9; // UPDATED: 9 slides (pp1, pp2, p1-p5, p7-p8) - p6 removed
+            const imageCount = 9;
             
-            // Create slides and dots
             for (let i = 1; i <= imageCount; i++) {
-                // Create slide
                 const slide = document.createElement('div');
                 slide.className = `slide ${i === 1 ? 'active' : ''}`;
                 
-                // Set background based on slide number
                 if (i === 1) {
                     slide.style.backgroundImage = "url('pp1.jpg')";
                 } else if (i === 2) {
                     slide.style.backgroundImage = "url('pp2.jpg')";
                 } else if (i <= 7) {
-                    // p1.jpg through p5.jpg (indices 3-7)
                     slide.style.backgroundImage = `url('p${i-2}.jpg')`;
                 } else {
-                    // p7.jpg and p8.jpg (indices 8-9)
                     slide.style.backgroundImage = `url('p${i-1}.jpg')`;
                 }
                 
@@ -994,7 +955,6 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                 slide.style.backgroundSize = 'cover';
                 heroSlider.appendChild(slide);
                 
-                // Create dot
                 const dot = document.createElement('button');
                 dot.className = `w-3 h-3 rounded-full ${i === 1 ? 'bg-gold-500' : 'bg-gray-600'} transition-colors duration-300`;
                 dot.setAttribute('aria-label', `Go to slide ${i}`);
@@ -1014,15 +974,12 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
             let slideInterval;
             
             function goToSlide(index) {
-                // Remove active class from current slide and dot
                 slides[currentSlide].classList.remove('active');
                 dots[currentSlide].classList.remove('bg-gold-500');
                 dots[currentSlide].classList.add('bg-gray-600');
                 
-                // Update current slide
                 currentSlide = (index + slides.length) % slides.length;
                 
-                // Add active class to new slide and dot
                 slides[currentSlide].classList.add('active');
                 dots[currentSlide].classList.remove('bg-gray-600');
                 dots[currentSlide].classList.add('bg-gold-500');
@@ -1032,7 +989,6 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                 goToSlide(currentSlide + 1);
             }
             
-            // Faster slideshow - 2.5 seconds instead of 5
             function startTimer() {
                 slideInterval = setInterval(nextSlide, 2500);
             }
@@ -1042,10 +998,8 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                 startTimer();
             }
             
-            // Start the automatic slideshow
             startTimer();
             
-            // Pause slider on hover
             heroSlider.addEventListener('mouseenter', () => {
                 clearInterval(slideInterval);
             });
@@ -1054,25 +1008,18 @@ affectionately known as P. Paul (The Great), is a poet, spoken word artist, and 
                 startTimer();
             });
             
-            // Secret Admin Link Functionality (without warning)
+            // Secret Admin Link
             const secretAdminLink = document.getElementById('secretAdminLink');
             
             secretAdminLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                // Add visual feedback
                 this.classList.add('secret-clicked');
-                
-                // Redirect immediately to admin page without confirmation
                 window.location.href = 'admin.html';
-                
-                // Remove animation class after animation completes
                 setTimeout(() => {
                     this.classList.remove('secret-clicked');
                 }, 500);
             });
             
-            // Add subtle visual feedback for secret link hover
             secretAdminLink.addEventListener('mousedown', function() {
                 this.style.transform = 'scale(0.95)';
             });
