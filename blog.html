@@ -23,7 +23,8 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="The Inkwell | P. Paul (The Great)" id="og-title">
     <meta property="og:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian" id="og-description">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" id="og-image">
+    <!-- UPDATED: Using Cloudinary fallback image instead of Unsplash man picture -->
+    <meta property="og:image" content="https://res.cloudinary.com/dmbjrohtn/image/upload/v1782994285/IMG-20260617-WA0028_cibyb3.jpg" id="og-image">
     <meta property="og:url" content="https://ppaulthegreat.com/blog.html" id="og-url">
     
     <meta name="twitter:card" content="summary_large_image" id="twitter-card">
@@ -31,7 +32,8 @@
     <meta name="twitter:creator" content="@ppaulthegreat">
     <meta name="twitter:title" content="The Inkwell | P. Paul (The Great)" id="twitter-title">
     <meta name="twitter:description" content="Official blog of P. Paul (The Great) - Poet, Speaker, Humanitarian" id="twitter-description">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" id="twitter-image">
+    <!-- UPDATED: Using Cloudinary fallback image -->
+    <meta name="twitter:image" content="https://res.cloudinary.com/dmbjrohtn/image/upload/v1782994285/IMG-20260617-WA0028_cibyb3.jpg" id="twitter-image">
     
     <style>
         :root {
@@ -585,6 +587,9 @@
             measurementId: "G-TK1B0ENV0D"
         };
 
+        // UPDATED: Cloudinary fallback image
+        const CLOUDINARY_FALLBACK = 'https://res.cloudinary.com/dmbjrohtn/image/upload/v1782994285/IMG-20260617-WA0028_cibyb3.jpg';
+
         // Initialize Firebase
         let firebaseApp, db;
         try {
@@ -683,16 +688,15 @@
 
             copyUrlBtn.addEventListener('click', () => {
                 const shareUrlInput = document.getElementById('share-url');
-                shareUrlInput.select();
-                document.execCommand('copy');
-                
-                copyUrlBtn.textContent = 'Copied!';
-                copyUrlBtn.classList.add('bg-green-500');
-                
-                setTimeout(() => {
-                    copyUrlBtn.textContent = 'Copy';
-                    copyUrlBtn.classList.remove('bg-green-500');
-                }, 2000);
+                navigator.clipboard.writeText(shareUrlInput.value).then(() => {
+                    copyUrlBtn.textContent = 'Copied!';
+                    copyUrlBtn.classList.add('bg-green-500');
+                    
+                    setTimeout(() => {
+                        copyUrlBtn.textContent = 'Copy';
+                        copyUrlBtn.classList.remove('bg-green-500');
+                    }, 2000);
+                });
             });
 
             // Share buttons
@@ -760,7 +764,6 @@
                 emptyState.classList.remove('hidden');
                 showNotification('Could not load blog posts. Please try again later.', 'error');
                 
-                // Show detailed error for debugging
                 const errorMsg = error.code ? `Error: ${error.code}` : 'Connection error';
                 console.log('Detailed error:', errorMsg);
             }
@@ -797,7 +800,7 @@
                                 <img src="${post.image}" 
                                      alt="${post.title}"
                                      class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                                     onerror="this.onerror=null; this.src='${CLOUDINARY_FALLBACK}';">
                             ` : `
                                 <div class="w-full h-full img-fallback">
                                     <i class="fas fa-feather-alt"></i>
@@ -876,7 +879,8 @@
                         ${post.image ? `
                             <img src="${post.image}" 
                                  alt="${post.title}"
-                                 class="w-full h-[400px] object-cover rounded-[2rem] mb-10 shadow-2xl gold-hover">
+                                 class="w-full h-[400px] object-cover rounded-[2rem] mb-10 shadow-2xl gold-hover"
+                                 onerror="this.onerror=null; this.src='${CLOUDINARY_FALLBACK}';">
                         ` : `
                             <div class="w-full h-[400px] img-fallback rounded-[2rem] mb-10">
                                 <i class="fas fa-feather-alt text-6xl"></i>
@@ -1028,6 +1032,9 @@
                 droplets.push(dropletWords.join(' '));
             }
             
+            // UPDATED: Use Cloudinary fallback for droplet window
+            const dropletImage = post.image || CLOUDINARY_FALLBACK;
+            
             dropletWindow.document.write(`
                 <!DOCTYPE html>
                 <html>
@@ -1107,7 +1114,7 @@
                             </div>
                         </div>
                         
-                        ${post.image ? `<img src="${post.image}" alt="${post.title}" style="width:100%; border-radius: 2rem; margin-bottom: 3rem;">` : ''}
+                        <img src="${dropletImage}" alt="${post.title}" style="width:100%; border-radius: 2rem; margin-bottom: 3rem;">
                         
                         ${droplets.map((droplet, index) => `
                             <div class="droplet" id="droplet-${index}">
@@ -1119,7 +1126,6 @@
                         `).join('')}
                     </div>
                     <script>
-                        // Auto-scroll to first droplet
                         setTimeout(() => {
                             document.getElementById('droplet-0')?.scrollIntoView({behavior: 'smooth'});
                         }, 500);
@@ -1155,7 +1161,6 @@
                     postElement.innerHTML = createPostElement(post, (currentCount + index) % 3);
                     blogContainer.appendChild(postElement.firstElementChild);
                     
-                    // Initialize droplets for new post
                     initializeDroplets(post.id);
                 });
                 
@@ -1176,10 +1181,8 @@
             const shareUrlInput = document.getElementById('share-url');
             
             if (post) {
-                // Update meta tags for this post
                 updateMetaTagsForPost(post);
                 
-                // Generate share URL
                 currentShareUrl = `${window.location.origin}${window.location.pathname}?post=${postId}`;
                 shareUrlInput.value = currentShareUrl;
                 shareModal.classList.remove('hidden');
@@ -1190,13 +1193,12 @@
             const post = allPosts.find(p => p.id === postId);
             if (!post) return;
             
-            // Update meta tags first
             updateMetaTagsForPost(post);
             
             const url = `${window.location.origin}${window.location.pathname}?post=${postId}`;
             const text = `Check out "${post.title || 'this article'}" by P. Paul (The Great)`;
-            // Use the actual post image for sharing
-            const imageUrl = post.image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+            // UPDATED: Use Cloudinary fallback for sharing
+            const imageUrl = post.image || CLOUDINARY_FALLBACK;
             
             let shareUrl = '';
             
@@ -1236,24 +1238,24 @@
             
             const url = `${window.location.origin}${window.location.pathname}?post=${post.id}`;
             const description = post.content ? post.content.substring(0, 200) + '...' : 'Read this article on The Inkwell';
-            // Use the actual post image for meta tags
-            const imageUrl = post.image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+            // UPDATED: Use Cloudinary fallback for meta tags
+            const imageUrl = post.image || CLOUDINARY_FALLBACK;
             
             // Update Open Graph
-            document.getElementById('og-title').content = `${post.title} | The Inkwell`;
-            document.getElementById('og-description').content = description;
-            document.getElementById('og-image').content = imageUrl;
-            document.getElementById('og-url').content = url;
+            document.getElementById('og-title').setAttribute('content', `${post.title} | The Inkwell`);
+            document.getElementById('og-description').setAttribute('content', description);
+            document.getElementById('og-image').setAttribute('content', imageUrl);
+            document.getElementById('og-url').setAttribute('content', url);
             
             // Update Twitter
-            document.getElementById('twitter-title').content = `${post.title} | The Inkwell`;
-            document.getElementById('twitter-description').content = description;
-            document.getElementById('twitter-image').content = imageUrl;
+            document.getElementById('twitter-title').setAttribute('content', `${post.title} | The Inkwell`);
+            document.getElementById('twitter-description').setAttribute('content', description);
+            document.getElementById('twitter-image').setAttribute('content', imageUrl);
             
             // Update page title
             document.title = `${post.title} | The Inkwell by P. Paul`;
             
-            console.log('✅ Meta tags updated for:', post.title);
+            console.log('✅ Meta tags updated with image:', imageUrl);
         }
 
         // ==================== HELPER FUNCTIONS ====================
